@@ -122,6 +122,9 @@ footer{padding-bottom:84px!important}
 .badges{position:absolute;left:10px;top:10px;display:flex;gap:6px;flex-wrap:wrap}
 .badge{border-radius:999px;padding:3px 9px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;background:rgba(21,20,19,.82);color:#F3EEE2}
 .badge.hot{background:var(--accent);color:var(--on-accent)}
+.badge.out{background:#F3EEE2;color:#151413}.badge.low{background:var(--accent);color:var(--on-accent)}
+.card.is-out .shot img{filter:grayscale(.85);opacity:.55}.card.is-out .price{text-decoration:line-through;opacity:.5}
+.stockline{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;margin:0 0 4px}.stockline.out{opacity:.7}
 .idx{position:absolute;right:12px;bottom:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#8a857d}
 
 /* collectibles booth */
@@ -439,6 +442,14 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 const WHATSAPP_NUMBER = "917411148303";     // country code + number, digits only
 const BRAND = "No Skips";
 const DROP = {total:50, claimed:0};         // Vol. 01 sets. Raise "claimed" as real orders come in; the meter appears once it is above 0.
+/* Live stock. Edited from /admin.html, saved to stock.json. Missing item = in stock. */
+let STOCK={items:{}};
+const stk=id=>{const x=(STOCK.items||{})[id]||{};return{s:x.s==="out"||x.s==="low"?x.s:"in",n:Number.isFinite(x.n)&&x.n>0?x.n:null}};
+async function loadStock(){
+  try{const r=await fetch("stock.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;STOCK=await r.json();
+    if(STOCK.drop&&Number.isFinite(STOCK.drop.claimed))DROP.claimed=Math.max(0,Math.min(DROP.total,STOCK.drop.claimed));
+    renderDrop();renderGrid()}catch(e){}
+}
 const SIGNATURE_LABEL = "Signature piece";  // change to "Top seller" once your sales say so
 
 /* ---------------- waveform data from "Knowing" ---------------- */
@@ -674,9 +685,10 @@ const wa=text=>"https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text
 
 function card(p,booth){
   const badges=[p.badge,p.custom&&p.badge!=="Made for you"?"Made for you":null].filter(Boolean);
-  return `<button class="card" type="button" data-open="${p.id}" aria-label="${esc(p.name)}, ${inr(p.price)}">
+  const k=stk(p.id);
+  return `<button class="card${k.s==="out"?" is-out":""}" type="button" data-open="${p.id}" aria-label="${esc(p.name)}, ${inr(p.price)}">
     <div class="shot"><img src="${img(p.imgs[0][0])}" alt="${esc(p.name)}" loading="lazy" width="880" height="880"><img class="bp" src="${img("bp_"+p.id)}" alt="" aria-hidden="true" loading="lazy" width="1200" height="1200">
-      <span class="badges">${badges.map((b,i)=>`<span class="badge${i===0&&p.badge?" hot":" opt"}">${esc(b)}</span>`).join("")}</span><span class="idx">${p.id}</span></div>
+      <span class="badges">${k.s==="out"?`<span class="badge out">Sold out</span>`:k.s==="low"?`<span class="badge low">${k.n?`Only ${k.n} left`:"Few left"}</span>`:""}${badges.map((b,i)=>`<span class="badge${i===0&&p.badge?" hot":" opt"}">${esc(b)}</span>`).join("")}</span><span class="idx">${p.id}</span></div>
     <div class="meta"><h3>${esc(p.name)}</h3><span class="price">${inr(p.price)}</span></div>
     <p class="line">${esc(p.line)}</p>${booth&&p.ed?`<div class="ed"><i class="led"></i>${esc(p.ed)}</div>`:""}</button>`;
 }
@@ -743,8 +755,10 @@ function openProduct(id){
       </div>
       <div class="gift"><label class="tick" for="gift"><input type="checkbox" id="gift" data-gift="tick">This is a gift</label>
         <div class="field" id="giftBox" hidden><label for="giftNote">Short note for the card (optional)</label><input id="giftNote" data-gift="note" maxlength="90" placeholder="Happy birthday. Play it loud." autocomplete="off"></div></div>
-      <a class="btn red block" id="pdOrder" target="_blank" rel="noopener" href="#">Order on WhatsApp</a>
-      <button class="btn ghost block" type="button" id="pdAdd">Add to order list</button>
+      ${(()=>{const k=stk(p.id);
+        if(k.s==="out")return `<p class="stockline out">Sold out right now</p><a class="btn red block" id="pdOrder" target="_blank" rel="noopener" href="${esc(wa(`Hi ${BRAND}, please tell me when ${p.name} is back in stock.`))}">Notify me on WhatsApp</a>`;
+        return (k.s==="low"?`<p class="stockline">${k.n?`Only ${k.n} left`:"Few left"}</p>`:"")+`<a class="btn red block" id="pdOrder" target="_blank" rel="noopener" href="#">Order on WhatsApp</a>
+      <button class="btn ghost block" type="button" id="pdAdd">Add to order list</button>`})()}
       ${p.extra?`<p class="note">${esc(p.extra)}</p>`:""}
       ${p.build?`<button class="linkish" type="button" data-gobuild="${p.build}">See how it builds, ${esc(BUILD[p.build].time)}</button>`:""}
       <dl class="specs"><dt>Size</dt><dd>${esc(p.size)}</dd><dt>In the box</dt><dd>Printed parts only. Matte PLA bioplastic, no magnets, glue or metal. Keep away from hot cars and direct summer sun.</dd><dt>Care</dt><dd>Not a toy. Small parts, keep away from children under 3.</dd><dt>Made</dt><dd>Printed to order in Bengaluru. Replacements, no returns.</dd></dl>
@@ -759,7 +773,7 @@ function syncProduct(){
   $("pd").querySelectorAll("[data-accent]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.accent===cur.accent)));
   $("pd").querySelectorAll("[data-pick]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.pick===cur.pick)));
   $("qOut").textContent=cur.qty;
-  $("pdOrder").href=wa(`Hi ${BRAND}, I would like to order:\n\n${itemText(cur)}\n\n${sign([cur])}`);
+  if(stk(p.id).s!=="out")$("pdOrder").href=wa(`Hi ${BRAND}, I would like to order:\n\n${itemText(cur)}\n\n${sign([cur])}`);
 }
 $("pd").addEventListener("input",e=>{if(e.target.dataset.i!==undefined){cur.vals[+e.target.dataset.i]=e.target.value.trim();syncProduct()}
   if(e.target.dataset.gift==="note"){cur.giftNote=e.target.value.trim();syncProduct()}});
@@ -818,7 +832,7 @@ function setView(v){if(v==="bp")root.dataset.view="bp";else delete root.dataset.
   document.querySelectorAll(".viewsw button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.view===v)))}
 document.querySelector(".viewsw").addEventListener("click",e=>{const b=e.target.closest("button");if(b)setView(b.dataset.view)});
 window.addEventListener("hashchange",routeHash);
-paintTheme();renderDrop();renderGrid();renderBuild();renderCount();routeHash();
+paintTheme();renderDrop();renderGrid();renderBuild();renderCount();routeHash();loadStock();
 </script>
 </body>
 </html>

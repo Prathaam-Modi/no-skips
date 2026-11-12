@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>No Skips admin</title>
+<style>
+:root{--bg:#F3EEE2;--ink:#171615;--mut:#6b655b;--line:#d9d2c2;--red:#C8202B;--card:#fbf8f0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:20px 16px 120px}
+h1{font-size:22px;margin:0 0 2px;display:flex;align-items:center;gap:10px}h1 i{display:inline-block;width:8px;height:22px;background:var(--red);border-radius:4px}
+.sub{color:var(--mut);margin:0 0 18px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+label{display:block;font-weight:600;margin-bottom:6px}
+input[type=password],input[type=text],input[type=number],input[type=search]{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;background:#fff;color:var(--ink)}
+button{font:inherit;cursor:pointer}
+.btn{height:46px;padding:0 20px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);font-weight:600}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff}.btn.ghost{background:transparent;color:var(--ink)}
+.btn[disabled]{opacity:.5}
+.help{color:var(--mut);font-size:13px;margin:10px 0 0}.help ol{margin:6px 0 0;padding-left:20px}
+.err{color:var(--red);font-weight:600;margin-top:10px}
+.bar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap}
+.row{display:grid;grid-template-columns:1fr;gap:10px;padding:14px 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.nm{font-weight:600}.nm small{color:var(--mut);font-weight:400;font-family:ui-monospace,Menlo,monospace;margin-left:6px}
+.ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--ink);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:9px 14px;font-weight:600;color:var(--ink)}
+.seg button[aria-pressed=true][data-s=in]{background:var(--ink);color:var(--bg)}
+.seg button[aria-pressed=true][data-s=low]{background:#d98b1c;color:#fff}
+.seg button[aria-pressed=true][data-s=out]{background:var(--red);color:#fff}
+.q{width:86px!important;height:40px!important}.ql{color:var(--mut);font-size:13px}
+.changed{box-shadow:inset 3px 0 0 var(--red);padding-left:10px}
+.save{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:center}
+.save span{color:var(--mut);font-size:13px}.ok{color:#1c7a3c!important;font-weight:600}
+[hidden]{display:none!important}
+</style></head><body><main>
+<h1><i></i>No Skips admin</h1><p class="sub">Update stock. Changes go live on the site about a minute after you save.</p>
+
+<section id="login" class="box">
+  <label for="tok">Your access key</label>
+  <input id="tok" type="password" autocomplete="off" placeholder="github_pat_...">
+  <div style="margin-top:12px"><button class="btn red" id="go" type="button">Unlock</button></div>
+  <div class="err" id="lerr" hidden></div>
+  <div class="help">The key never leaves this browser. Only a key with write access to the repo can change anything.
+    <ol>
+      <li>GitHub, Settings, Developer settings, Fine-grained tokens, Generate new token.</li>
+      <li>Repository access: only <b>Prathaam-Modi/no-skips</b>. Permissions: Contents, Read and write.</li>
+      <li>Paste it above. Set expiry to the longest allowed.</li>
+    </ol></div>
+</section>
+
+<section id="app" hidden>
+  <div class="bar"><input id="q" type="search" placeholder="Search products" style="max-width:300px"><button class="btn ghost" id="out" type="button">Lock</button></div>
+  <div class="box" id="dropBox">
+    <div class="nm">Vol. 01 sets claimed <small>of 50</small></div>
+    <div class="ctl" style="margin-top:8px"><input class="q" id="claimed" type="number" min="0" max="50" value="0"><span class="ql">The progress meter appears on the site once this is above 0.</span></div>
+  </div>
+  <div class="box" id="list"></div>
+</section>
+</main>
+<div class="save" id="savebar" hidden><span id="msg">No changes yet</span><button class="btn red" id="save" type="button" disabled>Save to site</button></div>
+
+<script>
+const OWNER="Prathaam-Modi",REPO="no-skips",BRANCH="main",PATH="stock.json";
+const PRODUCTS=[{"id": "C1", "name": "Vol. 01: The Studio"}, {"id": "C2", "name": "Studio Mini"}, {"id": "C3", "name": "Gig Coin"}, {"id": "C4", "name": "Mixtape Standees"}, {"id": "C5", "name": "Gain Knob"}, {"id": "A1", "name": "Soundwave Plate"}, {"id": "A2", "name": "Now Playing Plaque"}, {"id": "A3", "name": "Wristband Rail"}, {"id": "A4", "name": "Record Coasters"}, {"id": "A5", "name": "Song Tag"}, {"id": "B1", "name": "Pick Amp"}, {"id": "B2", "name": "Controller Riser"}, {"id": "B3", "name": "Name Tag"}, {"id": "B4", "name": "Session Sign"}, {"id": "D1", "name": "Monitor Phone Stand"}, {"id": "D2", "name": "Cassette Box"}, {"id": "D3", "name": "Reel Cord Winders"}, {"id": "D4", "name": "Vinyl Display Stand"}, {"id": "D5", "name": "Headphone Stand"}, {"id": "B5", "name": "Merch Run, 50 Tags"}];
+const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
+const $=id=>document.getElementById(id);
+let token="",sha=null,orig={},cur={},origClaimed=0;
+const hdr=()=>({Authorization:"Bearer "+token,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"});
+const b64e=s=>btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+const b64d=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),c=>c.charCodeAt(0)));
+const norm=x=>({s:x&&["low","out"].includes(x.s)?x.s:"in",n:x&&Number.isFinite(x.n)&&x.n>0?x.n:null});
+
+async function load(){
+  const rr=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}`,{headers:hdr()});
+  if(!rr.ok)throw new Error("That key was not accepted.");
+  const repo=await rr.json();
+  if(!(repo.permissions&&repo.permissions.push))throw new Error("This key cannot write to the repo.");
+  const r=await fetch(API+"?ref="+BRANCH+"&t="+Date.now(),{headers:hdr(),cache:"no-store"});
+  let data={items:{},drop:{claimed:0}};sha=null;
+  if(r.ok){const j=await r.json();sha=j.sha;try{data=JSON.parse(b64d(j.content))}catch(e){}}
+  else if(r.status!==404)throw new Error("Could not read stock.json ("+r.status+").");
+  orig={};cur={};PRODUCTS.forEach(p=>{orig[p.id]=norm((data.items||{})[p.id]);cur[p.id]={...orig[p.id]}});
+  origClaimed=Math.max(0,Math.min(50,+(data.drop&&data.drop.claimed)||0));$("claimed").value=origClaimed;
+}
+function draw(){
+  const f=$("q").value.trim().toLowerCase();
+  $("list").innerHTML=PRODUCTS.filter(p=>!f||(p.name+" "+p.id).toLowerCase().includes(f)).map(p=>{
+    const c=cur[p.id],ch=JSON.stringify(c)!==JSON.stringify(orig[p.id]);
+    return `<div class="row${ch?" changed":""}" data-id="${p.id}"><div class="nm">${p.name}<small>${p.id}</small></div>
+      <div class="ctl"><div class="seg">${[["in","In stock"],["low","Few left"],["out","Sold out"]].map(([k,t])=>`<button type="button" data-s="${k}" aria-pressed="${c.s===k}">${t}</button>`).join("")}</div>
+      ${c.s==="low"?`<input class="q" type="number" min="1" placeholder="How many" data-n value="${c.n||""}"><span class="ql">left (optional)</span>`:""}</div></div>`}).join("")||'<p class="help">No match.</p>';
+  dirty();
+}
+function dirty(){
+  const n=PRODUCTS.filter(p=>JSON.stringify(cur[p.id])!==JSON.stringify(orig[p.id])).length+(+$("claimed").value!==origClaimed?1:0);
+  $("save").disabled=!n;$("msg").className="";$("msg").textContent=n?`${n} change${n>1?"s":""} not saved`:"No changes yet";
+}
+$("list").addEventListener("click",e=>{const b=e.target.closest("[data-s]");if(!b)return;const id=b.closest(".row").dataset.id;
+  cur[id]={s:b.dataset.s,n:b.dataset.s==="low"?cur[id].n:null};draw()});
+$("list").addEventListener("input",e=>{if(e.target.hasAttribute("data-n")){const id=e.target.closest(".row").dataset.id;const v=parseInt(e.target.value,10);cur[id].n=v>0?v:null;dirty()}});
+$("claimed").addEventListener("input",dirty);$("q").addEventListener("input",draw);
+
+async function save(){
+  $("save").disabled=true;$("msg").textContent="Saving...";
+  const items={};PRODUCTS.forEach(p=>{const c=cur[p.id];if(c.s!=="in")items[p.id]=c.s==="low"&&c.n?{s:"low",n:c.n}:{s:c.s}});
+  const claimed=Math.max(0,Math.min(50,parseInt($("claimed").value,10)||0));
+  const body={updated:new Date().toISOString(),drop:{claimed},items};
+  const put=()=>fetch(API,{method:"PUT",headers:{...hdr(),"Content-Type":"application/json"},body:JSON.stringify({message:"Update stock",branch:BRANCH,content:b64e(JSON.stringify(body,null,2)+"\n"),...(sha?{sha}:{})})});
+  let r=await put();
+  if(r.status===409||r.status===422){await load();draw();$("msg").textContent="Someone else changed stock. Reloaded, check and save again.";return}
+  if(!r.ok){$("msg").textContent="Save failed ("+r.status+"). Try again.";$("save").disabled=false;return}
+  const j=await r.json();sha=j.content.sha;orig=JSON.parse(JSON.stringify(cur));origClaimed=claimed;$("claimed").value=claimed;draw();
+  $("msg").className="ok";$("msg").textContent="Saved. Live in about a minute.";
+}
+$("save").addEventListener("click",save);
+
+async function unlock(t){
+  token=t;$("lerr").hidden=true;$("go").disabled=true;
+  try{await load();localStorage.setItem("ns-admin-key",t);$("login").hidden=true;$("app").hidden=false;$("savebar").hidden=false;draw()}
+  catch(e){token="";$("lerr").textContent=e.message;$("lerr").hidden=false;try{localStorage.removeItem("ns-admin-key")}catch(_){}}
+  $("go").disabled=false;
+}
+$("go").addEventListener("click",()=>{const t=$("tok").value.trim();if(t)unlock(t)});
+$("tok").addEventListener("keydown",e=>{if(e.key==="Enter")$("go").click()});
+$("out").addEventListener("click",()=>{try{localStorage.removeItem("ns-admin-key")}catch(_){}location.reload()});
+try{const t=localStorage.getItem("ns-admin-key");if(t)unlock(t)}catch(_){}
+</script></body></html>
