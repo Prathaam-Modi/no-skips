@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>No Skips Catalogue</title>
+<title>No Skips. Music pieces and daily gear, printed to order</title>
+<meta name="description" content="Music collectibles, song keepsakes and flat-pack daily gear, 3D printed to order in Bengaluru. Order on WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Poppins:wght@700&display=swap" rel="stylesheet">
@@ -168,9 +169,29 @@ footer{padding-bottom:84px!important}
 .tabs button[aria-selected="true"] .mono{color:inherit;opacity:.65}
 @media (max-width:480px){.tabs button .mono{display:none}.tabs button{padding:0 13px}}
 
+/* filters, kind label, coming soon */
+.fbar{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-top:22px}
+.chips.fchips{margin-top:0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.fchips::-webkit-scrollbar{display:none}
+.fchips button{height:34px;font-size:13px}
+.fchips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.fbar+.grid{padding-top:18px}
+.kind{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:-6px}
+.booth .kind{color:var(--booth-muted);padding-inline:6px}
+.soon{margin-top:clamp(28px,4vw,48px);border-top:1px solid var(--line);padding-top:22px}
+.soon-head{display:flex;gap:8px 20px;align-items:baseline;flex-wrap:wrap}
+.soon-head p{margin:0;color:var(--muted);font-size:14px}
+.soon-grid{grid-template-columns:repeat(auto-fill,minmax(200px,260px));padding-top:16px}
+.card.is-soon .shot img:not(.bp){filter:saturate(.75)}
+.card.is-soon .price{color:var(--muted)}
+.bulk-ghost{border-color:var(--booth-ink);color:var(--booth-ink)}
+.bulk-ghost:hover{background:var(--booth-ink);color:var(--booth);border-color:var(--booth-ink)}
+@media (max-width:620px){.soon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 /* build it */
 .build{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(40px,6vw,88px) 0}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}
+@media (max-width:700px){#buildChips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(var(--gut)*-1);padding-inline:var(--gut)}#buildChips::-webkit-scrollbar{display:none}}
 .chips button{height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:transparent;font-size:14px;white-space:nowrap}
 .chips button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .build-panel{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(20px,4vw,56px);align-items:start;margin-top:24px}
@@ -312,9 +333,9 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
     <a class="brand" href="#top"><svg class="wm" role="img" aria-label="No Skips" xmlns="http://www.w3.org/2000/svg" viewBox="-12 -126.8 684.5 183.3"><g transform="translate(-6 -120.8) scale(1.7130)"><rect width="100" height="100" rx="22" fill="currentColor"/><path d="M17 30L35 50L17 70" fill="none" stroke="var(--bg)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 30L58 50L40 70" fill="none" stroke="var(--bg)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="71" y="20" width="10" height="60" rx="5" fill="var(--accent)"/></g><g transform="translate(197.3 0)"><path fill="currentColor" d="M69.00 -0.00L51.91 -0.00L23.30 -43.30L23.30 -0.00L6.20 -0.00L6.20 -70.20L23.30 -70.20L51.91 -26.70L51.91 -70.20L69.00 -70.20L69.00 -0.00ZM113.41 0.70Q103.50 0.70 95.25 -3.89Q87.00 -8.50 82.14 -16.75Q77.30 -25.00 77.30 -35.30Q77.30 -45.59 82.14 -53.80Q87.00 -62.00 95.25 -66.59Q103.50 -71.20 113.41 -71.20Q123.30 -71.20 131.55 -66.59Q139.80 -62.00 144.55 -53.80Q149.30 -45.59 149.30 -35.30Q149.30 -25.00 144.50 -16.75Q139.70 -8.50 131.50 -3.89Q123.30 0.70 113.41 0.70ZM113.41 -14.91Q121.80 -14.91 126.84 -20.50Q131.91 -26.09 131.91 -35.30Q131.91 -44.59 126.84 -50.14Q121.80 -55.70 113.41 -55.70Q104.91 -55.70 99.84 -50.20Q94.80 -44.70 94.80 -35.30Q94.80 -26.00 99.84 -20.45Q104.91 -14.91 113.41 -14.91ZM211.89 0.70Q204.20 0.70 198.09 -1.80Q192.00 -4.30 188.34 -9.19Q184.70 -14.09 184.50 -21.00L202.70 -21.00Q203.09 -17.09 205.39 -15.05Q207.70 -13.00 211.39 -13.00Q215.20 -13.00 217.39 -14.75Q219.59 -16.50 219.59 -19.59Q219.59 -22.20 217.84 -23.89Q216.09 -25.59 213.55 -26.69Q211.00 -27.80 206.30 -29.20Q199.50 -31.30 195.19 -33.39Q190.89 -35.50 187.80 -39.59Q184.70 -43.70 184.70 -50.30Q184.70 -60.09 191.80 -65.64Q198.89 -71.20 210.30 -71.20Q221.89 -71.20 228.98 -65.64Q236.09 -60.09 236.59 -50.20L218.09 -50.20Q217.89 -53.59 215.59 -55.55Q213.30 -57.50 209.70 -57.50Q206.59 -57.50 204.69 -55.84Q202.80 -54.20 202.80 -51.09Q202.80 -47.70 206.00 -45.80Q209.20 -43.91 216.00 -41.70Q222.80 -39.41 227.05 -37.30Q231.30 -35.20 234.39 -31.20Q237.50 -27.20 237.50 -20.91Q237.50 -14.91 234.44 -10.00Q231.39 -5.09 225.59 -2.19Q219.80 0.70 211.89 0.70ZM289.41 -0.00L265.80 -31.00L265.80 -0.00L248.70 -0.00L248.70 -70.20L265.80 -70.20L265.80 -39.41L289.20 -70.20L309.30 -70.20L282.09 -35.80L310.30 -0.00L289.41 -0.00ZM401.00 -47.59Q401.00 -41.50 398.19 -36.45Q395.39 -31.41 389.59 -28.30Q383.80 -25.20 375.20 -25.20L364.59 -25.20L364.59 -0.00L347.50 -0.00L347.50 -70.20L375.20 -70.20Q383.59 -70.20 389.39 -67.30Q395.20 -64.41 398.09 -59.30Q401.00 -54.20 401.00 -47.59ZM373.89 -38.80Q378.80 -38.80 381.19 -41.09Q383.59 -43.41 383.59 -47.59Q383.59 -51.80 381.19 -54.09Q378.80 -56.41 373.89 -56.41L364.59 -56.41L364.59 -38.80L373.89 -38.80ZM437.59 0.70Q429.91 0.70 423.80 -1.80Q417.70 -4.30 414.05 -9.19Q410.41 -14.09 410.20 -21.00L428.41 -21.00Q428.80 -17.09 431.09 -15.05Q433.41 -13.00 437.09 -13.00Q440.91 -13.00 443.09 -14.75Q445.30 -16.50 445.30 -19.59Q445.30 -22.20 443.55 -23.89Q441.80 -25.59 439.25 -26.69Q436.70 -27.80 432.00 -29.20Q425.20 -31.30 420.89 -33.39Q416.59 -35.50 413.50 -39.59Q410.41 -43.70 410.41 -50.30Q410.41 -60.09 417.50 -65.64Q424.59 -71.20 436.00 -71.20Q447.59 -71.20 454.69 -65.64Q461.80 -60.09 462.30 -50.20L443.80 -50.20Q443.59 -53.59 441.30 -55.55Q439.00 -57.50 435.41 -57.50Q432.30 -57.50 430.39 -55.84Q428.50 -54.20 428.50 -51.09Q428.50 -47.70 431.70 -45.80Q434.91 -43.91 441.70 -41.70Q448.50 -39.41 452.75 -37.30Q457.00 -35.20 460.09 -31.20Q463.20 -27.20 463.20 -20.91Q463.20 -14.91 460.14 -10.00Q457.09 -5.09 451.30 -2.19Q445.50 0.70 437.59 0.70Z"/><rect x="317.30" y="-86.20" width="17" height="102.20" rx="8.5" fill="var(--accent)"/></g></svg></a>
     <nav aria-label="Sections">
       <a href="#collectibles">Collectibles</a>
-      <a href="#catalogue" data-side="A">Front Row</a>
-      <a href="#catalogue" data-side="B">Studio</a>
       <a href="#catalogue" data-side="D">Daily</a>
+      <a href="#catalogue" data-side="A">Listen</a>
+      <a href="#catalogue" data-side="B">Make</a>
       <a href="#build">Build it</a>
       <a href="#order">How to order</a>
     </nav>
@@ -362,11 +383,11 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 
   <section class="wrap sig" aria-labelledby="sigTitle">
     <div class="sig-in">
-      <div class="shot"><img src="img/plate.webp" alt="Soundwave Plate on its two feet" loading="lazy" width="880" height="880"><img class="bp" src="img/bp_A1.webp" alt="" aria-hidden="true" loading="lazy" width="1200" height="1200"></div>
+      <div class="shot"><img src="img/plate.webp" alt="Track Plate in its base bar" loading="lazy" width="880" height="880"><img class="bp" src="img/bp_A1.webp" alt="" aria-hidden="true" loading="lazy" width="1200" height="1200"></div>
       <div class="sig-copy">
         <span class="eyebrow"><i class="led"></i><span id="sigLabel"></span></span>
-        <h2 id="sigTitle">Soundwave Plate</h2>
-        <p>The piece the range grew from. Send a track and its loudness, from the first second to the last, becomes 50 raised bars. Every quiet intro and every drop is there to see. No two songs print alike.</p>
+        <h2 id="sigTitle">Track Plate</h2>
+        <p>The piece the range grew from. Send a song and it becomes a plate you can scan to play, or a wave of 50 raised bars drawn from the track itself, every quiet intro and every drop. No two songs print alike.</p>
         <span class="price" id="sigPrice"></span>
         <button class="btn" type="button" data-open="A1">Make it with your song</button>
       </div>
@@ -376,17 +397,22 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
   <section class="wrap cat" id="catalogue">
     <div class="head">
       <div>
-        <h2 id="sideTitle">Side A. Front Row</h2>
+        <h2 id="sideTitle">Daily</h2>
         <p id="sideCopy"></p>
       </div>
       <div class="tabs" role="tablist" aria-label="Collection">
-        <button role="tab" type="button" data-side="A" id="tabA"><span class="mono">Side A</span>Front Row</button>
-        <button role="tab" type="button" data-side="B" id="tabB"><span class="mono">Side B</span>Studio</button>
-        <button role="tab" type="button" data-side="D" id="tabD"><span class="mono">New</span>Daily</button>
+        <button role="tab" type="button" data-side="D" id="tabD">Daily</button>
+        <button role="tab" type="button" data-side="A" id="tabA">Listen</button>
+        <button role="tab" type="button" data-side="B" id="tabB">Make</button>
         <button role="tab" type="button" data-side="all" id="tabAll">Everything</button>
       </div>
     </div>
+    <div class="fbar"><div class="chips fchips" id="filters" role="group" aria-label="Filter"></div><span class="mono muted" id="gridCount" aria-live="polite"></span></div>
     <div class="grid" id="grid"></div>
+    <div class="soon" id="soonWrap" hidden>
+      <div class="soon-head"><span class="eyebrow"><i class="led"></i>On the bench</span><p>Designed and drawn, not on sale yet. Tap one to be told when it lands.</p></div>
+      <div class="grid soon-grid" id="soonGrid"></div>
+    </div>
   </section>
 
   <section class="build" id="build" aria-labelledby="buildTitle">
@@ -435,9 +461,9 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
     <div class="bulk">
       <div>
         <h2>Coins and tags for your act or venue</h2>
-        <p>Gig coins and name tags in runs of 25 or more for artists, DJs, clubs and festivals. One run per show, numbered, never reprinted. Tell us the quantity and we will quote.</p>
+        <p>Run 50 is fifty name tags with your act's name, ready for the merch table, at <span id="run50Price"></span>. Gig coins and tags also come in runs of 25 or more for artists, DJs, clubs and festivals: one run per show, numbered, never reprinted.</p>
       </div>
-      <a class="btn red" id="chatBulk" target="_blank" rel="noopener" href="#">Ask about a run</a>
+      <div class="cta" style="margin:0"><button class="btn red" type="button" data-open="B5">Order a Run 50</button><a class="btn ghost bulk-ghost" id="chatBulk" target="_blank" rel="noopener" href="#">Ask about a custom run</a></div>
     </div>
   </section>
 </main>
@@ -541,7 +567,7 @@ function tag(o,big){
 }
 const ART={
   plate(o){
-    const feet=shadow(160,196,128)+`<rect class="pb" x="62" y="180" width="68" height="14" rx="5"/><rect class="pb" x="190" y="180" width="68" height="14" rx="5"/>`;
+    const feet=shadow(160,198,138)+`<rect class="pb" x="32" y="178" width="256" height="18" rx="6"/><rect x="62" y="188" width="196" height="3.4" rx="1.7" fill="var(--p-red)"/>`;
     if(o.mode==="code")return feet+body(40,58,240,126,9)+codeArt(o.t1+"|"+o.t2,160,102,205.7,"piv")
       +`<text class="piv" x="160" y="153" text-anchor="middle" font-size="${fit(o.t1,12.5,200)}">${up(o.t1)}</text><text class="piv" x="160" y="169" text-anchor="middle" font-size="${fit(o.t2,8.2,190)}">${up(o.t2)}</text>`;
     return feet+body(40,58,240,126,9)+dots(59.3,76.3,50,8,4.11,8.2,1)
@@ -609,100 +635,112 @@ const ART={
    f: text fields [label, example]. pick: one choice field [label, options]. imgs: [file, caption].
    ed: edition line shown on the card and in the product view. build: key into BUILD. */
 const P=[
- {id:"C1",side:"C",name:"Vol. 01: The Studio",price:1999,line:"All six pieces on a numbered tray",badge:"Latest release",noAccent:true,
+ {id:"C1",side:"C",name:"Vol. 01: The Studio",kind:"Collector set",price:1999,line:"All six pieces on a numbered tray",badge:"Latest release",noAccent:true,
   ed:`Numbered 01/${DROP.total} to ${DROP.total}/${DROP.total}`,build:"studio",
   desc:"The whole first volume: turntable, synth, drum machine, mixer, mic and headphones, each numbered 01/06 to 06/06 underneath, on a tray that carries your set number. Three pieces come in red, three in ivory. Fifty sets are made. After that the files are retired.",
   size:"Tray 196 x 124 mm. Pieces 30 to 66 mm wide, 12 to 57 mm tall",f:[],imgs:[["studio_set","The full set"],["studio_mini","01 Turntable, 05 Mic, 02 Synth"],["studio_mini2","03 Drums, 06 Headphones, 04 Mixer"]]},
- {id:"C2",side:"C",name:"Studio Mini",price:399,line:"One piece from Vol. 01, your pick",badge:"Collect all six",
+ {id:"C2",side:"C",name:"Studio Mini",kind:"Single piece",price:399,line:"One piece from Vol. 01, your pick",badge:"Collect all six",
   ed:"Six to collect, 01/06 to 06/06",
   desc:"A single piece from The Studio. Start with the one you play, then fill the shelf. Every mini has its number in the volume printed into the base.",
   size:"30 to 66 mm wide, 12 to 57 mm tall, depending on the piece",f:[],pick:["Which piece",["01 Turntable","02 Synth","03 Drum machine","04 Mixer","05 Mic","06 Headphones"]],
   imgs:[["studio_mini","01 Turntable, 05 Mic, 02 Synth"],["studio_mini2","03 Drums, 06 Headphones, 04 Mixer"]]},
- {id:"C3",side:"C",name:"Gig Coin",price:449,art:"coin",custom:true,line:"One show, one coin, never reprinted",badge:"Pocket size",
-  ed:"One numbered run per gig",
-  desc:"A pocket coin for the night you were there. One face carries the artist's silhouette, the other the name, the city and the year, with your coin's number. Each gig gets one run. Trade them at the barrier, or line them up at home.",
-  size:"42 mm across, 4 mm thick, about 6 g",f:[["Artist name","Dimo Mähtarp"],["City and year","Bengaluru 2026"]],pick:["Silhouette",["DJ","Guitarist","Vocalist","Traced from a photo"]],
+ {id:"C3",side:"C",name:"Gig Coin",kind:"Show token",price:499,art:"coin",custom:true,line:"One show, one coin, never reprinted",badge:"Pocket size",
+  ed:"One numbered run per gig",build:"coin",
+  desc:"A pocket coin for the night you were there. One face carries the artist's silhouette inside a raised rim, so pockets and keys rub the rim and not the artwork. The other face carries the name, the city and the year with your coin's number, set flush into the surface. The edge is reeded like a real coin. It comes with a snap frame and a small foot: stand it on a shelf, or hang it from a bag by the loop.",
+  size:"Coin 42 mm across, 4 mm thick, about 6 g. Frame 49 mm, foot 40 x 18 mm",f:[["Artist name","Dimo Mähtarp"],["City and year","Bengaluru 2026"]],pick:["Silhouette",["DJ","Guitarist","Vocalist","Traced from a photo"]],
   extra:"For a traced silhouette, send a photo in the chat. ",
-  imgs:[["coin","Both faces"]]},
- {id:"C4",side:"C",name:"Mixtape Standees",price:1099,art:"standees",custom:true,line:"Four cassettes, your four songs",badge:"Made for you",
+  imgs:[["coin","In its frame, and the back"]]},
+ {id:"C4",side:"C",name:"Side A",kind:"Mixtape set of 4",price:1299,art:"standees",custom:true,line:"Four cassettes, your four songs, one rail",badge:"Made for you",
   ed:"Your own four-track edition",build:"standees",
-  desc:"Four pocket cassettes that stand on their own printed feet, each with a label carrying a song you choose. Line them up as the mixtape you would hand someone.",
-  size:"60 x 38 x 4 mm each, on a 40 mm foot, set of 4",f:[["Four song titles, separated by commas","Starboy, Save Your Tears, Jungle, adore u"]],
-  imgs:[["standees","The set of four"],["standee_build","Cassette and foot"]]},
- {id:"C5",side:"C",name:"Gain Knob",price:399,line:"A knob that goes nowhere, and spins",badge:"New",
+  desc:"Four pocket cassettes, each with a label carrying a song you choose, standing in a slotted rail. The rail comes as two sections that slide together with a dovetail, so the set reads as one piece on the shelf. Order a second set and the row keeps going.",
+  size:"Cassettes 60 x 38 x 4 mm. Two rail sections, 132 x 34 x 10 mm each, 268 mm joined",f:[["Four song titles, separated by commas","Starboy, Save Your Tears, Jungle, adore u"]],
+  imgs:[["standees","Four on the rail"],["standee_build","Rail sections and cassettes"]]},
+ {id:"C5",side:"C",name:"Gain",kind:"Fidget knob",price:399,line:"A knob that goes nowhere, and spins",badge:"New",
   ed:"Vol. 01 desk series",build:"knob",
   desc:"A fluted amp knob on a puck with eleven level marks. It clicks onto a printed post and spins freely. For queues, long renders and calls that could have been an email.",
   size:"44 mm base, 27 mm knob, 20 mm tall",f:[],imgs:[["knob","Red and ivory"],["knob_build","Cap and base"]]},
 
- {id:"A1",side:"A",name:"Soundwave Plate",price:1799,art:"plate",custom:true,song:"plate",line:"Your song as a desk piece, scan it or see it",badge:"Signature",build:"plate",
-  desc:"Your song on a matte black plate, two ways. As its Spotify Code: open the Spotify app, scan the plate and the song starts playing. Or as its sound wave: the loud and quiet parts of the track from first second to last, in 50 raised bars. The title and artist sit underneath.",
-  size:"140 x 70 x 3 mm plate, two feet",
+ {id:"A1",side:"A",name:"Track Plate",kind:"Scannable song display",price:1799,art:"plate",custom:true,song:"plate",line:"Your song as a desk piece, scan it or see it",badge:"Signature",build:"plate",
+  desc:"Your song on a matte black plate, two ways. As its Spotify Code: open the Spotify app, scan the plate and the song starts playing. Or as its sound wave: the loud and quiet parts of the track from first second to last, in 50 raised bars. The title and artist sit underneath. The plate drops into one slotted base bar and leans back 12 degrees, the angle a phone reads it from most easily.",
+  size:"140 x 70 x 3 mm plate, 150 x 30 x 14 mm base bar",
   f:[["Song title","Blinding Lights",{max:60}],["Artist name","The Weeknd",{max:60,note:{code:"Spell both exactly as you want them printed under the code.",wave:"Spell both exactly. We build the wave from this song. For your own unreleased track, send the audio file in the chat."}}],
      ["Spotify song link","",{max:300,show:"code",ph:"https://open.spotify.com/track/...",note:{code:"Needed for the Spotify Code. In Spotify: Share, then Copy song link. Song not on Spotify? Choose Sound wave above."}}]],
-  imgs:[["plate","Spotify Code"],["plate_wave","Sound wave"],["plate_build","Plate and feet"]]},
- {id:"A2",side:"A",name:"Now Playing Plaque",price:1199,art:"plaque",custom:true,line:"A song that never skips",build:"plaque",
-  desc:"A standing plaque styled like a music player, frozen on the one track that matters. The plate drops into its base, no glue.",
-  size:"70 x 110 x 3 mm, slot base",f:[["Song title","Delilah"],["Artist","Fred again.."]],
-  imgs:[["plaque","In its base"],["plaque_build","Plate and base"]]},
- {id:"A3",side:"A",name:"Wristband Rail",price:1299,art:"rail",custom:true,line:"Every festival, one wall",build:"rail",
-  desc:"A wall rail with five short red T-head pegs for the wristbands you never throw away. Loop a few bands on one peg, the cap keeps them on. Pegs press in by hand. Wall screws or mounting tape are not included, so use what suits your wall.",
-  size:"200 x 36 x 8 mm rail, 11 mm pegs. Two 4 mm screw holes, 120 mm apart",f:[["Name on the rail","Front Row"]],
-  imgs:[["rail","On the wall"],["rail_build","Pegs press in"]]},
- {id:"A4",side:"A",name:"Record Coasters",price:1199,line:"Set of four, grooves included",
-  desc:"Coasters with real printed grooves, a coloured centre label and a ribbed underside. Made for cold drinks and desk duty. A mug straight off the boil is too hot for them.",
-  size:"90 mm across, 4 mm thick, set of 4",f:[],imgs:[["coasters","Stack of four"]]},
- {id:"A5",side:"A",name:"Song Tag",price:549,art:"songtag",custom:true,song:"tag",line:"Your song on your bag, scan it from the strap",build:"tag",
-  desc:"A tag for your bag or keys. The front carries your song's Spotify Code, which plays the song when scanned in the Spotify app, or its sound wave. The back carries the song and artist, or your own name. It hangs from a printed loop that locks with a twist, so there is no metal ring.",
-  size:"80 x 30 x 3 mm, printed loop",
+  imgs:[["plate","Spotify Code"],["plate_wave","Sound wave"],["plate_build","Plate and base bar"]]},
+ {id:"A5",side:"A",name:"Track Tag",kind:"Song keytag",price:549,art:"songtag",custom:true,song:"tag",line:"Your song on your bag, scan it from the strap",build:"tag",
+  desc:"A tag for your bag or keys. The front carries your song's Spotify Code, which plays the song when scanned in the Spotify app, or its sound wave. The code sits just below a raised rim, so keys and zips rub the rim and the code keeps scanning. The back carries the song and artist, or your own name. It hangs from a printed loop that locks with a twist, so there is no metal ring.",
+  size:"80 x 30 x 4 mm, printed loop",
   f:[["Song title","Starboy",{max:60}],["Artist name","The Weeknd",{max:60,note:{code:"Spell both exactly as you want them printed on the back.",wave:"Spell both exactly. We build the wave from this song."}}],
      ["Spotify song link","",{max:300,show:"code",ph:"https://open.spotify.com/track/...",note:{code:"Needed for the Spotify Code. In Spotify: Share, then Copy song link. Song not on Spotify? Choose Sound wave above."}}],
      ["Your name for the back","Dimo",{max:40,show:"name"}]],
   imgs:[["songtag","Code side and loop"],["songtag_sides","Front and back"]]},
+ {id:"A3",side:"A",name:"Rail",kind:"Wristband display",price:1299,art:"rail",custom:true,line:"Every festival, one wall",build:"rail",
+  desc:"A wall rail with five short red T-head pegs for the wristbands you never throw away. Loop a few bands on one peg, the cap keeps them on. Pegs press in by hand. Wall screws or mounting tape are not included, so use what suits your wall.",
+  size:"200 x 36 x 8 mm rail, 11 mm pegs. Two 4 mm screw holes, 120 mm apart",f:[["Name on the rail","Front Row"]],
+  imgs:[["rail","On the wall"],["rail_build","Pegs press in"]]},
+ {id:"A4",side:"A",name:"45s",kind:"Record coasters, set of 4",soon:"We are moving these to a heat-safe material and testing them with hot cups before they go on sale.",price:1199,line:"Set of four, grooves included",
+  desc:"Coasters with real printed grooves, a coloured centre label and a ribbed underside. Set of four.",
+  size:"90 mm across, 4 mm thick, set of 4",f:[],imgs:[["coasters","Stack of four"]]},
 
- {id:"B1",side:"B",name:"Pick Amp",price:1399,line:"Pick holder with a drawer",badge:"Build it yourself",build:"amp",
+ {id:"B1",side:"B",name:"Stack",kind:"Pick amp with drawer",price:1399,line:"Pick holder with a drawer",badge:"Build it yourself",build:"amp",
   desc:"A small amp for the desk that you build yourself in a few minutes. Picks stand in the top slot, spares and a capo go in the drawer. Five parts, no glue.",
   size:"70 x 72 x 30 mm, fits standard picks",f:[],noAccent:true,imgs:[["amp","Built"],["amp_open","Drawer open"],["amp_build","The five parts"]]},
- {id:"B2",side:"B",name:"Controller Riser",price:1699,line:"Pair of angled stands",
+ {id:"B2",side:"B",name:"Lift",kind:"Controller risers, pair",price:1699,line:"Pair of angled stands",
   desc:"Two wedges that tilt a MIDI controller, drum pad or laptop toward you at 14 degrees, with a front lip to stop it sliding and a waveform on the side.",
   size:"150 x 40 x 45 mm each, pair",f:[],imgs:[["riser","Pair, with a controller"]]},
- {id:"B3",side:"B",name:"Name Tag",price:449,art:"nametag",custom:true,line:"Your artist name, raised",build:"tag",
-  desc:"The tag that started the range. Your name in two lines over a strip of waveform, for cases and gig bags. Hangs from a printed loop.",
-  size:"70 x 30 x 3 mm, printed loop",f:[["Line one","Dimo"],["Line two (optional)","Mähtarp"]],imgs:[["nametag","Tag and loop"]]},
- {id:"B4",side:"B",name:"Session Sign",price:1099,art:"sign",custom:true,line:"Tell the house you are tracking",build:"plate",
-  desc:"A desk or shelf sign with one word and one light. Recording, On Air, Mixing, or anything up to twelve letters.",
-  size:"140 x 60 x 3 mm plate, two feet",f:[["Your word","Recording"]],imgs:[["sign","On its feet"]]},
- {id:"D1",side:"D",name:"Monitor Phone Stand, Horn",price:1499,line:"A studio monitor that holds and amplifies your phone",badge:"New",
+ {id:"B3",side:"B",name:"Alias",kind:"Artist name tag",price:449,art:"nametag",custom:true,line:"Your artist name, raised",build:"tag",
+  desc:"The tag that started the range. Your name in two lines over a strip of waveform, for cases and gig bags. A raised rim protects the lettering. Hangs from a printed loop.",
+  size:"70 x 30 x 4 mm, printed loop",f:[["Line one","Dimo"],["Line two (optional)","Mähtarp"]],imgs:[["nametag","Tag and loop"]]},
+ {id:"B5",side:"B",name:"Run 50",kind:"Artist merch tags",hide:true,price:5999,custom:true,line:"Your name, fifty times",noAccent:false,
+  desc:"Fifty name tags with your act, venue or event name, each with its printed loop, ready for the merch table. That is about ₹120 a tag. Larger runs cost less per piece.",
+  size:"70 x 30 x 4 mm each, 50 pieces",f:[["Name or text on the tags",""]],extra:"Send your logo in the chat if you have one.",imgs:[["run","Part of a run"]]},
+
+ {id:"D1",side:"D",name:"Horn",kind:"Phone stand and amplifier",price:1499,line:"A studio monitor that holds and amplifies your phone",badge:"Top pick",
   desc:"A small studio monitor for the desk with a hollow horn behind the woofer. Your phone rests on the seat at 71 degrees, upright or sideways, with its bottom speaker over two slits that feed the horn, so the sound is guided out of the front through the woofer opening, a little louder and more directed than the phone alone. The charging cable gets its own opening and runs out the back. Fits phones in cases from 7 to 11.5 mm thick, small iPhones to tall Androids. The stand slides onto a weighted plate by a dovetail, and the long tail behind it stops the stand tipping back when you tap the screen.",
   size:"70 x 133 x 108 mm, stand and plate",f:[],imgs:[["phonestand","With a phone"],["phonestand_horn_exploded","Stand and plate"],["phonestand_horn_seat","Seat and slits"]]},
- {id:"D2",side:"D",name:"Cassette Box",price:849,custom:true,line:"A tape that holds your small things",badge:"New",build:"box",
+ {id:"D6",side:"D",name:"Fold",kind:"Flat-pack laptop stand",price:1699,line:"Lifts your screen, packs flat in a bag",badge:"New",build:"fold",noAccent:true,
+  desc:"A laptop stand in four flat pieces. Two side ribs press down onto two cross braces and it is built, no tools and no screws. It tilts the laptop 16 degrees and lifts the back by about 80 mm, so the screen comes up and the keyboard angles toward you. The slots in each rib follow a real waveform and let air through underneath. Pull it apart and the four pieces stack 24 mm thick, flat enough for a backpack sleeve.",
+  size:"240 x 236 x 83 mm built. Four parts, each 6 mm thick. For laptops from 13 to 16 inches",f:[],
+  extra:"Made for everyday laptops. A gaming laptop running hot for hours can soften PLA, so this is not the stand for that. ",
+  imgs:[["fold_bare","Built"],["fold","With a laptop"],["fold_flat","The four flat parts"]]},
+ {id:"D7",side:"D",name:"Channel",kind:"Modular desk set",price:1799,line:"Pens, tools and small things, linked like a mixer",badge:"New",build:"channel",noAccent:true,
+  desc:"Three desk modules styled as mixer channels, each with its own fader on the front. A tall cup for pens and brushes, a mid cup for markers and scissors, and a tray with a divider for cards, clips and earbuds. Each module has a dovetail on one side and a socket on the other: lower one beside the next and they lock into a single row. Rearrange them any time, or run them apart.",
+  size:"Tall cup 60 x 60 x 100 mm, mid cup 60 x 60 x 60 mm, tray 120 x 60 x 24 mm. 254 mm linked",f:[],
+  imgs:[["channel","Linked, in use"],["channel_build","Three modules"]]},
+ {id:"D8",side:"D",name:"B-Side",kind:"Catch-all tray",price:1099,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
+  desc:"A tray for the things you drop when you walk in: keys, rings, earbuds, a watch, loose change. It is drawn as a record, with grooves cut into the floor and a raised centre label, and a 20 mm rim so nothing rolls off. One piece, nothing to build.",
+  size:"160 mm across, 20 mm tall",f:[],
+  imgs:[["bside","In use"],["bside_bare","Grooves and label"]]},
+ {id:"D2",side:"D",name:"Tape Case",kind:"Small storage box",price:849,custom:true,line:"A tape that holds your small things",build:"box",
   desc:"A box drawn from a real tape: reel hubs, a tape window, corner screws, the head slots and the seam between the two halves, with your own text on the label. Two compartments inside for picks, SD cards, earbud tips or a gig coin. The lid presses on and holds by friction, so there is no hinge to break.",
   size:"100 x 64 x 21 mm. Compartments 35 x 59 and 58 x 59 mm, 16 mm deep",f:[["Label text","Side A"]],
   imgs:[["cassettebox","Red and ivory labels"],["cassettebox_open","Open, with picks and a coin"]]},
- {id:"D3",side:"D",name:"Reel Cord Winders",price:399,line:"Wind your cable like tape",
-  desc:"Two tape reels joined by a spindle. Wind your earphone cable between them the way tape runs between reels, then lock the plug end in the slit. Thin enough for a pocket. Set of three.",
-  size:"70 x 28 x 4 mm each, set of 3",f:[],imgs:[["winders","Set of three"],["winder_wound","With earphones wound"]]},
- {id:"D4",side:"D",name:"Vinyl Display Stand",price:1299,line:"For the record you are playing now",badge:"New",build:"vinyl",
+ {id:"D4",side:"D",name:"Sleeve",kind:"Vinyl display stand",price:1299,line:"For the record you are playing now",build:"vinyl",
   desc:"Two feet cut from records, grooves and label included, hold a 12-inch sleeve leaning back like the racks in a record shop. The Now Spinning ledge slides into both feet at the front. It also holds a framed print, a book or a 7-inch.",
   size:"170 x 130 x 120 mm. Holds sleeves up to 10 mm thick",f:[],imgs:[["vinylstand","The stand"],["vinylstand_record","With a 12-inch sleeve"],["vinylstand_build","Ledge and feet"]]},
- {id:"D5",side:"D",name:"Headphone Stand",price:2199,line:"A home for the cans",badge:"New",build:"headphones",
+ {id:"D5",side:"D",name:"Hold",kind:"Headphone stand",price:2199,line:"A home for the cans",build:"headphones",
   desc:"Mixer parts at full size. The base is a giant gain knob, knurled round the edge with its dial and pointer on top. The post is a channel fader, track and scale included. The headband rests on a ribbed saddle that will not crease it. Three parts press together by hand.",
   size:"116 mm base, 253 mm tall, saddle 108 mm wide",f:[],imgs:[["headphonestand_bare","Knob, fader, saddle"],["headphonestand","With headphones"],["headphonestand_build","Three parts"]]},
- {id:"B5",side:"B",name:"Merch Run, 50 Tags",price:5999,custom:true,line:"Your name, fifty times",noAccent:false,
-  desc:"Fifty name tags with your act, venue or event name, each with its printed loop, ready for the merch table. That is about ₹120 a tag. Larger runs cost less per piece.",
-  size:"70 x 30 x 3 mm each, 50 pieces",f:[["Name or text on the tags",""]],extra:"Send your logo in the chat if you have one.",imgs:[["run","Part of a run"]]}
+ {id:"D9",side:"D",name:"Perch",kind:"Sofa arm tray",price:0,line:"A steady table for the arm of your sofa",noAccent:true,
+  soon:"A cup of chai will end up on this, so it is being made in a heat-safe material and tested with hot cups before release.",
+  desc:"A tray that wraps over a sofa arm. The centre is a rigid table with a raised rim and a cup well, so a glass cannot slide off. Two hinged slats on each side fold down and grip arms of different widths. The hinge pins slide in by hand.",
+  size:"Table 122 x 240 mm with a 9 mm rim. 264 mm wide laid flat",f:[],
+  imgs:[["perch","On a sofa arm"],["perch_flat","Laid flat"]]}
 ];
-const SIDES={D:["Daily Rotation","Things you will reach for every day. A phone stand, a box for small things, a stand for the record you are playing, and a home for your headphones."],
-             A:["Side A. Front Row","For people who live for the music. Keepsakes and gifts built around a song, a show or a night you want to keep."],
-             B:["Side B. Studio","For people who make the music. Small, useful things for the desk, the booth and the gig bag."],
-             all:["The whole tape","Collectibles, Daily Rotation, Side A and Side B. Twenty pieces, one design system, one material."]};
-const SIDE_NAME={A:"Front Row",B:"Studio",C:"Collectibles",D:"Daily Rotation"};
+const SIDES={D:["Daily","Things you reach for every day. A laptop stand that packs flat, a desk set that links together, a tray for your keys, and homes for your phone, records and headphones."],
+             A:["Listen","For people who live for the music. Keepsakes and gifts built around a song, a show or a night you want to keep."],
+             B:["Make","For people who make the music. Small, useful things for the desk, the booth and the gig bag."],
+             all:["Everything","The whole range. One design system, one material, nothing in the box but printed parts."]};
+const SIDE_NAME={A:"Listen",B:"Make",C:"Collectibles",D:"Daily"};
+const live=p=>!p.soon&&!p.hide;
+const FILTERS=[["all","All"],["new","New"],["u999","Under ₹999"],["custom","Made for you"],["build","Build it yourself"]];
+const passes=(p,f)=>f==="all"||(f==="new"&&p.badge==="New")||(f==="u999"&&p.price<1000)||(f==="custom"&&!!p.custom)||(f==="build"&&!!p.build);
 const img=k=>"img/"+k+".webp";
 const defaults=p=>({t1:(p.f[0]&&p.f[0][1])||"",t2:(p.f[1]&&p.f[1][1])||""});
 const draw=(p,o,accent)=>svg(ART[p.art](o||defaults(p)),accent||"red");
 
 /* ---------------- build guides (QR codes on the box link to #build-<key>) ---------------- */
 const BUILD={
- amp:{name:"Pick Amp",img:"amp_build",parts:"5 parts",time:"3 minutes",steps:[
+ amp:{name:"Stack",img:"amp_build",parts:"5 parts",time:"3 minutes",steps:[
    ["Press in the three knobs","Each ivory knob has a short stem. Push them into the three holes on the face of the head until they sit flush."],
    ["Fit the handle","Line the two pins on the ivory handle up with the holes on the drawer front and press."],
    ["Stack the head on the base","The head has four pins underneath. Line them up with the four sockets on the base and push down until the seam closes."],
@@ -711,68 +749,89 @@ const BUILD={
    ["Stand the headphones","Press the two ear cups into the two pockets on their base. This is the only piece that needs building."],
    ["Find the numbers","Each piece has its number, 01/06 to 06/06, printed into the underside."],
    ["Rack them","Turntable, drum machine and mixer at the front. Mic, headphones and synth behind. Your set number faces you on the front lip."]]},
- rail:{name:"Wristband Rail",img:"rail_build",parts:"Rail and 5 pegs",time:"5 minutes",steps:[
+ rail:{name:"Rail",img:"rail_build",parts:"Rail and 5 pegs",time:"5 minutes",steps:[
    ["Fix the rail to the wall","Use two 4 mm screws with wall plugs through the holes, 120 mm apart, or a strong mounting tape on smooth walls. These are not in the box, so pick what suits your wall."],
    ["Press in the pegs","Push each red peg into a socket by hand until it stops. The screw heads sit sunk below the face, between the pegs."],
    ["Hang the bands","Loop two or three wristbands over each peg. The wide cap stops them sliding off."]],
    note:"Tape is for light loads only. On textured paint or for a full rail, use screws."},
- plate:{name:"Soundwave Plate and Session Sign",img:"plate_build",parts:"Plate and 2 feet",time:"30 seconds",steps:[
-   ["Set out the feet","Place the two feet about 50 mm apart, slots in line, the low side of each slot facing you."],
-   ["Lower the plate in","Drop the bottom edge of the plate into both slots. It leans back 12 degrees and holds itself."]]},
- plaque:{name:"Now Playing Plaque",img:"plaque_build",parts:"Plate and base",time:"10 seconds",steps:[
-   ["Drop the plate into the base","The bottom edge of the plate fits the slot in the base. Press until it reaches the floor of the slot."]]},
- standees:{name:"Mixtape Standees",img:"standee_build",parts:"4 cassettes, 4 feet",time:"1 minute",steps:[
-   ["Press each cassette into a foot","The bottom edge of the cassette fits the slot. Centre it and press down."],
-   ["Line them up","Track one on the left. Angle them a little so the labels catch the light."]]},
- knob:{name:"Gain Knob",img:"knob_build",parts:"Cap and base",time:"10 seconds",steps:[
+ plate:{name:"Track Plate",img:"plate_build",parts:"Plate and base bar",time:"10 seconds",steps:[
+   ["Set down the base bar","Red stripe toward you, slot behind it."],
+   ["Lower the plate in","Drop the bottom edge of the plate into the slot. It leans back 12 degrees and holds itself."]]},
+ standees:{name:"Side A",img:"standee_build",parts:"4 cassettes, 2 rail sections",time:"1 minute",steps:[
+   ["Join the rail","Hold one section flat. Lower the dovetail on the end of the other section straight down into its socket until both sit level."],
+   ["Stand the cassettes","Press the bottom edge of each cassette into a slot. Track one on the left."],
+   ["Add to it","A second set links onto either end the same way."]]},
+ coin:{name:"Gig Coin",img:"coin",parts:"Coin, frame, foot",time:"30 seconds",steps:[
+   ["Snap the coin into the frame","Open the split at the bottom of the frame a little, seat the coin, and let the frame close around it."],
+   ["Stand it or hang it","Press the two tabs at the bottom of the frame into the foot. The foot holds the split shut, so the coin is locked in. Or leave the foot off and use the loop."]]},
+ fold:{name:"Fold",img:"fold_flat",parts:"2 ribs, 2 braces",time:"1 minute",steps:[
+   ["Lay out the braces","Place the two braces about 170 mm apart, notches facing up, red bars facing you."],
+   ["Press on the first rib","Line the two notches under a rib up with the notches at one end of the braces and press down until the rib touches the table. The tall end goes at the back."],
+   ["Press on the second rib","Same again at the other end. Check all four joints are fully down."],
+   ["Add the laptop","Rest the front edge of the laptop against the two lips."]],
+   note:"To pack it, lift each rib straight up. If a joint feels tight on the first build, work it in and out a few times."},
+ channel:{name:"Channel",img:"channel_build",parts:"3 modules",time:"30 seconds",steps:[
+   ["Pick your order","Each module has a dovetail on its right side and a socket on its left."],
+   ["Lower to link","Hold one module on the desk. Lower the next one straight down beside it so its socket slides over the dovetail."],
+   ["Change it any time","Lift a module straight up to release it."]]},
+ knob:{name:"Gain",img:"knob_build",parts:"Cap and base",time:"10 seconds",steps:[
    ["Push the cap onto the post","Hold the base flat and press the knob straight down until you feel it click past the head of the post."],
    ["Spin it","It turns freely. To take it apart, pull straight up."]]},
- box:{name:"Cassette Box",img:"cassettebox_open",parts:"Tray and lid",time:"10 seconds",steps:[
+ box:{name:"Tape Case",img:"cassettebox_open",parts:"Tray and lid",time:"10 seconds",steps:[
    ["Fill the tray","Picks and small things in the narrow side, cards or a coin in the wide side."],
    ["Press the lid on","Line the label up with the thumb notch at the front and press until the rim seats. To open, push your thumb into the notch and lift."]]},
- vinyl:{name:"Vinyl Display Stand",img:"vinylstand_build",parts:"Ledge and 2 feet",time:"1 minute",steps:[
+ vinyl:{name:"Sleeve",img:"vinylstand_build",parts:"Ledge and 2 feet",time:"1 minute",steps:[
    ["Stand the feet","Place the two record feet about 110 mm apart, grooves facing out, the slotted ends at the front."],
    ["Slide in the ledge","Push the Now Spinning ledge down into the front slot of both feet until it reaches the bottom."],
    ["Add the record","Rest the sleeve on the base behind the ledge and lean it back on the cut edge of the records."]]},
- headphones:{name:"Headphone Stand",img:"headphonestand_build",parts:"Base, post, saddle",time:"1 minute",steps:[
+ headphones:{name:"Hold",img:"headphonestand_build",parts:"Base, post, saddle",time:"1 minute",steps:[
    ["Post into the base","Push the bottom of the post into the slot in the knob, fader facing the same way as the pointer, until it reaches the floor of the slot."],
    ["Saddle onto the post","Press the saddle down onto the top of the post, red arc facing front."],
    ["Hang your headphones","Rest the headband on the saddle. Keep it on a flat surface."]],
    note:"It is a tight press fit. If a joint feels loose after a lot of use, a single layer of tape on the post end tightens it."},
- tag:{name:"Song Tag and Name Tag",img:"nametag",parts:"Tag and loop",time:"30 seconds",steps:[
+ tag:{name:"Track Tag and Alias",img:"nametag",parts:"Tag and loop",time:"30 seconds",steps:[
    ["Thread the loop","Push the T-shaped end of the strap through the hole in the tag."],
    ["Wrap it round a strap or zip","Take the strap around your bag strap, zip pull or key ring."],
    ["Lock it","Turn the T-bar in line with the slot at the other end, feed it through, and let it turn back. Pull gently to check."]]}
 };
 
 /* ---------------- state ---------------- */
-let side="A", cart=[];
-try{cart=JSON.parse(localStorage.getItem("ns-list-v2")||"[]").filter(it=>P.some(p=>p.id===it.id))}catch(e){}
+let side="D", cart=[];
+try{cart=JSON.parse(localStorage.getItem("ns-list-v2")||"[]").filter(it=>P.some(p=>p.id===it.id&&!p.soon))}catch(e){}
 const save=()=>{try{localStorage.setItem("ns-list-v2",JSON.stringify(cart))}catch(e){}};
 const wa=text=>"https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text);
 
 function card(p,booth){
-  const badges=[p.badge,p.custom&&p.badge!=="Made for you"?"Made for you":null].filter(Boolean);
-  const k=stk(p.id);
-  return `<button class="card${k.s==="out"?" is-out":""}" type="button" data-open="${p.id}" aria-label="${esc(p.name)}, ${inr(p.price)}">
-    <div class="shot"><img src="${img(p.imgs[0][0])}" alt="${esc(p.name)}" loading="lazy" width="880" height="880"><img class="bp" src="${img("bp_"+p.id)}" alt="" aria-hidden="true" loading="lazy" width="1200" height="1200">
-      <span class="badges">${k.s==="out"?`<span class="badge out">Sold out</span>`:k.s==="low"?`<span class="badge low">${k.n?`Only ${k.n} left`:"Few left"}</span>`:""}${badges.map((b,i)=>`<span class="badge${i===0&&p.badge?" hot":" opt"}">${esc(b)}</span>`).join("")}</span><span class="idx">${p.id}</span></div>
-    <div class="meta"><h3>${esc(p.name)}</h3><span class="price">${inr(p.price)}</span></div>
+  const badges=p.soon?[]:[p.badge,p.custom&&p.badge!=="Made for you"?"Made for you":null].filter(Boolean);
+  const k=p.soon?{s:"in"}:stk(p.id);
+  return `<button class="card${k.s==="out"?" is-out":""}${p.soon?" is-soon":""}" type="button" data-open="${p.id}" aria-label="${esc(p.name)}, ${esc(p.kind||"")}, ${p.soon?"coming soon":inr(p.price)}">
+    <div class="shot"><img src="${img(p.imgs[0][0])}" alt="${esc(p.name)}, ${esc(p.kind||"")}" loading="lazy" width="880" height="880"><img class="bp" src="${img("bp_"+p.id)}" alt="" aria-hidden="true" loading="lazy" width="1200" height="1200">
+      <span class="badges">${p.soon?`<span class="badge out">Coming soon</span>`:""}${k.s==="out"?`<span class="badge out">Sold out</span>`:k.s==="low"?`<span class="badge low">${k.n?`Only ${k.n} left`:"Few left"}</span>`:""}${badges.map((b,i)=>`<span class="badge${i===0&&p.badge?" hot":" opt"}">${esc(b)}</span>`).join("")}</span><span class="idx">${p.id}</span></div>
+    ${p.kind?`<span class="kind">${esc(p.kind)}</span>`:""}
+    <div class="meta"><h3>${esc(p.name)}</h3><span class="price">${p.soon?"Soon":inr(p.price)}</span></div>
     <p class="line">${esc(p.line)}</p>${booth&&p.ed?`<div class="ed"><i class="led"></i>${esc(p.ed)}</div>`:""}</button>`;
 }
+let filt="all";
 function renderGrid(){
   const [t,c]=SIDES[side];$("sideTitle").textContent=t;$("sideCopy").textContent=c;
   ["A","B","D","all"].forEach(s=>$("tab"+(s==="all"?"All":s)).setAttribute("aria-selected",String(s===side)));
-  $("grid").innerHTML=P.filter(p=>side==="all"||p.side===side).map(p=>card(p)).join("");
+  const inSide=P.filter(p=>live(p)&&(side==="all"||p.side===side));
+  if(!inSide.some(p=>passes(p,filt)))filt="all";
+  $("filters").innerHTML=FILTERS.filter(([k])=>k==="all"||inSide.some(p=>passes(p,k))).map(([k,l])=>`<button type="button" data-filter="${k}" aria-pressed="${k===filt}">${esc(l)}</button>`).join("");
+  const shown=inSide.filter(p=>passes(p,filt));
+  $("gridCount").textContent=`${shown.length} ${shown.length===1?"piece":"pieces"}`;
+  $("grid").innerHTML=shown.map(p=>card(p)).join("");
+  const soon=P.filter(p=>p.soon&&(side==="all"||p.side===side));
+  $("soonWrap").hidden=!soon.length;$("soonGrid").innerHTML=soon.map(p=>card(p)).join("");
 }
-function setSide(s){side=s;renderGrid()}
+function setSide(s){side=s;filt="all";renderGrid()}
 function renderDrop(){
   const left=DROP.total-DROP.claimed;
   $("tickEd").textContent=`Vol. 01: ${DROP.total} numbered sets`+(DROP.claimed?`, ${left} left`:"");
   $("heroStamp").textContent=DROP.claimed?`${left} of ${DROP.total} left`:`Edition of ${DROP.total}`;
   $("heroEdition").innerHTML=`<div><b>${DROP.total}</b><span>numbered sets</span></div><div><b>6</b><span>pieces a set</span></div><div><b>${inr(1999)}</b><span>tray included</span></div>`
     +(DROP.claimed?`<div class="meter" role="img" aria-label="${DROP.claimed} of ${DROP.total} sets claimed"><i style="width:${(100*DROP.claimed/DROP.total).toFixed(1)}%"></i></div>`:"");
-  $("boothGrid").innerHTML=P.filter(p=>p.side==="C"&&p.id!=="C1").map(p=>card(p,true)).join("");
+  $("boothGrid").innerHTML=P.filter(p=>p.side==="C"&&p.id!=="C1"&&live(p)).map(p=>card(p,true)).join("");
   $("sigLabel").textContent=SIGNATURE_LABEL;$("sigPrice").textContent=inr(P.find(p=>p.id==="A1").price);
 }
 
@@ -813,11 +872,12 @@ function openProduct(id){
   <div class="pd-grid">
     <div class="pd-stage"><div class="car" id="car">${slides}</div>${n>1?`<div class="car-nav"><button type="button" data-car="-1" aria-label="Previous image">&larr;</button><span class="car-dots" id="carDots"></span><button type="button" data-car="1" aria-label="Next image">&rarr;</button></div>`:""}</div>
     <div class="pd-body">
-      <span class="eyebrow muted">${p.id} / ${SIDE_NAME[p.side]}</span>
+      <span class="eyebrow muted">${p.id} / ${SIDE_NAME[p.side]}${p.kind?" / "+esc(p.kind):""}</span>
       <h2 id="pdName">${esc(p.name)}</h2>
-      <div class="pd-price">${inr(p.price)}${p.badge?`<span class="badge hot">${esc(p.badge)}</span>`:""}</div>
+      <div class="pd-price">${p.soon?`<span class="badge out">Coming soon</span>`:inr(p.price)+(p.badge?`<span class="badge hot">${esc(p.badge)}</span>`:"")}</div>
       ${p.ed?`<div class="pd-ed"><i class="led"></i>${esc(p.ed)}${p.id==="C1"&&DROP.claimed?`. ${DROP.total-DROP.claimed} left`:""}</div>`:""}
       <p class="pd-desc">${esc(p.desc)}</p>
+      ${p.soon?`<div class="pd-ed"><i class="led"></i>${esc(p.soon)}</div><a class="btn red block" target="_blank" rel="noopener" href="${esc(wa(`Hi ${BRAND}, please tell me when ${p.name} (${p.kind}) is available.`))}">Tell me when it lands</a>`:`
       ${p.song?`<div class="field"><span class="lab">Style</span><div class="seg"><button type="button" data-mode="code" aria-pressed="false">Spotify Code</button><button type="button" data-mode="wave" aria-pressed="false">Sound wave</button></div>
         <button class="hintbtn" type="button" data-hint aria-expanded="false" aria-controls="hintBox">What is the difference?</button><div class="hintbox" id="hintBox" hidden>${HINT(p.song==="tag")}</div></div>`:""}
       ${p.f.slice(0,split).map(fieldHtml).join("")}
@@ -837,7 +897,7 @@ function openProduct(id){
         if(k.s==="out")return `<p class="stockline out">Sold out right now</p><a class="btn red block" id="pdOrder" target="_blank" rel="noopener" href="${esc(wa(`Hi ${BRAND}, please tell me when ${p.name} is back in stock.`))}">Notify me on WhatsApp</a>`;
         return (k.s==="low"?`<p class="stockline">${k.n?`Only ${k.n} left`:"Few left"}</p>`:"")+`<p class="warn" id="pdWarn" role="alert" hidden></p><p class="note" id="pdNeed" hidden></p>${agreeBox("agreePd")}<a class="btn red block" id="pdOrder" target="_blank" rel="noopener" href="#">Order on WhatsApp</a>
       <button class="btn ghost block" type="button" id="pdAdd">Add to order list</button>`})()}
-      ${p.extra?`<p class="note">${esc(p.extra)}</p>`:""}
+      ${p.extra?`<p class="note">${esc(p.extra)}</p>`:""}`}
       ${p.build?`<button class="linkish" type="button" data-gobuild="${p.build}">See how it builds, ${esc(BUILD[p.build].time)}</button>`:""}
       <dl class="specs"><dt>Size</dt><dd>${esc(p.size)}</dd><dt>In the box</dt><dd>Printed parts only. Matte PLA bioplastic, no magnets, glue or metal. Keep away from hot cars and direct summer sun.</dd><dt>Care</dt><dd>Not a toy. Small parts, keep away from children under 3.</dd><dt>Made</dt><dd>Printed to order in Bengaluru. No returns. Replacement if it arrives broken, faulty or not as approved, reported within 48 hours of delivery. <button class="linkish" type="button" data-terms>Terms</button></dd></dl>
     </div></div>`;
@@ -846,7 +906,7 @@ function openProduct(id){
   if(dd){const paint=()=>{const k=Math.round(car.scrollLeft/car.clientWidth);dd.innerHTML=Array.from({length:n},(_,i)=>`<i class="${i===k?"on":""}"></i>`).join("")};car.addEventListener("scroll",paint,{passive:true});paint()}
 }
 function syncProduct(){
-  const p=P.find(x=>x.id===cur.id),d=defaults(p);
+  const p=P.find(x=>x.id===cur.id),d=defaults(p);if(p.soon)return;
   if(p.art){const o={t1:cur.vals[0]||d.t1,t2:p.f.length>1?(cur.vals[1]||(p.art==="nametag"?"":d.t2)):d.t2,mode:cur.mode,back:cur.back,name:cur.vals[3]||(p.f[3]?p.f[3][1]:"")};$("pdArt").innerHTML=draw(p,o,cur.accent||"red")}
   const pd=$("pd"),lim=limitsFor(p,cur)||{};
   pd.querySelectorAll("[data-mode]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mode===cur.mode)));
@@ -945,10 +1005,12 @@ document.addEventListener("click",e=>{
   const o=e.target.closest("[data-open]");if(o&&!$("pd").open){openProduct(o.dataset.open);return}
   const b=e.target.closest("[data-build]");if(b)showBuild(b.dataset.build);
 });
+$("filters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b){filt=b.dataset.filter;renderGrid()}});
 document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>setSide(b.dataset.side)));
 document.querySelectorAll("nav a[data-side]").forEach(a=>a.addEventListener("click",()=>setSide(a.dataset.side)));
 $("listBtn").addEventListener("click",openList);
 $("chatBulk").href=wa(`Hi ${BRAND}, I would like a quote for a run.\n\nAct or venue:\nProduct (gig coins or tags):\nQuantity:\nGig date:`);
+$("run50Price").textContent=inr(P.find(p=>p.id==="B5").price);
 function setView(v){if(v==="bp")root.dataset.view="bp";else delete root.dataset.view;
   document.querySelectorAll(".viewsw button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.view===v)))}
 document.querySelector(".viewsw").addEventListener("click",e=>{const b=e.target.closest("button");if(b)setView(b.dataset.view)});
