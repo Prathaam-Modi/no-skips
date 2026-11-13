@@ -220,6 +220,8 @@ footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .pv .pa{fill:var(--pa)}
 .pv .pas{fill:none;stroke:var(--pa)}
 .pv .pn{fill:var(--p-neutral)}
+.pv .piv{fill:var(--p-ivory)}
+.pv text.piv{fill:var(--p-ivory)}
 .pv .pns{fill:none;stroke:var(--p-neutral)}
 .pv .pd{fill:var(--p-dot);opacity:.55}
 .pv .hole{fill:var(--stage)}
@@ -266,7 +268,25 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 .terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:clamp(28px,4vw,44px);border-top:1px solid var(--line);padding-top:24px}
 .terms h3{font-size:15px;font-stretch:112%;margin-bottom:8px}
 .terms p{margin:0;font-size:14px;color:var(--muted)}
+[hidden]{display:none!important}
 .note{font-size:12px;color:var(--muted);margin:0}
+.field .note{margin-top:2px}
+.flabel{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.cnt{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.cnt.over{color:#E5404A;font-weight:700}
+.field input.bad{border-color:#E5404A}
+.warn{font-size:13px;line-height:1.45;color:#E5404A;margin:0;padding:10px 12px;border:1px solid #E5404A;border-radius:8px}
+.hintbtn{background:none;border:0;padding:0;font-size:13px;text-decoration:underline;text-underline-offset:3px;color:var(--ink);cursor:pointer;align-self:flex-start}
+.hintbox{font-size:13px;line-height:1.5;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:8px}
+.hintbox p{margin:0}.hintbox b{font-weight:700}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.45;cursor:pointer}
+.agree input{margin-top:3px;width:16px;height:16px;flex:none}
+.agree button{background:none;border:0;padding:0;font:inherit;text-decoration:underline;text-underline-offset:3px;color:inherit;cursor:pointer}
+.btn[aria-disabled="true"],.btn:disabled{opacity:.42;pointer-events:none}
+.tc{padding:clamp(22px,4vw,40px);max-width:760px;margin:0 auto;position:relative}
+.tc h2{margin:0 0 6px}.tc .upd{font-family:var(--mono);font-size:11px;color:var(--muted);margin:0 0 18px}
+.tc h3{font-size:15px;margin:22px 0 6px}.tc p,.tc li{font-size:14px;line-height:1.6;color:var(--ink)}.tc ul{padding-left:18px;margin:6px 0}
+.tc .close{position:sticky;top:0;float:right}
 .linkish{background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;font-size:14px;align-self:flex-start}
 @media (max-width:760px){.pd-grid{grid-template-columns:1fr}.pd-stage{min-height:0}}
 #list{margin:0 0 0 auto;height:100dvh;max-height:100dvh;width:min(440px,100vw);border-radius:0}
@@ -402,13 +422,13 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
     <h2>How to order</h2>
     <ol class="steps">
       <li><h3>Pick your pieces</h3><p>Open a product, add your song, name or date, and choose an ivory or red accent.</p></li>
-      <li><h3>Send it on WhatsApp</h3><p>One tap opens WhatsApp with your order already written out. For song pieces, share the track or a link in the chat.</p></li>
+      <li><h3>Send it on WhatsApp</h3><p>One tap opens WhatsApp with your order already written out. For song pieces, the song title and artist, or the Spotify link, go in the message.</p></li>
       <li><h3>Approve and pay</h3><p>Personalised pieces get a preview before anything is printed. Payment is by UPI.</p></li>
       <li><h3>Printed, numbered, shipped</h3><p>Every piece is printed to order in Bengaluru. The code on the box opens the build steps. Shipping is quoted in the chat.</p></li>
     </ol>
     <div class="terms" id="terms">
       <div><h3>Shipping and packing</h3><p>Every order ships in a No Skips box with tissue and a build card. Pieces in one order share a box. Shipping is charged on top and quoted in the chat with the dispatch date.</p></div>
-      <div><h3>Replacements, not returns</h3><p>Pieces are made to order, so we do not take returns. If something arrives damaged or with a print fault, we replace it.</p></div>
+      <div><h3>Replacements within 48 hours</h3><p>Pieces are made to order, so we do not take returns. If something arrives broken, faulty or not as approved, message us within 48 hours of delivery with photos and an unboxing video and we replace it. <button class="linkish" type="button" data-terms>Read the full terms</button></p></div>
       <div><h3>Checked before it ships</h3><p>Every personalised piece is reviewed by hand against your order, and you see the preview before it is printed.</p></div>
       <div><h3>Not a toy</h3><p>Small parts. Keep away from children under 3.</p></div>
     </div>
@@ -424,8 +444,8 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 
 <footer>
   <div class="wrap">
-    <div class="row"><span>No Skips. Printed to order in Bengaluru.</span><span>Instagram @cassettebydimo</span><span>Prices in INR, shipping extra.</span></div>
-    <div class="row" style="margin-top:10px"><span>Product pictures and blueprints are drawn from the actual print files, dimensions in millimetres. Song titles and artist names on example pieces show how personalisation looks. No Skips is an independent maker and is not affiliated with or endorsed by any artist. Artist names and silhouettes on coins and tags are used to show the artist the piece is about, and are not an endorsement.</span></div>
+    <div class="row"><span>No Skips. Printed to order in Bengaluru.</span><span>Instagram @cassettebydimo</span><span>Prices in INR, shipping extra.</span><span><button class="linkish" type="button" data-terms>Terms, replacements and privacy</button></span></div>
+    <div class="row" style="margin-top:10px"><span>Product pictures and blueprints are drawn from the actual print files, dimensions in millimetres. Song titles and artist names on example pieces show how personalisation looks. No Skips is an independent maker and is not affiliated with or endorsed by any artist. Artist names and silhouettes on coins and tags are used to show the artist the piece is about, and are not an endorsement. Spotify and Spotify Codes are trademarks of Spotify AB. No Skips is not affiliated with Spotify.</span></div>
   </div>
 </footer>
 
@@ -436,6 +456,7 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 
 <dialog id="pd" aria-labelledby="pdName"></dialog>
 <dialog id="list" aria-labelledby="listTitle"></dialog>
+<dialog id="tcd" aria-labelledby="tcTitle"></dialog>
 
 <script>
 /* ---------------- settings: edit these ---------------- */
@@ -463,6 +484,37 @@ const up=s=>esc(String(s).toUpperCase());
 const pad2=n=>String(n).padStart(2,"0");
 const $=id=>document.getElementById(id);
 
+/* ---------------- Spotify Code stand-in for previews. The real code is made by Spotify for each order. ---------------- */
+function codeLevels(seed){let h=2166136261>>>0;const out=[];for(let i=0;i<23;i++){for(const ch of String(seed)+"#"+i){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)>>>0}out.push(h%8)}out[0]=0;out[11]=7;out[22]=0;return out}
+function codeArt(seed,cx,cy,w,cls){const k=w/339,x0=cx-w/2-20*k;let s=`<circle class="${cls}" cx="${(x0+50*k).toFixed(2)}" cy="${cy.toFixed(2)}" r="${(30*k).toFixed(2)}"/>`;
+  codeLevels(seed).forEach((l,i)=>{const h=(6+54*l/7)*k,bw=6*k;s+=`<rect class="${cls}" x="${(x0+(103+i*11.5)*k-bw/2).toFixed(2)}" y="${(cy-h/2).toFixed(2)}" width="${bw.toFixed(2)}" height="${h.toFixed(2)}" rx="${(bw/2).toFixed(2)}"/>`});return s}
+
+/* ---------------- field rules: what must be filled, what fits, what we can print ---------------- */
+const fo=f=>f[2]||{};
+const isOpt=f=>!!fo(f).opt||/\(optional\)/i.test(f[0]);
+const isLink=f=>/link/i.test(f[0]);
+const showF=(f,c)=>{const v=fo(f).show;return !v||v===c.mode||v===c.back};
+const LIMITS={plate:{code:{0:40,1:40},wave:{0:40,1:40}},tag:{song:{0:18,1:18},name:{3:14}}};
+const limitsFor=(p,c)=>p.song==="plate"?LIMITS.plate[c.mode]:p.song==="tag"?LIMITS.tag[c.back]:{};
+const PRINTABLE=/^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF0-9 .,'&!?()\-]*$/;
+const SPOTIFY_LINK=/^(https?:\/\/)?(open\.spotify\.com\/(intl-[a-z-]+\/)?track\/[A-Za-z0-9]{10,}|spotify\.link\/[A-Za-z0-9]+)|^spotify:track:[A-Za-z0-9]{10,}/;
+const printedIdx=(p,c)=>p.f.map((f,i)=>i).filter(i=>showF(p.f[i],c)&&!isLink(p.f[i])&&!(p.song==="tag"&&c.back==="name"&&i<2));
+function missing(p,c){return p.custom?p.f.filter((f,i)=>showF(f,c)&&!isOpt(f)&&!c.vals[i]).map(f=>{const l=f[0].replace(/ for the back/,"").toLowerCase();return /^(your|line) /.test(l)?l:"the "+l}):[]}
+function problems(p,c){
+  const out=[],lim=limitsFor(p,c)||{};
+  p.f.forEach((f,i)=>{const v=c.vals[i]||"";if(!showF(f,c)||!v)return;
+    if(lim[i]&&v.length>lim[i])out.push(`${f[0].replace(/ for the back/,"")} is ${v.length} characters and fits ${lim[i]}. Shorten it${p.song==="tag"&&c.back==="song"?", or choose Your name for the back of the tag":""}.`);});
+  printedIdx(p,c).forEach(i=>{const v=c.vals[i]||"";if(v&&!PRINTABLE.test(v))out.push(`${p.f[i][0].replace(/ for the back/,"")}: we can print letters (accents are fine), numbers, spaces and . , ' & ! ? ( ) -. Please remove the other characters.`)});
+  p.f.forEach((f,i)=>{const v=c.vals[i]||"";if(isLink(f)&&showF(f,c)&&v&&!SPOTIFY_LINK.test(v))out.push("That does not look like a Spotify song link. It should start with https://open.spotify.com/track/. Leave it empty if you are not sure.")});
+  return out;
+}
+const TERMS_DATE="14 November 2026";
+let agreed=false;try{agreed=sessionStorage.getItem("ns-agree")==="1"}catch(e){}
+const agreeBox=id=>`<label class="agree" for="${id}"><input type="checkbox" id="${id}" data-agree ${agreed?"checked":""}><span>I agree to the <button type="button" data-terms>Terms</button>, including replacements only within 48 hours of delivery.</span></label>`;
+const HINT=tag=>`<p><b>Spotify Code.</b> The bars are a code Spotify makes for your song. Open the Spotify app, tap Search, then the camera icon, and point it at the ${tag?"tag":"plate"}. The song starts playing. It scans only in the Spotify app and only for songs on Spotify. It is printed ivory on black so phones can read it.</p>
+  <p><b>Sound wave.</b> The real shape of your song: its loud and quiet parts from start to finish, as raised bars. It does not scan, but it works for any song, even one that is not on Spotify, like your own unreleased track.</p>
+  <p>Not sure your song is on Spotify? Choose Spotify Code anyway. If we cannot find it, we tell you in the chat before printing and make the sound wave instead.</p>${tag?"<p>The back is printed in your accent colour.</p>":""}`;
+
 /* ---------------- drawings: live preview for personalised pieces ---------------- */
 function bars(data,x,cy,pitch,w,maxH,minH,cls){
   return data.map((v,i)=>{const h=minH+(maxH-minH)*v;
@@ -489,8 +541,10 @@ function tag(o,big){
 }
 const ART={
   plate(o){
-    return shadow(160,196,128)+`<rect class="pb" x="62" y="180" width="68" height="14" rx="5"/><rect class="pb" x="190" y="180" width="68" height="14" rx="5"/>`
-      +body(40,58,240,126,9)+dots(59.3,76.3,50,8,4.11,8.2,1)
+    const feet=shadow(160,196,128)+`<rect class="pb" x="62" y="180" width="68" height="14" rx="5"/><rect class="pb" x="190" y="180" width="68" height="14" rx="5"/>`;
+    if(o.mode==="code")return feet+body(40,58,240,126,9)+codeArt(o.t1+"|"+o.t2,160,102,205.7,"piv")
+      +`<text class="piv" x="160" y="153" text-anchor="middle" font-size="${fit(o.t1,12.5,200)}">${up(o.t1)}</text><text class="piv" x="160" y="169" text-anchor="middle" font-size="${fit(o.t2,8.2,190)}">${up(o.t2)}</text>`;
+    return feet+body(40,58,240,126,9)+dots(59.3,76.3,50,8,4.11,8.2,1)
       +bars(W50,59.3,105,4.11,2.74,58,4.1,"pa")
       +`<text x="57" y="164" font-size="${fit(o.t1,11.5,112)}">${up(o.t1)}</text><text x="263" y="164" text-anchor="end" font-size="${fit(o.t2,7.4,96)}">${up(o.t2)}</text>`;
   },
@@ -535,7 +589,15 @@ const ART={
       ${bars(W20.slice(3,14),-40,36,8,5,15,4,"pa")}<text text-anchor="middle" y="54" font-size="5.6" opacity=".8">NO. 01</text></g>`;
     return shadow(88,186,60)+shadow(232,186,60)+A+B;
   },
-  songtag(o){return tag(o,true)},
+  songtag(o){
+    const X=28,k=3.3,Y1=8,Y2=114,cy1=Y1+15*k,cy2=Y2+15*k,cx=X+33.5*k;
+    let r=body(X,Y1,264,99,16)+`<circle class="hole" cx="${X+8.5*k}" cy="${cy1}" r="${3.4*k}"/>`
+      +(o.mode==="wave"?bars(W20,X+18*k,cy1,3*k,1.8*k,17*k,2.4*k,"pa"):codeArt(o.t1+"|"+o.t2,X+46.5*k,cy1,60*k,"piv"));
+    r+=body(X,Y2,264,99,16)+`<circle class="hole" cx="${X+71.5*k}" cy="${cy2}" r="${3.4*k}"/>`;
+    if(o.back==="name")r+=`<text x="${cx}" y="${cy2+8}" text-anchor="middle" font-size="${fit(o.name,23,198)}">${up(o.name)}</text>`;
+    else r+=`<text x="${cx}" y="${Y2+10.4*k+6}" text-anchor="middle" font-size="${fit(o.t1,17,198)}">${up(o.t1)}</text><text x="${cx}" y="${Y2+19.6*k+5.6}" text-anchor="middle" font-size="${fit(o.t2,16,198)}">${up(o.t2)}</text>`;
+    return r;
+  },
   nametag(o){return tag(o)},
   sign(o){
     return shadow(160,186,116)+`<rect class="pb" x="74" y="168" width="60" height="14" rx="5"/><rect class="pb" x="186" y="168" width="60" height="14" rx="5"/>`+body(40,62,240,110,9)
@@ -572,10 +634,12 @@ const P=[
   desc:"A fluted amp knob on a puck with eleven level marks. It clicks onto a printed post and spins freely. For queues, long renders and calls that could have been an email.",
   size:"44 mm base, 27 mm knob, 20 mm tall",f:[],imgs:[["knob","Red and ivory"],["knob_build","Cap and base"]]},
 
- {id:"A1",side:"A",name:"Soundwave Plate",price:1799,art:"plate",custom:true,line:"Your song as a desk piece",badge:"Signature",build:"plate",
-  desc:"The loudness of your track from first second to last, printed as 50 raised bars on a matte plate. Every quiet intro and every drop is there to see.",
-  size:"140 x 70 x 3 mm plate, two feet",f:[["Song title","Blinding Lights"],["Name or artist line","The Weeknd"]],extra:"Share the track or a link in the chat.",
-  imgs:[["plate","On its feet"],["plate_build","Plate and feet"]]},
+ {id:"A1",side:"A",name:"Soundwave Plate",price:1799,art:"plate",custom:true,song:"plate",line:"Your song as a desk piece, scan it or see it",badge:"Signature",build:"plate",
+  desc:"Your song on a matte black plate, two ways. As its Spotify Code: open the Spotify app, scan the plate and the song starts playing. Or as its sound wave: the loud and quiet parts of the track from first second to last, in 50 raised bars. The title and artist sit underneath.",
+  size:"140 x 70 x 3 mm plate, two feet",
+  f:[["Song title","Blinding Lights",{max:60}],["Artist name","The Weeknd",{max:60,note:{code:"Spell both exactly as they appear on Spotify. We find your song with these words, so a typo can mean the wrong song.",wave:"Spell both exactly. We build the wave from this song. For your own unreleased track, send the audio file in the chat."}}],
+     ["Spotify song link (optional)","",{max:300,opt:1,show:"code",ph:"https://open.spotify.com/track/...",note:{code:"The surest way to get the exact version. In Spotify: Share, then Copy song link."}}]],
+  imgs:[["plate","Spotify Code"],["plate_wave","Sound wave"],["plate_build","Plate and feet"]]},
  {id:"A2",side:"A",name:"Now Playing Plaque",price:1199,art:"plaque",custom:true,line:"A song that never skips",build:"plaque",
   desc:"A standing plaque styled like a music player, frozen on the one track that matters. The plate drops into its base, no glue.",
   size:"70 x 110 x 3 mm, slot base",f:[["Song title","Delilah"],["Artist","Fred again.."]],
@@ -587,9 +651,13 @@ const P=[
  {id:"A4",side:"A",name:"Record Coasters",price:1199,line:"Set of four, grooves included",
   desc:"Coasters with real printed grooves, a coloured centre label and a ribbed underside. Made for cold drinks and desk duty. A mug straight off the boil is too hot for them.",
   size:"90 mm across, 4 mm thick, set of 4",f:[],imgs:[["coasters","Stack of four"]]},
- {id:"A5",side:"A",name:"Song Tag",price:449,art:"songtag",custom:true,line:"Your song on your bag",build:"tag",
-  desc:"A tag carrying the waveform of your track in twenty bars, with the title underneath. It hangs from a printed loop that locks with a twist, so there is no metal ring.",
-  size:"70 x 30 x 3 mm, printed loop",f:[["Song title","Starboy"]],extra:"Share the track or a link in the chat.",imgs:[["songtag","Tag and loop"]]},
+ {id:"A5",side:"A",name:"Song Tag",price:549,art:"songtag",custom:true,song:"tag",line:"Your song on your bag, scan it from the strap",build:"tag",
+  desc:"A tag for your bag or keys. The front carries your song's Spotify Code, which plays the song when scanned in the Spotify app, or its sound wave. The back carries the song and artist, or your own name. It hangs from a printed loop that locks with a twist, so there is no metal ring.",
+  size:"80 x 30 x 3 mm, printed loop",
+  f:[["Song title","Starboy",{max:60}],["Artist name","The Weeknd",{max:60,note:{code:"Spell both exactly as they appear on Spotify. We find your song with these words.",wave:"Spell both exactly. We build the wave from this song."}}],
+     ["Spotify song link (optional)","",{max:300,opt:1,show:"code",ph:"https://open.spotify.com/track/...",note:{code:"The surest way to get the exact version. In Spotify: Share, then Copy song link."}}],
+     ["Your name for the back","Dimo",{max:40,show:"name"}]],
+  imgs:[["songtag","Code side and loop"],["songtag_sides","Front and back"]]},
 
  {id:"B1",side:"B",name:"Pick Amp",price:1399,line:"Pick holder with a drawer",badge:"Build it yourself",build:"amp",
   desc:"A small amp for the desk that you build yourself in a few minutes. Picks stand in the top slot, spares and a capo go in the drawer. Five parts, no glue.",
@@ -727,12 +795,17 @@ function itemText(it,n){
   if(it.pick)s+=`\n   ${p.pick[0]}: ${it.pick}`;
   if(it.accent)s+=`\n   Accent: ${it.accent}`;
   if(it.gift)s+=`\n   Gift: yes${it.giftNote?". Note on the card: "+it.giftNote:""}`;
-  it.vals.forEach((v,i)=>{if(v)s+=`\n   ${p.f[i][0]}: ${v}`});return s;
+  if(p.song)s+=`\n   Style: ${it.mode==="wave"?"Sound wave":"Spotify Code"}`;
+  if(p.song==="tag")s+=`\n   Back of the tag: ${it.back==="name"?"Your name":"Song and artist"}`;
+  it.vals.forEach((v,i)=>{if(v&&p.f[i]&&showF(p.f[i],it))s+=`\n   ${p.f[i][0]}: ${v}`});return s;
 }
-const sign=items=>items.some(it=>P.find(p=>p.id===it.id).custom)?"Please share the preview and payment details.":"Please share the payment details.";
+const sign=items=>(items.some(it=>P.find(p=>p.id===it.id).custom)?"Please share the preview and payment details.":"Please share the payment details.")
+  +`\n\nI have read and agree to the No Skips Terms (${TERMS_DATE}), including replacements only within 48 hours of delivery.`;
 function openProduct(id){
   const p=P.find(x=>x.id===id);if(!p)return;
-  cur={id,qty:1,accent:p.noAccent?"":"red",vals:p.f.map(f=>f[1]),pick:p.pick?p.pick[1][0]:"",gift:false,giftNote:""};
+  cur={id,qty:1,accent:p.noAccent?"":(p.song==="plate"?"ivory":"red"),vals:p.f.map(()=>""),pick:p.pick?p.pick[1][0]:"",gift:false,giftNote:"",mode:p.song?"code":"",back:p.song==="tag"?"song":"",prevAccent:"red"};
+  const fieldHtml=(f,i)=>`<div class="field" id="fw${i}"><div class="flabel"><label for="f${i}">${esc(f[0])}</label><span class="cnt" id="fc${i}" aria-live="polite"></span></div><input id="f${i}" data-i="${i}" maxlength="${fo(f).max||(f[0].startsWith("Four")?120:28)}" placeholder="${esc(fo(f).ph||f[1])}" autocomplete="off"${isLink(f)?' type="url" inputmode="url"':""}${isOpt(f)?"":' aria-required="true"'}><p class="note" id="fn${i}" hidden></p></div>`;
+  const split=p.song==="tag"?3:p.f.length;
   const slides=(p.art?`<div class="slide" id="pdArt"></div>`:"")+p.imgs.map(m=>`<div class="slide"><img src="${img(m[0])}" alt="${esc(p.name)}, ${esc(m[1].toLowerCase())}" width="880" height="880"><span class="mono cap">${esc(m[1])}</span></div>`).join("")
     +`<div class="slide"><img src="${img("bp_"+p.id)}" alt="${esc(p.name)}, blueprint with dimensions in millimetres" width="1200" height="1200"><span class="mono cap">Blueprint</span></div>`;
   const n=p.imgs.length+(p.art?1:0)+1;
@@ -745,10 +818,15 @@ function openProduct(id){
       <div class="pd-price">${inr(p.price)}${p.badge?`<span class="badge hot">${esc(p.badge)}</span>`:""}</div>
       ${p.ed?`<div class="pd-ed"><i class="led"></i>${esc(p.ed)}${p.id==="C1"&&DROP.claimed?`. ${DROP.total-DROP.claimed} left`:""}</div>`:""}
       <p class="pd-desc">${esc(p.desc)}</p>
-      ${p.f.map((f,i)=>`<div class="field"><label for="f${i}">${esc(f[0])}</label><input id="f${i}" data-i="${i}" maxlength="${f[0].startsWith("Four")?120:28}" value="${esc(f[1])}" autocomplete="off"></div>`).join("")}
+      ${p.song?`<div class="field"><span class="lab">Style</span><div class="seg"><button type="button" data-mode="code" aria-pressed="false">Spotify Code</button><button type="button" data-mode="wave" aria-pressed="false">Sound wave</button></div>
+        <button class="hintbtn" type="button" data-hint aria-expanded="false" aria-controls="hintBox">What is the difference?</button><div class="hintbox" id="hintBox" hidden>${HINT(p.song==="tag")}</div></div>`:""}
+      ${p.f.slice(0,split).map(fieldHtml).join("")}
+      ${p.song==="tag"?`<div class="field"><span class="lab">Back of the tag</span><div class="seg"><button type="button" data-back="song" aria-pressed="false">Song and artist</button><button type="button" data-back="name" aria-pressed="false">Your name</button></div>
+        <p class="note">Song and artist fit 18 characters each, your name fits 14, spaces included.</p></div>`:""}
+      ${p.f.slice(split).map((f,j)=>fieldHtml(f,j+split)).join("")}
       ${p.pick?`<div class="field"><span class="lab">${esc(p.pick[0])}</span><div class="seg">${p.pick[1].map(o=>`<button type="button" data-pick="${esc(o)}" aria-pressed="false">${esc(o)}</button>`).join("")}</div></div>`:""}
       <div class="row2">
-        ${p.noAccent?"":`<div class="field"><span class="lab">Accent colour</span><div class="seg">
+        ${p.noAccent?"":`<div class="field" id="accField"><span class="lab">Accent colour</span><div class="seg">
           <button type="button" data-accent="red" aria-pressed="false"><i style="background:var(--p-red)"></i>Red</button>
           <button type="button" data-accent="ivory" aria-pressed="false"><i style="background:var(--p-ivory)"></i>Ivory</button></div></div>`}
         <div class="field"><span class="lab">Quantity</span><div class="qty"><button type="button" data-q="-1" aria-label="One fewer">&minus;</button><output id="qOut">1</output><button type="button" data-q="1" aria-label="One more">+</button></div></div>
@@ -757,11 +835,11 @@ function openProduct(id){
         <div class="field" id="giftBox" hidden><label for="giftNote">Short note for the card (optional)</label><input id="giftNote" data-gift="note" maxlength="90" placeholder="Happy birthday. Play it loud." autocomplete="off"></div></div>
       ${(()=>{const k=stk(p.id);
         if(k.s==="out")return `<p class="stockline out">Sold out right now</p><a class="btn red block" id="pdOrder" target="_blank" rel="noopener" href="${esc(wa(`Hi ${BRAND}, please tell me when ${p.name} is back in stock.`))}">Notify me on WhatsApp</a>`;
-        return (k.s==="low"?`<p class="stockline">${k.n?`Only ${k.n} left`:"Few left"}</p>`:"")+`<a class="btn red block" id="pdOrder" target="_blank" rel="noopener" href="#">Order on WhatsApp</a>
+        return (k.s==="low"?`<p class="stockline">${k.n?`Only ${k.n} left`:"Few left"}</p>`:"")+`<p class="warn" id="pdWarn" role="alert" hidden></p><p class="note" id="pdNeed" hidden></p>${agreeBox("agreePd")}<a class="btn red block" id="pdOrder" target="_blank" rel="noopener" href="#">Order on WhatsApp</a>
       <button class="btn ghost block" type="button" id="pdAdd">Add to order list</button>`})()}
       ${p.extra?`<p class="note">${esc(p.extra)}</p>`:""}
       ${p.build?`<button class="linkish" type="button" data-gobuild="${p.build}">See how it builds, ${esc(BUILD[p.build].time)}</button>`:""}
-      <dl class="specs"><dt>Size</dt><dd>${esc(p.size)}</dd><dt>In the box</dt><dd>Printed parts only. Matte PLA bioplastic, no magnets, glue or metal. Keep away from hot cars and direct summer sun.</dd><dt>Care</dt><dd>Not a toy. Small parts, keep away from children under 3.</dd><dt>Made</dt><dd>Printed to order in Bengaluru. Replacements, no returns.</dd></dl>
+      <dl class="specs"><dt>Size</dt><dd>${esc(p.size)}</dd><dt>In the box</dt><dd>Printed parts only. Matte PLA bioplastic, no magnets, glue or metal. Keep away from hot cars and direct summer sun.</dd><dt>Care</dt><dd>Not a toy. Small parts, keep away from children under 3.</dd><dt>Made</dt><dd>Printed to order in Bengaluru. No returns. Replacement if it arrives broken, faulty or not as approved, reported within 48 hours of delivery. <button class="linkish" type="button" data-terms>Terms</button></dd></dl>
     </div></div>`;
   syncProduct();$("pd").showModal();
   const car=$("car"),dd=$("carDots");
@@ -769,14 +847,31 @@ function openProduct(id){
 }
 function syncProduct(){
   const p=P.find(x=>x.id===cur.id),d=defaults(p);
-  if(p.art){const o={t1:cur.vals[0]||d.t1,t2:p.f.length>1?(cur.vals[1]||(p.art==="nametag"?"":d.t2)):d.t2};$("pdArt").innerHTML=draw(p,o,cur.accent||"red")}
+  if(p.art){const o={t1:cur.vals[0]||d.t1,t2:p.f.length>1?(cur.vals[1]||(p.art==="nametag"?"":d.t2)):d.t2,mode:cur.mode,back:cur.back,name:cur.vals[3]||(p.f[3]?p.f[3][1]:"")};$("pdArt").innerHTML=draw(p,o,cur.accent||"red")}
+  const pd=$("pd"),lim=limitsFor(p,cur)||{};
+  pd.querySelectorAll("[data-mode]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mode===cur.mode)));
+  pd.querySelectorAll("[data-back]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.back===cur.back)));
+  p.f.forEach((f,i)=>{const w=$("fw"+i);if(!w)return;w.hidden=!showF(f,cur);
+    const n=fo(f).note,nt=n?(typeof n==="string"?n:(n[cur.mode]||"")):"";$("fn"+i).hidden=!nt;$("fn"+i).textContent=nt;
+    const v=cur.vals[i]||"",L=lim[i],c=$("fc"+i);c.textContent=L?`${v.length}/${L}`:"";c.classList.toggle("over",!!L&&v.length>L);
+    $("f"+i).classList.toggle("bad",(!!L&&v.length>L)||(!!v&&printedIdx(p,cur).includes(i)&&!PRINTABLE.test(v))||(isLink(f)&&!!v&&!SPOTIFY_LINK.test(v)))});
+  if($("accField"))$("accField").hidden=p.song==="plate"&&cur.mode==="code";
   $("pd").querySelectorAll("[data-accent]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.accent===cur.accent)));
   $("pd").querySelectorAll("[data-pick]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.pick===cur.pick)));
   $("qOut").textContent=cur.qty;
-  if(stk(p.id).s!=="out")$("pdOrder").href=wa(`Hi ${BRAND}, I would like to order:\n\n${itemText(cur)}\n\n${sign([cur])}`);
+  if(stk(p.id).s!=="out"){
+    const probs=problems(p,cur),miss=missing(p,cur),ok=!probs.length&&!miss.length&&agreed;
+    $("pdWarn").hidden=!probs.length;$("pdWarn").innerHTML=probs.map(esc).join("<br>");
+    const need=[miss.length?`Fill in ${miss.join(" and ")} to order.`:"",!agreed?"Tick the box to agree to the Terms.":""].filter(Boolean).join(" ");
+    $("pdNeed").hidden=!need||!!probs.length;$("pdNeed").textContent=need;
+    const o=$("pdOrder");o.href=ok?wa(`Hi ${BRAND}, I would like to order:\n\n${itemText(cur)}\n\n${sign([cur])}`):"#";
+    o.setAttribute("aria-disabled",String(!ok));o.tabIndex=ok?0:-1;$("pdAdd").disabled=!(!probs.length&&!miss.length);
+  }
 }
 $("pd").addEventListener("input",e=>{if(e.target.dataset.i!==undefined){cur.vals[+e.target.dataset.i]=e.target.value.trim();syncProduct()}
   if(e.target.dataset.gift==="note"){cur.giftNote=e.target.value.trim();syncProduct()}});
+document.addEventListener("change",e=>{if(e.target.hasAttribute&&e.target.hasAttribute("data-agree")){agreed=e.target.checked;try{sessionStorage.setItem("ns-agree",agreed?"1":"0")}catch(_){}
+  document.querySelectorAll("[data-agree]").forEach(x=>{x.checked=agreed});if($("pd").open&&cur)syncProduct();if($("list").open)paintListSend()}});
 $("pd").addEventListener("change",e=>{if(e.target.dataset.gift==="tick"){cur.gift=e.target.checked;$("giftBox").hidden=!cur.gift;if(!cur.gift){cur.giftNote="";$("giftNote").value=""}syncProduct()}});
 $("pd").addEventListener("click",e=>{
   const t=e.target.closest("button");
@@ -784,6 +879,9 @@ $("pd").addEventListener("click",e=>{
   if(!t)return;
   if(t.dataset.car){const car=$("car");car.scrollBy({left:+t.dataset.car*car.clientWidth,behavior:"smooth"})}
   if(t.dataset.accent){cur.accent=t.dataset.accent;syncProduct()}
+  if(t.dataset.mode){const p=P.find(x=>x.id===cur.id);if(p.song==="plate"&&t.dataset.mode!==cur.mode){if(t.dataset.mode==="code"){cur.prevAccent=cur.accent;cur.accent="ivory"}else cur.accent=cur.prevAccent||"red"}cur.mode=t.dataset.mode;syncProduct()}
+  if(t.dataset.back){cur.back=t.dataset.back;syncProduct()}
+  if(t.hasAttribute("data-hint")){const h=$("hintBox");h.hidden=!h.hidden;t.setAttribute("aria-expanded",String(!h.hidden))}
   if(t.dataset.pick){cur.pick=t.dataset.pick;syncProduct()}
   if(t.dataset.q){cur.qty=Math.max(1,Math.min(99,cur.qty+ +t.dataset.q));syncProduct()}
   if(t.dataset.gobuild){$("pd").close();showBuild(t.dataset.gobuild,true)}
@@ -798,19 +896,41 @@ function renderList(){
   const msg=`Hi ${BRAND}, I would like to order:\n\n${cart.map((it,i)=>itemText(it,i+1)).join("\n")}\n\nTotal before shipping: ${inr(total)}\n${sign(cart)}`;
   $("list").innerHTML=`<div class="dl"><button class="close" type="button" aria-label="Close" data-close>&times;</button>
     <h2 id="listTitle">Order list</h2>
-    ${cart.length?cart.map((it,i)=>{const p=P.find(x=>x.id===it.id);const opts=[it.pick,it.accent&&("Accent "+it.accent),it.gift&&("Gift"+(it.giftNote?": "+it.giftNote:"")),...it.vals.filter(Boolean)].filter(Boolean).join(", ");
+    ${cart.length?cart.map((it,i)=>{const p=P.find(x=>x.id===it.id);const opts=[it.pick,p.song?(it.mode==="wave"?"Sound wave":"Spotify Code"):"",p.song==="tag"?(it.back==="name"?"Back: your name":"Back: song and artist"):"",it.accent&&("Accent "+it.accent),it.gift&&("Gift"+(it.giftNote?": "+it.giftNote:"")),...it.vals.filter((v,j)=>v&&p.f[j]&&showF(p.f[j],it))].filter(Boolean).join(", ");
       return `<div class="li"><b>${p.id} ${esc(p.name)} &times; ${it.qty}</b><span class="mono">${inr(p.price*it.qty)}</span><span class="opt">${esc(opts)}</span><button type="button" data-rm="${i}">Remove</button></div>`}).join("")
       +`<div class="total"><span>Total before shipping</span><span>${inr(total)}</span></div>`
       :`<p class="empty">Nothing here yet. Open a product and choose Add to order list.</p>`}
     <div class="spacer"></div>
-    ${cart.length?`<a class="btn red block" target="_blank" rel="noopener" href="${esc(wa(msg))}">Send list on WhatsApp</a><p class="note">Opens WhatsApp with this list written out. Nothing is charged here.</p>`:""}
+    ${cart.length?`${agreeBox("agreeList")}<a class="btn red block" id="listSend" target="_blank" rel="noopener" data-href="${esc(wa(msg))}" href="#">Send list on WhatsApp</a><p class="note">Opens WhatsApp with this list written out. Nothing is charged here.</p>`:""}
   </div>`;
+  paintListSend();
 }
+function paintListSend(){const a=$("listSend");if(!a)return;a.href=agreed?a.dataset.href:"#";a.setAttribute("aria-disabled",String(!agreed));a.tabIndex=agreed?0:-1}
 $("list").addEventListener("click",e=>{
   const t=e.target.closest("button");
   if(e.target===$("list")||(t&&t.hasAttribute("data-close"))){$("list").close();return}
   if(t&&t.dataset.rm){cart.splice(+t.dataset.rm,1);save();renderCount();renderList()}
 });
+
+
+/* ---------------- terms ---------------- */
+const TERMS=`<h2 id="tcTitle">Terms, replacements and privacy</h2><p class="upd">Last updated ${TERMS_DATE}</p>
+<p>These terms apply to every order placed with No Skips. By sending an order on WhatsApp you agree to them. Nothing here takes away rights you have under Indian consumer law.</p>
+<h3>1. Who we are</h3><p>No Skips is a small studio in Bengaluru, Karnataka, India that designs and 3D prints music pieces to order. This website is a catalogue. Orders, previews, payment and support all happen on WhatsApp at +91 74111 48303.</p>
+<h3>2. Orders and payment</h3><ul><li>Your order is confirmed only when we confirm it in the chat and receive full payment by UPI.</li><li>Prices are in Indian rupees and include printing and packing. Shipping is extra and is quoted in the chat before you pay.</li><li>We may decline or cancel an order before printing, for example if we cannot print it well, or if it uses content that is hateful, unlawful or someone else's logo or artwork without permission. If we cancel, you get a full refund.</li><li>Prices on the site can change. Your order keeps the price confirmed in the chat.</li></ul>
+<h3>3. Personalised pieces</h3><ul><li>You are responsible for the text, song, link and names you send. Please check the spelling.</li><li>For every personalised piece we send a preview. Once you approve it, we print exactly what you approved. A mistake in an approved preview is not a fault.</li><li><b>Spotify Codes</b> are made with Spotify's own code generator from the song you give us. We scan each code with a phone before it ships. A code scans only in the Spotify app. It keeps working as long as Spotify keeps the song and its code service. If Spotify removes the song or changes how codes work, that is outside our control and is not a fault in the piece.</li><li>If we cannot find your song on Spotify, we tell you in the chat before printing and offer the sound wave instead.</li><li><b>Sound waves</b> are an artistic picture of the song's loud and quiet parts, not a measurement.</li></ul>
+<h3>4. Cancellations</h3><p>You can cancel for a full refund until we start printing. Pieces are made to order for you, so once printing has started we cannot cancel or take the piece back.</p>
+<h3>5. Replacements within 48 hours of delivery</h3><p>We replace a piece that arrives broken, has a print fault, or is not what you approved. To claim:</p><ul><li>Message us on WhatsApp within <b>48 hours of delivery</b>, going by the delivery time on the courier tracking.</li><li>Send photos of the piece, the box and the shipping label, and an unboxing video. Without an unboxing video we may not be able to accept a claim for a broken or missing part.</li><li>Keep the piece and the packing until we reply.</li></ul><p>If the claim is accepted, we reprint the piece and ship it at our cost. If we cannot reprint it, we refund the price of that piece. Claims made after 48 hours are not accepted, except where the law requires otherwise.</p>
+<p>These are not faults: the fine layer lines, small seams and slight colour differences that come with 3D printing; damage from heat, drops, misuse or wear after delivery; and phones or cases outside the sizes listed for a product.</p>
+<h3>6. Shipping</h3><p>We share a dispatch date and a tracking link in the chat. Courier delays are outside our control. Please give a complete and correct address. If a parcel comes back because of a wrong address or a missed delivery, re-shipping is charged again.</p>
+<h3>7. Care and safety</h3><ul><li>Pieces are printed in PLA, a plant-based plastic that softens with heat. Keep them out of hot cars, direct summer sun, dishwashers and away from hot pans. Coasters are for cups and glasses, not for a pot or a mug straight off the boil.</li><li>Not a toy. Small parts, keep away from children under 3.</li><li>Not for direct contact with food.</li></ul>
+<h3>8. Designs, names and trademarks</h3><ul><li>The No Skips designs, models and files belong to No Skips. Please do not copy or sell them.</li><li>By sending a name, logo, photo or artwork you confirm you have the right to use it.</li><li>Song titles, artist names and trademarks belong to their owners. No Skips is an independent maker and is not affiliated with or endorsed by any artist, label or Spotify. Spotify and Spotify Codes are trademarks of Spotify AB.</li></ul>
+<h3>9. Our liability</h3><p>To the extent the law allows, our total liability for an order is limited to the amount you paid for it, and we are not liable for indirect losses. This does not limit liability that cannot be limited by law.</p>
+<h3>10. Privacy</h3><p>We use your name, phone number, address and order details only to make, deliver and support your order. We share your address and phone number with the courier and with no one else, and we never sell your data. Ask us in the chat to delete your details once your order is complete.</p>
+<h3>11. Complaints</h3><p>Grievance officer: Prathaam, owner, No Skips. WhatsApp +91 74111 48303. We acknowledge every complaint within 48 hours and aim to resolve it within one month.</p>
+<h3>12. Law</h3><p>These terms are governed by the laws of India. Courts in Bengaluru have jurisdiction, without affecting your right to approach a consumer commission. If we change these terms, the version in force when you ordered applies to your order.</p>`;
+function openTerms(){$("tcd").innerHTML=`<div class="tc"><button class="close" type="button" aria-label="Close" data-close>&times;</button>${TERMS}<p><button class="btn ghost" type="button" data-close>Close</button></p></div>`;if(!$("tcd").open)$("tcd").showModal()}
+$("tcd").addEventListener("click",e=>{const t=e.target.closest("button");if(e.target===$("tcd")||(t&&t.hasAttribute("data-close")))$("tcd").close()});
 
 /* ---------------- theme ---------------- */
 const root=document.documentElement;
@@ -821,6 +941,7 @@ $("themeBtn").addEventListener("click",()=>{const n=isDark()?"light":"dark";root
 
 /* ---------------- wiring ---------------- */
 document.addEventListener("click",e=>{
+  const tb=e.target.closest("[data-terms]");if(tb){e.preventDefault();openTerms();return}
   const o=e.target.closest("[data-open]");if(o&&!$("pd").open){openProduct(o.dataset.open);return}
   const b=e.target.closest("[data-build]");if(b)showBuild(b.dataset.build);
 });
@@ -832,6 +953,7 @@ function setView(v){if(v==="bp")root.dataset.view="bp";else delete root.dataset.
   document.querySelectorAll(".viewsw button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.view===v)))}
 document.querySelector(".viewsw").addEventListener("click",e=>{const b=e.target.closest("button");if(b)setView(b.dataset.view)});
 window.addEventListener("hashchange",routeHash);
+if(location.hash==="#terms")openTerms();
 paintTheme();renderDrop();renderGrid();renderBuild();renderCount();routeHash();loadStock();
 </script>
 </body>
