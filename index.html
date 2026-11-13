@@ -422,7 +422,7 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
     <h2>How to order</h2>
     <ol class="steps">
       <li><h3>Pick your pieces</h3><p>Open a product, add your song, name or date, and choose an ivory or red accent.</p></li>
-      <li><h3>Send it on WhatsApp</h3><p>One tap opens WhatsApp with your order already written out. For song pieces, the song title and artist, or the Spotify link, go in the message.</p></li>
+      <li><h3>Send it on WhatsApp</h3><p>One tap opens WhatsApp with your order already written out. For song pieces, the song title, artist and, for a Spotify Code, the Spotify link go in the message.</p></li>
       <li><h3>Approve and pay</h3><p>Personalised pieces get a preview before anything is printed. Payment is by UPI.</p></li>
       <li><h3>Printed, numbered, shipped</h3><p>Every piece is printed to order in Bengaluru. The code on the box opens the build steps. Shipping is quoted in the chat.</p></li>
     </ol>
@@ -499,13 +499,13 @@ const limitsFor=(p,c)=>p.song==="plate"?LIMITS.plate[c.mode]:p.song==="tag"?LIMI
 const PRINTABLE=/^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF0-9 .,'&!?()\-]*$/;
 const SPOTIFY_LINK=/^(https?:\/\/)?(open\.spotify\.com\/(intl-[a-z-]+\/)?track\/[A-Za-z0-9]{10,}|spotify\.link\/[A-Za-z0-9]+)|^spotify:track:[A-Za-z0-9]{10,}/;
 const printedIdx=(p,c)=>p.f.map((f,i)=>i).filter(i=>showF(p.f[i],c)&&!isLink(p.f[i])&&!(p.song==="tag"&&c.back==="name"&&i<2));
-function missing(p,c){return p.custom?p.f.filter((f,i)=>showF(f,c)&&!isOpt(f)&&!c.vals[i]).map(f=>{const l=f[0].replace(/ for the back/,"").toLowerCase();return /^(your|line) /.test(l)?l:"the "+l}):[]}
+function missing(p,c){return p.custom?p.f.filter((f,i)=>showF(f,c)&&!isOpt(f)&&!c.vals[i]).map(f=>{const l=f[0].replace(/ for the back/,"").toLowerCase();const m=l.replace(/spotify/,"Spotify");return /^(your|line) /.test(m)?m:"the "+m}):[]}
 function problems(p,c){
   const out=[],lim=limitsFor(p,c)||{};
   p.f.forEach((f,i)=>{const v=c.vals[i]||"";if(!showF(f,c)||!v)return;
     if(lim[i]&&v.length>lim[i])out.push(`${f[0].replace(/ for the back/,"")} is ${v.length} characters and fits ${lim[i]}. Shorten it${p.song==="tag"&&c.back==="song"?", or choose Your name for the back of the tag":""}.`);});
   printedIdx(p,c).forEach(i=>{const v=c.vals[i]||"";if(v&&!PRINTABLE.test(v))out.push(`${p.f[i][0].replace(/ for the back/,"")}: we can print letters (accents are fine), numbers, spaces and . , ' & ! ? ( ) -. Please remove the other characters.`)});
-  p.f.forEach((f,i)=>{const v=c.vals[i]||"";if(isLink(f)&&showF(f,c)&&v&&!SPOTIFY_LINK.test(v))out.push("That does not look like a Spotify song link. It should start with https://open.spotify.com/track/. Leave it empty if you are not sure.")});
+  p.f.forEach((f,i)=>{const v=c.vals[i]||"";if(isLink(f)&&showF(f,c)&&v&&!SPOTIFY_LINK.test(v))out.push("That does not look like a Spotify song link. It should start with https://open.spotify.com/track/. In Spotify: Share, then Copy song link.")});
   return out;
 }
 const TERMS_DATE="14 November 2026";
@@ -513,7 +513,7 @@ let agreed=false;try{agreed=sessionStorage.getItem("ns-agree")==="1"}catch(e){}
 const agreeBox=id=>`<label class="agree" for="${id}"><input type="checkbox" id="${id}" data-agree ${agreed?"checked":""}><span>I agree to the <button type="button" data-terms>Terms</button>, including replacements only within 48 hours of delivery.</span></label>`;
 const HINT=tag=>`<p><b>Spotify Code.</b> The bars are a code Spotify makes for your song. Open the Spotify app, tap Search, then the camera icon, and point it at the ${tag?"tag":"plate"}. The song starts playing. It scans only in the Spotify app and only for songs on Spotify. It is printed ivory on black so phones can read it.</p>
   <p><b>Sound wave.</b> The real shape of your song: its loud and quiet parts from start to finish, as raised bars. It does not scan, but it works for any song, even one that is not on Spotify, like your own unreleased track.</p>
-  <p>Not sure your song is on Spotify? Choose Spotify Code anyway. If we cannot find it, we tell you in the chat before printing and make the sound wave instead.</p>${tag?"<p>The back is printed in your accent colour.</p>":""}`;
+  <p>For the Spotify Code, paste the song's Spotify link. Song not on Spotify? Choose Sound wave, no link needed.</p>${tag?"<p>The back is printed in your accent colour.</p>":""}`;
 
 /* ---------------- drawings: live preview for personalised pieces ---------------- */
 function bars(data,x,cy,pitch,w,maxH,minH,cls){
@@ -637,8 +637,8 @@ const P=[
  {id:"A1",side:"A",name:"Soundwave Plate",price:1799,art:"plate",custom:true,song:"plate",line:"Your song as a desk piece, scan it or see it",badge:"Signature",build:"plate",
   desc:"Your song on a matte black plate, two ways. As its Spotify Code: open the Spotify app, scan the plate and the song starts playing. Or as its sound wave: the loud and quiet parts of the track from first second to last, in 50 raised bars. The title and artist sit underneath.",
   size:"140 x 70 x 3 mm plate, two feet",
-  f:[["Song title","Blinding Lights",{max:60}],["Artist name","The Weeknd",{max:60,note:{code:"Spell both exactly as they appear on Spotify. We find your song with these words, so a typo can mean the wrong song.",wave:"Spell both exactly. We build the wave from this song. For your own unreleased track, send the audio file in the chat."}}],
-     ["Spotify song link (optional)","",{max:300,opt:1,show:"code",ph:"https://open.spotify.com/track/...",note:{code:"The surest way to get the exact version. In Spotify: Share, then Copy song link."}}]],
+  f:[["Song title","Blinding Lights",{max:60}],["Artist name","The Weeknd",{max:60,note:{code:"Spell both exactly as you want them printed under the code.",wave:"Spell both exactly. We build the wave from this song. For your own unreleased track, send the audio file in the chat."}}],
+     ["Spotify song link","",{max:300,show:"code",ph:"https://open.spotify.com/track/...",note:{code:"Needed for the Spotify Code. In Spotify: Share, then Copy song link. Song not on Spotify? Choose Sound wave above."}}]],
   imgs:[["plate","Spotify Code"],["plate_wave","Sound wave"],["plate_build","Plate and feet"]]},
  {id:"A2",side:"A",name:"Now Playing Plaque",price:1199,art:"plaque",custom:true,line:"A song that never skips",build:"plaque",
   desc:"A standing plaque styled like a music player, frozen on the one track that matters. The plate drops into its base, no glue.",
@@ -654,8 +654,8 @@ const P=[
  {id:"A5",side:"A",name:"Song Tag",price:549,art:"songtag",custom:true,song:"tag",line:"Your song on your bag, scan it from the strap",build:"tag",
   desc:"A tag for your bag or keys. The front carries your song's Spotify Code, which plays the song when scanned in the Spotify app, or its sound wave. The back carries the song and artist, or your own name. It hangs from a printed loop that locks with a twist, so there is no metal ring.",
   size:"80 x 30 x 3 mm, printed loop",
-  f:[["Song title","Starboy",{max:60}],["Artist name","The Weeknd",{max:60,note:{code:"Spell both exactly as they appear on Spotify. We find your song with these words.",wave:"Spell both exactly. We build the wave from this song."}}],
-     ["Spotify song link (optional)","",{max:300,opt:1,show:"code",ph:"https://open.spotify.com/track/...",note:{code:"The surest way to get the exact version. In Spotify: Share, then Copy song link."}}],
+  f:[["Song title","Starboy",{max:60}],["Artist name","The Weeknd",{max:60,note:{code:"Spell both exactly as you want them printed on the back.",wave:"Spell both exactly. We build the wave from this song."}}],
+     ["Spotify song link","",{max:300,show:"code",ph:"https://open.spotify.com/track/...",note:{code:"Needed for the Spotify Code. In Spotify: Share, then Copy song link. Song not on Spotify? Choose Sound wave above."}}],
      ["Your name for the back","Dimo",{max:40,show:"name"}]],
   imgs:[["songtag","Code side and loop"],["songtag_sides","Front and back"]]},
 
@@ -918,7 +918,7 @@ const TERMS=`<h2 id="tcTitle">Terms, replacements and privacy</h2><p class="upd"
 <p>These terms apply to every order placed with No Skips. By sending an order on WhatsApp you agree to them. Nothing here takes away rights you have under Indian consumer law.</p>
 <h3>1. Who we are</h3><p>No Skips is a small studio in Bengaluru, Karnataka, India that designs and 3D prints music pieces to order. This website is a catalogue. Orders, previews, payment and support all happen on WhatsApp at +91 74111 48303.</p>
 <h3>2. Orders and payment</h3><ul><li>Your order is confirmed only when we confirm it in the chat and receive full payment by UPI.</li><li>Prices are in Indian rupees and include printing and packing. Shipping is extra and is quoted in the chat before you pay.</li><li>We may decline or cancel an order before printing, for example if we cannot print it well, or if it uses content that is hateful, unlawful or someone else's logo or artwork without permission. If we cancel, you get a full refund.</li><li>Prices on the site can change. Your order keeps the price confirmed in the chat.</li></ul>
-<h3>3. Personalised pieces</h3><ul><li>You are responsible for the text, song, link and names you send. Please check the spelling.</li><li>For every personalised piece we send a preview. Once you approve it, we print exactly what you approved. A mistake in an approved preview is not a fault.</li><li><b>Spotify Codes</b> are made with Spotify's own code generator from the song you give us. We scan each code with a phone before it ships. A code scans only in the Spotify app. It keeps working as long as Spotify keeps the song and its code service. If Spotify removes the song or changes how codes work, that is outside our control and is not a fault in the piece.</li><li>If we cannot find your song on Spotify, we tell you in the chat before printing and offer the sound wave instead.</li><li><b>Sound waves</b> are an artistic picture of the song's loud and quiet parts, not a measurement.</li></ul>
+<h3>3. Personalised pieces</h3><ul><li>You are responsible for the text, song, link and names you send. Please check the spelling.</li><li>For every personalised piece we send a preview. Once you approve it, we print exactly what you approved. A mistake in an approved preview is not a fault.</li><li><b>Spotify Codes</b> need the song's Spotify link, and are made with Spotify's own code generator from that link. If the link opens a different song or version from the one you named, we check with you in the chat before printing. We scan each code with a phone before it ships. A code scans only in the Spotify app. It keeps working as long as Spotify keeps the song and its code service. If Spotify removes the song or changes how codes work, that is outside our control and is not a fault in the piece.</li><li>Songs that are not on Spotify can be ordered as a sound wave.</li><li><b>Sound waves</b> are an artistic picture of the song's loud and quiet parts, not a measurement.</li></ul>
 <h3>4. Cancellations</h3><p>You can cancel for a full refund until we start printing. Pieces are made to order for you, so once printing has started we cannot cancel or take the piece back.</p>
 <h3>5. Replacements within 48 hours of delivery</h3><p>We replace a piece that arrives broken, has a print fault, or is not what you approved. To claim:</p><ul><li>Message us on WhatsApp within <b>48 hours of delivery</b>, going by the delivery time on the courier tracking.</li><li>Send photos of the piece, the box and the shipping label, and an unboxing video. Without an unboxing video we may not be able to accept a claim for a broken or missing part.</li><li>Keep the piece and the packing until we reply.</li></ul><p>If the claim is accepted, we reprint the piece and ship it at our cost. If we cannot reprint it, we refund the price of that piece. Claims made after 48 hours are not accepted, except where the law requires otherwise.</p>
 <p>These are not faults: the fine layer lines, small seams and slight colour differences that come with 3D printing; damage from heat, drops, misuse or wear after delivery; and phones or cases outside the sizes listed for a product.</p>
