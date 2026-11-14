@@ -203,6 +203,10 @@ footer{padding-bottom:84px!important}
 .bsteps li::before{content:"0" counter(b);font-family:var(--mono);font-size:13px;color:var(--accent);padding-top:2px}
 .bsteps b{display:block;font-weight:600}
 .bsteps span{grid-column:2;color:var(--muted);font-size:15px}
+.bsteps .sfig{grid-column:2;margin:10px 0 0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#e4e1db}
+.bsteps .sfig img{display:block;width:100%;height:auto}
+.bkey{margin:14px 0 0;font-size:13px;color:var(--muted)}
+.bkey b{color:var(--ink)}
 .bnote{margin:8px 0 0;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
 @media (max-width:860px){.build-panel{grid-template-columns:1fr}}
 
@@ -723,7 +727,7 @@ const P=[
  {id:"D12",side:"D",name:"Rotary",kind:"Key organiser",price:449,line:"Keys that swing out like a knife, not a jingle",badge:"New",build:"rotary",noAccent:false,
   desc:"Two slim plates hold your keys between them, folded in like a pocket knife. Swing out the one you need, fold it back flat. Posts snap through by hand, short ones for two to four keys and long ones for up to seven, with spacers so the stack stays firm. The loop takes a car fob or a ring.",
   size:"82 x 20 mm, 10 to 14 mm thick depending on your keys",f:[],
-  imgs:[["rotary","Keys folded in"],["rotary_open","Swing one out"],["rotary_build","Plates, posts, loop and spacers"]]},
+  imgs:[["rotary","Two keys swung out"],["rotary_open","Four keys on the organiser"],["rotary_s1_guide","Every part, labelled"]]},
  {id:"D2",side:"D",name:"Tape Case",kind:"Small storage box",price:849,custom:true,line:"A tape that holds your small things",build:"box",
   desc:"A box drawn from a real tape: reel hubs, a tape window, corner screws, the head slots and the seam between the two halves, with your own text on the label. Two compartments inside for picks, SD cards, earbud tips or a gig coin. The lid presses on and holds by friction, so there is no hinge to break.",
   size:"100 x 64 x 21 mm. Compartments 35 x 59 and 58 x 59 mm, 16 mm deep",f:[["Label text","Side A"]],
@@ -754,68 +758,69 @@ const draw=(p,o,accent)=>svg(ART[p.art](o||defaults(p)),accent||"red");
 
 /* ---------------- build guides (QR codes on the box link to #build-<key>) ---------------- */
 const BUILD={
- amp:{name:"Stack",img:"amp_build",parts:"5 parts",time:"3 minutes",steps:[
+ amp:{name:"Stack",img:"amp_build_guide",parts:"5 parts",time:"3 minutes",steps:[
    ["Press in the three knobs","Each ivory knob has a short stem. Push them into the three holes on the face of the head until they sit flush."],
    ["Fit the handle","Line the two pins on the ivory handle up with the holes on the drawer front and press."],
    ["Stack the head on the base","The head has four pins underneath. Line them up with the four sockets on the base and push down until the seam closes."],
    ["Slide in the drawer, add picks","The drawer goes in tray first. Stand your picks in the slot on top."]]},
- studio:{name:"Vol. 01: The Studio",img:"studio_set",parts:"6 pieces, 1 tray",time:"1 minute",steps:[
+ studio:{name:"Vol. 01: The Studio",img:"studio_set_guide",parts:"6 pieces, 1 tray",time:"1 minute",steps:[
    ["Stand the headphones","Press the two ear cups into the two pockets on their base. This is the only piece that needs building."],
    ["Find the numbers","Each piece has its number, 01/06 to 06/06, printed into the underside."],
    ["Rack them","Turntable, drum machine and mixer at the front. Mic, headphones and synth behind. Your set number faces you on the front lip."]]},
- rail:{name:"Rail",img:"rail_build",parts:"Rail and 5 pegs",time:"5 minutes",steps:[
+ rail:{name:"Rail",img:"rail_build_guide",parts:"Rail and 5 pegs",time:"5 minutes",steps:[
    ["Fix the rail to the wall","Use two 4 mm screws with wall plugs through the holes, 120 mm apart, or a strong mounting tape on smooth walls. These are not in the box, so pick what suits your wall."],
    ["Press in the pegs","Push each red peg into a socket by hand until it stops. The screw heads sit sunk below the face, between the pegs."],
    ["Hang the bands","Loop two or three wristbands over each peg. The wide cap stops them sliding off."]],
    note:"Tape is for light loads only. On textured paint or for a full rail, use screws."},
- plate:{name:"Track Plate",img:"plate_build",parts:"Plate and base bar",time:"10 seconds",steps:[
+ plate:{name:"Track Plate",img:"plate_build_guide",parts:"Plate and base bar",time:"10 seconds",steps:[
    ["Set down the base bar","Red stripe toward you, slot behind it."],
    ["Lower the plate in","Drop the bottom edge of the plate into the slot. It leans back 12 degrees and holds itself."]]},
- standees:{name:"Side A",img:"standee_build",parts:"4 cassettes, 2 rail sections",time:"1 minute",steps:[
+ standees:{name:"Side A",img:"standee_build_guide",parts:"4 cassettes, 2 rail sections",time:"1 minute",steps:[
    ["Join the rail","Hold one section flat. Lower the dovetail on the end of the other section straight down into its socket until both sit level."],
    ["Stand the cassettes","Press the bottom edge of each cassette into a slot. Track one on the left."],
    ["Add to it","A second set links onto either end the same way."]]},
- coin:{name:"Gig Coin",img:"coin",parts:"Coin, frame, foot",time:"30 seconds",steps:[
+ coin:{name:"Gig Coin",img:"coin_build_guide",parts:"Coin, frame, foot",time:"30 seconds",steps:[
    ["Snap the coin into the frame","Open the split at the bottom of the frame a little, seat the coin, and let the frame close around it."],
    ["Stand it or hang it","Press the two tabs at the bottom of the frame into the foot. The foot holds the split shut, so the coin is locked in. Or leave the foot off and use the loop."]]},
- fold:{name:"Fold",img:"fold_flat",parts:"2 ribs, 2 braces",time:"1 minute",steps:[
+ fold:{name:"Fold",img:"fold_flat_guide",parts:"2 ribs, 2 braces",time:"1 minute",steps:[
    ["Lay out the braces","Place the two braces about 170 mm apart, notches facing up, red bars facing you."],
    ["Press on the first rib","Line the two notches under a rib up with the notches at one end of the braces and press down until the rib touches the table. The tall end goes at the back."],
    ["Press on the second rib","Same again at the other end. Check all four joints are fully down."],
    ["Add the laptop","Rest the front edge of the laptop against the two lips."]],
    note:"To pack it, lift each rib straight up. If a joint feels tight on the first build, work it in and out a few times."},
- channel:{name:"Channel",img:"channel_build",parts:"3 modules",time:"30 seconds",steps:[
+ channel:{name:"Channel",img:"channel_build_guide",parts:"3 modules",time:"30 seconds",steps:[
    ["Pick your order","Each module has a dovetail on its right side and a socket on its left."],
    ["Lower to link","Hold one module on the desk. Lower the next one straight down beside it so its socket slides over the dovetail."],
    ["Change it any time","Lift a module straight up to release it."]]},
- eject:{name:"Eject",img:"eject_build",parts:"Tray, slider, face plate",time:"30 seconds",steps:[
+ eject:{name:"Eject",img:"eject_build_guide",parts:"Tray, slider, face plate",time:"30 seconds",steps:[
    ["Drop in the slider","Lower the red slider into the tray, tab first, so the tab pokes out of the slot in the back."],
    ["Press on the face plate","Line the plate up with the tray, eject mark at the bottom right, and press round the edges until it sits flat."],
    ["Load and eject","Slide in up to six cards. Push the red tab up with your thumb and they fan out. Tip it back and they drop home."]]},
- standby:{name:"Standby",img:"standby_build",parts:"Base and 3 fins",time:"1 minute",steps:[
+ standby:{name:"Standby",img:"standby_build_guide",parts:"Base and 3 fins",time:"1 minute",steps:[
    ["Slide in the fins","Feed each fin's key into the channel from either end of the base. It is a snug fit by design."],
    ["Set the gaps","Stand your closed laptop on the base and slide the fins in until they just touch it. They stay where you leave them."],
    ["Route the cables","Run the charger and display cables through the notches at the back."]]},
- rotary:{name:"Rotary",img:"rotary_build",parts:"2 plates, 2 posts, loop, spacers",time:"3 minutes",steps:[
-   ["Pick your posts","Short posts for two to four keys, long posts for four to seven."],
-   ["Stack the keys","Push a post up through plate A, then thread keys onto it, alternating ends so they fold in from both sides. Add spacers to fill any gap."],
-   ["Snap it shut","Lay plate B on top, red line out, and press over each post until the head clicks into the plate. To open, squeeze the split head and push it back through."]]},
- knob:{name:"Gain",img:"knob_build",parts:"Cap and base",time:"10 seconds",steps:[
+ rotary:{name:"Rotary",img:"rotary_open",parts:"2 plates, 2 posts, loop, spacers",time:"3 minutes",steps:[
+   ["Lay out your parts","Plate A is the plain one. Plate B has the red line. Short posts (1) are for 2 to 3 keys, long posts (2) for more. The loop (L) is for a car fob. Spacers (S) fill gaps between keys.","rotary_s1_guide"],
+   ["Put the posts through plate A, then the keys","Push a post up from underneath through each end hole of plate A. Drop a key over a post, bow first, so its blade lies along the plate. Alternate: one key from the right post, one from the left. Slip a spacer on last if the stack feels loose.","rotary_s2_guide"],
+   ["Press plate B on","Turn plate B so the red line faces up and press it down over both posts. Each post head clicks into its plate. The keys stay between the two plates.","rotary_s3_guide"],
+   ["Swing a key out, fold it back","Pinch the plates, pull a key out with your fingernail and swing it round the post. Push it back flat to close. To change keys, squeeze a split post head and push it back through the plate.","rotary_s4_guide"]]},
+ knob:{name:"Gain",img:"knob_build_guide",parts:"Cap and base",time:"10 seconds",steps:[
    ["Push the cap onto the post","Hold the base flat and press the knob straight down until you feel it click past the head of the post."],
    ["Spin it","It turns freely. To take it apart, pull straight up."]]},
- box:{name:"Tape Case",img:"cassettebox_open",parts:"Tray and lid",time:"10 seconds",steps:[
+ box:{name:"Tape Case",img:"cassettebox_open_guide",parts:"Tray and lid",time:"10 seconds",steps:[
    ["Fill the tray","Picks and small things in the narrow side, cards or a coin in the wide side."],
    ["Press the lid on","Line the label up with the thumb notch at the front and press until the rim seats. To open, push your thumb into the notch and lift."]]},
- vinyl:{name:"Sleeve",img:"vinylstand_build",parts:"Ledge and 2 feet",time:"1 minute",steps:[
+ vinyl:{name:"Sleeve",img:"vinylstand_build_guide",parts:"Ledge and 2 feet",time:"1 minute",steps:[
    ["Stand the feet","Place the two record feet about 110 mm apart, grooves facing out, the slotted ends at the front."],
    ["Slide in the ledge","Push the Now Spinning ledge down into the front slot of both feet until it reaches the bottom."],
    ["Add the record","Rest the sleeve on the base behind the ledge and lean it back on the cut edge of the records."]]},
- headphones:{name:"Hold",img:"headphonestand_build",parts:"Base, post, saddle",time:"1 minute",steps:[
+ headphones:{name:"Hold",img:"headphonestand_build_guide",parts:"Base, post, saddle",time:"1 minute",steps:[
    ["Post into the base","Push the bottom of the post into the slot in the knob, fader facing the same way as the pointer, until it reaches the floor of the slot."],
    ["Saddle onto the post","Press the saddle down onto the top of the post, red arc facing front."],
    ["Hang your headphones","Rest the headband on the saddle. Keep it on a flat surface."]],
    note:"It is a tight press fit. If a joint feels loose after a lot of use, a single layer of tape on the post end tightens it."},
- tag:{name:"Track Tag and Alias",img:"nametag",parts:"Tag and loop",time:"30 seconds",steps:[
+ tag:{name:"Track Tag and Alias",img:"nametag_guide",parts:"Tag and loop",time:"30 seconds",steps:[
    ["Thread the loop","Push the T-shaped end of the strap through the hole in the tag."],
    ["Wrap it round a strap or zip","Take the strap around your bag strap, zip pull or key ring."],
    ["Lock it","Turn the T-bar in line with the slot at the other end, feed it through, and let it turn back. Pull gently to check."]]}
@@ -868,7 +873,8 @@ function renderBuild(){
   const b=BUILD[buildKey];
   $("buildPanel").innerHTML=`<div class="shot"><img src="${img(b.img)}" alt="${esc(b.name)}, parts laid out" loading="lazy" width="880" height="880"></div>
     <div><h3>${esc(b.name)}</h3><div class="bmeta"><span>${esc(b.parts)}</span><span>About ${esc(b.time)}</span><span>No glue, no tools</span></div>
-    <ol class="bsteps">${b.steps.map(s=>`<li><b>${esc(s[0])}</b><span>${esc(s[1])}</span></li>`).join("")}</ol>${b.note?`<p class="bnote">${esc(b.note)}</p>`:""}</div>`;
+    <p class="bkey"><b>Reading the pictures:</b> a letter in a circle names a part. A red arrow shows which way it moves. The number on the arrow is the step.</p>
+    <ol class="bsteps">${b.steps.map(s=>`<li><b>${esc(s[0])}</b><span>${esc(s[1])}</span>${s[2]?`<div class="sfig"><img src="${img(s[2])}" alt="${esc(s[0])}" loading="lazy" width="880" height="880"></div>`:""}</li>`).join("")}</ol>${b.note?`<p class="bnote">${esc(b.note)}</p>`:""}</div>`;
 }
 function showBuild(k,scroll){if(!BUILD[k])return;buildKey=k;renderBuild();if(scroll)$("build").scrollIntoView()}
 function routeHash(){const m=/^#build-([a-z]+)$/.exec(location.hash);if(m)showBuild(m[1],true)}

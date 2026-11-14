@@ -113,6 +113,8 @@ def build_coin():
     inframe = [(mv(m, 0, 0, 0.0), c) for m, c in one] + [(frame, BLACK)]
     stoodc = [(mv(rot(m, 90, 0, 0), 0, 2.0, 2.2 + 29.5), c) for m, c in inframe]
     p.scene("coin", place(stoodc + [(foot, BLACK), (mark, RED)], rz=-14, x=-16, y=8) + place([(flip(m), c) for m, c in one], rz=10, x=34, y=-22))
+    # exploded for the build guide: coin above the frame, foot in front of the frame's two tabs
+    p.scene("coin_build", [(mv(m, 0, 0, 30), c) for m, c in one] + [(frame, BLACK), (mv(foot, 0, -52, 0), BLACK), (mv(mark, 0, -52, 0), RED)])
     p.scene("bp_C3", stoodc + [(foot, BLACK), (mark, RED)]); p.scene("bpo_C3", one + [(frame, BLACK)])
     p.note = "Rev B. Reeded edge, rim 0.7 mm above a 0.5 mm silhouette, back text as a first-layer inlay. New snap frame with bag loop and a foot that locks the frame shut."
     P["C3"] = p

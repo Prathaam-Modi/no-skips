@@ -5,12 +5,12 @@ from mathutils import Vector
 
 OUT = os.environ.get("NS_OUT", "/home/claude/out")
 COL = {"black": (0.016, 0.015, 0.014, 0.52), "ivory": (0.86, 0.80, 0.68, 0.55), "red": (0.56, 0.022, 0.03, 0.5),
-       "prop": (0.085, 0.085, 0.085, 0.35), "prop2": (0.50, 0.48, 0.44, 0.5), "sofa": (0.30, 0.27, 0.235, 1.0), "glass": (0.9, 0.93, 0.95, 0.05)}
+       "prop": (0.085, 0.085, 0.085, 0.35), "prop2": (0.50, 0.48, 0.44, 0.5), "brass": (0.70, 0.50, 0.17, 0.30), "steel": (0.62, 0.63, 0.66, 0.28), "sofa": (0.30, 0.27, 0.235, 1.0), "glass": (0.9, 0.93, 0.95, 0.05)}
 # scene: az (deg, 0 = straight on from the front, + = camera to the right), el, zoom (1 = fit), optional look-at shift
 SHOTS = {
  "songtag": dict(az=-22, el=52, zoom=1.02), "songtag_sides": dict(az=0, el=62, zoom=1.0), "nametag": dict(az=-22, el=52, zoom=1.02),
  "plate": dict(az=-24, el=14, zoom=1.0), "plate_wave": dict(az=-24, el=14, zoom=1.0), "plate_build": dict(az=-18, el=48, zoom=1.0),
- "coin": dict(az=-20, el=28, zoom=1.0), "standees": dict(az=-26, el=20, zoom=1.02), "standee_build": dict(az=-16, el=46, zoom=1.0),
+ "coin": dict(az=-20, el=28, zoom=1.0), "coin_build": dict(az=-26, el=40, zoom=0.82), "standees": dict(az=-26, el=20, zoom=1.02), "standee_build": dict(az=-16, el=46, zoom=1.0),
  "fold": dict(az=-52, el=16, zoom=1.0), "fold_bare": dict(az=-52, el=20, zoom=1.0), "fold_flat": dict(az=-24, el=46, zoom=1.0),
  "channel": dict(az=-28, el=24, zoom=1.0), "channel_build": dict(az=-28, el=26, zoom=1.0),
  "bside": dict(az=-20, el=40, zoom=1.0), "bside_bare": dict(az=-20, el=40, zoom=1.0),
@@ -24,7 +24,8 @@ SHOTS = {
  "vinylstand_build": dict(az=-36, el=22, zoom=1.0), "headphonestand": dict(az=-24, el=12, zoom=1.0), "headphonestand_build": dict(az=-26, el=12, zoom=1.0),
  "eject": dict(az=-24, el=18, zoom=1.0), "eject_open": dict(az=-30, el=16, zoom=1.0), "eject_build": dict(az=-36, el=20, zoom=1.0),
  "standby_bare": dict(az=-34, el=20, zoom=1.0), "standby": dict(az=-40, el=16, zoom=1.0), "standby_build": dict(az=-30, el=22, zoom=1.0),
- "rotary": dict(az=-18, el=48, zoom=1.0), "rotary_open": dict(az=-18, el=50, zoom=1.0), "rotary_build": dict(az=-24, el=30, zoom=1.0),
+ "rotary": dict(az=-18, el=48, zoom=1.0), "rotary_open": dict(az=-18, el=50, zoom=1.0),
+ "rotary_s1": dict(az=-24, el=30, zoom=0.78), "rotary_s2": dict(az=-30, el=36, zoom=0.7), "rotary_s3": dict(az=-30, el=32, zoom=0.72), "rotary_s4": dict(az=-18, el=52, zoom=0.72), "rotary_build": dict(az=-24, el=30, zoom=1.0),
  "cover": dict(az=-26, el=24, zoom=1.0), "cover_lifted": dict(az=-30, el=20, zoom=1.0), "cover_top": dict(az=0, el=89, zoom=1.0), "cover_tiles": dict(az=-24, el=40, zoom=1.0),
  "perch": dict(az=-36, el=30, zoom=1.0, focus=("black", "red", "glass", "prop")), "perch_flat": dict(az=-26, el=44, zoom=1.0),
 }
@@ -34,6 +35,7 @@ def mat(name):
     m = bpy.data.materials.new(name); m.use_nodes = True
     p = m.node_tree.nodes["Principled BSDF"]
     p.inputs["Base Color"].default_value = (r, g, b, 1); p.inputs["Roughness"].default_value = rough
+    if name in ("brass", "steel"): p.inputs["Metallic"].default_value = 0.9
     if name == "glass":
         p.inputs["Transmission Weight"].default_value = 1.0; p.inputs["IOR"].default_value = 1.45
     else:

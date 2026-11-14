@@ -148,15 +148,35 @@ def build_rotary():
     S = 6.0
     a_w = [(plate_a, BLACK)]
     b_w = [(mv(rot(plate_b, 180, 0, 0), 0, 0, 2 * T + S), BLACK), (mv(rot(inlay, 180, 0, 0), 0, 0, 2 * T + S), RED)]
-    posts = [(mv(rot(post(S), 0, 0, 0), s * X, 0, -0.0), BLACK) for s in (-1, 1)]
-    keyblade = lambda ang, z, flip=False: mv(rot(mv(ext(unary_union([circle(9, 0, 0), box(0, -4, 52, 4), Polygon([(52, 4), (58, 0), (52, -4)])]).difference(circle(2.1)), 1.8), 0, 0, 0), 0, 0, ang), X if not flip else -X, 0, z)
-    keys = [(keyblade(178, T + 0.3), PROP2), (keyblade(176, T + 2.4), PROP), (keyblade(2, T + 0.3, True), PROP), (keyblade(4, T + 2.4, True), PROP2)]
+    posts = [(mv(post(S), s * X, 0, 0), BLACK) for s in (-1, 1)]
+    # real keys for the renders: bow with pivot hole, shoulder, bitted blade with a milled groove. Brass and nickel, like a house set.
+    def key2d(n):
+        bow = unary_union([circle(8.6, 0, 0, 64), box(0, -3.6, 15, 3.6)])
+        blade = Polygon([(12, 4.2), (50, 4.2), (55.5, 2.4), (55.5, -4.2), (12, -4.2)])
+        cuts = [box(x0, -4.3, x0 + 3.1, -4.3 + d) for x0, d in zip(range(20, 52, 5), [2.1, 1.0, 2.8, 1.5, 2.4, 0.9][:6])]
+        shape = unary_union([bow, blade]).difference(unary_union(cuts)).difference(circle(2.15, 0, 0, 40))
+        return shape
+    KT = 1.4                                            # key thickness, four keys fit a 6 mm post gap
+    def keyblade(ang, lvl, col, flip=False, n=0):
+        k = ext(key2d(n), KT) - ext(LineString([(17, 1.3), (47, 1.3)]).buffer(0.45, quad_segs=4), 0.45, KT - 0.4)
+        return (mv(rot(k, 0, 0, ang), -X if flip else X, 0, T + 0.2 + lvl * 1.45), col)
+    BR, NI = "brass", "steel"
+    # levels 0 and 2 hang on the right post, 1 and 3 on the left, so the blades pass over each other, never through
+    folded = [keyblade(178, 0, BR), keyblade(2, 1, NI, True), keyblade(176, 2, NI), keyblade(4, 3, BR, True)]
     built = a_w + b_w + posts
     p.scene("rotary_bare", built)
-    p.scene("rotary", built + keys)
-    p.scene("rotary_open", built + [(keyblade(130, T + 0.3), PROP2), (keyblade(150, T + 2.4), PROP), (keyblade(30, T + 0.3, True), PROP), (keyblade(4, T + 2.4, True), PROP2)])
-    ex = [(m, c) for m, c in a_w] + [(mv(m, 0, 0, 30), c) for m, c in b_w] + [(mv(m, 0, 0, -18), c) for m, c in posts] + [(mv(loop_m, 0, -28, 0), BLACK)] + [(mv(spacer, 50 + i * 10, -28, 0), BLACK) for i in range(3)]
+    p.scene("rotary", built + [keyblade(100, 0, BR), keyblade(2, 1, NI, True), keyblade(128, 2, NI), keyblade(30, 3, BR, True)])
+    p.scene("rotary_open", built + [keyblade(58, 0, BR), keyblade(150, 1, NI, True), keyblade(92, 2, NI), keyblade(172, 3, BR, True)])
+    pa = [(plate_a, BLACK)] + posts
+    ex = [(m, c) for m, c in a_w] + [(mv(m, 0, 0, 30), c) for m, c in b_w] + \
+         [(mv(post(6.0), -14, -28, 0), BLACK), (mv(post(10.0), 14, -28, 0), BLACK)] + [(mv(loop_m, 0, 32, 0), BLACK)] + [(mv(spacer, 40 + i * 9, 32, 0), BLACK) for i in range(3)]
     p.scene("rotary_build", ex); p.scene("bp_D12", ex); p.scene("bpo_D12", built)
+    p.scene("rotary_s1", ex)
+    # step 2: keys go on the posts. Two already on, one above the left post ready to drop, one spacer above the right post
+    p.scene("rotary_s2", pa + [keyblade(178, 0, BR), keyblade(2, 1, NI, True), (mv(spacer, X, 0, 24), BLACK),
+                               (mv(keyblade(176, 2, NI)[0], 0, 0, 10), NI)])
+    p.scene("rotary_s3", pa + folded + [(mv(m, 0, 0, 22), c) for m, c in b_w])
+    p.scene("rotary_s4", built + [keyblade(58, 0, BR), keyblade(2, 1, NI, True), keyblade(92, 2, NI), keyblade(4, 3, BR, True)])
     p.note = ("82 x 20 mm plates, 2 mm thick. Two posts snap through: short posts for 2 to 4 keys, long posts for 4 to 7, spacers fill the gaps "
               "so the keys stay stiff when you swing them out. The loop takes a car fob. Plates print outer face down (red pointer inlay on plate B).")
     P["D12"] = p
