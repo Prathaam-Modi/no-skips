@@ -302,10 +302,9 @@ def build_horn():
     p.part("stand", rot(U([stand]), -90, 0, 0), BLACK, infill=0.15)
     p.part("speaker_rings", rot(red, -90, 0, 0), RED, infill=1.0)
     p.part("plate", plate, BLACK, infill=0.4); p.part("plate_mark", mark, RED, infill=1.0)
-    phone = mv(rot(body(rrect(75, 160, 9), 9, c=1.5, steps=3, bottom=True), 90 - 71 + 90 - 90, 0, 0), 0, 0, 0)
-    ph = mv(rot(rot(body(rrect(75, 160, 9), 9.0, c=1.5, steps=3, bottom=True), 0, 0, 0), -(90 - 71) + 0, 0, 0), 0, 0, 0)
-    ph = mv(rot(mv(body(rrect(75, 160, 9), 9.0, c=1.5, steps=3, bottom=True), 0, 80, 0), 90 - 19, 0, 0), 0, 0, 0)
-    ph = mv(rot(ph, 0, 0, 0), 0, -20.5 + 0.2, 29.2 + 4.0)
+    # phone: 9 mm thick, back face on the 71 degree ramp, bottom-back edge in the corner of the seat
+    ph = mv(rot(body(rrect(75, 160, 9), 9.0, c=1.5, steps=3, bottom=True), 90, 0, 0), 0, 0, 80)     # thickness along -y, back face y = 0
+    ph = mv(rot(ph, -(90 - 71), 0, 0), 0, -9.0 - 0.3, 29.0 + 4.0 + 0.3)
     built = [(mv(stand, 0, 0, 4.0), BLACK), (mv(red, 0, 0, 4.0), RED), (plate, BLACK), (mark, RED)]
     p.scene("phonestand", built + [(ph, PROP)])
     p.scene("bp_D1", built); p.scene("bpo_D1", built); p.scene("phonestand_horn_seat", built)
