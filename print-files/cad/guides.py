@@ -6,6 +6,17 @@ from annotate import annotate, arc
 X = 30.0; T = 2.0
 G = {}
 
+G["rotary_s5"] = dict(banner="Step 5: add the loop (car fob)", labels=[
+    dict(text="Loop", sub="takes the place of one key", tag="L", at=(-30, 0, 25), to=(-150, -80)),
+    dict(text="Slot", sub="your fob ring goes through here", tag="S", at=(-19, 0, 25), to=(150, -110)),
+    dict(text="Post", sub="loop drops over this post", tag="P", at=(-30, 0, 8), to=(-120, 120)),
+], arrows=[dict(pts=[(-30, 0, 45), (-30, 0, 28)], step=1)])
+G["rotary_s6"] = dict(banner="Swing the loop out, fob on a ring", labels=[
+    dict(text="Loop", sub="swings out like a key", tag="L", at=(-27, 12, 7), to=(-150, 90)),
+    dict(text="Split ring", sub="through the slot", tag="R", at=(-35, 17, 8), to=(-30, -120)),
+    dict(text="Car fob", sub="hangs off the ring", tag="F", at=(-60, 20, 6), to=(-150, -60)),
+])
+
 # ---------------------------------------------------------------- Rotary (D12)
 G["rotary_s1"] = dict(banner="1  Pick your parts", labels=[
     dict(text="Plate B", sub="red line on top", tag="B", at=(0, 0, 40), to=(-250, -70)),
@@ -278,11 +289,108 @@ G["studio_set"] = dict(banner="Vol. 01: where each piece goes", labels=[
     dict(text="Set number on the front lip", at=(-30, -52, 5), to=(-70, 175)),
 ])
 
+# ---------------------------------------------------------------- "how it works" pictures (name_use.webp), drawn on the finished-product
+# renders. Same labels and arrows, so each step of each guide can show what the customer will actually do.
+U = {}
+U["eject_open"] = dict(banner="Eject: push the tab, cards fan out", labels=[
+    dict(text="Cards", sub="up to six, flat", tag="A", at=(0, -3, 80), to=(150, -60)),
+    dict(text="Red slider tab", sub="push up with your thumb", tag="B", at=(30, -8, 25), to=(150, 110)),
+    dict(text="Tray and face plate", tag="C", at=(-44, -3, 40), to=(-140, 80)),
+], arrows=[
+    dict(pts=[(52, -8, 8), (52, -8, 40)], step=3),
+])
+U["standby"] = dict(banner="Standby: set the gaps to your laptops", labels=[
+    dict(text="Closed laptop", sub="stands upright in its bay", tag="A", at=(-10, 0, 200), to=(-150, -60)),
+    dict(text="Fin", sub="slide it until it just touches", tag="B", at=(20, 0, 120), to=(150, -80)),
+    dict(text="Base", sub="fins stay where you leave them", tag="C", at=(100, 20, 10), to=(140, 110)),
+], arrows=[
+    dict(pts=[(60, 0, 100), (33, 0, 100)], step=2),
+])
+U["fold"] = dict(banner="Fold: built, with a laptop on it", labels=[
+    dict(text="Rib", sub="waveform slots let air through", tag="A", at=(100, 0, 60), to=(150, -70)),
+    dict(text="Brace", sub="ribs press down onto its notches", tag="B", at=(0, -78, 20), to=(-150, 90)),
+    dict(text="Laptop", sub="front edge rests on the lips", tag="C", at=(-80, 0, 150), to=(-150, -60)),
+], arrows=[
+    dict(pts=[(-100, 0, 100), (-100, 0, 150)] if False else [(100, 100, 96), (100, 100, 140)], step=5),
+])
+U["amp_open"] = dict(banner="Stack: drawer and knobs", labels=[
+    dict(text="Drawer", sub="slides in tray first", tag="A", at=(0, -40, 18), to=(-150, 60)),
+    dict(text="Knobs x3", sub="pressed in flush", tag="B", at=(16, -17, 66), to=(150, -40)),
+    dict(text="Pick slot", sub="stand your picks on top", tag="C", at=(0, 0, 74), to=(0, -150)),
+    dict(text="Handle", tag="D", at=(0, -44, 17), to=(-110, 140)),
+], arrows=[
+    dict(pts=[(0, -80, 12), (0, -46, 12)], step=4),
+])
+U["channel"] = dict(banner="Channel: link, change, lift out", labels=[
+    dict(text="Tall cup", tag="A", at=(-110, 0, 99), to=(-100, -140)),
+    dict(text="Mid cup", tag="B", at=(-30, 0, 59), to=(-10, -150)),
+    dict(text="Tray", tag="C", at=(90, 0, 23), to=(120, 100)),
+    dict(text="Dovetail joint", sub="each module's right side slides into the next one's left", at=(0, 28, 20), to=(30, 170)),
+], arrows=[
+    dict(pts=[(60, 0, 40), (60, 0, 80)], step=3),
+])
+U["plate"] = dict(banner="Track Plate: scan it", labels=[
+    dict(text="Spotify Code", sub="Spotify app, Search, camera icon, scan", tag="A", at=(0, 10, 52), to=(0, -150)),
+    dict(text="Title and artist", tag="B", at=(0, 5, 22), to=(-130, 80)),
+    dict(text="Base bar", sub="plate leans back, holds itself", tag="C", at=(60, -10, 10), to=(140, 100)),
+])
+U["songtag"] = dict(banner="Track Tag: both sides", labels=[
+    dict(text="Front", sub="Spotify Code, scans from the strap", tag="A", at=(0, 12, 4), to=(120, -100)),
+    dict(text="Loop strap", sub="through the hole, round your strap", tag="B", at=(20, -26, 1), to=(120, 110)),
+])
+U["rail"] = dict(banner="Rail: hang the bands", labels=[
+    dict(text="Peg", sub="loop two or three bands over each", tag="A", at=(-80, -20, 56), to=(-60, 140)),
+    dict(text="Wide cap", sub="stops bands sliding off", tag="B", at=(80, -22, 56), to=(120, 120)),
+    dict(text="Rail", sub="fixed to the wall", tag="C", at=(95, -4, 76), to=(60, -120)),
+])
+U["headphonestand"] = dict(banner="Hold: in use", labels=[
+    dict(text="Saddle", sub="headband rests here", tag="A", at=(50, 0, 250), to=(130, -120)),
+    dict(text="Post", sub="press fit, fader faces the pointer", tag="B", at=(15, 0, 120), to=(140, 20)),
+    dict(text="Base", sub="keep on a flat surface", tag="C", at=(58, 0, 10), to=(140, 130)),
+])
+U["vinylstand_record"] = dict(banner="Sleeve: add the record", labels=[
+    dict(text="Ledge", sub="holds the record from the front", tag="A", at=(0, -41, 30), to=(130, 130)),
+    dict(text="Feet", sub="left and right, grooves face out", tag="B", at=(55, 30, 100), to=(150, -80)),
+    dict(text="Record sleeve", sub="lean it back on the cut edges", tag="C", at=(0, 30, 200), to=(-130, -80)),
+])
+U["cassettebox"] = dict(banner="Tape Case: opening it", labels=[
+    dict(text="Lid", sub="label lines up with the notch", tag="A", at=(0, 0, 21), to=(0, -150)),
+    dict(text="Thumb notch", sub="push your thumb in, lift", at=(0, -32, 16), to=(140, 100)),
+], arrows=[
+    dict(pts=[(0, -40, 8), (0, -40, 36)], step=2),
+])
+U["phonestand"] = dict(banner="Horn: where everything is", labels=[
+    dict(text="Phone seat", sub="71 degrees, upright or sideways", tag="A", at=(0, 5, 100), to=(-130, -110)),
+    dict(text="Sound slits", sub="under the phone's bottom speaker", tag="B", at=(17, -12, 32), to=(-160, 60)),
+    dict(text="Horn mouth", sub="sound comes out here", tag="C", at=(0, -25, 20), to=(150, 90)),
+    dict(text="Cable opening", sub="runs out the back", tag="D", at=(0, 26, 16), to=(150, 160)),
+])
+U["phonestand_horn_exploded"] = dict(banner="Horn: stand slides onto the plate", labels=[
+    dict(text="Stand", sub="has a groove underneath", tag="A", at=(0, -60, 100), to=(-140, -80)),
+    dict(text="Plate", sub="long tail stops it tipping back", tag="B", at=(0, 90, 5), to=(140, 90)),
+    dict(text="Dovetail rail", sub="groove slides over it", tag="C", at=(0, 40, 8), to=(-140, 130)),
+])
+U["riser"] = dict(banner="Lift: how it sits", labels=[
+    dict(text="Wedge", sub="two in the box, 14 degrees", tag="A", at=(-75, 70, 22), to=(-130, 120)),
+    dict(text="Front lip", sub="stops the controller sliding", tag="B", at=(0, -49, 30), to=(120, 130)),
+    dict(text="Controller", sub="rests across both wedges", tag="C", at=(0, 0, 70), to=(0, -150)),
+])
+
 import os
+from annotate import OUT
+OUT_DIR = OUT + "/r"
 SRC = "/home/claude/no-skips/img"
 def run(names):
     for n in names or G:
         g = G[n]
         src = f"{SRC}/{n}.webp" if (n in ("amp_build","plate_build","standee_build","knob_build","rail_build","coin","cassettebox_open","vinylstand_build","headphonestand_build","fold_flat","studio_set","channel_build","eject_build","standby_build","nametag") and os.path.exists(f"{SRC}/{n}.webp")) else None
         print(annotate(n, g.get("labels", ()), g.get("arrows", ()), banner=g.get("banner"), src=src))
-if __name__ == "__main__": run(sys.argv[1:])
+
+def run_use(names):
+    for n in names or U:
+        g = U[n]; src = f"{SRC}/{n}.webp"
+        print(annotate(n, g.get("labels", ()), g.get("arrows", ()), banner=g.get("banner"), src=src, out=f"{OUT_DIR}/{n}_use"))
+
+if __name__ == "__main__":
+    if sys.argv[1:2] == ["use"]: run_use(sys.argv[2:])
+    else: run(sys.argv[1:])

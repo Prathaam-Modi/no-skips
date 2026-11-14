@@ -10,7 +10,7 @@ COL = {"black": (0.016, 0.015, 0.014, 0.52), "ivory": (0.86, 0.80, 0.68, 0.55), 
 SHOTS = {
  "songtag": dict(az=-22, el=52, zoom=1.02), "songtag_sides": dict(az=0, el=62, zoom=1.0), "nametag": dict(az=-22, el=52, zoom=1.02),
  "plate": dict(az=-24, el=14, zoom=1.0), "plate_wave": dict(az=-24, el=14, zoom=1.0), "plate_build": dict(az=-18, el=48, zoom=1.0),
- "coin": dict(az=-20, el=28, zoom=1.0), "coin_build": dict(az=-26, el=40, zoom=0.82), "standees": dict(az=-26, el=20, zoom=1.02), "standee_build": dict(az=-16, el=46, zoom=1.0),
+ "coin": dict(az=-20, el=28, zoom=1.0), "coin_build": dict(az=-26, el=40, zoom=0.82), "horn_slide": dict(az=-38, el=26, zoom=0.86), "standees": dict(az=-26, el=20, zoom=1.02), "standee_build": dict(az=-16, el=46, zoom=1.0),
  "fold": dict(az=-52, el=16, zoom=1.0), "fold_bare": dict(az=-52, el=20, zoom=1.0), "fold_flat": dict(az=-24, el=46, zoom=1.0),
  "channel": dict(az=-28, el=24, zoom=1.0), "channel_build": dict(az=-28, el=26, zoom=1.0),
  "bside": dict(az=-20, el=40, zoom=1.0), "bside_bare": dict(az=-20, el=40, zoom=1.0),
@@ -25,7 +25,7 @@ SHOTS = {
  "eject": dict(az=-24, el=18, zoom=1.0), "eject_open": dict(az=-30, el=16, zoom=1.0), "eject_build": dict(az=-36, el=20, zoom=1.0),
  "standby_bare": dict(az=-34, el=20, zoom=1.0), "standby": dict(az=-40, el=16, zoom=1.0), "standby_build": dict(az=-30, el=22, zoom=1.0),
  "rotary": dict(az=-18, el=48, zoom=1.0), "rotary_open": dict(az=-18, el=50, zoom=1.0),
- "rotary_s1": dict(az=-24, el=30, zoom=0.78), "rotary_s2": dict(az=-30, el=36, zoom=0.7), "rotary_s3": dict(az=-30, el=32, zoom=0.72), "rotary_s4": dict(az=-18, el=52, zoom=0.72), "rotary_build": dict(az=-24, el=30, zoom=1.0),
+ "rotary_s1": dict(az=-24, el=30, zoom=0.78), "rotary_s2": dict(az=-30, el=36, zoom=0.7), "rotary_s3": dict(az=-30, el=32, zoom=0.72), "rotary_s4": dict(az=-18, el=52, zoom=0.72), "rotary_s5": dict(az=-30, el=34, zoom=0.74), "rotary_s6": dict(az=-24, el=40, zoom=0.8), "rotary_build": dict(az=-24, el=30, zoom=1.0),
  "cover": dict(az=-26, el=24, zoom=1.0), "cover_lifted": dict(az=-30, el=20, zoom=1.0), "cover_top": dict(az=0, el=89, zoom=1.0), "cover_tiles": dict(az=-24, el=40, zoom=1.0),
  "perch": dict(az=-36, el=30, zoom=1.0, focus=("black", "red", "glass", "prop")), "perch_flat": dict(az=-26, el=44, zoom=1.0),
 }

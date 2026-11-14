@@ -688,7 +688,7 @@ const P=[
  {id:"B1",side:"B",name:"Stack",kind:"Pick amp with drawer",price:1399,line:"Pick holder with a drawer",badge:"Build it yourself",build:"amp",
   desc:"A small amp for the desk that you build yourself in a few minutes. Picks stand in the top slot, spares and a capo go in the drawer. Five parts, no glue.",
   size:"70 x 35 x 74 mm, fits standard picks",f:[],noAccent:true,imgs:[["amp","Built"],["amp_open","Drawer open"],["amp_build","The five parts"]]},
- {id:"B2",side:"B",name:"Lift",kind:"Controller risers, pair",price:1699,line:"Pair of angled stands",
+ {id:"B2",side:"B",name:"Lift",kind:"Controller risers, pair",price:1699,line:"Pair of angled stands",build:"riser",
   desc:"Two wedges that tilt a MIDI controller, drum pad or laptop toward you at 14 degrees, with a front lip to stop it sliding and a waveform on the side.",
   size:"150 x 41 x 44 mm each, pair",f:[],imgs:[["riser","Pair, with a controller"]]},
  {id:"B3",side:"B",name:"Alias",kind:"Artist name tag",price:449,art:"nametag",custom:true,line:"Your artist name, raised",build:"tag",
@@ -698,7 +698,7 @@ const P=[
   desc:"Fifty name tags with your act, venue or event name, each with its printed loop, ready for the merch table. That is about ₹120 a tag. Larger runs cost less per piece.",
   size:"70 x 30 x 4 mm each, 50 pieces",f:[["Name or text on the tags",""]],extra:"Send your logo in the chat if you have one.",imgs:[["run","Part of a run"]]},
 
- {id:"D1",side:"D",name:"Horn",kind:"Phone stand and amplifier",price:1499,line:"A studio monitor that holds and amplifies your phone",badge:"Top pick",
+ {id:"D1",side:"D",name:"Horn",kind:"Phone stand and amplifier",price:1499,line:"A studio monitor that holds and amplifies your phone",badge:"Top pick",build:"horn",
   desc:"A small studio monitor for the desk with a hollow horn behind the woofer. Your phone rests on the seat at 71 degrees, upright or sideways, with its bottom speaker over two slits that feed the horn, so the sound is guided out of the front through the woofer opening, a little louder and more directed than the phone alone. The charging cable gets its own opening and runs out the back. Fits phones in cases from 7 to 11.5 mm thick, small iPhones to tall Androids. The stand slides onto a weighted plate by a dovetail, and the long tail behind it stops the stand tipping back when you tap the screen.",
   size:"70 x 133 x 108 mm, stand and plate",f:[],imgs:[["phonestand","With a phone"],["phonestand_horn_exploded","Stand and plate"],["phonestand_horn_seat","Seat and slits"]]},
  {id:"D6",side:"D",name:"Fold",kind:"Flat-pack laptop stand",price:1699,line:"Lifts your screen, packs flat in a bag",badge:"New",build:"fold",noAccent:true,
@@ -762,7 +762,7 @@ const BUILD={
    ["Press in the three knobs","Each ivory knob has a short stem. Push them into the three holes on the face of the head until they sit flush."],
    ["Fit the handle","Line the two pins on the ivory handle up with the holes on the drawer front and press."],
    ["Stack the head on the base","The head has four pins underneath. Line them up with the four sockets on the base and push down until the seam closes."],
-   ["Slide in the drawer, add picks","The drawer goes in tray first. Stand your picks in the slot on top."]]},
+   ["Slide in the drawer, add picks","The drawer goes in tray first. Stand your picks in the slot on top.","amp_open_use"]]},
  studio:{name:"Vol. 01: The Studio",img:"studio_set_guide",parts:"6 pieces, 1 tray",time:"1 minute",steps:[
    ["Stand the headphones","Press the two ear cups into the two pockets on their base. This is the only piece that needs building."],
    ["Find the numbers","Each piece has its number, 01/06 to 06/06, printed into the underside."],
@@ -770,11 +770,11 @@ const BUILD={
  rail:{name:"Rail",img:"rail_build_guide",parts:"Rail and 5 pegs",time:"5 minutes",steps:[
    ["Fix the rail to the wall","Use two 4 mm screws with wall plugs through the holes, 120 mm apart, or a strong mounting tape on smooth walls. These are not in the box, so pick what suits your wall."],
    ["Press in the pegs","Push each red peg into a socket by hand until it stops. The screw heads sit sunk below the face, between the pegs."],
-   ["Hang the bands","Loop two or three wristbands over each peg. The wide cap stops them sliding off."]],
+   ["Hang the bands","Loop two or three wristbands over each peg. The wide cap stops them sliding off.","rail_use"]],
    note:"Tape is for light loads only. On textured paint or for a full rail, use screws."},
  plate:{name:"Track Plate",img:"plate_build_guide",parts:"Plate and base bar",time:"10 seconds",steps:[
    ["Set down the base bar","Red stripe toward you, slot behind it."],
-   ["Lower the plate in","Drop the bottom edge of the plate into the slot. It leans back 12 degrees and holds itself."]]},
+   ["Lower the plate in","Drop the bottom edge of the plate into the slot. It leans back 12 degrees and holds itself. To play the song, open Spotify, tap Search, tap the camera icon and scan the code.","plate_use"]]},
  standees:{name:"Side A",img:"standee_build_guide",parts:"4 cassettes, 2 rail sections",time:"1 minute",steps:[
    ["Join the rail","Hold one section flat. Lower the dovetail on the end of the other section straight down into its socket until both sit level."],
    ["Stand the cassettes","Press the bottom edge of each cassette into a slot. Track one on the left."],
@@ -786,44 +786,53 @@ const BUILD={
    ["Lay out the braces","Place the two braces about 170 mm apart, notches facing up, red bars facing you."],
    ["Press on the first rib","Line the two notches under a rib up with the notches at one end of the braces and press down until the rib touches the table. The tall end goes at the back."],
    ["Press on the second rib","Same again at the other end. Check all four joints are fully down."],
-   ["Add the laptop","Rest the front edge of the laptop against the two lips."]],
+   ["Add the laptop","Rest the front edge of the laptop against the two lips.","fold_use"]],
    note:"To pack it, lift each rib straight up. If a joint feels tight on the first build, work it in and out a few times."},
  channel:{name:"Channel",img:"channel_build_guide",parts:"3 modules",time:"30 seconds",steps:[
    ["Pick your order","Each module has a dovetail on its right side and a socket on its left."],
    ["Lower to link","Hold one module on the desk. Lower the next one straight down beside it so its socket slides over the dovetail."],
-   ["Change it any time","Lift a module straight up to release it."]]},
+   ["Change it any time","Lift a module straight up to release it.","channel_use"]]},
  eject:{name:"Eject",img:"eject_build_guide",parts:"Tray, slider, face plate",time:"30 seconds",steps:[
    ["Drop in the slider","Lower the red slider into the tray, tab first, so the tab pokes out of the slot in the back."],
    ["Press on the face plate","Line the plate up with the tray, eject mark at the bottom right, and press round the edges until it sits flat."],
-   ["Load and eject","Slide in up to six cards. Push the red tab up with your thumb and they fan out. Tip it back and they drop home."]]},
+   ["Load and eject","Slide in up to six cards. Push the red tab up with your thumb and they fan out. Tip it back and they drop home.","eject_open_use"]]},
  standby:{name:"Standby",img:"standby_build_guide",parts:"Base and 3 fins",time:"1 minute",steps:[
    ["Slide in the fins","Feed each fin's key into the channel from either end of the base. It is a snug fit by design."],
-   ["Set the gaps","Stand your closed laptop on the base and slide the fins in until they just touch it. They stay where you leave them."],
+   ["Set the gaps","Stand your closed laptop on the base and slide the fins in until they just touch it. They stay where you leave them.","standby_use"],
    ["Route the cables","Run the charger and display cables through the notches at the back."]]},
  rotary:{name:"Rotary",img:"rotary_open",parts:"2 plates, 2 posts, loop, spacers",time:"3 minutes",steps:[
    ["Lay out your parts","Plate A is the plain one. Plate B has the red line. Short posts (1) are for 2 to 3 keys, long posts (2) for more. The loop (L) is for a car fob. Spacers (S) fill gaps between keys.","rotary_s1_guide"],
    ["Put the posts through plate A, then the keys","Push a post up from underneath through each end hole of plate A. Drop a key over a post, bow first, so its blade lies along the plate. Alternate: one key from the right post, one from the left. Slip a spacer on last if the stack feels loose.","rotary_s2_guide"],
    ["Press plate B on","Turn plate B so the red line faces up and press it down over both posts. Each post head clicks into its plate. The keys stay between the two plates.","rotary_s3_guide"],
-   ["Swing a key out, fold it back","Pinch the plates, pull a key out with your fingernail and swing it round the post. Push it back flat to close. To change keys, squeeze a split post head and push it back through the plate.","rotary_s4_guide"]]},
+   ["Swing a key out, fold it back","Pinch the plates, pull a key out with your fingernail and swing it round the post. Push it back flat to close. To change keys, squeeze a split post head and push it back through the plate.","rotary_s4_guide"],
+   ["Add the loop for a car fob","The loop takes the place of one key, so you get one fewer key. Drop it over a post like a key. Swing it out and thread your fob's split ring through the slot. Fold it back flat to close.","rotary_s5_guide"],
+   ["Swing it out when you need the fob","Pull the loop out like a key. The fob hangs from its ring. Fold it back in to carry.","rotary_s6_guide"]]},
+ horn:{name:"Horn",img:"phonestand_horn_exploded_use",parts:"Stand and plate",time:"10 seconds",steps:[
+   ["Slide the stand onto the plate","Turn the stand so its groove underneath lines up with the dovetail rail on the plate and push it along the rail until it stops. The long tail of the plate stays behind to stop it tipping back.","phonestand_horn_exploded_use"],
+   ["Set the cable","Feed the charging cable up through the cable opening and out the back before you place the phone.","phonestand_use"],
+   ["Seat the phone","Rest the bottom of the phone on the seat, upright or sideways, with its bottom speaker over the two slits.","phonestand_use"]]},
+ riser:{name:"Lift",img:"riser_use",parts:"2 wedges",time:"5 seconds",steps:[
+   ["Place the two wedges","Set them about the width of your controller apart, tall end at the back, front lip toward you."],
+   ["Rest the controller across both","It tilts 14 degrees toward you and the front lip stops it sliding.","riser_use"]]},
  knob:{name:"Gain",img:"knob_build_guide",parts:"Cap and base",time:"10 seconds",steps:[
    ["Push the cap onto the post","Hold the base flat and press the knob straight down until you feel it click past the head of the post."],
    ["Spin it","It turns freely. To take it apart, pull straight up."]]},
  box:{name:"Tape Case",img:"cassettebox_open_guide",parts:"Tray and lid",time:"10 seconds",steps:[
    ["Fill the tray","Picks and small things in the narrow side, cards or a coin in the wide side."],
-   ["Press the lid on","Line the label up with the thumb notch at the front and press until the rim seats. To open, push your thumb into the notch and lift."]]},
+   ["Press the lid on","Line the label up with the thumb notch at the front and press until the rim seats. To open, push your thumb into the notch and lift.","cassettebox_use"]]},
  vinyl:{name:"Sleeve",img:"vinylstand_build_guide",parts:"Ledge and 2 feet",time:"1 minute",steps:[
    ["Stand the feet","Place the two record feet about 110 mm apart, grooves facing out, the slotted ends at the front."],
    ["Slide in the ledge","Push the Now Spinning ledge down into the front slot of both feet until it reaches the bottom."],
-   ["Add the record","Rest the sleeve on the base behind the ledge and lean it back on the cut edge of the records."]]},
+   ["Add the record","Rest the sleeve on the base behind the ledge and lean it back on the cut edge of the records.","vinylstand_record_use"]]},
  headphones:{name:"Hold",img:"headphonestand_build_guide",parts:"Base, post, saddle",time:"1 minute",steps:[
    ["Post into the base","Push the bottom of the post into the slot in the knob, fader facing the same way as the pointer, until it reaches the floor of the slot."],
    ["Saddle onto the post","Press the saddle down onto the top of the post, red arc facing front."],
-   ["Hang your headphones","Rest the headband on the saddle. Keep it on a flat surface."]],
+   ["Hang your headphones","Rest the headband on the saddle. Keep it on a flat surface.","headphonestand_use"]],
    note:"It is a tight press fit. If a joint feels loose after a lot of use, a single layer of tape on the post end tightens it."},
  tag:{name:"Track Tag and Alias",img:"nametag_guide",parts:"Tag and loop",time:"30 seconds",steps:[
    ["Thread the loop","Push the T-shaped end of the strap through the hole in the tag."],
    ["Wrap it round a strap or zip","Take the strap around your bag strap, zip pull or key ring."],
-   ["Lock it","Turn the T-bar in line with the slot at the other end, feed it through, and let it turn back. Pull gently to check."]]}
+   ["Lock it","Turn the T-bar in line with the slot at the other end, feed it through, and let it turn back. Pull gently to check.","songtag_use"]]}
 };
 
 /* ---------------- state ---------------- */

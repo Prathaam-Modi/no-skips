@@ -309,6 +309,8 @@ def build_horn():
     p.scene("phonestand", built + [(ph, PROP)])
     p.scene("bp_D1", built); p.scene("bpo_D1", built); p.scene("phonestand_horn_seat", built)
     p.scene("phonestand_horn_exploded", [(mv(stand, 0, -60, 30), BLACK), (mv(red, 0, -60, 30), RED), (plate, BLACK), (mark, RED)])
+    # build picture: stand sits on the plate's tail, groove over the end of the rail, then slides forward onto the plate's front
+    p.scene("horn_slide", [(mv(stand, 0, 62, 4.0), BLACK), (mv(red, 0, 62, 4.0), RED), (plate, BLACK), (mark, RED)])
     p.note = "Rev C rebuilt. Stand 70 x 50 x 108 prints front face up, plate 70 x 133 x 4 flat. Dovetail rail 20/24 x 5, socket 0.25 mm a side. Seat at 29 mm, ramp 71 degrees, phones 7 to 11.5 mm. Two 5.5 x 19.5 slits feed the chamber, D29 mouth. Cable shaft 11 x 11 runs down and out the back, walled off from the chamber."
     P["D1"] = p
 

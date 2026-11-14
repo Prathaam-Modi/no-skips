@@ -177,6 +177,19 @@ def build_rotary():
                                (mv(keyblade(176, 2, NI)[0], 0, 0, 10), NI)])
     p.scene("rotary_s3", pa + folded + [(mv(m, 0, 0, 22), c) for m, c in b_w])
     p.scene("rotary_s4", built + [keyblade(58, 0, BR), keyblade(2, 1, NI, True), keyblade(92, 2, NI), keyblade(4, 3, BR, True)])
+    # the loop is a key-sized piece on a post: hole at the left end, slot for a ring at the right
+    def loopat(px, ang, z):
+        return mv(rot(mv(loop_m, 11, 0, 0), 0, 0, ang), px, 0, z)
+    LZ = T + 0.2 + 2 * 1.45
+    p.scene("rotary_s5", pa + [keyblade(178, 0, BR), keyblade(2, 1, NI, True), (loopat(-X, 0, LZ + 18), BLACK)])
+    ang = 80.0; ca, sa = math.cos(math.radians(ang)), math.sin(math.radians(ang))
+    sc_x, sc_y = -X + 16 * ca, 16 * sa                      # slot centre in the plan
+    fob_ring = rot(rot(revolve([(8.0 + 0.7 * math.cos(t), 0.7 * math.sin(t)) for t in [i * math.pi / 12 for i in range(24)]], 64), 0, 90, 0), 0, 0, ang)
+    fob_ring = mv(fob_ring, sc_x - sa * 8, sc_y + ca * 8, LZ + 1.2)  # centred one radius off the slot so one side of the ring passes through it
+    fx, fy = sc_x - sa * 16, sc_y + ca * 16                  # far side of the ring
+    fob_b = ext(rrect(40, 26, 6), 9.0) - cube(12, 3.2, 12, 0, -9.0, -1)   # hole for the ring near its end
+    fob = mv(rot(fob_b, 0, 0, ang + 90), fx - sa * 17 - 0.0, fy + ca * 17, LZ + 1.2 - 4.5)
+    p.scene("rotary_s6", built + [(loopat(-X, ang, LZ), BLACK), (fob_ring, NI), (fob, PROP)])
     p.note = ("82 x 20 mm plates, 2 mm thick. Two posts snap through: short posts for 2 to 4 keys, long posts for 4 to 7, spacers fill the gaps "
               "so the keys stay stiff when you swing them out. The loop takes a car fob. Plates print outer face down (red pointer inlay on plate B).")
     P["D12"] = p
