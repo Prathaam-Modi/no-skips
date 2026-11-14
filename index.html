@@ -710,6 +710,20 @@ const P=[
   desc:"A tray for the things you drop when you walk in: keys, rings, earbuds, a watch, loose change. It is drawn as a record, with grooves cut into the floor and a raised centre label, and a 20 mm rim so nothing rolls off. One piece, nothing to build.",
   size:"160 mm across, 20 mm tall",f:[],
   imgs:[["bside","In use"],["bside_bare","Grooves and label"]]},
+ {id:"D10",side:"D",name:"Eject",kind:"Slim card wallet",price:599,line:"Push the tab, your cards fan out",badge:"New",build:"eject",noAccent:true,
+  desc:"A card wallet 7.4 mm thin that holds up to six cards. Push the red tab on the back up and a ramp inside lifts the stack, front card highest, so the cards fan out and you pick the one you need. Let go and tip it back and they drop home. The face plate presses on, so nothing to unscrew and nothing to lose.",
+  size:"91 x 67 x 7.4 mm. Up to 6 flat cards (an embossed card takes two places)",f:[],
+  extra:"PLA softens in heat, so do not leave it on a car dashboard. ",
+  imgs:[["eject","Closed"],["eject_open","Push the tab, the cards fan out"],["eject_build","Tray, slider and face plate"]]},
+ {id:"D11",side:"D",name:"Standby",kind:"Rack for closed laptops",price:1999,line:"Your laptop, shut and parked beside the monitor",badge:"New",build:"standby",noAccent:true,
+  desc:"For when the laptop is closed and running an external monitor. Stand it on its edge in Standby and it takes a hand's width of desk instead of a whole corner. The three fins slide along a dovetail channel in the base, so you set each gap to your own laptops, from 10 to 30 mm thick, and a sprung key holds them where you leave them. Cable notches at the back keep the leads tidy.",
+  size:"Base 230 x 110 x 12 mm, fins 92 x 130 mm. Two bays, each 10 to 30 mm",f:[],
+  extra:"Made for laptops that are closed and driving a monitor. A gaming laptop running hot for hours can soften PLA, so keep those vents clear. ",
+  imgs:[["standby","Two laptops parked"],["standby_bare","Base and fins"],["standby_build","Fins slide in from either end"]]},
+ {id:"D12",side:"D",name:"Rotary",kind:"Key organiser",price:449,line:"Keys that swing out like a knife, not a jingle",badge:"New",build:"rotary",noAccent:false,
+  desc:"Two slim plates hold your keys between them, folded in like a pocket knife. Swing out the one you need, fold it back flat. Posts snap through by hand, short ones for two to four keys and long ones for up to seven, with spacers so the stack stays firm. The loop takes a car fob or a ring.",
+  size:"82 x 20 mm, 10 to 14 mm thick depending on your keys",f:[],
+  imgs:[["rotary","Keys folded in"],["rotary_open","Swing one out"],["rotary_build","Plates, posts, loop and spacers"]]},
  {id:"D2",side:"D",name:"Tape Case",kind:"Small storage box",price:849,custom:true,line:"A tape that holds your small things",build:"box",
   desc:"A box drawn from a real tape: reel hubs, a tape window, corner screws, the head slots and the seam between the two halves, with your own text on the label. Two compartments inside for picks, SD cards, earbud tips or a gig coin. The lid presses on and holds by friction, so there is no hinge to break.",
   size:"100 x 64 x 21 mm. Compartments 35 x 59 and 58 x 59 mm, 16 mm deep",f:[["Label text","Side A"]],
@@ -726,7 +740,7 @@ const P=[
   size:"Table 122 x 240 mm with a 9 mm rim. 264 mm wide laid flat",f:[],
   imgs:[["perch","On a sofa arm"],["perch_flat","Laid flat"]]}
 ];
-const SIDES={D:["Daily","Things you reach for every day. A laptop stand that packs flat, a desk set that links together, a tray for your keys, and homes for your phone, records and headphones."],
+const SIDES={D:["Daily","Things you reach for every day. A card wallet that fans your cards out, a key organiser, a laptop stand that packs flat, a rack for closed laptops, a desk set that links together, a tray for your keys, and homes for your phone, records and headphones."],
              A:["Listen","For people who live for the music. Keepsakes and gifts built around a song, a show or a night you want to keep."],
              B:["Make","For people who make the music. Small, useful things for the desk, the booth and the gig bag."],
              all:["Everything","The whole range. One design system, one material, nothing in the box but printed parts."]};
@@ -774,6 +788,18 @@ const BUILD={
    ["Pick your order","Each module has a dovetail on its right side and a socket on its left."],
    ["Lower to link","Hold one module on the desk. Lower the next one straight down beside it so its socket slides over the dovetail."],
    ["Change it any time","Lift a module straight up to release it."]]},
+ eject:{name:"Eject",img:"eject_build",parts:"Tray, slider, face plate",time:"30 seconds",steps:[
+   ["Drop in the slider","Lower the red slider into the tray, tab first, so the tab pokes out of the slot in the back."],
+   ["Press on the face plate","Line the plate up with the tray, eject mark at the bottom right, and press round the edges until it sits flat."],
+   ["Load and eject","Slide in up to six cards. Push the red tab up with your thumb and they fan out. Tip it back and they drop home."]]},
+ standby:{name:"Standby",img:"standby_build",parts:"Base and 3 fins",time:"1 minute",steps:[
+   ["Slide in the fins","Feed each fin's key into the channel from either end of the base. It is a snug fit by design."],
+   ["Set the gaps","Stand your closed laptop on the base and slide the fins in until they just touch it. They stay where you leave them."],
+   ["Route the cables","Run the charger and display cables through the notches at the back."]]},
+ rotary:{name:"Rotary",img:"rotary_build",parts:"2 plates, 2 posts, loop, spacers",time:"3 minutes",steps:[
+   ["Pick your posts","Short posts for two to four keys, long posts for four to seven."],
+   ["Stack the keys","Push a post up through plate A, then thread keys onto it, alternating ends so they fold in from both sides. Add spacers to fill any gap."],
+   ["Snap it shut","Lay plate B on top, red line out, and press over each post until the head clicks into the plate. To open, squeeze the split head and push it back through."]]},
  knob:{name:"Gain",img:"knob_build",parts:"Cap and base",time:"10 seconds",steps:[
    ["Push the cap onto the post","Hold the base flat and press the knob straight down until you feel it click past the head of the post."],
    ["Spin it","It turns freely. To take it apart, pull straight up."]]},
