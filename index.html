@@ -681,7 +681,7 @@ const P=[
   desc:"A wall rail with five short red T-head pegs for the wristbands you never throw away. Loop a few bands on one peg, the cap keeps them on. Pegs press in by hand. Wall screws or mounting tape are not included, so use what suits your wall.",
   size:"200 x 36 x 8 mm rail, pegs stand 15 mm out. Two 4 mm screw holes, 120 mm apart",f:[["Name on the rail","Front Row"]],
   imgs:[["rail","On the wall"],["rail_build","Pegs press in"]]},
- {id:"A4",side:"A",name:"45s",kind:"Record coasters, set of 4",soon:"We are moving these to a heat-safe material and testing them with hot cups before they go on sale.",price:1199,line:"Set of four, grooves included",
+ {id:"A4",side:"A",name:"45s",kind:"Record coasters, set of 4",soon:"Hot cups soften regular PLA, so these will be printed in PETG, which holds up to about 70 C, and tested with hot cups before they go on sale.",price:1199,line:"Set of four, grooves included",
   desc:"Coasters with real printed grooves, a coloured centre label and a ribbed underside. Set of four.",
   size:"90 mm across, 4.6 mm thick, set of 4",f:[],imgs:[["coasters","Stack of four"]]},
 
@@ -701,7 +701,7 @@ const P=[
  {id:"D1",side:"D",name:"Horn",kind:"Phone stand and amplifier",price:1499,line:"A studio monitor that holds and amplifies your phone",badge:"Top pick",build:"horn",
   desc:"A small studio monitor for the desk with a hollow horn behind the woofer. Your phone rests on the seat at 71 degrees, upright or sideways, with its bottom speaker over two slits that feed the horn, so the sound is guided out of the front through the woofer opening, a little louder and more directed than the phone alone. The charging cable gets its own opening and runs out the back. Fits phones in cases from 7 to 11.5 mm thick, small iPhones to tall Androids. The stand slides onto a weighted plate by a dovetail, and the long tail behind it stops the stand tipping back when you tap the screen.",
   size:"70 x 133 x 108 mm, stand and plate",f:[],imgs:[["phonestand","With a phone"],["phonestand_horn_exploded","Stand and plate"],["phonestand_horn_seat","Seat and slits"]]},
- {id:"D6",side:"D",name:"Fold",kind:"Flat-pack laptop stand",price:1699,line:"Lifts your screen, packs flat in a bag",badge:"New",build:"fold",noAccent:true,
+ {id:"D6",side:"D",name:"Fold",kind:"Flat-pack laptop stand",price:1699,line:"Lifts your screen, packs flat in a bag",badge:"New",build:"fold",noAccent:true,mat:"Printed in PLA. Fine for a light laptop on a shaded desk. For a laptop that runs hot for hours, ask us for the PETG version.",
   desc:"A laptop stand in four flat pieces. Two side ribs press down onto two cross braces and it is built, no tools and no screws. It tilts the laptop 16 degrees and lifts the back by about 80 mm, so the screen comes up and the keyboard angles toward you. The slots in each rib follow a real waveform and let air through underneath. Pull it apart and the four pieces stack 24 mm thick, flat enough for a backpack sleeve.",
   size:"240 x 236 x 83 mm built. Four parts, each 6 mm thick. For laptops from 13 to 16 inches",f:[],
   extra:"Made for everyday laptops. A gaming laptop running hot for hours can soften PLA, so this is not the stand for that. ",
@@ -719,7 +719,7 @@ const P=[
   size:"91 x 67 x 7.4 mm. Up to 6 flat cards (an embossed card takes two places)",f:[],
   extra:"PLA softens in heat, so do not leave it on a car dashboard. ",
   imgs:[["eject","Closed"],["eject_open","Push the tab, the cards fan out"],["eject_build","Tray, slider and face plate"]]},
- {id:"D11",side:"D",name:"Standby",kind:"Rack for closed laptops",price:1999,line:"Your laptop, shut and parked beside the monitor",badge:"New",build:"standby",noAccent:true,
+ {id:"D11",side:"D",name:"Standby",kind:"Rack for closed laptops",price:1999,line:"Your laptop, shut and parked beside the monitor",badge:"New",build:"standby",noAccent:true,mat:"Printed in PLA. Fine for cool-running laptops. If yours runs warm, ask us for the PETG version.",
   desc:"For when the laptop is closed and running an external monitor. Stand it on its edge in Standby and it takes a hand's width of desk instead of a whole corner. The three fins slide along a dovetail channel in the base, so you set each gap to your own laptops, from 10 to 30 mm thick, and a sprung key holds them where you leave them. Cable notches at the back keep the leads tidy.",
   size:"Base 230 x 110 x 12 mm, fins 92 x 130 mm. Two bays, each 10 to 30 mm",f:[],
   extra:"Made for laptops that are closed and driving a monitor. A gaming laptop running hot for hours can soften PLA, so keep those vents clear. ",
@@ -739,7 +739,7 @@ const P=[
   desc:"Mixer parts at full size. The base is a giant gain knob, knurled round the edge with its dial and pointer on top. The post is a channel fader, track and scale included. The headband rests on a ribbed saddle that will not crease it. Three parts press together by hand.",
   size:"116 mm base, 253 mm tall, saddle 108 mm wide",f:[],imgs:[["headphonestand_bare","Knob, fader, saddle"],["headphonestand","With headphones"],["headphonestand_build","Three parts"]]},
  {id:"D9",side:"D",name:"Perch",kind:"Sofa arm tray",price:0,line:"A steady table for the arm of your sofa",noAccent:true,
-  soon:"A cup of chai will end up on this, so it is being made in a heat-safe material and tested with hot cups before release.",
+  soon:"A cup of chai will end up on this, so it will be printed in PETG, which holds up to about 70 C, and tested with hot cups before release.",
   desc:"A tray that wraps over a sofa arm. The centre is a rigid table with a raised rim and a cup well, so a glass cannot slide off. Two hinged slats on each side fold down and grip arms of different widths. The hinge pins slide in by hand.",
   size:"Table 122 x 240 mm with a 9 mm rim. 264 mm wide laid flat",f:[],
   imgs:[["perch","On a sofa arm"],["perch_flat","Laid flat"]]}
@@ -940,7 +940,7 @@ function openProduct(id){
       <button class="btn ghost block" type="button" id="pdAdd">Add to order list</button>`})()}
       ${p.extra?`<p class="note">${esc(p.extra)}</p>`:""}`}
       ${p.build?`<button class="linkish" type="button" data-gobuild="${p.build}">See how it builds, ${esc(BUILD[p.build].time)}</button>`:""}
-      <dl class="specs"><dt>Size</dt><dd>${esc(p.size)}</dd><dt>In the box</dt><dd>Printed parts only. Matte PLA bioplastic, no magnets, glue or metal. Keep away from hot cars and direct summer sun.</dd><dt>Care</dt><dd>Not a toy. Small parts, keep away from children under 3.</dd><dt>Made</dt><dd>Printed to order in Bengaluru. No returns. Replacement if it arrives broken, faulty or not as approved, reported within 48 hours of delivery. <button class="linkish" type="button" data-terms>Terms</button></dd></dl>
+      <dl class="specs"><dt>Size</dt><dd>${esc(p.size)}</dd><dt>In the box</dt><dd>Printed parts only, no magnets, glue or metal. ${esc(p.mat||"Printed in PLA, a plant-based plastic that softens with heat. Keep away from hot cars and direct summer sun.")}</dd><dt>Care</dt><dd>Not a toy. Small parts, keep away from children under 3.</dd><dt>Made</dt><dd>Printed to order in Bengaluru. No returns. Replacement if it arrives broken, faulty or not as approved, reported within 48 hours of delivery. <button class="linkish" type="button" data-terms>Terms</button></dd></dl>
     </div></div>`;
   syncProduct();$("pd").showModal();
   const car=$("car"),dd=$("carDots");
@@ -1024,7 +1024,7 @@ const TERMS=`<h2 id="tcTitle">Terms, replacements and privacy</h2><p class="upd"
 <h3>5. Replacements within 48 hours of delivery</h3><p>We replace a piece that arrives broken, has a print fault, or is not what you approved. To claim:</p><ul><li>Message us on WhatsApp within <b>48 hours of delivery</b>, going by the delivery time on the courier tracking.</li><li>Send photos of the piece, the box and the shipping label, and an unboxing video. Without an unboxing video we may not be able to accept a claim for a broken or missing part.</li><li>Keep the piece and the packing until we reply.</li></ul><p>If the claim is accepted, we reprint the piece and ship it at our cost. If we cannot reprint it, we refund the price of that piece. Claims made after 48 hours are not accepted, except where the law requires otherwise.</p>
 <p>These are not faults: the fine layer lines, small seams and slight colour differences that come with 3D printing; damage from heat, drops, misuse or wear after delivery; and phones or cases outside the sizes listed for a product.</p>
 <h3>6. Shipping</h3><p>We share a dispatch date and a tracking link in the chat. Courier delays are outside our control. Please give a complete and correct address. If a parcel comes back because of a wrong address or a missed delivery, re-shipping is charged again.</p>
-<h3>7. Care and safety</h3><ul><li>Pieces are printed in PLA, a plant-based plastic that softens with heat. Keep them out of hot cars, direct summer sun, dishwashers and away from hot pans. Coasters are for cups and glasses, not for a pot or a mug straight off the boil.</li><li>Not a toy. Small parts, keep away from children under 3.</li><li>Not for direct contact with food.</li></ul>
+<h3>7. Care and safety</h3><ul><li>Pieces are printed in PLA, a plant-based plastic that softens with heat (about 55 to 60 C). Heat-exposed pieces, such as coasters and trays, will be printed in PETG once they are on sale. Keep PLA pieces out of hot cars, direct summer sun, dishwashers and away from hot pans. Coasters are for cups and glasses, not for a pot or a mug straight off the boil.</li><li>Not a toy. Small parts, keep away from children under 3.</li><li>Not for direct contact with food.</li></ul>
 <h3>8. Designs, names and trademarks</h3><ul><li>The No Skips designs, models and files belong to No Skips. Please do not copy or sell them.</li><li>By sending a name, logo, photo or artwork you confirm you have the right to use it.</li><li>Song titles, artist names and trademarks belong to their owners. No Skips is an independent maker and is not affiliated with or endorsed by any artist, label or Spotify. Spotify and Spotify Codes are trademarks of Spotify AB.</li></ul>
 <h3>9. Our liability</h3><p>To the extent the law allows, our total liability for an order is limited to the amount you paid for it, and we are not liable for indirect losses. This does not limit liability that cannot be limited by law.</p>
 <h3>10. Privacy</h3><p>We use your name, phone number, address and order details only to make, deliver and support your order. We share your address and phone number with the courier and with no one else, and we never sell your data. Ask us in the chat to delete your details once your order is complete.</p>
