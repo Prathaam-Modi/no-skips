@@ -153,7 +153,7 @@ def build_gain():
     a = np.linspace(0, 2 * math.pi, 24, endpoint=False)
     flutes = unary_union([circle(1.0, 13.5 * math.cos(t), 13.5 * math.sin(t), 24) for t in a])
     cap = U([ext(circle(13.5).difference(flutes), 12.0), body(circle(13.2), 4.2, 12.0, c=0.8, steps=4)])
-    cap = cap - cyl(4.3, 9.0, -0.01, seg=48) - cyl(5.2, 4.2, 9.0, seg=48) - cyl(5.2, 0.4, -0.01, r2=4.3, seg=48)
+    cap = cap - cyl(4.3, 9.03, -0.01, seg=48) - cyl(5.2, 4.2, 9.0, seg=48)   # bore runs 0.02 into the head pocket: at 9.0 a 0.01 mm skin sealed the pocket off - cyl(5.2, 0.4, -0.01, r2=4.3, seg=48)
     ptr = ext(seg(0, 4.5, 0, 10.5, 1.8), RAISE, 16.2)
     p.part("base", base, BLACK, infill=0.4); p.part("level_marks", ext(marks, RAISE, 4.0), RED, infill=1.0)
     p.part("knob", cap, BLACK, infill=0.3); p.part("pointer", ptr, RED, infill=1.0)
@@ -227,8 +227,9 @@ def build_stack():
     p.part("base", rot(base, -90, 0, 0), BLACK, infill=0.15)
     p.part("head", rot(head, 180, 0, 0), BLACK, infill=0.15)
     p.part("drawer", rot(drawer, -90, 0, 0), BLACK, infill=0.2)
-    p.part("knob", knob, IVORY, qty=3, infill=1.0)
-    p.part("handle", handle, IVORY, infill=1.0)
+    # knobs and handle print face down, pins up: stem-down left the cap and the bar hanging in the air
+    p.part("knob", rot(knob, 180, 0, 0), IVORY, qty=3, infill=1.0)
+    p.part("handle", rot(handle, 180, 0, 0), IVORY, infill=1.0)
     knobs_on = [(mv(rot(knob, 90, 0, 0), x, -17.5, 34 + 31), IVORY) for x in (-16, 0, 16)]
     handle_on = [(mv(rot(handle, 90, 0, 0), 0, -19.9, 17.0), IVORY)]
     built = [(base, BLACK), (mv(head, 0, 0, 34), BLACK), (drawer, BLACK)] + knobs_on + handle_on + picks
@@ -237,7 +238,7 @@ def build_stack():
     p.scene("bpo_B1", built[:-2])
     ex = [(base, BLACK), (mv(head, 0, 0, 34 + 30), BLACK), (mv(drawer, 0, -60, 0), BLACK)] + [(mv(m, 0, -25, 30), c) for m, c in knobs_on] + [(mv(m, 0, -82, 0), c) for m, c in handle_on]
     p.scene("amp_build", ex); p.scene("bp_B1", ex)
-    p.note = "70 x 35 x 74. Base prints on its back, head upside down, drawer on its front panel, knobs and handle as they are. Pins 3.9 mm into 4.1 mm sockets; knob stems and handle pins press into nominal holes."
+    p.note = "70 x 35 x 74. Base prints on its back, head upside down, drawer on its front panel, knobs and handle face down with their pins up. Pins 3.9 mm into 4.1 mm sockets; knob stems and handle pins press into nominal holes."
     P["B1"] = p
 
 # ================================================================== B2 Lift

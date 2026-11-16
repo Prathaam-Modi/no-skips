@@ -5,6 +5,8 @@ Nothing here has been test-printed. Weights and hours are model estimates (1.2 m
 plus 15 minutes a plate). Fit-test every joint before selling and replace the numbers with slicer figures.
 
 Folders
+  a1_ready/          Bambu Studio project files for the A1, one per plate, settings saved in the file. Start with
+                     a1_ready/PRINT_SETTINGS.md and FIRST_PRINTS.md. Times and grams there are slicer figures.
   stl/<ID>_<name>/   print parts, already in print orientation. The file name ends in the filament colour;
                      _x4 means print four. Load all parts of a folder as ONE object with parts in Bambu Studio.
   blueprints/        drawing sheets, the same ones the site shows.
@@ -239,3 +241,14 @@ D9 PERCH  about 293 g, 16.3 h  [COMING SOON (heat test)]
   - D9_3_inner_slat_BLACK_x2.stl  46.0 x 240.0 x 8.0 mm, 79.5 g
   - D9_4_outer_slat_BLACK_x2.stl  37.0 x 240.0 x 8.0 mm, 66.2 g
   - D9_5_hinge_pin_BLACK_x4.stl  6.8 x 238.0 x 6.8 mm, 8.5 g
+
+D13 DRUMROLL  about 42 g PLA plus a 7 g TPU belt, 1.9 h PLA (sliced) plus about 0.7 h a belt
+  Hand rolling machine for king size slim papers (up to 110 mm). 126 x 35.2 x 32.7 mm. cad/build5.py.
+  Belt runs round roller A (front, fixed, flanged), roller B (rear, slides 10 mm back in a J slot and drops
+  1.2 mm into a seat to lock shut) and a capstan under the pocket. Rollers 10 mm, 2 mm apart when closed.
+  Belts: 7 mm roll = 112.9 mm loop, 8 mm = 116.2, 9 mm = 119.5; 110.6 wide, 0.45 wall. Start with the 8 mm belt.
+  BELTS ARE TPU 95A: external spool (not the AMS Lite), one 0.45 mm wall, no top or bottom, about 25 mm/s.
+  The three rods print lying on their flats, 4 walls. Hubs and caps print face down, pin up. No supports.
+  Build: loop the belt round the three rods, lower them between the end plates, push a black cap into each
+  end of the capstan, a red hub into each end of roller A (round hole) and roller B (slot). Poker slides into
+  the square hole. Checked in CAD only (no clashes over the full travel). Not printed.

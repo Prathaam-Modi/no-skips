@@ -12,7 +12,9 @@ from matplotlib.font_manager import FontProperties
 import trimesh
 
 OUT = os.environ.get("NS_OUT", "/home/claude/out")
-FONT = "/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf"
+FONT = os.environ.get("NS_FONT", "/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf")
+if not os.path.exists(FONT):     # fall back to the copy that ships with the order kit
+    FONT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "order_kit", "Poppins-Bold.ttf")
 BLACK, IVORY, RED, PROP, PROP2 = "black", "ivory", "red", "prop", "prop2"
 SEG = 96
 # waveform from "Knowing", the same data the site draws
@@ -116,6 +118,29 @@ def grams(m, infill=0.15, shell=1.2):
 def hours(g, plates=1, colours=1):
     return 0.25 * plates + g / 19.0 + 0.15 * (colours - 1)
 
+# ---------- print groups ----------
+# An accent part (inlay, raised art, rim band) is exported in the coordinate system of the body it rides on,
+# so body + accents load in Bambu Studio as ONE object with parts and land in the right place.
+# Product id -> {accent label: body label}. Parts not listed here are bodies: centred on the origin, sitting on z = 0.
+_TAG = {"front_code": "tag_body", "front_name": "tag_body", "back_text_inlay": "tag_body"}
+_MINI = {"accents": "body"}
+GROUPS = {
+    "A1": {"code_and_title": "plate", "base_stripe": "base_bar"}, "A3": {"name_and_wave": "rail"}, "A4": {"label": "coaster"},
+    "A5": _TAG, "B3": _TAG, "B5": _TAG, "B2": {"wave_inlay": "wedge"},
+    "B6": {"hood_mark": "hood", "hood_bar": "hood", "tag_main_word": "tag_main", "tag_backup_word": "tag_backup",
+           "tag_rec_word": "tag_rec", "tag_spare_word": "tag_spare"},
+    "C1": {"tray_lettering": "tray"}, "C2_01": _MINI, "C2_02": _MINI, "C2_03": _MINI, "C2_04": _MINI, "C2_05": _MINI,
+    "C2_06": {"ear_pads": "band"}, "C3": {"silhouette": "coin", "back_text_inlay": "coin", "foot_mark": "foot"},
+    "C4": {"cassette_face_example": "cassette_body", "rail_bar": "rail_section"}, "C5": {"level_marks": "base", "pointer": "knob"},
+    "D1": {"speaker_rings": "stand", "plate_mark": "plate"}, "D2": {"label_inlay": "lid"},
+    "D4": {"foot_left_inlay": "foot_left", "foot_right_inlay": "foot_right", "ledge_art": "ledge"},
+    "D5": {"dial": "base", "fader_and_scale": "post", "saddle_stripe": "saddle"}, "D6": {"brace_bar": "cross_brace"},
+    "D7": {"tall_cup_rim": "tall_cup", "mid_cup_rim": "mid_cup", "tray_rim": "tray"}, "D8": {"label": "tray"},
+    "D9": {"table_mark": "table"}, "D10": {"eject_inlay": "face_plate"}, "D11": {"standby_dot": "base"},
+    "D12": {"pointer_inlay": "plate_b"},
+    "D13": {"base_mark": "base", "base_bar": "base"},
+}
+
 # ---------- product container ----------
 class Product:
     def __init__(self, pid, key, name):
@@ -123,7 +148,10 @@ class Product:
         self.parts = []      # print parts: (file label, manifold in print orientation, colour, qty, infill)
         self.scenes = {}     # scene name -> list of (manifold, colour)
         self.note = ""
-    def part(self, label, m, colour, qty=1, infill=0.15):
+        self.on = dict(GROUPS.get(pid, {}))   # accent label -> body label
+    def part(self, label, m, colour, qty=1, infill=0.15, on=None):
+        """on = label of the body this part rides on (overrides the GROUPS table)."""
+        if on: self.on[label] = on
         self.parts.append((label, m, colour, qty, infill)); return m
     def scene(self, name, items):
         self.scenes[name] = [(m, c) for m, c in items if not m.is_empty()]
@@ -131,16 +159,23 @@ class Product:
         d = f"{OUT}/stl/{self.id}_{self.key}"; os.makedirs(d, exist_ok=True)
         rep = {"id": self.id, "name": self.name, "parts": [], "note": self.note}
         tot = 0.0; plates = set()
+        shift = {}
+        for label, m, colour, qty, infill in self.parts:          # bodies first: each is centred and dropped onto z = 0
+            if label in self.on: continue
+            b = tm(m).bounds; shift[label] = (-(b[0][0] + b[1][0]) / 2, -(b[0][1] + b[1][1]) / 2, -b[0][2])
         for i, (label, m, colour, qty, infill) in enumerate(self.parts, 1):
             mesh = tm(m)
             assert mesh.is_watertight, (self.id, label)
-            b = mesh.bounds; mesh.apply_translation((-(b[0][0] + b[1][0]) / 2, -(b[0][1] + b[1][1]) / 2, -b[0][2]))
+            host = self.on.get(label)
+            assert host is None or host in shift, (self.id, label, host)
+            mesh.apply_translation(shift[host or label])           # accents keep their place on the body
+            assert mesh.bounds[0][2] > -1e-6, (self.id, label, "below the bed")
             fn = f"{self.id}_{i}_{label}_{colour.upper()}" + (f"_x{qty}" if qty > 1 else "") + ".stl"
             mesh.export(f"{d}/{fn}")
             g = grams(m, infill) * qty; tot += g
             ex = mesh.extents
             assert max(ex[0], ex[1]) <= 256 and min(ex[0], ex[1]) <= 256 and ex[2] <= 256, (fn, ex)
-            rep["parts"].append({"file": fn, "colour": colour, "qty": qty, "size": [round(float(x), 1) for x in ex], "grams": round(g, 1), "watertight": True})
+            rep["parts"].append({"file": fn, "colour": colour, "qty": qty, "size": [round(float(x), 1) for x in ex], "grams": round(g, 1), "watertight": True, "on": host})
         rep["grams"] = round(tot, 1)
         os.makedirs(f"{OUT}/scenes", exist_ok=True)
         for sn, items in self.scenes.items():
