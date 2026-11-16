@@ -376,6 +376,47 @@ U["riser"] = dict(banner="Lift: how it sits", labels=[
     dict(text="Controller", sub="rests across both wedges", tag="C", at=(0, 0, 70), to=(0, -150)),
 ])
 
+
+# ---------------------------------------------------------------- Crate (B6)
+G["crate_build"] = dict(banner="Crate: how it goes together", labels=[
+    dict(text="Hood", sub="lockup on the front", tag="A", at=(40, -11, 128), to=(150, -40)),
+    dict(text="Spine", sub="red, with 4 feet", tag="B", at=(-30, 8, 85), to=(-190, -40)),
+    dict(text="Shell", sub="4 slots, numbered", tag="C", at=(-45, -9, 25), to=(-190, 60)),
+    dict(text="Fit shims x4", sub="thin sticks only", tag="D", at=(20, -55, 18), to=(170, 150)),
+    dict(text="Role tags x4", sub="flip for the other side", tag="E", at=(-20, -85, 10), to=(-170, 150)),
+], arrows=[
+    dict(pts=[(0, 8, 105), (0, 8, 52)], step=1),
+    dict(pts=[(0, -80, 6), (0, -30, 22)], step=2),
+    dict(pts=[(-60, -11, 160), (-60, -11, 138)], step=4),
+])
+G["crate_s1"] = dict(banner="1  Pick your parts", labels=[
+    dict(text="Shell", tag="C", at=(0, 0, 25), to=(-60, -140)),
+    dict(text="Spine", tag="B", at=(-128, 8, 25), to=(-120, 150)),
+    dict(text="Hood", tag="A", at=(128, -9, 55), to=(100, -130)),
+    dict(text="Shims", tag="D", at=(-55, -52, 18), to=(-80, 150)),
+    dict(text="Tags", tag="E", at=(52, -52, 10), to=(110, 150)),
+])
+G["crate_s2"] = dict(banner="2  Drop the red spine in from the top", labels=[
+    dict(text="Spine", sub="feet point down, into the pockets", tag="B", at=(0, 8, 70), to=(-190, -80)),
+    dict(text="Shell", tag="C", at=(-45, -9, 20), to=(-190, 120)),
+], arrows=[dict(pts=[(0, 8, 105), (0, 8, 52)], step=1)])
+G["crate_s3"] = dict(banner="3  Press a tag into each recess", labels=[
+    dict(text="Role tag", sub="Main, Backup, Rec, Spare", tag="E", at=(36, -9, 19), to=(150, -110)),
+    dict(text="Red window", sub="red means the stick is missing", tag="", at=(-36, -9, 6), to=(-190, 130)),
+], arrows=[dict(pts=[(36, -40, 19), (36, -12, 19)], step=2)])
+G["crate_s4"] = dict(banner="4  Drop the sticks in, connector down", labels=[
+    dict(text="Stick", sub="connector goes down first", tag="F", at=(-12, -1, 70), to=(-170, -80)),
+    dict(text="Silver in the window", sub="means it is home", tag="", at=(-12, -9, 6), to=(-190, 130)),
+], arrows=[dict(pts=[(-12, -1, 100), (-12, -1, 62)], step=3)])
+G["crate_s5"] = dict(banner="5  Press the hood on until it clicks", labels=[
+    dict(text="Hood", sub="detent bumps click it shut", tag="A", at=(0, -10, 85), to=(150, 170)),
+], arrows=[dict(pts=[(-40, 0, 115), (-40, 0, 76)], step=4)])
+U["crate_open"] = dict(banner="Crate: what is home", labels=[
+    dict(text="Silver", sub="connector home, stick is in", tag="A", at=(-36, -9, 6), to=(-190, 120)),
+    dict(text="Red", sub="foot shows, stick is missing", tag="B", at=(36, -9, 6), to=(150, 140)),
+    dict(text="Role tag", sub="flip it, relabel it", tag="C", at=(0, -9, 19), to=(140, -120)),
+])
+
 import os
 from annotate import OUT
 OUT_DIR = OUT + "/r"

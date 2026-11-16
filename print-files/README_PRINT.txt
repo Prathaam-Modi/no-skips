@@ -1,6 +1,6 @@
 NO SKIPS - PRINT FILES, FULL RANGE
 
-Every product in one place: V2 pieces from cad/build.py, the classic range in cad/build2.py, Eject, Standby and Rotary in cad/build3.py.
+Every product in one place: V2 pieces from cad/build.py, the classic range in cad/build2.py, Eject, Standby and Rotary in cad/build3.py, Crate in cad/build4.py.
 Nothing here has been test-printed. Weights and hours are model estimates (1.2 mm shell, sparse infill, 19 g an hour
 plus 15 minutes a plate). Fit-test every joint before selling and replace the numbers with slicer figures.
 
@@ -11,7 +11,7 @@ Folders
   order_kit/         per-order files for Track Plate, Track Tag, Alias and Run 50 (real Spotify Codes, names).
   cad/               the scripts that make all of it. pip install manifold3d trimesh shapely matplotlib numpy;
                      renders and blueprints also need Blender's bpy and pillow.
-                     python3 build.py && python3 build2.py && python3 build3.py, then python3 package.py.
+                     python3 build.py && python3 build2.py && python3 build3.py && python3 build4.py, then python3 package.py.
                      Options: NS_SET=07 (Vol. 01 tray number), NS_RAIL='Front Row', NS_TAPE='Side A', NS_ACT='Your Act'.
 
 Colours: BLACK body, IVORY and RED accents. ACCENT means the customer's chosen colour.
@@ -136,6 +136,23 @@ B5 RUN 50  about 441 g, 24.8 h
   - B5_1_tag_body_BLACK_x50.stl  70.0 x 30.0 x 4.0 mm, 391.9 g
   - B5_2_front_name_RED_x50.stl  43.7 x 18.5 x 0.6 mm, 8.5 g
   - B5_3_loop_strap_BLACK_x50.stl  118.8 x 12.2 x 1.2 mm, 40.1 g
+
+B6 CRATE  about 78 g, 5.2 h  [COMING SOON]
+  102 x 18 x 49 mm shell, 71 mm with the hood on. Four slots, 24.2 mm pitch. Sticks stand connector down in a sealed pocket on a shoulder; a window in front of each pocket shows the silver connector when the stick is home and the red spine foot when the slot is empty. Takes sticks 52 to 66 mm long, 12 to 22 wide, 6 to 13 thick, USB A or C. Shell prints upright, spine back face down, hood front face down with the lockup inlaid flush, tags front face down with the word inlaid. Slide the spine in from the top, press the tags in, drop the sticks in, press the hood on.
+  - B6_1_shell_BLACK.stl  103.4 x 18.5 x 49.0 mm, 27.3 g
+  - B6_2_spine_RED.stl  98.5 x 47.8 x 6.8 mm, 22.1 g
+  - B6_3_hood_BLACK.stl  105.7 x 27.6 x 21.7 mm, 17.2 g
+  - B6_4_hood_mark_IVORY.stl  66.8 x 7.6 x 0.6 mm, 0.1 g
+  - B6_5_hood_bar_RED.stl  1.9 x 7.6 x 0.6 mm, 0.0 g
+  - B6_6_tag_main_IVORY.stl  17.0 x 10.0 x 0.9 mm, 0.2 g
+  - B6_7_tag_main_word_BLACK.stl  9.6 x 2.6 x 0.4 mm, 0.0 g
+  - B6_8_tag_backup_IVORY.stl  17.0 x 10.0 x 0.9 mm, 0.2 g
+  - B6_9_tag_backup_word_BLACK.stl  14.0 x 2.5 x 0.4 mm, 0.0 g
+  - B6_10_tag_rec_IVORY.stl  17.0 x 10.0 x 0.9 mm, 0.2 g
+  - B6_11_tag_rec_word_BLACK.stl  6.9 x 2.7 x 0.4 mm, 0.0 g
+  - B6_12_tag_spare_IVORY.stl  17.0 x 10.0 x 0.9 mm, 0.2 g
+  - B6_13_tag_spare_word_BLACK.stl  11.5 x 2.7 x 0.4 mm, 0.0 g
+  - B6_14_fit_shim_RED_x4.stl  19.5 x 36.0 x 3.0 mm, 10.4 g
 
 ====================================================================================================
 DAILY

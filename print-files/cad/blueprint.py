@@ -35,6 +35,7 @@ SHEETS = {
  "D11": dict(piece="STANDBY LAPTOP RACK", parts="BASE + 3 FINS", cap="ISOMETRIC  FINS SLIDE IN THE DOVETAIL CHANNEL.  VIEWS: BUILT", iso=dict(az=-34, el=22)),
  "D12": dict(piece="ROTARY KEY ORGANISER", parts="2 PLATES, 2 POSTS", cap="EXPLODED  PLATES + SNAP POSTS + LOOP + SPACERS.  VIEWS: BUILT", iso=dict(az=-24, el=30)),
  "X1": dict(piece="CUE COVER  XDJ-RX3", parts="6 TILES, 2 HOODS", cap="EXPLODED  SIX TILES + SCREEN HOOD.  BOW-TIE KEYS UNDERNEATH.  VIEWS: COVER", iso=dict(az=-24, el=40)),
+ "B6": dict(piece="CRATE USB KEEPER", parts="SHELL, SPINE, HOOD + 8", cap="ISOMETRIC  HOOD ON.  4 SLOTS AT 24.2 PITCH.  VIEWS: CLOSED", iso=dict(az=-26, el=18)),
  "D9": dict(piece="PERCH SOFA ARM TRAY", parts="TABLE, 4 SLATS, 4 PINS", cap="ISOMETRIC  LAID FLAT.  CONCEPT, NOT RELEASED", iso=dict(az=-32, el=40)),
 }
 

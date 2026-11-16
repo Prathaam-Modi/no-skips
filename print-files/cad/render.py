@@ -5,7 +5,7 @@ from mathutils import Vector
 
 OUT = os.environ.get("NS_OUT", "/home/claude/out")
 COL = {"black": (0.016, 0.015, 0.014, 0.52), "ivory": (0.86, 0.80, 0.68, 0.55), "red": (0.56, 0.022, 0.03, 0.5),
-       "prop": (0.085, 0.085, 0.085, 0.35), "prop2": (0.50, 0.48, 0.44, 0.5), "brass": (0.70, 0.50, 0.17, 0.30), "steel": (0.62, 0.63, 0.66, 0.28), "sofa": (0.30, 0.27, 0.235, 1.0), "glass": (0.9, 0.93, 0.95, 0.05)}
+       "prop": (0.085, 0.085, 0.085, 0.35), "prop2": (0.50, 0.48, 0.44, 0.5), "brass": (0.70, 0.50, 0.17, 0.30), "steel": (0.62, 0.63, 0.66, 0.28), "sofa": (0.30, 0.27, 0.235, 1.0), "glass": (0.9, 0.93, 0.95, 0.05), "blue": (0.03, 0.17, 0.55, 0.32)}
 # scene: az (deg, 0 = straight on from the front, + = camera to the right), el, zoom (1 = fit), optional look-at shift
 SHOTS = {
  "songtag": dict(az=-22, el=52, zoom=1.02), "songtag_sides": dict(az=0, el=62, zoom=1.0), "nametag": dict(az=-22, el=52, zoom=1.02),
@@ -26,6 +26,9 @@ SHOTS = {
  "standby_bare": dict(az=-34, el=20, zoom=1.0), "standby": dict(az=-40, el=16, zoom=1.0), "standby_build": dict(az=-30, el=22, zoom=1.0),
  "rotary": dict(az=-18, el=48, zoom=1.0), "rotary_open": dict(az=-18, el=50, zoom=1.0),
  "rotary_s1": dict(az=-24, el=30, zoom=0.78), "rotary_s2": dict(az=-30, el=36, zoom=0.7), "rotary_s3": dict(az=-30, el=32, zoom=0.72), "rotary_s4": dict(az=-18, el=52, zoom=0.72), "rotary_s5": dict(az=-30, el=34, zoom=0.74), "rotary_s6": dict(az=-24, el=40, zoom=0.8), "rotary_build": dict(az=-24, el=30, zoom=1.0),
+ "crate": dict(az=-26, el=16, zoom=1.0), "crate_open": dict(az=-26, el=18, zoom=1.0), "crate_full": dict(az=-26, el=18, zoom=1.0), "crate_bare": dict(az=-24, el=14, zoom=1.0),
+ "crate_section": dict(az=90, el=6, zoom=1.0), "crate_build": dict(az=-30, el=30, zoom=0.9),
+ "crate_s1": dict(az=-14, el=40, zoom=1.12), "crate_back": dict(az=152, el=18, zoom=1.0), "crate_s2": dict(az=-30, el=26, zoom=1.0), "crate_s3": dict(az=-32, el=22, zoom=1.0), "crate_s4": dict(az=-28, el=22, zoom=1.0), "crate_s5": dict(az=-28, el=20, zoom=1.0),
  "cover": dict(az=-26, el=24, zoom=1.0), "cover_lifted": dict(az=-30, el=20, zoom=1.0), "cover_top": dict(az=0, el=89, zoom=1.0), "cover_tiles": dict(az=-24, el=40, zoom=1.0),
  "perch": dict(az=-36, el=30, zoom=1.0, focus=("black", "red", "glass", "prop")), "perch_flat": dict(az=-26, el=44, zoom=1.0),
 }
