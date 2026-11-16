@@ -374,13 +374,13 @@ def guides():
     tr = info["trough"]; L = 46.0
     G = {}
     G["drumroll_build"] = dict(banner="Drumroll: how it goes together", labels=[
-        dict(text="Belt", sub="loop it round all three rods first", tag="A", at=(10, (A[0] + Bo[0]) / 2, L + 6), to=(120, -150)),
+        dict(text="Belt", sub="loop it round all three rods first", tag="A", at=(10, (A[0] + Bo[0]) / 2, L + 6), to=(150, -200)),
         dict(text="Roller A", sub="flanged, front hole", tag="B", at=(-30, A[0], L + 5), to=(-250, -60)),
-        dict(text="Roller B", sub="plain, goes in the slot", tag="C", at=(30, Bo[0], L + 5), to=(170, -85)),
+        dict(text="Roller B", sub="plain, goes in the slot", tag="C", at=(30, Bo[0], L + 5), to=(200, -40)),
         dict(text="Capstan", sub="thin rod, bottom hole", tag="D", at=(52, 0, L + info["ZI"] - 4), to=(200, 30)),
-        dict(text="Base", sub="slot = back", tag="E", at=(-20, info["Y0"], info["Z0"] + 5), to=(-220, 110)),
-        dict(text="Red hubs x4", sub="rollers A and B", tag="F", at=(xl - 22, A[0], 0), to=(-150, -170)),
-        dict(text="Black caps x2", sub="capstan", tag="G", at=(xl - 22, 0, info["ZI"]), to=(-170, 60)),
+        dict(text="Base", sub="slot = back", tag="E", at=(-20, info["Y0"], info["Z0"] + 5), to=(40, 190)),
+        dict(text="Red hubs x4", sub="rollers A and B", tag="F", at=(xl - 22, A[0], 0), to=(-60, -190)),
+        dict(text="Black caps x2", sub="capstan", tag="G", at=(xl - 22, 0, info["ZI"]), to=(-60, 110)),
         dict(text="Poker", sub="slides into the square hole", tag="H", at=(60, info["Y0"] - 16, info["ZF"] + 2), to=(60, 150)),
     ], arrows=[
         dict(pts=[(-44, 3, L - 26), (-44, 3, L - 46)], step=1),
@@ -402,14 +402,14 @@ def guides():
     G["drumroll_s3"] = dict(banner="3  Roll both toward you to tamp", labels=[
         dict(text="Thumbs on both rollers", sub="one full turn toward you", tag="", at=(0, Bc[0], 5.4), to=(60, -190)),
         dict(text="Hubs turn with the rollers", tag="F", at=(xl, A[0], 0), to=(-150, 150)),
-    ], arrows=rot2(((A[0] + Bc[0]) / 2, 0), 13.0) + [dict(pts=turn(xl - 0.5, A, 8.5, 20, 200), kind="turn", text="toward you", text_off=(-150, -40))])
+    ], arrows=rot2(((A[0] + Bc[0]) / 2, 0), 13.0) + [dict(pts=turn(xl - 0.5, A, 8.5, 20, 200), kind="turn", text="toward you", text_off=(-60, -115))])
     G["drumroll_s4"] = dict(banner="4  Feed the paper, gum strip last and facing you", labels=[
         dict(text="Paper", sub="drops into the gap between the rollers", tag="P", at=(20, 8, 24), to=(150, -60)),
         dict(text="Gum strip", sub="top edge, on the side facing you", tag="G", at=(-20, 10.4, 38), to=(-210, -30)),
     ], arrows=[dict(pts=[(-40, 9, 30), (-40, 4, 12)], step=4)] + [dict(pts=turn(40.0, ((A[0] + Bc[0]) / 2, 0), 13.0), kind="turn", text="toward you", text_off=(20, 10))])
     G["drumroll_s5"] = dict(banner="5  Roll until only the gum shows, wet it, roll through", labels=[
         dict(text="Gum strip", sub="wet it, then keep rolling", tag="G", at=(0, 1.5, 5.5), to=(40, -180)),
-    ], arrows=rot2(((A[0] + Bc[0]) / 2, 0), 13.0) + [dict(pts=turn(xl - 0.5, A, 8.5, 20, 200), kind="turn", text="toward you", text_off=(-150, -40))])
+    ], arrows=rot2(((A[0] + Bc[0]) / 2, 0), 13.0) + [dict(pts=turn(xl - 0.5, A, 8.5, 20, 200), kind="turn", text="toward you", text_off=(-60, -115))])
     G["drumroll_s6"] = dict(banner="6  Open and lift it out", labels=[
         dict(text="Done", sub="tip at one end", tag="", at=(0, tr[0], tr[1] + 22), to=(150, -80)),
         dict(text="Roller B", sub="lift and slide back", tag="C", at=(40, Bo[0], Bo[1] + 5.4), to=(170, 60)),
@@ -423,7 +423,7 @@ def guides():
         dict(text="Roller A", sub="fixed", tag="B", at=(0, A[0], 5.4), to=(-60, 190)),
         dict(text="Reel hubs", sub="turn as you roll", tag="F", at=(xl, Bc[0], 0), to=(-160, -150)),
         dict(text="Poker", sub="pull it out by the red head", tag="H", at=(xo + 2, info["YP"], info["ZP"]), to=(100, 150)),
-    ], arrows=rot2(((A[0] + Bc[0]) / 2, 0), 13.0) + [dict(pts=turn(xl - 0.5, A, 8.5, 20, 200), kind="turn", text="roll toward you", text_off=(-190, -40))],
+    ], arrows=rot2(((A[0] + Bc[0]) / 2, 0), 13.0) + [dict(pts=turn(xl - 0.5, A, 8.5, 20, 200), kind="turn", text="roll toward you", text_off=(-70, -115))],
         banner="Drumroll: both rollers turn toward you", out=f"{OUT}/r/drumroll_use")
     for k, v in out.items(): print(k, v)
 

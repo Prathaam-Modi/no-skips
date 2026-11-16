@@ -889,6 +889,12 @@ const P=[
   desc:"Two slim plates hold your keys between them, folded in like a pocket knife. Swing out the one you need, fold it back flat. Posts snap through by hand, short ones for two to four keys and long ones for up to seven, with spacers so the stack stays firm. The loop takes a car fob or a ring.",
   size:"82 x 20 mm, 10 to 14 mm thick depending on your keys",f:[],
   imgs:[["rotary","Two keys swung out"],["rotary_open","Four keys on the organiser"],["rotary_s1_guide","Every part, labelled"]]},
+ /* unlisted: not shown in any grid or in the build chips; opens only from its direct link #p-D13 (and #build-drumroll). Delete unlisted:true to list it. */
+ {id:"D13",unlisted:true,soon:"Coming after launch. For adults, 18 and over. Tap to be told when it lands.",side:"D",name:"Drumroll",kind:"Rolling machine, king size slim",price:799,line:"Two reels and a belt, like a tape deck",badge:"18+",build:"drumroll",noAccent:true,
+  mat:"PLA body and rollers, flexible TPU belt. Keep away from heat and flame.",
+  desc:"A pocket rolling machine built like a tape transport: two rollers, one belt, and red reel hubs that turn as you roll. Lay in a filter tip and your blend, close it, give it a turn, feed the paper and roll it through. Comes with three belts for a slimmer or fuller roll, and a red poker that stows in the base. Sold empty: no papers, tips or contents. For adults only.",
+  size:"126 x 35 x 33 mm, about 50 g. Takes king size slim papers up to 110 mm. Belts for 7, 8 and 9 mm rolls",f:[],
+  imgs:[["drumroll","Closed, ready to roll"],["drumroll_open","Open, with a tip and paper"],["drumroll_build_guide","Every part, labelled"]]},
  {id:"D2",side:"D",name:"Tape Case",kind:"Small storage box",price:849,custom:true,line:"A tape that holds your small things",build:"box",
   desc:"A box drawn from a real tape: reel hubs, a tape window, corner screws, the head slots and the seam between the two halves, with your own text on the label. Two compartments inside for picks, SD cards, earbud tips or a gig coin. The lid presses on and holds by friction, so there is no hinge to break.",
   size:"100 x 64 x 21 mm. Compartments 35 x 59 and 58 x 59 mm, 16 mm deep",f:[["Label text","Side A"]],
@@ -910,7 +916,7 @@ const SIDES={D:["Daily","Things you reach for every day. A card wallet that fans
              B:["Make","For people who make the music. Small, useful things for the desk, the booth and the gig bag."],
              all:["Everything","The whole range. One design system, one material, nothing in the box but printed parts."]};
 const SIDE_NAME={A:"Listen",B:"Make",C:"Collectibles",D:"Daily"};
-const live=p=>!p.soon&&!p.hide;
+const live=p=>!p.soon&&!p.hide&&!p.unlisted;
 const FILTERS=[["all","All"],["new","New"],["u999","Under ₹999"],["custom","Made for you"],["build","Build it yourself"]];
 const passes=(p,f)=>f==="all"||(f==="new"&&p.badge==="New")||(f==="u999"&&p.price<1000)||(f==="custom"&&!!p.custom)||(f==="build"&&!!p.build);
 const img=k=>"img/"+k+".webp";
@@ -968,6 +974,15 @@ const BUILD={
    ["Slide in the fins","Feed each fin's key into the channel from either end of the base. It is a snug fit by design.","","side"],
    ["Set the gaps","Stand your closed laptop on the base and slide the fins in until they just touch it. They stay where you leave them.","standby_use"],
    ["Route the cables","Run the charger and display cables through the notches at the back."]]},
+ drumroll:{name:"Drumroll",img:"drumroll_build_guide",parts:"Base, 2 rollers, capstan, belt, 4 red hubs, 2 black caps, poker",time:"2 minutes to build, 20 seconds a roll",steps:[
+   ["Build it once","Loop the belt (A) round roller A, roller B and the thin capstan (D). Lower all three between the end plates of the base (E): roller A at the round hole, roller B at the slot, capstan at the bottom. Push a black cap (G) into each end of the capstan, then a red hub (F) into each end of both rollers. Slide the poker (H) into the square hole.","","down"],
+   ["Open it and load","Lift roller B and slide it back. The belt sags into a trough. Lay the filter tip at one end and spread your blend evenly along the rest.","drumroll_s1_guide","side"],
+   ["Close it","Slide roller B forward until it drops into its seat. It stays shut by itself.","drumroll_s2_guide","down"],
+   ["Tamp","Thumbs on both rollers. Roll them toward you one full turn to shape the fill. The red hubs turn with them.","drumroll_s3_guide","turn"],
+   ["Feed the paper","Drop the paper into the gap between the rollers, gum strip at the top and facing you. Roll toward you so the belt pulls it in.","drumroll_s4_guide","turn"],
+   ["Seal and roll through","Stop when only the gum strip shows. Wet it, then keep rolling toward you until it disappears.","drumroll_s5_guide","turn"],
+   ["Open and lift out","Lift roller B, slide it back, and take it out. Use the poker to pack the open end.","drumroll_s6_guide","up"]],
+   note:"Too loose or too tight? Swap the belt: 7 mm for a slimmer roll, 9 mm for a fuller one. For adults only. Sold without papers, tips or contents."},
  rotary:{name:"Rotary",img:"rotary_open",parts:"2 plates, 2 posts, loop, spacers",time:"3 minutes",steps:[
    ["Lay out your parts","Plate A is the plain one. Plate B has the red line. Short posts (1) are for 2 to 3 keys, long posts (2) for more. The loop (L) is for a car fob. Spacers (S) fill gaps between keys.","rotary_s1_guide"],
    ["Put the posts through plate A, then the keys","Push a post up from underneath through each end hole of plate A. Drop a key over a post, bow first, so its blade lies along the plate. Alternate: one key from the right post, one from the left. Slip a spacer on last if the stack feels loose.","rotary_s2_guide"],
@@ -1055,7 +1070,7 @@ function renderGrid(){
   const [t,c]=SIDES[side];$("sideTitle").textContent=t;$("sideCopy").textContent=c;
   ["A","B","D","all"].forEach(s=>{const b=$("tab"+(s==="all"?"All":s));b.setAttribute("aria-selected",String(s===side));b.tabIndex=s===side?0:-1});
   const inSide=P.filter(p=>live(p)&&(side==="all"||p.side===side));
-  const soon=P.filter(p=>p.soon&&!p.hide&&(side==="all"||p.side===side)).sort((a,b)=>isSecond(b)-isSecond(a));
+  const soon=P.filter(p=>p.soon&&!p.hide&&!p.unlisted&&(side==="all"||p.side===side)).sort((a,b)=>isSecond(b)-isSecond(a));
   const few=inSide.length<=2;
   if(inSide.length<4||!inSide.some(p=>passes(p,filt)))filt="all";
   $("filters").hidden=inSide.length<4;
@@ -1122,7 +1137,7 @@ const dirSvg=(c,label,d)=>`<svg class="dir ${c}" viewBox="0 0 18 18" role="img" 
 const DIRS={down:dirSvg("d","Moves straight down","M9 3v12M4 10l5 5 5-5"),up:dirSvg("u","Moves straight up","M9 15V3M4 8l5-5 5 5"),
   side:dirSvg("s","Slides sideways","M3 9h12M10 4l5 5-5 5"),turn:dirSvg("t","Turns","M14.5 9a5.5 5.5 0 1 1-1.8-4.1M13 1.8v3.4H9.6")};
 function renderBuild(){
-  $("buildChips").innerHTML=Object.entries(BUILD).map(([k,b])=>`<button type="button" role="tab" data-build="${k}" aria-selected="${k===buildKey}" tabindex="${k===buildKey?0:-1}">${esc(b.name)}</button>`).join("");
+  $("buildChips").innerHTML=Object.entries(BUILD).filter(([k])=>k===buildKey||!P.some(p=>p.build===k&&p.unlisted)).map(([k,b])=>`<button type="button" role="tab" data-build="${k}" aria-selected="${k===buildKey}" tabindex="${k===buildKey?0:-1}">${esc(b.name)}</button>`).join("");
   const b=BUILD[buildKey];
   $("buildPanel").innerHTML=`<div class="shot"><img src="${img(b.img)}" alt="${esc(b.name)}, parts laid out" loading="lazy" width="880" height="880"></div>
     <div><h3>${esc(b.name)}</h3><div class="bmeta"><span>${esc(b.parts)}</span><span>About ${esc(b.time)}</span><span>No glue, no tools</span></div>
