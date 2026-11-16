@@ -1,15 +1,18 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow"><title>No Skips admin</title>
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><title>No Skips admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#F3EEE2;--ink:#171615;--mut:#6b655b;--line:#d9d2c2;--red:#C8202B;--card:#fbf8f0}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Instrument Sans",sans-serif}
+h1,.nm{font-family:"Archivo",sans-serif;letter-spacing:-.02em;line-height:1.1}
 main{max-width:760px;margin:0 auto;padding:20px 16px 120px}
-h1{font-size:22px;margin:0 0 2px;display:flex;align-items:center;gap:10px}h1 i{display:inline-block;width:8px;height:22px;background:var(--red);border-radius:4px}
+h1{font-size:22px;margin:0 0 2px;display:flex;align-items:center;gap:10px}h1 i{display:inline-block;width:8px;height:22px;background:var(--red);border-radius:2px}
 .sub{color:var(--mut);margin:0 0 18px}
-.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:14px}
 label{display:block;font-weight:600;margin-bottom:6px}
-input[type=password],input[type=text],input[type=number],input[type=search]{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;background:#fff;color:var(--ink)}
+input[type=password],input[type=text],input[type=number],input[type=search]{width:100%;height:44px;border:1px solid var(--line);border-radius:6px;padding:0 12px;font:inherit;background:#fff;color:var(--ink)}
 button{font:inherit;cursor:pointer}
 .btn{height:46px;padding:0 20px;border-radius:6px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);font-weight:600}
 .btn.red{background:var(--red);border-color:var(--red);color:#fff}.btn.ghost{background:transparent;color:var(--ink)}
@@ -19,7 +22,7 @@ button{font:inherit;cursor:pointer}
 .bar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap}
 .row{display:grid;grid-template-columns:1fr;gap:10px;padding:14px 0;border-top:1px solid var(--line)}
 .row:first-child{border-top:0}
-.nm{font-weight:600}.nm small{color:var(--mut);font-weight:400;font-family:ui-monospace,Menlo,monospace;margin-left:6px}
+.nm{font-weight:600}.nm small{color:var(--mut);font-weight:400;font-family:"DM Mono",monospace;margin-left:6px}
 .ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .seg{display:inline-flex;border:1px solid var(--ink);border-radius:6px;overflow:hidden}
 .seg button{border:0;background:transparent;padding:9px 14px;font-weight:600;color:var(--ink)}
@@ -30,13 +33,21 @@ button{font:inherit;cursor:pointer}
 .changed{box-shadow:inset 3px 0 0 var(--red);padding-left:10px}
 .save{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:center}
 .save span{color:var(--mut);font-size:13px}.ok{color:#1c7a3c!important;font-weight:600}
+.seg button[aria-pressed=true][data-ph]{background:var(--ink);color:var(--bg)}
+.fld{margin-top:14px}.fld label{font-weight:600;margin-bottom:6px}
+.tag{font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--line);border-radius:2px;padding:1px 6px;margin-left:8px;color:var(--mut)}
+.mk{width:22px;height:22px;flex:none;color:var(--ink)}.mk .ch{fill:none;stroke:var(--bg);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}.mk .bar{fill:var(--red)}
+@keyframes run{0%{transform:translateX(-66px)}45%{transform:translateX(7px)}60%,100%{transform:none}}
+@media (prefers-reduced-motion:no-preference){.mk .ch{animation:run 1.1s cubic-bezier(.3,.7,.2,1) infinite}.mk .ch+.ch{animation-delay:.07s}}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 [hidden]{display:none!important}
 </style></head><body><main>
-<h1><i></i>No Skips admin</h1><p class="sub">Update stock. Changes go live on the site about a minute after you save.</p>
+<h1><i></i>No Skips admin</h1><p class="sub">Set the site phase and update stock. Changes go live on the site about a minute after you save.</p>
 
 <section id="login" class="box">
   <label for="tok">Your access key</label>
   <input id="tok" type="password" autocomplete="off" placeholder="github_pat_...">
+  <label style="display:flex;gap:8px;align-items:center;font-weight:400;margin:12px 0 0"><input type="checkbox" id="stay">Stay unlocked on this device (only on your own phone or laptop)</label>
   <div style="margin-top:12px"><button class="btn red" id="go" type="button">Unlock</button></div>
   <div class="err" id="lerr" hidden></div>
   <div class="help">The key never leaves this browser. Only a key with write access to the repo can change anything.
@@ -49,21 +60,35 @@ button{font:inherit;cursor:pointer}
 
 <section id="app" hidden>
   <div class="bar"><input id="q" type="search" placeholder="Search products" style="max-width:300px"><button class="btn ghost" id="out" type="button">Lock</button></div>
+  <div class="box" id="phaseBox">
+    <div class="nm">Site phase</div>
+    <div class="ctl" style="margin-top:8px"><div class="seg" id="phaseSeg" role="group" aria-label="Site phase">
+      <button type="button" data-ph="waitlist" aria-pressed="false">Waitlist</button><button type="button" data-ph="preorder" aria-pressed="false">Pre-order</button><button type="button" data-ph="live" aria-pressed="false">Live</button></div></div>
+    <p class="help" id="phaseHelp"></p>
+    <div class="fld"><label for="shipFrom">Ships from</label><input id="shipFrom" type="text" maxlength="40" placeholder="January 2027"></div>
+    <div class="fld"><label for="preNote">Pre-order note (optional, shown beside the ship date)</label><input id="preNote" type="text" maxlength="160" placeholder="First batch gets the launch price."></div>
+  </div>
   <div class="box" id="dropBox">
-    <div class="nm">Vol. 01 sets claimed <small>of 50</small></div>
-    <div class="ctl" style="margin-top:8px"><input class="q" id="claimed" type="number" min="0" max="50" value="0"><span class="ql">The progress meter appears on the site once this is above 0.</span></div>
+    <div class="nm">Vol. 01 sets <small>edition of 50</small></div>
+    <div class="ctl" style="margin-top:8px"><input class="q" id="claimed" type="number" min="0" max="50" value="0"><span class="ql">claimed so far. The meter appears on the site once this is above 0.</span></div>
+    <div class="ctl" style="margin-top:8px"><input class="q" id="batch" type="number" min="1" max="50" value="15"><span class="ql">released so far (first batch = 15). When claimed reaches this, the set shows as batch full. Raise it to open the next batch.</span></div>
   </div>
   <div class="box" id="list"></div>
 </section>
 </main>
-<div class="save" id="savebar" hidden><span id="msg">No changes yet</span><button class="btn red" id="save" type="button" disabled>Save to site</button></div>
+<div class="save" id="savebar" hidden><svg class="mk" id="busy" hidden viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="mkc"><rect width="100" height="100" rx="22"/></clipPath></defs><rect width="100" height="100" rx="22" fill="currentColor"/><g clip-path="url(#mkc)"><path class="ch" d="M17 30L35 50L17 70"/><path class="ch" d="M40 30L58 50L40 70"/><rect class="bar" x="71" y="20" width="10" height="60" rx="5"/></g></svg><span id="msg" role="status">No changes yet</span><button class="btn red" id="save" type="button" disabled>Save to site</button></div>
 
 <script>
 const OWNER="Prathaam-Modi",REPO="no-skips",BRANCH="main",PATH="stock.json";
-const PRODUCTS=[{"id": "C1", "name": "Vol. 01: The Studio (Collector set)"}, {"id": "C2", "name": "Studio Mini (Single piece)"}, {"id": "C3", "name": "Gig Coin (Show token)"}, {"id": "C4", "name": "Side A (Mixtape set of 4)"}, {"id": "C5", "name": "Gain (Fidget knob)"}, {"id": "A1", "name": "Track Plate (Scannable song display)"}, {"id": "A5", "name": "Track Tag (Song keytag)"}, {"id": "A3", "name": "Rail (Wristband display)"}, {"id": "B1", "name": "Stack (Pick amp with drawer)"}, {"id": "B2", "name": "Lift (Controller risers, pair)"}, {"id": "B3", "name": "Alias (Artist name tag)"}, {"id": "B5", "name": "Run 50 (Artist merch tags)"}, {"id": "D1", "name": "Horn (Phone stand and amplifier)"}, {"id": "D6", "name": "Fold (Flat-pack laptop stand)"}, {"id": "D7", "name": "Channel (Modular desk set)"}, {"id": "D8", "name": "B-Side (Catch-all tray)"}, {"id": "D10", "name": "Eject (Slim card wallet)"}, {"id": "D11", "name": "Standby (Rack for closed laptops)"}, {"id": "D12", "name": "Rotary (Key organiser)"}, {"id": "D2", "name": "Tape Case (Small storage box)"}, {"id": "D4", "name": "Sleeve (Vinyl display stand)"}, {"id": "D5", "name": "Hold (Headphone stand)"}];
+const LAUNCH=["C1","C2","C3","A3","D2","D5"];
+const PRODUCTS=[{"id": "A4", "name": "45s (Record coasters)"}, {"id": "B6", "name": "Crate (USB stick keeper)"}, {"id": "D9", "name": "Perch (Sofa arm tray)"}, {"id": "C1", "name": "Vol. 01: The Studio (Collector set)"}, {"id": "C2", "name": "Studio Mini (Single piece)"}, {"id": "C3", "name": "Gig Coin (Show token)"}, {"id": "C4", "name": "Side A (Mixtape set of 4)"}, {"id": "C5", "name": "Gain (Fidget knob)"}, {"id": "A1", "name": "Track Plate (Scannable song display)"}, {"id": "A5", "name": "Track Tag (Song keytag)"}, {"id": "A3", "name": "Rail (Wristband display)"}, {"id": "B1", "name": "Stack (Pick amp with drawer)"}, {"id": "B2", "name": "Lift (Controller risers, pair)"}, {"id": "B3", "name": "Alias (Artist name tag)"}, {"id": "B5", "name": "Run 50 (Artist merch tags)"}, {"id": "D1", "name": "Horn (Phone stand and amplifier)"}, {"id": "D6", "name": "Fold (Flat-pack laptop stand)"}, {"id": "D7", "name": "Channel (Modular desk set)"}, {"id": "D8", "name": "B-Side (Catch-all tray)"}, {"id": "D10", "name": "Eject (Slim card wallet)"}, {"id": "D11", "name": "Standby (Rack for closed laptops)"}, {"id": "D12", "name": "Rotary (Key organiser)"}, {"id": "D2", "name": "Tape Case (Small storage box)"}, {"id": "D4", "name": "Sleeve (Vinyl display stand)"}, {"id": "D5", "name": "Hold (Headphone stand)"}];
+PRODUCTS.sort((a,b)=>LAUNCH.includes(b.id)-LAUNCH.includes(a.id));
 const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
 const $=id=>document.getElementById(id);
-let token="",sha=null,orig={},cur={},origClaimed=0;
+let token="",sha=null,orig={},cur={},origClaimed=0,raw={},origMeta="",phase="waitlist";
+const PH_HELP={waitlist:"Nothing can be ordered. Every button collects early access interest on WhatsApp.",preorder:"The six launch pieces can be pre-ordered. Messages are marked PRE-ORDER with the ship date below.",live:"Normal ordering. Buttons say Order on WhatsApp."};
+const meta=()=>JSON.stringify([phase,$("shipFrom").value.trim(),$("preNote").value.trim(),+$("batch").value]);
+function paintPhase(){document.querySelectorAll("[data-ph]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.ph===phase)));$("phaseHelp").textContent=PH_HELP[phase]}
 const hdr=()=>({Authorization:"Bearer "+token,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"});
 const b64e=s=>btoa(String.fromCharCode(...new TextEncoder().encode(s)));
 const b64d=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),c=>c.charCodeAt(0)));
@@ -71,56 +96,75 @@ const norm=x=>({s:x&&["low","out"].includes(x.s)?x.s:"in",n:x&&Number.isFinite(x
 
 async function load(){
   const rr=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}`,{headers:hdr()});
-  if(!rr.ok)throw new Error("That key was not accepted.");
+  if(rr.status===401||rr.status===403||rr.status===404){const e=new Error("That key was not accepted.");e.auth=true;throw e}
+  if(!rr.ok)throw new Error("GitHub did not answer ("+rr.status+"). Try again in a minute.");
   const repo=await rr.json();
-  if(!(repo.permissions&&repo.permissions.push))throw new Error("This key cannot write to the repo.");
+  if(!(repo.permissions&&repo.permissions.push)){const e=new Error("This key cannot write to the repo.");e.auth=true;throw e}
   const r=await fetch(API+"?ref="+BRANCH+"&t="+Date.now(),{headers:hdr(),cache:"no-store"});
   let data={items:{},drop:{claimed:0}};sha=null;
-  if(r.ok){const j=await r.json();sha=j.sha;try{data=JSON.parse(b64d(j.content))}catch(e){}}
+  if(r.ok){const j=await r.json();sha=j.sha;try{const d=JSON.parse(b64d(j.content));if(d&&typeof d==="object"&&!Array.isArray(d))data=d}catch(e){}}
   else if(r.status!==404)throw new Error("Could not read stock.json ("+r.status+").");
   orig={};cur={};PRODUCTS.forEach(p=>{orig[p.id]=norm((data.items||{})[p.id]);cur[p.id]={...orig[p.id]}});
   origClaimed=Math.max(0,Math.min(50,+(data.drop&&data.drop.claimed)||0));$("claimed").value=origClaimed;
+  raw=data;phase=["waitlist","preorder","live"].includes(data.phase)?data.phase:"waitlist";
+  $("shipFrom").value=typeof data.shipFrom==="string"&&data.shipFrom.trim()?data.shipFrom.trim():"January 2027";
+  $("preNote").value=typeof data.preorderNote==="string"?data.preorderNote:"";
+  $("batch").value=Math.max(1,Math.min(50,+(data.drop&&data.drop.batch)||15));
+  origMeta=meta();paintPhase();
 }
 function draw(){
   const f=$("q").value.trim().toLowerCase();
   $("list").innerHTML=PRODUCTS.filter(p=>!f||(p.name+" "+p.id).toLowerCase().includes(f)).map(p=>{
     const c=cur[p.id],ch=JSON.stringify(c)!==JSON.stringify(orig[p.id]);
-    return `<div class="row${ch?" changed":""}" data-id="${p.id}"><div class="nm">${p.name}<small>${p.id}</small></div>
+    return `<div class="row${ch?" changed":""}" data-id="${p.id}"><div class="nm">${p.name}<small>${p.id}</small>${LAUNCH.includes(p.id)?'<span class="tag">First drop</span>':""}</div>
       <div class="ctl"><div class="seg">${[["in","In stock"],["low","Few left"],["out","Sold out"]].map(([k,t])=>`<button type="button" data-s="${k}" aria-pressed="${c.s===k}">${t}</button>`).join("")}</div>
       ${c.s==="low"?`<input class="q" type="number" min="1" placeholder="How many" data-n value="${c.n||""}"><span class="ql">left (optional)</span>`:""}</div></div>`}).join("")||'<p class="help">No match.</p>';
   dirty();
 }
 function dirty(){
-  const n=PRODUCTS.filter(p=>JSON.stringify(cur[p.id])!==JSON.stringify(orig[p.id])).length+(+$("claimed").value!==origClaimed?1:0);
+  const n=PRODUCTS.filter(p=>JSON.stringify(cur[p.id])!==JSON.stringify(orig[p.id])).length+(+$("claimed").value!==origClaimed?1:0)+(meta()!==origMeta?1:0);
   $("save").disabled=!n;$("msg").className="";$("msg").textContent=n?`${n} change${n>1?"s":""} not saved`:"No changes yet";
 }
 $("list").addEventListener("click",e=>{const b=e.target.closest("[data-s]");if(!b)return;const id=b.closest(".row").dataset.id;
   cur[id]={s:b.dataset.s,n:b.dataset.s==="low"?cur[id].n:null};draw()});
 $("list").addEventListener("input",e=>{if(e.target.hasAttribute("data-n")){const id=e.target.closest(".row").dataset.id;const v=parseInt(e.target.value,10);cur[id].n=v>0?v:null;dirty()}});
-$("claimed").addEventListener("input",dirty);$("q").addEventListener("input",draw);
+$("claimed").addEventListener("input",dirty);["shipFrom","preNote","batch"].forEach(i=>$(i).addEventListener("input",dirty));
+$("phaseSeg").addEventListener("click",e=>{const b=e.target.closest("[data-ph]");if(!b)return;phase=b.dataset.ph;paintPhase();dirty()});$("q").addEventListener("input",draw);
 
 async function save(){
-  $("save").disabled=true;$("msg").textContent="Saving...";
-  const items={};PRODUCTS.forEach(p=>{const c=cur[p.id];if(c.s!=="in")items[p.id]=c.s==="low"&&c.n?{s:"low",n:c.n}:{s:c.s}});
-  const claimed=Math.max(0,Math.min(50,parseInt($("claimed").value,10)||0));
-  const body={updated:new Date().toISOString(),drop:{claimed},items};
-  const put=()=>fetch(API,{method:"PUT",headers:{...hdr(),"Content-Type":"application/json"},body:JSON.stringify({message:"Update stock",branch:BRANCH,content:b64e(JSON.stringify(body,null,2)+"\n"),...(sha?{sha}:{})})});
-  let r=await put();
-  if(r.status===409||r.status===422){await load();draw();$("msg").textContent="Someone else changed stock. Reloaded, check and save again.";return}
-  if(!r.ok){$("msg").textContent="Save failed ("+r.status+"). Try again.";$("save").disabled=false;return}
-  const j=await r.json();sha=j.content.sha;orig=JSON.parse(JSON.stringify(cur));origClaimed=claimed;$("claimed").value=claimed;draw();
-  $("msg").className="ok";$("msg").textContent="Saved. Live in about a minute.";
+  const was=["waitlist","preorder","live"].includes(raw.phase)?raw.phase:"waitlist";
+  if(phase!==was&&!confirm("Change the site from "+was+" to "+phase+"? "+PH_HELP[phase]))return;
+  $("save").disabled=true;$("busy").hidden=false;$("msg").className="";$("msg").textContent="Saving...";
+  try{
+    const items={};PRODUCTS.forEach(p=>{const c=cur[p.id];if(c.s!=="in")items[p.id]=c.s==="low"&&c.n?{s:"low",n:c.n}:{s:c.s}});
+    const claimed=Math.max(0,Math.min(50,parseInt($("claimed").value,10)||0));
+    const batch=Math.max(1,Math.min(50,parseInt($("batch").value,10)||15));
+    /* keep any field this page does not know about */
+    const body={...raw,updated:new Date().toISOString(),phase,shipFrom:$("shipFrom").value.trim()||"January 2027",preorderNote:$("preNote").value.trim(),drop:{...(raw.drop&&typeof raw.drop==="object"?raw.drop:{}),claimed,batch},items};
+    const r=await fetch(API,{method:"PUT",headers:{...hdr(),"Content-Type":"application/json"},body:JSON.stringify({message:"Update stock and phase",branch:BRANCH,content:b64e(JSON.stringify(body,null,2)+"\n"),...(sha?{sha}:{})})});
+    if(r.status===409||r.status===422){await load();draw();$("msg").textContent="The file changed somewhere else. Reloaded, check and save again.";return}
+    if(r.status===401||r.status===403){$("msg").textContent="The key was refused ("+r.status+"). Lock, then unlock with a new key.";$("save").disabled=false;return}
+    if(!r.ok){$("msg").textContent="Save failed ("+r.status+"). Try again.";$("save").disabled=false;return}
+    const j=await r.json();sha=j.content.sha;raw=body;orig=JSON.parse(JSON.stringify(cur));origClaimed=claimed;$("claimed").value=claimed;$("batch").value=batch;origMeta=meta();draw();
+    $("msg").className="ok";$("msg").textContent="Saved. Live in about a minute.";
+  }catch(e){$("msg").textContent="Could not reach GitHub. Check your connection and try again.";$("save").disabled=false}
+  finally{$("busy").hidden=true}
 }
 $("save").addEventListener("click",save);
 
-async function unlock(t){
-  token=t;$("lerr").hidden=true;$("go").disabled=true;
-  try{await load();localStorage.setItem("ns-admin-key",t);$("login").hidden=true;$("app").hidden=false;$("savebar").hidden=false;draw()}
-  catch(e){token="";$("lerr").textContent=e.message;$("lerr").hidden=false;try{localStorage.removeItem("ns-admin-key")}catch(_){}}
-  $("go").disabled=false;
+/* The key is kept for this tab only, unless "Stay unlocked" is ticked. It is never logged or sent anywhere but api.github.com. */
+const forget=()=>{try{localStorage.removeItem("ns-admin-key");sessionStorage.removeItem("ns-admin-key")}catch(_){}};
+async function unlock(t,keep){
+  token=t;$("lerr").hidden=true;$("go").disabled=true;$("go").textContent="Checking...";
+  try{await load();try{(keep?localStorage:sessionStorage).setItem("ns-admin-key",t)}catch(_){}
+    $("tok").value="";$("login").hidden=true;$("app").hidden=false;$("savebar").hidden=false;draw()}
+  catch(e){token="";$("lerr").textContent=e.auth?e.message:(e.message&&/GitHub did not/.test(e.message)?e.message:"Could not reach GitHub. Check your connection and try again.");$("lerr").hidden=false;
+    if(e.auth)forget()}   /* a dropped connection no longer throws away a good key */
+  $("go").disabled=false;$("go").textContent="Unlock";
 }
-$("go").addEventListener("click",()=>{const t=$("tok").value.trim();if(t)unlock(t)});
+$("go").addEventListener("click",()=>{const t=$("tok").value.trim();if(t)unlock(t,$("stay").checked)});
 $("tok").addEventListener("keydown",e=>{if(e.key==="Enter")$("go").click()});
-$("out").addEventListener("click",()=>{try{localStorage.removeItem("ns-admin-key")}catch(_){}location.reload()});
-try{const t=localStorage.getItem("ns-admin-key");if(t)unlock(t)}catch(_){}
+$("out").addEventListener("click",()=>{forget();location.reload()});
+window.addEventListener("beforeunload",e=>{if(!$("save").disabled&&!$("app").hidden){e.preventDefault();e.returnValue=""}});
+try{const l=localStorage.getItem("ns-admin-key"),t=l||sessionStorage.getItem("ns-admin-key");if(t){$("stay").checked=!!l;unlock(t,!!l)}}catch(_){}
 </script></body></html>

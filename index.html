@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>No Skips. Music pieces and daily gear, printed to order</title>
-<meta name="description" content="Music collectibles, song keepsakes and flat-pack daily gear, 3D printed to order in Bengaluru. Order on WhatsApp.">
+<meta name="description" content="Music collectibles, song keepsakes and flat-pack daily gear, 3D printed to order in Bengaluru. Ordering happens on WhatsApp.">
+<meta name="theme-color" content="#EDEBE6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0D0C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="No Skips">
+<meta property="og:title" content="No Skips. Music pieces and daily gear, printed to order">
+<meta property="og:description" content="Music collectibles, song keepsakes and flat-pack daily gear, 3D printed to order in Bengaluru.">
+<!-- Link previews need the full address. Change these two lines if the site moves to its own domain. -->
+<meta property="og:url" content="https://prathaam-modi.github.io/no-skips/">
+<meta property="og:image" content="https://prathaam-modi.github.io/no-skips/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="No Skips. Vol. 01 The Studio, six miniature studio pieces on a numbered tray">
+<meta name="twitter:card" content="summary_large_image">
+<script>/* opens light by default (owner's choice); a saved pick wins */var t="light";try{var s=localStorage.getItem("ns-theme");if(s==="dark"||s==="light")t=s}catch(e){}document.documentElement.dataset.theme=t</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Poppins:wght@700&display=swap" rel="stylesheet">
@@ -125,7 +141,7 @@ footer{padding-bottom:84px!important}
 .badge.out{background:#F3EEE2;color:#151413}.badge.low{background:var(--accent);color:var(--on-accent)}
 .card.is-out .shot img{filter:grayscale(.85);opacity:.55}.card.is-out .price{text-decoration:line-through;opacity:.5}
 .stockline{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;margin:0 0 4px}.stockline.out{opacity:.7}
-.idx{position:absolute;right:12px;bottom:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#8a857d}
+.idx{position:absolute;right:12px;bottom:10px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#57524b}
 
 /* collectibles booth */
 .booth{background:var(--booth);color:var(--booth-ink);padding:clamp(40px,6vw,88px) 0}
@@ -142,7 +158,8 @@ footer{padding-bottom:84px!important}
 /* cards */
 .card{border:0;padding:0;background:transparent;text-align:left;display:flex;flex-direction:column;gap:12px;color:inherit}
 .card .meta{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
-.card h3{font-size:16px;font-stretch:112%;letter-spacing:.01em;line-height:1.15}
+.card .shot,.card .kind,.card .line{display:block}
+.card .h3{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:16px;font-stretch:112%;letter-spacing:.01em;line-height:1.15;overflow-wrap:anywhere;min-width:0}
 .card .price{font-family:var(--mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .card .line{margin:-6px 0 0;font-size:14px;color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:clamp(14px,1.8vw,24px);padding:28px 0 0}
@@ -183,8 +200,8 @@ footer{padding-bottom:84px!important}
 .soon-grid{grid-template-columns:repeat(auto-fill,minmax(200px,260px));padding-top:16px}
 .card.is-soon .shot img:not(.bp){filter:saturate(.75)}
 .card.is-soon .price{color:var(--muted)}
-.bulk-ghost{border-color:var(--booth-ink);color:var(--booth-ink)}
-.bulk-ghost:hover{background:var(--booth-ink);color:var(--booth);border-color:var(--booth-ink)}
+.btn.ghost.bulk-ghost{border-color:var(--booth-ink);color:var(--booth-ink)}
+.btn.ghost.bulk-ghost:hover{background:var(--booth-ink);color:var(--booth);border-color:var(--booth-ink)}
 @media (max-width:620px){.soon-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* build it */
@@ -224,12 +241,7 @@ footer{padding-bottom:84px!important}
 
 /* how */
 .how{padding-bottom:clamp(40px,6vw,88px)}
-.how h2{font-size:clamp(28px,4vw,48px);margin-bottom:28px}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:20px;list-style:none;margin:0;padding:0;counter-reset:s}
-.steps li{counter-increment:s;border-top:2px solid var(--ink);padding-top:14px}
-.steps li::before{content:"0" counter(s);font-family:var(--mono);font-size:12px;color:var(--accent)}
-.steps h3{font-size:17px;margin:8px 0 6px;font-stretch:112%}
-.steps p{margin:0;font-size:14px;color:var(--muted)}
+.how h2{font-size:clamp(28px,4vw,48px);margin:0}
 .bulk{margin-top:clamp(32px,5vw,56px);background:var(--booth);color:var(--booth-ink);border-radius:var(--r);padding:clamp(22px,4vw,44px);display:flex;gap:24px;justify-content:space-between;align-items:center;flex-wrap:wrap}
 .bulk h2{font-size:clamp(24px,3.4vw,40px);margin:0}
 .bulk p{margin:10px 0 0;max-width:52ch;color:var(--booth-muted)}
@@ -276,7 +288,8 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 .field{display:flex;flex-direction:column;gap:6px}
 .field label,.field .lab{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .field input{height:44px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:0 12px;font:inherit;width:100%}
-.field input:focus{border-color:var(--ink);outline:none}
+.field input:focus{border-color:var(--ink)}
+.field input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .row2{display:flex;gap:16px;flex-wrap:wrap;align-items:end}
 .seg{display:inline-flex;gap:8px;flex-wrap:wrap}
 .seg button{height:40px;padding:0 14px;border-radius:var(--r);border:1px solid var(--line);background:transparent;display:inline-flex;gap:8px;align-items:center;font-size:14px}
@@ -319,9 +332,9 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 .field .note{margin-top:2px}
 .flabel{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
 .cnt{font-family:var(--mono);font-size:11px;color:var(--muted)}
-.cnt.over{color:#E5404A;font-weight:700}
-.field input.bad{border-color:#E5404A}
-.warn{font-size:13px;line-height:1.45;color:#E5404A;margin:0;padding:10px 12px;border:1px solid #E5404A;border-radius:var(--r)}
+.cnt.over{color:var(--accent);font-weight:700}
+.field input.bad{border-color:var(--accent)}
+.warn{font-size:13px;line-height:1.45;color:var(--accent);margin:0;padding:10px 12px;border:1px solid var(--accent);border-radius:var(--r)}
 .hintbtn{background:none;border:0;padding:0;font-size:13px;text-decoration:underline;text-underline-offset:3px;color:var(--ink);cursor:pointer;align-self:flex-start}
 .hintbox{font-size:13px;line-height:1.5;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:8px}
 .hintbox p{margin:0}.hintbox b{font-weight:700}
@@ -340,15 +353,107 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 .dl h2{font-size:24px}
 .li{display:grid;grid-template-columns:1fr auto;gap:4px 12px;border-top:1px solid var(--line);padding-top:12px;font-size:14px}
 .li b{font-weight:600}.li .opt{grid-column:1/-1;color:var(--muted);font-size:13px}
-.li button{border:0;background:transparent;color:var(--muted);text-decoration:underline;font-size:12px;padding:0;justify-self:start}
 .total{display:flex;justify-content:space-between;border-top:2px solid var(--ink);padding-top:12px;font-family:var(--mono);font-variant-numeric:tabular-nums}
 .empty{color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
 .spacer{flex:1}
+
+/* ---- v2: phases, small-shelf layout, ordering strip, brand motion ---- */
+.card .txt{display:flex;flex-direction:column;gap:12px;flex:1;min-width:0;overflow-wrap:anywhere}
+.card .meta>*{min-width:0}
+.pd-body h2,.li b{overflow-wrap:anywhere}
+.go{display:none}
+.grid.few{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.few .card{flex-direction:row;gap:clamp(12px,2vw,24px);align-items:stretch;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px}
+.grid.few .card .shot{flex:0 0 46%;align-self:flex-start}
+.grid.few .card .txt{justify-content:center;padding:6px 10px 6px 0}
+.grid.few .card .meta{flex-direction:column;gap:6px;align-items:flex-start}
+.grid.few .card .h3{font-size:clamp(18px,2vw,24px)}
+.grid.few .card .line,.grid.few .card .kind{margin:0}
+.grid.few .go{display:inline-flex;gap:8px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
+.grid.few .go::after{content:"\2192";color:var(--accent)}
+.gnote{border:1px solid var(--line);border-radius:var(--r);padding:clamp(16px,2.4vw,28px);display:flex;flex-direction:column;gap:10px;justify-content:center}
+.gnote b{font-family:var(--display);font-stretch:118%;font-weight:700;text-transform:uppercase;font-size:clamp(18px,2vw,24px);letter-spacing:-.02em;line-height:1.1}
+.gnote p{margin:0;color:var(--muted);max-width:46ch}
+.grid.few .gnote:only-child{grid-column:1/-1}
+@media (max-width:860px){.grid.few{grid-template-columns:minmax(0,1fr)}}
+.phase-line{display:flex;gap:10px;margin:18px 0 0;font-size:15px;max-width:46ch}
+.phase-line .led,.pd-ed .led{margin-top:8px;align-self:flex-start}
+.pd-ed.ph{align-items:flex-start}
+.batchline{grid-column:1/-1;margin:10px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.mark{width:34px;height:34px;flex:none}
+.mark .ch{fill:none;stroke:var(--bg);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+.mark .bar{fill:var(--accent)}
+.lbl-short{display:none}
+@media (max-width:420px){.lbl-long{display:none}.lbl-short{display:inline}}
+.pd-act{display:flex;flex-direction:column;gap:8px}
+@media (max-width:420px){.btn{white-space:normal;height:auto;min-height:50px;padding-block:10px;text-align:center}}
+.pd-act .note.nudge,#listNeed{color:var(--accent)}
+.pd-links{display:flex;gap:6px 22px;flex-wrap:wrap}
+@media (max-width:760px){
+  .pd-act{position:sticky;bottom:0;z-index:1;background:var(--bg);margin:0 calc(clamp(18px,3vw,36px)*-1);padding:10px clamp(18px,3vw,36px) max(10px,env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+  .icon-btn{height:44px;min-width:44px}
+  .close,.car-nav button{width:44px;height:44px}
+  .fchips button{height:40px}
+  .chips button{height:44px}
+  .viewsw button{height:40px}
+  .seg button,.qty{height:44px}.qty button{height:42px;width:44px}
+  .pd-links .linkish,.hintbtn{padding-block:10px}
+}
+.agree input{width:20px;height:20px;margin-top:0;accent-color:var(--accent)}
+.li-ctl{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.li .qty{height:36px}.li .qty button{width:36px;height:34px;font-size:16px}
+.li .gone{grid-column:1/-1;color:var(--accent);font-size:13px}
+.li [data-rm]{border:0;background:transparent;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-size:13px;padding:10px 0;min-height:36px}
+.dir{display:inline-block;width:18px;height:18px;vertical-align:-3px;margin-left:8px;color:var(--accent);overflow:visible}
+.dir path{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transform-box:fill-box;transform-origin:center}
+footer a{text-underline-offset:3px}
+@media (max-width:900px){.hero-shot .tagr{display:none}}
+@media (max-width:700px){.ticker span{white-space:normal;text-align:center}}
+
+/* how ordering works */
+.how .cols{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,5vw,64px)}
+.how .lead{color:var(--muted);margin:14px 0 0;max-width:40ch}
+.dispatch{margin:20px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:14px;max-width:40ch}
+.dispatch .mono{display:block;color:var(--muted);margin-bottom:6px;font-size:11px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,28px);list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;padding-top:14px;background:linear-gradient(var(--ink),var(--ink)) left top/100% 2px no-repeat}
+.steps li::before{content:"0" counter(s);font-family:var(--mono);font-size:12px;color:var(--accent)}
+.steps svg{width:120px;height:56px;margin:14px 0 6px;color:var(--ink);overflow:visible}
+.steps svg *{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.steps svg .ac{stroke:var(--accent)}
+.steps h3{font-size:17px;margin:8px 0 6px;font-stretch:112%}
+.steps p{margin:0;font-size:14px;color:var(--muted)}
+@media (max-width:860px){.how .cols{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:620px){.steps{grid-template-columns:minmax(0,1fr)}.steps li{display:grid;grid-template-columns:1fr auto;column-gap:16px}.steps li::before{grid-column:1}.steps svg{grid-column:2;grid-row:1/span 3;width:96px;height:45px;margin:4px 0 0}.steps h3,.steps p{grid-column:1}}
+
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes rule{from{background-size:0 2px}}
+@keyframes skipin{0%{transform:translateX(-66px)}62%{transform:translateX(7px)}100%{transform:none}}
+@keyframes jolt{40%{transform:translateX(3px)}}
+@keyframes bump{35%{transform:scale(1.3);background:var(--accent);color:var(--on-accent)}}
+@keyframes nd{50%{transform:translateY(3px)}}
+@keyframes nu{50%{transform:translateY(-3px)}}
+@keyframes ns{50%{transform:translateX(3px)}}
+@keyframes nt{50%{transform:rotate(50deg)}}
+@media (prefers-reduced-motion:no-preference){
+  .hero .mark .ch{animation:skipin .8s .15s cubic-bezier(.3,.7,.2,1) both}
+  .hero .mark .ch+.ch{animation-delay:.22s}
+  .hero .mark .bar{animation:jolt .32s .68s ease-out both}
+  .how.arm .steps li{background-size:0 2px}
+  .how.arm .steps .dr{stroke-dasharray:1;stroke-dashoffset:1}
+  .how.arm.in .steps li{background-size:100% 2px;animation:rule .5s ease-out both;animation-delay:calc(var(--i)*.55s)}
+  .how.arm.in .steps .dr{animation:draw .55s ease-out forwards;animation-delay:calc(var(--i)*.55s + .2s + var(--d,0s))}
+  .count.bump{animation:bump .45s ease-out}
+  .bsteps li.on .dir.d path{animation:nd .7s ease-in-out 2}
+  .bsteps li.on .dir.u path{animation:nu .7s ease-in-out 2}
+  .bsteps li.on .dir.s path{animation:ns .7s ease-in-out 2}
+  .bsteps li.on .dir.t path{animation:nt .8s ease-in-out 2}
+}
 </style>
 </head>
 <body>
 <div class="ticker"><div class="wrap">
-  <span><i class="led"></i>Launching January 2027</span>
+  <span><i class="led"></i><span id="tickPhase">Pre-orders opening soon</span></span>
   <span id="tickEd"></span>
   <span class="opt">Only filament in the box. No magnets, no glue, no metal</span>
   <span class="opt">Printed to order in Bengaluru</span>
@@ -366,7 +471,7 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
     </nav>
     <div class="tools">
       <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch between light and dark"></button>
-      <button class="icon-btn" id="listBtn" type="button">Order list <span class="count" id="count">0</span></button>
+      <button class="icon-btn" id="listBtn" type="button"><span class="lbl-long" id="listLbl">Interest list</span><span class="lbl-short">List</span> <span class="count" id="count">0</span></button>
     </div>
   </div>
 </header>
@@ -374,14 +479,12 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 <main id="top">
   <section class="wrap hero" aria-labelledby="heroTitle">
     <div>
-      <span class="eyebrow"><i class="led"></i>Latest release &middot; Drop 01</span>
+      <span class="eyebrow"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="mkc"><rect width="100" height="100" rx="22"/></clipPath></defs><rect width="100" height="100" rx="22" fill="currentColor"/><g clip-path="url(#mkc)"><path class="ch" d="M17 30L35 50L17 70"/><path class="ch" d="M40 30L58 50L40 70"/><rect class="bar" x="71" y="20" width="10" height="60" rx="5"/></g></svg>Latest release &middot; Drop 01</span>
       <h1 id="heroTitle">Vol. 01 <em>The Studio</em></h1>
       <p class="lede">Six pieces of studio gear, shrunk to fit your palm and racked on a numbered tray. Turntable, synth, drum machine, mixer, mic, headphones. Collect one, or take the whole set.</p>
+      <p class="phase-line" id="heroPhase" hidden></p>
       <div class="edition" id="heroEdition"></div>
-      <div class="cta">
-        <button class="btn red" type="button" data-open="C1">Claim a numbered set</button>
-        <button class="btn ghost" type="button" data-open="C2">Start with one piece, ₹399</button>
-      </div>
+      <div class="cta" id="heroCta"></div>
     </div>
     <button class="hero-shot" type="button" data-open="C1" aria-label="Open Vol. 01 The Studio">
       <img src="img/studio_set.webp" alt="Vol. 01 The Studio: six miniature studio pieces on a numbered tray" width="880" height="880">
@@ -400,7 +503,7 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
           <h2 id="boothTitle" style="margin-top:14px">The collectibles</h2>
           <p>Small enough to carry, numbered so no two are the same. Each run has a fixed size. When a run is finished, the files are retired and the next volume takes its place.</p>
         </div>
-        <button class="btn red" type="button" data-open="C3">Mint a Gig Coin</button>
+        <button class="btn red" type="button" data-open="C3" id="boothCta">See the Gig Coin</button>
       </div>
       <div class="booth-grid" id="boothGrid"></div>
     </div>
@@ -414,7 +517,7 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
         <h2 id="sigTitle">Track Plate</h2>
         <p>The piece the range grew from. Send a song and it becomes a plate you can scan to play, or a wave of 50 raised bars drawn from the track itself, every quiet intro and every drop. No two songs print alike.</p>
         <span class="price" id="sigPrice"></span>
-        <button class="btn" type="button" data-open="A1">Make it with your song</button>
+        <button class="btn" type="button" data-open="A1" id="sigCta">Tell me when it opens</button>
       </div>
     </div>
   </section>
@@ -426,16 +529,16 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
         <p id="sideCopy"></p>
       </div>
       <div class="tabs" role="tablist" aria-label="Collection">
-        <button role="tab" type="button" data-side="D" id="tabD">Daily</button>
-        <button role="tab" type="button" data-side="A" id="tabA">Listen</button>
-        <button role="tab" type="button" data-side="B" id="tabB">Make</button>
-        <button role="tab" type="button" data-side="all" id="tabAll">Everything</button>
+        <button role="tab" type="button" aria-controls="grid" data-side="D" id="tabD">Daily</button>
+        <button role="tab" type="button" aria-controls="grid" data-side="A" id="tabA">Listen</button>
+        <button role="tab" type="button" aria-controls="grid" data-side="B" id="tabB">Make</button>
+        <button role="tab" type="button" aria-controls="grid" data-side="all" id="tabAll">Everything</button>
       </div>
     </div>
     <div class="fbar"><div class="chips fchips" id="filters" role="group" aria-label="Filter"></div><span class="mono muted" id="gridCount" aria-live="polite"></span></div>
     <div class="grid" id="grid"></div>
     <div class="soon" id="soonWrap" hidden>
-      <div class="soon-head"><span class="eyebrow">On the bench</span><p>Designed and drawn, not on sale yet. Tap one to be told when it lands.</p></div>
+      <div class="soon-head"><span class="eyebrow">On the bench</span><p id="soonCopy">Designed and drawn, not on sale yet. Tap one to be told when it lands.</p></div>
       <div class="grid soon-grid" id="soonGrid"></div>
     </div>
   </section>
@@ -468,14 +571,19 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
     </div>
   </section>
 
-  <section class="wrap how" id="order">
-    <h2>How to order</h2>
-    <ol class="steps">
-      <li><h3>Pick your pieces</h3><p>Open a product, add your song, name or date, and choose an ivory or red accent.</p></li>
-      <li><h3>Send it on WhatsApp</h3><p>One tap opens WhatsApp with your order already written out. For song pieces, the song title, artist and, for a Spotify Code, the Spotify link go in the message.</p></li>
-      <li><h3>Approve and pay</h3><p>Personalised pieces get a preview before anything is printed. Payment is by UPI.</p></li>
-      <li><h3>Printed, numbered, shipped</h3><p>Every piece is printed to order in Bengaluru. The code on the box opens the build steps. Shipping is quoted in the chat.</p></li>
-    </ol>
+  <section class="wrap how" id="order" aria-labelledby="howTitle">
+    <div class="cols">
+      <div>
+        <h2 id="howTitle">How ordering works</h2>
+        <p class="lead" id="howLead"></p>
+        <p class="dispatch"><span class="mono">Dispatch</span><span id="howDispatch"></span></p>
+      </div>
+      <ol class="steps" id="howSteps">
+        <li style="--i:0"><svg viewBox="0 0 120 56" aria-hidden="true"><rect class="dr" pathLength="1" x="2" y="4" width="48" height="48" rx="5"/><path class="dr" pathLength="1" style="--d:.15s" d="M14 34v-8M22 40V18M30 36V22M38 32v-4"/><path class="dr ac" pathLength="1" style="--d:.3s" d="M74 28h22M85 17v22"/></svg><h3>Pick your pieces</h3><p>Open a piece, add your name, show or label text, and choose an ivory or red accent. Add more than one to your list.</p></li>
+        <li style="--i:1"><svg viewBox="0 0 120 56" aria-hidden="true"><path class="dr" pathLength="1" d="M8 4h80a5 5 0 0 1 5 5v26a5 5 0 0 1-5 5H34L20 52V40H8a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5z"/><rect class="dr" pathLength="1" style="--d:.15s" x="13" y="12" width="26" height="20" rx="3"/><path class="dr" pathLength="1" style="--d:.25s" d="M48 16h34M48 26h22"/><path class="dr ac" pathLength="1" style="--d:.4s" d="M100 22l6 6 11-13"/></svg><h3>Chat and preview on WhatsApp</h3><p>One tap opens WhatsApp with your list written out. Personalised pieces get a preview, and nothing is printed until you approve it.</p></li>
+        <li style="--i:2"><svg viewBox="0 0 120 56" aria-hidden="true"><path class="dr" pathLength="1" d="M6 8h24M6 18h24M10 8c16 0 16 20 0 20H6l18 22"/><path class="dr" pathLength="1" style="--d:.2s" d="M66 4h28l-6 12H72zM80 16v8"/><path class="dr" pathLength="1" style="--d:.35s" d="M56 50h48M60 42h40"/><path class="dr ac" pathLength="1" style="--d:.5s" d="M64 34h20"/></svg><h3>Pay by UPI, then we print</h3><p>Shipping and your dispatch date are quoted in the chat before you pay. Then your piece is printed, checked and boxed with a code that opens its build steps.</p></li>
+      </ol>
+    </div>
     <div class="terms" id="terms">
       <div><h3>Shipping and packing</h3><p>Every order ships in a No Skips box with tissue and a build card. Pieces in one order share a box. Shipping is charged on top and quoted in the chat with the dispatch date.</p></div>
       <div><h3>Replacements within 48 hours</h3><p>Pieces are made to order, so we do not take returns. If something arrives broken, faulty or not as approved, message us within 48 hours of delivery with photos and an unboxing video and we replace it. <button class="linkish" type="button" data-terms>Read the full terms</button></p></div>
@@ -494,7 +602,7 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 
 <footer>
   <div class="wrap">
-    <div class="row"><span>No Skips. Printed to order in Bengaluru.</span><span>Instagram @noskips.in</span><span>Prices in INR, shipping extra.</span><span><button class="linkish" type="button" data-terms>Terms, replacements and privacy</button></span></div>
+    <div class="row"><span>No Skips. Printed to order in Bengaluru.</span><span>Instagram <a href="https://www.instagram.com/noskips.in/" target="_blank" rel="noopener">@noskips.in</a></span><span>Prices in INR, shipping extra.</span><span><button class="linkish" type="button" data-terms>Terms, replacements and privacy</button></span></div>
     <div class="row" style="margin-top:10px"><span>Product pictures and blueprints are drawn from the actual print files, dimensions in millimetres. Song titles and artist names on example pieces show how personalisation looks. No Skips is an independent maker and is not affiliated with or endorsed by any artist. Artist names and silhouettes on coins and tags are used to show the artist the piece is about, and are not an endorsement. Spotify and Spotify Codes are trademarks of Spotify AB. No Skips is not affiliated with Spotify.</span></div>
   </div>
 </footer>
@@ -512,14 +620,40 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 /* ---------------- settings: edit these ---------------- */
 const WHATSAPP_NUMBER = "917411148303";     // country code + number, digits only
 const BRAND = "No Skips";
-const DROP = {total:50, claimed:0};         // Vol. 01 sets. Raise "claimed" as real orders come in; the meter appears once it is above 0.
+const root=document.documentElement;
+/* Vol. 01 sets. total = the whole edition. batch = how many sets are released so far (the first batch).
+   claimed = sets sold. batch and claimed are edited from /admin.html and saved to stock.json. */
+const FIRST_BATCH=15;
+const DROP = {total:50, batch:FIRST_BATCH, batchName:"first batch", claimed:0};
+/* Site phase, edited from /admin.html and saved to stock.json:
+   "waitlist" = nothing can be ordered, buttons collect early access interest.
+   "preorder" = the launch set is orderable as pre-orders that ship from SHIP_FROM.
+   "live"     = normal ordering.
+   A missing or broken stock.json always means "waitlist". */
+const PHASES=["waitlist","preorder","live"];
+let PHASE="waitlist", SHIP_FROM="January 2027", PREORDER_NOTE="";
+try{const c=localStorage.getItem("ns-phase");if(PHASES.includes(c))PHASE=c}catch(e){}
 /* Live stock. Edited from /admin.html, saved to stock.json. Missing item = in stock. */
 let STOCK={items:{}};
 const stk=id=>{const x=(STOCK.items||{})[id]||{};return{s:x.s==="out"||x.s==="low"?x.s:"in",n:Number.isFinite(x.n)&&x.n>0?x.n:null}};
+const num=(v,d)=>{const n=typeof v==="number"?v:(typeof v==="string"&&v.trim()!==""?Number(v):NaN);return Number.isFinite(n)?Math.round(n):d};
+const str=(v,d,max)=>typeof v==="string"&&v.trim()?v.trim().slice(0,max):d;
+function applyStock(d){
+  const o=d&&typeof d==="object"&&!Array.isArray(d)?d:{};
+  STOCK={items:o.items&&typeof o.items==="object"&&!Array.isArray(o.items)?o.items:{}};
+  PHASE=PHASES.includes(o.phase)?o.phase:"waitlist";
+  SHIP_FROM=str(o.shipFrom,"January 2027",40);PREORDER_NOTE=str(o.preorderNote,"",160);
+  const dr=o.drop&&typeof o.drop==="object"?o.drop:{};
+  DROP.batch=Math.max(1,Math.min(DROP.total,num(dr.batch,FIRST_BATCH)));
+  DROP.batchName=str(dr.batchName,"first batch",24);
+  DROP.claimed=Math.max(0,Math.min(DROP.total,num(dr.claimed,0)));
+  try{localStorage.setItem("ns-phase",PHASE)}catch(e){}
+  loadCart();renderAll();
+}
 async function loadStock(){
-  try{const r=await fetch("stock.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;STOCK=await r.json();
-    if(STOCK.drop&&Number.isFinite(STOCK.drop.claimed))DROP.claimed=Math.max(0,Math.min(DROP.total,STOCK.drop.claimed));
-    renderDrop();renderGrid()}catch(e){}
+  let d=null;
+  try{const r=await fetch("stock.json?t="+Date.now(),{cache:"no-store"});if(r.ok)d=await r.json()}catch(e){}
+  applyStock(d);
 }
 const SIGNATURE_LABEL = "Signature piece";  // change to "Top seller" once your sales say so
 
@@ -657,7 +791,9 @@ const ART={
 
 /* ---------------- catalogue ----------------
    f: text fields [label, example]. pick: one choice field [label, options]. imgs: [file, caption].
-   ed: edition line shown on the card and in the product view. build: key into BUILD. */
+   ed: edition line shown on the card and in the product view. build: key into BUILD.
+   soon: text. A product WITH soon is on the bench (not orderable in any phase). A product WITHOUT soon is in the launch set.
+   A soon text that starts with "Second drop" is badged Second drop and sorted first on the bench. */
 const P=[
  {id:"C1",side:"C",name:"Vol. 01: The Studio",kind:"Collector set",price:1999,line:"All six pieces on a numbered tray",badge:"Latest release",noAccent:true,
   ed:`Numbered 01/${DROP.total} to ${DROP.total}/${DROP.total}`,build:"studio",
@@ -674,7 +810,7 @@ const P=[
   size:"Coin 42 mm across, 4 mm thick, about 6 g. Frame 49 mm, foot 40 x 18 mm",f:[["Artist name","Dimo Mähtarp"],["City and year","Bengaluru 2026"]],pick:["Silhouette",["DJ","Guitarist","Vocalist","Traced from a photo"]],
   extra:"For a traced silhouette, send a photo in the chat. ",
   imgs:[["coin","In its frame, and the back"]]},
- {id:"C4",soon:"Opens for pre-order with a launch price. Tap to be told the day it opens.",side:"C",name:"Side A",kind:"Mixtape set of 4",price:1299,art:"standees",custom:true,line:"Four cassettes, your four songs, one rail",badge:"Made for you",
+ {id:"C4",soon:"Second drop, opening before Valentine's. Tap to be told the day it opens.",side:"C",name:"Side A",kind:"Mixtape set of 4",price:1299,art:"standees",custom:true,line:"Four cassettes, your four songs, one rail",badge:"Made for you",
   ed:"Your own four-track edition",build:"standees",
   desc:"Four pocket cassettes, each with a label carrying a song you choose, standing in a slotted rail. The rail comes as two sections that slide together with a dovetail, so the set reads as one piece on the shelf. Order a second set and the row keeps going.",
   size:"Cassettes 60 x 38 x 4 mm. Two rail sections, 132 x 34 x 10 mm each, 268 mm joined",f:[["Four song titles, separated by commas","Starboy, Save Your Tears, Jungle, adore u"]],
@@ -684,13 +820,13 @@ const P=[
   desc:"A fluted amp knob on a puck with eleven level marks. It clicks onto a printed post and spins freely. For queues, long renders and calls that could have been an email.",
   size:"44 mm base, 27 mm knob, 21 mm tall",f:[],imgs:[["knob","Red and ivory"],["knob_build","Cap and base"]]},
 
- {id:"A1",soon:"Opens for pre-order with a launch price. Tap to be told the day it opens.",side:"A",name:"Track Plate",kind:"Scannable song display",price:1799,art:"plate",custom:true,song:"plate",line:"Your song as a desk piece, scan it or see it",badge:"Signature",build:"plate",
+ {id:"A1",soon:"Second drop, opening before Valentine's. Tap to be told the day it opens.",side:"A",name:"Track Plate",kind:"Scannable song display",price:1799,art:"plate",custom:true,song:"plate",line:"Your song as a desk piece, scan it or see it",badge:"Signature",build:"plate",
   desc:"Your song on a matte black plate, two ways. As its Spotify Code: open the Spotify app, scan the plate and the song starts playing. Or as its sound wave: the loud and quiet parts of the track from first second to last, in 50 raised bars. The title and artist sit underneath. The plate drops into one slotted base bar and leans back 12 degrees, the angle a phone reads it from most easily.",
   size:"140 x 70 x 3 mm plate, 150 x 30 x 14 mm base bar",
   f:[["Song title","Blinding Lights",{max:60}],["Artist name","The Weeknd",{max:60,note:{code:"Spell both exactly as you want them printed under the code.",wave:"Spell both exactly. We build the wave from this song. For your own unreleased track, send the audio file in the chat."}}],
      ["Spotify song link","",{max:300,show:"code",ph:"https://open.spotify.com/track/...",note:{code:"Needed for the Spotify Code. In Spotify: Share, then Copy song link. Song not on Spotify? Choose Sound wave above."}}]],
   imgs:[["plate","Spotify Code"],["plate_wave","Sound wave"],["plate_build","Plate and base bar"]]},
- {id:"A5",soon:"Opens for pre-order with a launch price. Tap to be told the day it opens.",side:"A",name:"Track Tag",kind:"Song keytag",price:549,art:"songtag",custom:true,song:"tag",line:"Your song on your bag, scan it from the strap",build:"tag",
+ {id:"A5",soon:"Second drop, opening before Valentine's. Tap to be told the day it opens.",side:"A",name:"Track Tag",kind:"Song keytag",price:549,art:"songtag",custom:true,song:"tag",line:"Your song on your bag, scan it from the strap",build:"tag",
   desc:"A tag for your bag or keys. The front carries your song's Spotify Code, which plays the song when scanned in the Spotify app, or its sound wave. The code sits just below a raised rim, so keys and zips rub the rim and the code keeps scanning. The back carries the song and artist, or your own name. It hangs from a printed loop that locks with a twist, so there is no metal ring.",
   size:"80 x 30 x 4 mm, printed loop",
   f:[["Song title","Starboy",{max:60}],["Artist name","The Weeknd",{max:60,note:{code:"Spell both exactly as you want them printed on the back.",wave:"Spell both exactly. We build the wave from this song."}}],
@@ -705,7 +841,7 @@ const P=[
   desc:"Coasters with real printed grooves, a coloured centre label and a ribbed underside. Set of four.",
   size:"90 mm across, 4.6 mm thick, set of 4",f:[],imgs:[["coasters","Stack of four"]]},
 
- {id:"B1",side:"B",name:"Stack",kind:"Pick amp with drawer",price:1399,line:"Pick holder with a drawer",badge:"Build it yourself",build:"amp",
+ {id:"B1",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"B",name:"Stack",kind:"Pick amp with drawer",price:1399,line:"Pick holder with a drawer",badge:"Build it yourself",build:"amp",
   desc:"A small amp for the desk that you build yourself in a few minutes. Picks stand in the top slot, spares and a capo go in the drawer. Five parts, no glue.",
   size:"70 x 35 x 74 mm, fits standard picks",f:[],noAccent:true,imgs:[["amp","Built"],["amp_open","Drawer open"],["amp_build","The five parts"]]},
  {id:"B2",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"B",name:"Lift",kind:"Controller risers, pair",price:1699,line:"Pair of angled stands",build:"riser",
@@ -735,7 +871,7 @@ const P=[
   desc:"Three desk modules styled as mixer channels, each with its own fader on the front. A tall cup for pens and brushes, a mid cup for markers and scissors, and a tray with a divider for cards, clips and earbuds. Each module has a dovetail on one side and a socket on the other: lower one beside the next and they lock into a single row. Rearrange them any time, or run them apart.",
   size:"Tall cup 60 x 60 x 100 mm, mid cup 60 x 60 x 60 mm, tray 120 x 60 x 24 mm. 254 mm linked",f:[],
   imgs:[["channel","Linked, in use"],["channel_build","Three modules"]]},
- {id:"D8",side:"D",name:"B-Side",kind:"Catch-all tray",price:1099,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
+ {id:"D8",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"B-Side",kind:"Catch-all tray",price:1099,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
   desc:"A tray for the things you drop when you walk in: keys, rings, earbuds, a watch, loose change. It is drawn as a record, with grooves cut into the floor and a raised centre label, and a 20 mm rim so nothing rolls off. One piece, nothing to build.",
   size:"160 mm across, 20 mm tall",f:[],
   imgs:[["bside","In use"],["bside_bare","Grooves and label"]]},
@@ -781,13 +917,15 @@ const img=k=>"img/"+k+".webp";
 const defaults=p=>({t1:(p.f[0]&&p.f[0][1])||"",t2:(p.f[1]&&p.f[1][1])||""});
 const draw=(p,o,accent)=>svg(ART[p.art](o||defaults(p)),accent||"red");
 
-/* ---------------- build guides (QR codes on the box link to #build-<key>) ---------------- */
+/* ---------------- build guides (QR codes on the box link to #build-<key>) ----------------
+   steps: [title, text, picture or "", direction]. direction is optional: "down", "up", "side" or "turn".
+   It draws a small arrow beside the step title, so only set it where the text itself says which way the part moves. */
 const BUILD={
  amp:{name:"Stack",img:"amp_build_guide",parts:"5 parts",time:"3 minutes",steps:[
    ["Press in the three knobs","Each ivory knob has a short stem. Push them into the three holes on the face of the head until they sit flush."],
    ["Fit the handle","Line the two pins on the ivory handle up with the holes on the drawer front and press."],
-   ["Stack the head on the base","The head has four pins underneath. Line them up with the four sockets on the base and push down until the seam closes."],
-   ["Slide in the drawer, add picks","The drawer goes in tray first. Stand your picks in the slot on top.","amp_open_use"]]},
+   ["Stack the head on the base","The head has four pins underneath. Line them up with the four sockets on the base and push down until the seam closes.","","down"],
+   ["Slide in the drawer, add picks","The drawer goes in tray first. Stand your picks in the slot on top.","amp_open_use","side"]]},
  studio:{name:"Vol. 01: The Studio",img:"studio_set_guide",parts:"6 pieces, 1 tray",time:"1 minute",steps:[
    ["Stand the headphones","Press the two ear cups into the two pockets on their base. This is the only piece that needs building."],
    ["Find the numbers","Each piece has its number, 01/06 to 06/06, printed into the underside."],
@@ -799,9 +937,9 @@ const BUILD={
    note:"Tape is for light loads only. On textured paint or for a full rail, use screws."},
  plate:{name:"Track Plate",img:"plate_build_guide",parts:"Plate and base bar",time:"10 seconds",steps:[
    ["Set down the base bar","Red stripe toward you, slot behind it."],
-   ["Lower the plate in","Drop the bottom edge of the plate into the slot. It leans back 12 degrees and holds itself. To play the song, open Spotify, tap Search, tap the camera icon and scan the code.","plate_use"]]},
+   ["Lower the plate in","Drop the bottom edge of the plate into the slot. It leans back 12 degrees and holds itself. To play the song, open Spotify, tap Search, tap the camera icon and scan the code.","plate_use","down"]]},
  standees:{name:"Side A",img:"standee_build_guide",parts:"4 cassettes, 2 rail sections",time:"1 minute",steps:[
-   ["Join the rail","Hold one section flat. Lower the dovetail on the end of the other section straight down into its socket until both sit level."],
+   ["Join the rail","Hold one section flat. Lower the dovetail on the end of the other section straight down into its socket until both sit level.","","down"],
    ["Stand the cassettes","Press the bottom edge of each cassette into a slot. Track one on the left."],
    ["Add to it","A second set links onto either end the same way."]]},
  coin:{name:"Gig Coin",img:"coin_build_guide",parts:"Coin, frame, foot",time:"30 seconds",steps:[
@@ -809,112 +947,187 @@ const BUILD={
    ["Stand it or hang it","Press the two tabs at the bottom of the frame into the foot. The foot holds the split shut, so the coin is locked in. Or leave the foot off and use the loop."]]},
  fold:{name:"Fold",img:"fold_flat_guide",parts:"2 ribs, 2 braces",time:"1 minute",steps:[
    ["Lay out the braces","Place the two braces about 170 mm apart, notches facing up, red bars facing you."],
-   ["Press on the first rib","Line the two notches under a rib up with the notches at one end of the braces and press down until the rib touches the table. The tall end goes at the back."],
-   ["Press on the second rib","Same again at the other end. Check all four joints are fully down."],
+   ["Press on the first rib","Line the two notches under a rib up with the notches at one end of the braces and press down until the rib touches the table. The tall end goes at the back.","","down"],
+   ["Press on the second rib","Same again at the other end. Check all four joints are fully down.","","down"],
    ["Add the laptop","Rest the front edge of the laptop against the two lips.","fold_use"]],
    note:"To pack it, lift each rib straight up. If a joint feels tight on the first build, work it in and out a few times."},
  channel:{name:"Channel",img:"channel_build_guide",parts:"3 modules",time:"30 seconds",steps:[
    ["Pick your order","Each module has a dovetail on its right side and a socket on its left."],
-   ["Lower to link","Hold one module on the desk. Lower the next one straight down beside it so its socket slides over the dovetail."],
-   ["Change it any time","Lift a module straight up to release it.","channel_use"]]},
+   ["Lower to link","Hold one module on the desk. Lower the next one straight down beside it so its socket slides over the dovetail.","","down"],
+   ["Change it any time","Lift a module straight up to release it.","channel_use","up"]]},
  eject:{name:"Eject",img:"eject_build_guide",parts:"Tray, slider, face plate",time:"30 seconds",steps:[
    ["Drop in the slider","Lower the red slider into the tray, tab first, so the tab pokes out of the slot in the back."],
    ["Press on the face plate","Line the plate up with the tray, eject mark at the bottom right, and press round the edges until it sits flat."],
-   ["Load and eject","Slide in up to six cards. Push the red tab up with your thumb and they fan out. Tip it back and they drop home.","eject_open_use"]]},
+   ["Load and eject","Slide in up to six cards. Push the red tab up with your thumb and they fan out. Tip it back and they drop home.","eject_open_use","up"]]},
  crate:{name:"Crate",img:"crate_build_guide",parts:"Shell, spine, hood, 4 tags, 4 shims",time:"2 minutes",steps:[
-   ["Drop the red spine in","Feed the red spine into the shell from the top, feet down, until it sits on the floor. Each foot lands in a pocket."],
+   ["Drop the red spine in","Feed the red spine into the shell from the top, feet down, until it sits on the floor. Each foot lands in a pocket.","","down"],
    ["Press in the tags","Press a tag into the recess above each window. Flip it over to change the role."],
    ["Drop in the sticks","Stand each stick connector down. Silver in the window means it is home. Slim sticks: add a shim first."],
-   ["Press the hood on","Line the hood up from above and press down until it clicks.","crate_use"]]},
+   ["Press the hood on","Line the hood up from above and press down until it clicks.","crate_use","down"]]},
  standby:{name:"Standby",img:"standby_build_guide",parts:"Base and 3 fins",time:"1 minute",steps:[
-   ["Slide in the fins","Feed each fin's key into the channel from either end of the base. It is a snug fit by design."],
+   ["Slide in the fins","Feed each fin's key into the channel from either end of the base. It is a snug fit by design.","","side"],
    ["Set the gaps","Stand your closed laptop on the base and slide the fins in until they just touch it. They stay where you leave them.","standby_use"],
    ["Route the cables","Run the charger and display cables through the notches at the back."]]},
  rotary:{name:"Rotary",img:"rotary_open",parts:"2 plates, 2 posts, loop, spacers",time:"3 minutes",steps:[
    ["Lay out your parts","Plate A is the plain one. Plate B has the red line. Short posts (1) are for 2 to 3 keys, long posts (2) for more. The loop (L) is for a car fob. Spacers (S) fill gaps between keys.","rotary_s1_guide"],
    ["Put the posts through plate A, then the keys","Push a post up from underneath through each end hole of plate A. Drop a key over a post, bow first, so its blade lies along the plate. Alternate: one key from the right post, one from the left. Slip a spacer on last if the stack feels loose.","rotary_s2_guide"],
-   ["Press plate B on","Turn plate B so the red line faces up and press it down over both posts. Each post head clicks into its plate. The keys stay between the two plates.","rotary_s3_guide"],
-   ["Swing a key out, fold it back","Pinch the plates, pull a key out with your fingernail and swing it round the post. Push it back flat to close. To change keys, squeeze a split post head and push it back through the plate.","rotary_s4_guide"],
+   ["Press plate B on","Turn plate B so the red line faces up and press it down over both posts. Each post head clicks into its plate. The keys stay between the two plates.","rotary_s3_guide","down"],
+   ["Swing a key out, fold it back","Pinch the plates, pull a key out with your fingernail and swing it round the post. Push it back flat to close. To change keys, squeeze a split post head and push it back through the plate.","rotary_s4_guide","turn"],
    ["Add the loop for a car fob","The loop takes the place of one key, so you get one fewer key. Drop it over a post like a key. Swing it out and thread your fob's split ring through the slot. Fold it back flat to close.","rotary_s5_guide"],
    ["Swing it out when you need the fob","Pull the loop out like a key. The fob hangs from its ring. Fold it back in to carry.","rotary_s6_guide"]]},
  horn:{name:"Horn",img:"phonestand_horn_exploded_use",parts:"Stand and plate",time:"10 seconds",steps:[
-   ["Slide the stand onto the plate","Turn the stand so its groove underneath lines up with the dovetail rail on the plate and push it along the rail until it stops. The long tail of the plate stays behind to stop it tipping back.","phonestand_horn_exploded_use"],
+   ["Slide the stand onto the plate","Turn the stand so its groove underneath lines up with the dovetail rail on the plate and push it along the rail until it stops. The long tail of the plate stays behind to stop it tipping back.","phonestand_horn_exploded_use","side"],
    ["Set the cable","Feed the charging cable up through the cable opening and out the back before you place the phone.","phonestand_use"],
    ["Seat the phone","Rest the bottom of the phone on the seat, upright or sideways, with its bottom speaker over the two slits.","phonestand_use"]]},
  riser:{name:"Lift",img:"riser_use",parts:"2 wedges",time:"5 seconds",steps:[
    ["Place the two wedges","Set them about the width of your controller apart, tall end at the back, front lip toward you."],
    ["Rest the controller across both","It tilts 14 degrees toward you and the front lip stops it sliding.","riser_use"]]},
  knob:{name:"Gain",img:"knob_build_guide",parts:"Cap and base",time:"10 seconds",steps:[
-   ["Push the cap onto the post","Hold the base flat and press the knob straight down until you feel it click past the head of the post."],
-   ["Spin it","It turns freely. To take it apart, pull straight up."]]},
+   ["Push the cap onto the post","Hold the base flat and press the knob straight down until you feel it click past the head of the post.","","down"],
+   ["Spin it","It turns freely. To take it apart, pull straight up.","","turn"]]},
  box:{name:"Tape Case",img:"cassettebox_open_guide",parts:"Tray and lid",time:"10 seconds",steps:[
    ["Fill the tray","Picks and small things in the narrow side, cards or a coin in the wide side."],
-   ["Press the lid on","Line the label up with the thumb notch at the front and press until the rim seats. To open, push your thumb into the notch and lift.","cassettebox_use"]]},
+   ["Press the lid on","Line the label up with the thumb notch at the front and press until the rim seats. To open, push your thumb into the notch and lift.","cassettebox_use","down"]]},
  vinyl:{name:"Sleeve",img:"vinylstand_build_guide",parts:"Ledge and 2 feet",time:"1 minute",steps:[
    ["Stand the feet","Place the two record feet about 110 mm apart, grooves facing out, the slotted ends at the front."],
-   ["Slide in the ledge","Push the Now Spinning ledge down into the front slot of both feet until it reaches the bottom."],
+   ["Slide in the ledge","Push the Now Spinning ledge down into the front slot of both feet until it reaches the bottom.","","down"],
    ["Add the record","Rest the sleeve on the base behind the ledge and lean it back on the cut edge of the records.","vinylstand_record_use"]]},
  headphones:{name:"Hold",img:"headphonestand_build_guide",parts:"Base, post, saddle",time:"1 minute",steps:[
-   ["Post into the base","Push the bottom of the post into the slot in the knob, fader facing the same way as the pointer, until it reaches the floor of the slot."],
-   ["Saddle onto the post","Press the saddle down onto the top of the post, red arc facing front."],
+   ["Post into the base","Push the bottom of the post into the slot in the knob, fader facing the same way as the pointer, until it reaches the floor of the slot.","","down"],
+   ["Saddle onto the post","Press the saddle down onto the top of the post, red arc facing front.","","down"],
    ["Hang your headphones","Rest the headband on the saddle. Keep it on a flat surface.","headphonestand_use"]],
    note:"It is a tight press fit. If a joint feels loose after a lot of use, a single layer of tape on the post end tightens it."},
  tag:{name:"Track Tag and Alias",img:"nametag_guide",parts:"Tag and loop",time:"30 seconds",steps:[
    ["Thread the loop","Push the T-shaped end of the strap through the hole in the tag."],
    ["Wrap it round a strap or zip","Take the strap around your bag strap, zip pull or key ring."],
-   ["Lock it","Turn the T-bar in line with the slot at the other end, feed it through, and let it turn back. Pull gently to check.","songtag_use"]]}
+   ["Lock it","Turn the T-bar in line with the slot at the other end, feed it through, and let it turn back. Pull gently to check.","songtag_use","turn"]]}
 };
 
 /* ---------------- state ---------------- */
-let side="D", cart=[];
-try{cart=JSON.parse(localStorage.getItem("ns-list-v2")||"[]").filter(it=>P.some(p=>p.id===it.id&&!p.soon))}catch(e){}
-const save=()=>{try{localStorage.setItem("ns-list-v2",JSON.stringify(cart))}catch(e){}};
+const byId=id=>P.find(p=>p.id===id);
+const isSecond=p=>!!p.soon&&/^Second drop/.test(p.soon);
+const batchLeft=()=>Math.max(0,DROP.batch-DROP.claimed);
+const c1Full=()=>DROP.claimed>=DROP.batch;
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+/* stock is ignored while nothing can be ordered */
+const stockOf=p=>PHASE==="waitlist"?{s:"in",n:null}:(p.id==="C1"&&c1Full()?{s:"out",n:null}:stk(p.id));
+const PH=()=>({
+  waitlist:{tick:"Pre-orders opening soon",list:"Interest list",add:"Add to interest list",cta:"Get early access",go:"Get early access",label:"First drop, early access"},
+  preorder:{tick:`Pre-orders open. Shipping from ${SHIP_FROM}`,list:"Pre-order list",add:"Add to pre-order list",cta:"Pre-order on WhatsApp",go:"Pre-order",label:"First drop, pre-order open"},
+  live:{tick:"Open for orders",list:"Order list",add:"Add to order list",cta:"Order on WhatsApp",go:"Order",label:"Available now"}}[PHASE]);
 const wa=text=>"https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text);
+const earlyMsg=names=>`Hi ${BRAND}, put me on the early access list for: ${names.join(", ")}`;
+const waLink=(cls,msg,label,id)=>`<a class="${cls}"${id?` id="${id}"`:""} target="_blank" rel="noopener" href="${esc(wa(msg))}">${esc(label)}</a>`;
+
+/* the list is an interest list in the waitlist phase and an order list otherwise. They are stored apart,
+   so a name left on the interest list never turns into a half-filled order when the phase changes. */
+let side="D", cart=[];
+const cartKey=()=>PHASE==="waitlist"?"ns-wish-v1":"ns-list-v2";
+function fixItem(it){
+  const p=byId(it.id),v=Array.isArray(it.vals)?it.vals:[];
+  return {id:p.id,qty:Math.max(1,Math.min(99,parseInt(it.qty,10)||1)),accent:p.noAccent?"":(it.accent==="ivory"?"ivory":"red"),
+    vals:p.f.map((f,i)=>typeof v[i]==="string"?v[i]:""),pick:p.pick?(p.pick[1].includes(it.pick)?it.pick:p.pick[1][0]):"",
+    gift:!!it.gift,giftNote:str(it.giftNote,"",90),mode:p.song?(it.mode==="wave"?"wave":"code"):"",back:p.song==="tag"?(it.back==="name"?"name":"song"):""};
+}
+function loadCart(){
+  cart=[];
+  try{const a=JSON.parse(localStorage.getItem(cartKey())||"[]");
+    if(Array.isArray(a))cart=a.filter(it=>it&&typeof it==="object"&&P.some(p=>p.id===it.id&&live(p))).map(fixItem)}catch(e){cart=[]}
+}
+const save=()=>{try{localStorage.setItem(cartKey(),JSON.stringify(cart))}catch(e){}};
 
 function card(p,booth){
   const badges=p.soon?[]:[p.badge,p.custom&&p.badge!=="Made for you"?"Made for you":null].filter(Boolean);
-  const k=p.soon?{s:"in"}:stk(p.id);
-  return `<button class="card${k.s==="out"?" is-out":""}${p.soon?" is-soon":""}" type="button" data-open="${p.id}" aria-label="${esc(p.name)}, ${esc(p.kind||"")}, ${p.soon?"coming soon":inr(p.price)}">
-    <div class="shot"><img src="${img(p.imgs[0][0])}" alt="${esc(p.name)}, ${esc(p.kind||"")}" loading="lazy" width="880" height="880"><img class="bp" src="${img("bp_"+p.id)}" alt="" aria-hidden="true" loading="lazy" width="1200" height="1200">
-      <span class="badges">${p.soon?`<span class="badge out">Coming soon</span>`:""}${k.s==="out"?`<span class="badge out">Sold out</span>`:k.s==="low"?`<span class="badge low">${k.n?`Only ${k.n} left`:"Few left"}</span>`:""}${badges.map((b,i)=>`<span class="badge${i===0&&p.badge?" hot":" opt"}">${esc(b)}</span>`).join("")}</span><span class="idx">${p.id}</span></div>
-    ${p.kind?`<span class="kind">${esc(p.kind)}</span>`:""}
-    <div class="meta"><h3>${esc(p.name)}</h3><span class="price">${p.soon?"Soon":inr(p.price)}</span></div>
-    <p class="line">${esc(p.line)}</p>${booth&&p.ed?`<div class="ed">${esc(p.ed)}</div>`:""}</button>`;
+  const k=p.soon?{s:"in"}:stockOf(p);
+  const state=p.soon?`<span class="badge out">${isSecond(p)?"Second drop":"Coming soon"}</span>`
+    :k.s==="out"?`<span class="badge out">${p.id==="C1"?"Batch full":"Sold out"}</span>`
+    :k.s==="low"?`<span class="badge low">${k.n?`Only ${k.n} left`:"Few left"}</span>`
+    :PHASE==="preorder"?`<span class="badge out">Pre-order</span>`:"";
+  return `<button class="card${k.s==="out"?" is-out":""}${p.soon?" is-soon":""}" type="button" data-open="${p.id}" aria-label="${esc(p.name)}, ${esc(p.kind||"")}, ${p.soon?(isSecond(p)?"second drop":"coming soon"):inr(p.price)}">
+    <span class="shot"><img src="${img(p.imgs[0][0])}" alt="" loading="lazy" decoding="async" width="880" height="880"><img class="bp" src="${img("bp_"+p.id)}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="1200" height="1200">
+      <span class="badges">${state}${badges.map((b,i)=>`<span class="badge${i===0&&p.badge?" hot":" opt"}">${esc(b)}</span>`).join("")}</span><span class="idx">${p.id}</span></span>
+    <span class="txt">${p.kind?`<span class="kind">${esc(p.kind)}</span>`:""}
+    <span class="meta"><span class="h3">${esc(p.name)}</span><span class="price">${p.soon?"Soon":inr(p.price)}</span></span>
+    <span class="line">${esc(p.line)}</span>${booth&&p.ed?`<span class="ed">${esc(p.ed)}</span>`:""}<span class="go">${p.soon?"Tell me when it lands":PH().go}</span></span></button>`;
 }
 let filt="all";
 function renderGrid(){
   const [t,c]=SIDES[side];$("sideTitle").textContent=t;$("sideCopy").textContent=c;
-  ["A","B","D","all"].forEach(s=>$("tab"+(s==="all"?"All":s)).setAttribute("aria-selected",String(s===side)));
+  ["A","B","D","all"].forEach(s=>{const b=$("tab"+(s==="all"?"All":s));b.setAttribute("aria-selected",String(s===side));b.tabIndex=s===side?0:-1});
   const inSide=P.filter(p=>live(p)&&(side==="all"||p.side===side));
-  if(!inSide.some(p=>passes(p,filt)))filt="all";
+  const soon=P.filter(p=>p.soon&&!p.hide&&(side==="all"||p.side===side)).sort((a,b)=>isSecond(b)-isSecond(a));
+  const few=inSide.length<=2;
+  if(inSide.length<4||!inSide.some(p=>passes(p,filt)))filt="all";
+  $("filters").hidden=inSide.length<4;
   $("filters").innerHTML=FILTERS.filter(([k])=>k==="all"||inSide.some(p=>passes(p,k))).map(([k,l])=>`<button type="button" data-filter="${k}" aria-pressed="${k===filt}">${esc(l)}</button>`).join("");
   const shown=inSide.filter(p=>passes(p,filt));
-  $("gridCount").textContent=`${shown.length} ${shown.length===1?"piece":"pieces"}`;
-  $("grid").innerHTML=shown.map(p=>card(p)).join("");
-  const soon=P.filter(p=>p.soon&&(side==="all"||p.side===side));
+  $("gridCount").textContent=shown.length?`${PH().label} · ${shown.length} ${shown.length===1?"piece":"pieces"}`:"";
+  const second=soon.filter(isSecond).map(p=>p.name);
+  const note=!few||inSide.length===2?"":inSide.length===1
+    ?`<div class="gnote"><b>One piece from ${esc(t)} is in the first drop</b><p>${soon.length} more ${soon.length===1?"is":"are"} on the bench below.${second.length?` ${esc(second.join(" and "))} ${second.length===1?"opens":"open"} in the second drop, before Valentine's.`:""}</p></div>`
+    :`<div class="gnote"><b>${esc(t)} joins after the first drop</b><p>Nothing from ${esc(t)} is open yet. The ${soon.length} ${soon.length===1?"piece":"pieces"} below ${soon.length===1?"is":"are"} on the bench. Tap one to be told when it lands.</p></div>`;
+  $("grid").className="grid"+(few?" few":"");
+  $("grid").innerHTML=shown.map(p=>card(p)).join("")+note;
   $("soonWrap").hidden=!soon.length;$("soonGrid").innerHTML=soon.map(p=>card(p)).join("");
 }
 function swap(el){el.classList.remove("swap");void el.offsetWidth;el.classList.add("swap")}
 function setSide(s){side=s;filt="all";renderGrid();swap($("grid"))}
 function renderDrop(){
-  const left=DROP.total-DROP.claimed;
-  $("tickEd").textContent=`Vol. 01: ${DROP.total} numbered sets`+(DROP.claimed?`, ${left} left`:"");
-  $("heroStamp").textContent=DROP.claimed?`${left} of ${DROP.total} left`:`Edition of ${DROP.total}`;
-  $("heroEdition").innerHTML=`<div><b>${DROP.total}</b><span>numbered sets</span></div><div><b>6</b><span>pieces a set</span></div><div><b>${inr(1999)}</b><span>tray included</span></div>`
-    +(DROP.claimed?`<div class="meter" role="img" aria-label="${DROP.claimed} of ${DROP.total} sets claimed"><i style="width:${(100*DROP.claimed/DROP.total).toFixed(1)}%"></i></div>`:"");
-  $("boothGrid").innerHTML=P.filter(p=>p.side==="C"&&p.id!=="C1"&&live(p)).map(p=>card(p,true)).join("");
-  $("sigLabel").textContent=SIGNATURE_LABEL;$("sigPrice").textContent=inr(P.find(p=>p.id==="A1").price);
+  const part=DROP.batch<DROP.total,left=batchLeft(),gone=DROP.claimed>=DROP.total;
+  $("tickEd").textContent=`Vol. 01: ${DROP.total} numbered sets`+(part?`, ${DROP.batchName} of ${DROP.batch}`:"")+(DROP.claimed&&!gone?`, ${left} left`:"");
+  $("heroStamp").textContent=!DROP.claimed?`Edition of ${DROP.total}`:gone?"Edition complete":!left?`${cap(DROP.batchName)} full`:part?`${left} left in the ${DROP.batchName}`:`${left} of ${DROP.total} left`;
+  $("heroEdition").innerHTML=`<div><b>${DROP.total}</b><span>numbered sets</span></div><div><b>6</b><span>pieces a set</span></div><div><b>${inr(byId("C1").price)}</b><span>tray included</span></div>`
+    +(DROP.claimed?`<div class="meter" role="img" aria-label="${DROP.claimed} of ${DROP.batch} sets ${part?"in the "+esc(DROP.batchName)+" ":""}claimed"><i style="width:${Math.min(100,100*DROP.claimed/DROP.batch).toFixed(1)}%"></i></div>`:"")
+    +(part?`<p class="batchline">${esc(cap(DROP.batchName))}: ${DROP.batch} of ${DROP.total} sets${DROP.claimed?`, ${Math.min(DROP.claimed,DROP.batch)} claimed`:""}</p>`:"");
+  $("boothGrid").innerHTML=P.filter(p=>p.side==="C"&&p.id!=="C1"&&!p.hide).sort((a,b)=>!!a.soon-!!b.soon||isSecond(b)-isSecond(a)).map(p=>card(p,true)).join("");
+  $("sigPrice").textContent=inr(byId("A1").price);
+}
+/* everything whose wording depends on the phase */
+function renderPhase(){
+  const L=PH(),wl=PHASE==="waitlist",pre=PHASE==="preorder",c1=byId("C1"),c2=byId("C2"),a1=byId("A1");
+  const part=DROP.batch<DROP.total,gone=DROP.claimed>=DROP.total,full=c1Full()&&!wl;
+  root.dataset.phase=PHASE;
+  $("tickPhase").textContent=L.tick;$("listLbl").textContent=L.list;
+  const batchTxt=part?`The ${DROP.batchName} is ${DROP.batch} sets. `:"";
+  const line=full?(gone?`All ${DROP.total} sets are claimed.`:`The ${DROP.batchName} is full. Ask to be told when the next one opens.`)
+    :wl?`Pre-orders open soon. ${batchTxt}The early access list gets the first message.`
+    :pre?`Pre-orders are open. ${batchTxt}Ships from ${SHIP_FROM}.`
+    :part?`The ${DROP.batchName} is ${DROP.batch} sets, printed to order.`:"";
+  $("heroPhase").hidden=!line;$("heroPhase").innerHTML=`<i class="led"></i><span>${esc(line)}</span>`;
+  const primary=wl?waLink("btn red",earlyMsg([c1.name]),"Get early access")
+    :full?(gone?`<button class="btn" type="button" data-open="C1">See the set</button>`:waLink("btn red",`Hi ${BRAND}, please tell me when the next batch of ${c1.name} opens.`,"Tell me when the next batch opens"))
+    :`<button class="btn red" type="button" data-open="C1">${pre?"Pre-order a numbered set":"Claim a numbered set"}</button>`;
+  $("heroCta").innerHTML=primary+(wl?`<button class="btn ghost" type="button" data-open="C1">See the set, ${inr(c1.price)}</button>`
+    :`<button class="btn ghost" type="button" data-open="C2">Start with one piece, ${inr(c2.price)}</button>`);
+  $("boothCta").textContent=wl?"See the Gig Coin":pre?"Pre-order a Gig Coin":"Mint a Gig Coin";
+  $("sigLabel").textContent=SIGNATURE_LABEL+(isSecond(a1)?" · Second drop":a1.soon?" · Coming soon":"");
+  $("sigCta").textContent=a1.soon?"Tell me when it opens":"Make it with your song";
+  $("howLead").textContent=wl?"Pre-orders are not open yet. Tap Get early access on any piece and you get the first message when they do. After that, ordering takes three steps."
+    :pre?"Pre-orders are open for the first drop. Three steps, all of them in one WhatsApp chat."
+    :"Three steps, all of them in one WhatsApp chat. Nothing is charged on this site.";
+  $("howDispatch").textContent=wl?`Shipping is planned from ${SHIP_FROM}. Every piece is printed after it is ordered, on one printer, in the order payments come in.`
+    :pre?`Pre-orders ship from ${SHIP_FROM}, in the order payments come in.${PREORDER_NOTE?" "+PREORDER_NOTE:""} Your dispatch date is confirmed in the chat before you pay.`
+    :"Every piece is printed after you order, on one printer, in the order payments come in. Your dispatch date is confirmed in the chat before you pay.";
+  $("soonCopy").textContent="Designed and drawn, not on sale yet. Tap one to be told when it lands.";
+}
+function renderAll(){
+  renderPhase();renderDrop();renderGrid();renderCount();
+  if($("pd").open&&cur)openProduct(cur.id);
+  if($("list").open)renderList();
 }
 
 /* ---------------- build section ---------------- */
-let buildKey="amp";
+let buildKey="studio";
+const dirSvg=(c,label,d)=>`<svg class="dir ${c}" viewBox="0 0 18 18" role="img" aria-label="${label}"><path d="${d}"/></svg>`;
+const DIRS={down:dirSvg("d","Moves straight down","M9 3v12M4 10l5 5 5-5"),up:dirSvg("u","Moves straight up","M9 15V3M4 8l5-5 5 5"),
+  side:dirSvg("s","Slides sideways","M3 9h12M10 4l5 5-5 5"),turn:dirSvg("t","Turns","M14.5 9a5.5 5.5 0 1 1-1.8-4.1M13 1.8v3.4H9.6")};
 function renderBuild(){
-  $("buildChips").innerHTML=Object.entries(BUILD).map(([k,b])=>`<button type="button" role="tab" data-build="${k}" aria-selected="${k===buildKey}">${esc(b.name)}</button>`).join("");
+  $("buildChips").innerHTML=Object.entries(BUILD).map(([k,b])=>`<button type="button" role="tab" data-build="${k}" aria-selected="${k===buildKey}" tabindex="${k===buildKey?0:-1}">${esc(b.name)}</button>`).join("");
   const b=BUILD[buildKey];
   $("buildPanel").innerHTML=`<div class="shot"><img src="${img(b.img)}" alt="${esc(b.name)}, parts laid out" loading="lazy" width="880" height="880"></div>
     <div><h3>${esc(b.name)}</h3><div class="bmeta"><span>${esc(b.parts)}</span><span>About ${esc(b.time)}</span><span>No glue, no tools</span></div>
-    <p class="bkey"><b>Reading the pictures:</b> a letter in a circle names a part. A red arrow shows which way it moves. The number on the arrow is the step.</p>
-    <ol class="bsteps">${b.steps.map(s=>`<li><b>${esc(s[0])}</b><span>${esc(s[1])}</span>${s[2]?`<div class="sfig"><img src="${img(s[2])}" alt="${esc(s[0])}" loading="lazy" width="880" height="880"></div>`:""}</li>`).join("")}</ol>${b.note?`<p class="bnote">${esc(b.note)}</p>`:""}</div>`;
+    <p class="bkey"><b>Reading the pictures:</b> a letter in a circle names a part. A red arrow shows which way it moves. The number on the arrow is the step. A small arrow beside a step title shows which way that part moves.</p>
+    <ol class="bsteps">${b.steps.map(s=>`<li><b>${esc(s[0])}${s[3]&&DIRS[s[3]]?DIRS[s[3]]:""}</b><span>${esc(s[1])}</span>${s[2]?`<div class="sfig"><img src="${img(s[2])}" alt="${esc(b.name)}, ${esc(s[0].toLowerCase())}" loading="lazy" decoding="async" width="880" height="880"></div>`:""}</li>`).join("")}</ol>${b.note?`<p class="bnote">${esc(b.note)}</p>`:""}</div>`;
   trackSteps();
 }
 let stepIO=null;
@@ -926,13 +1139,20 @@ function trackSteps(){
   stepIO=new IntersectionObserver(es=>{es.forEach(e=>e.target.classList.toggle("on",e.isIntersecting));settle()},{rootMargin:"-25% 0px -50% 0px"});
   li.forEach(x=>stepIO.observe(x));
 }
-function showBuild(k,scroll){if(!BUILD[k])return;buildKey=k;renderBuild();swap($("buildPanel"));if(scroll)$("build").scrollIntoView()}
-function routeHash(){const m=/^#build-([a-z]+)$/.exec(location.hash);if(m)showBuild(m[1],true)}
+function showBuild(k,scroll){if(!BUILD[k])return;const had=document.activeElement&&document.activeElement.closest("#buildChips");buildKey=k;renderBuild();swap($("buildPanel"));
+  const chip=$("buildChips").querySelector(`[data-build="${k}"]`);if(chip){if(had)chip.focus();if(chip.scrollIntoView&&!scroll)chip.scrollIntoView({block:"nearest",inline:"nearest"})}
+  if(scroll)$("build").scrollIntoView()}
+function routeHash(){
+  const h=location.hash;let m;
+  if(h==="#terms"){openTerms();return}
+  if((m=/^#build-([a-z]+)$/.exec(h))){showBuild(m[1],true);return}
+  if((m=/^#p-([A-D]\d{1,2})$/.exec(h))){const p=byId(m[1]);if(p&&!p.hide&&!$("pd").open)openProduct(p.id)}
+}
 
 /* ---------------- product dialog ---------------- */
 let cur=null;
 function itemText(it,n){
-  const p=P.find(x=>x.id===it.id);let s=`${n?n+". ":""}${p.id} ${p.name} x${it.qty} (${inr(p.price*it.qty)})`;
+  const p=byId(it.id);let s=`${n?n+". ":""}${p.id} ${p.name} x${it.qty} (${inr(p.price*it.qty)})`;
   if(it.pick)s+=`\n   ${p.pick[0]}: ${it.pick}`;
   if(it.accent)s+=`\n   Accent: ${it.accent}`;
   if(it.gift)s+=`\n   Gift: yes${it.giftNote?". Note on the card: "+it.giftNote:""}`;
@@ -940,118 +1160,186 @@ function itemText(it,n){
   if(p.song==="tag")s+=`\n   Back of the tag: ${it.back==="name"?"Your name":"Song and artist"}`;
   it.vals.forEach((v,i)=>{if(v&&p.f[i]&&showF(p.f[i],it))s+=`\n   ${p.f[i][0]}: ${v}`});return s;
 }
-const sign=items=>(items.some(it=>P.find(p=>p.id===it.id).custom)?"Please share the preview and payment details.":"Please share the payment details.")
+const sign=items=>(items.some(it=>byId(it.id).custom)?"Please share the preview and payment details.":"Please share the payment details.")
   +`\n\nI have read and agree to the No Skips Terms (${TERMS_DATE}), including replacements only within 48 hours of delivery.`;
+/* the WhatsApp message for one piece (numbered=false) or the whole list (numbered=true) */
+function orderMsg(items,numbered){
+  const pre=PHASE==="preorder",total=items.reduce((a,it)=>a+byId(it.id).price*it.qty,0);
+  return `Hi ${BRAND}, ${pre?"this is a PRE-ORDER":"I would like to order"}:\n\n${items.map((it,i)=>itemText(it,numbered?i+1:0)).join("\n")}\n\n`
+    +(numbered?`Total before shipping: ${inr(total)}\n`:"")
+    +(pre?`PRE-ORDER. Ships from ${SHIP_FROM}.${PREORDER_NOTE?" "+PREORDER_NOTE:""}\n`:"")
+    +sign(items);
+}
 function openProduct(id){
-  const p=P.find(x=>x.id===id);if(!p)return;
-  cur={id,qty:1,accent:p.noAccent?"":(p.song==="plate"?"ivory":"red"),vals:p.f.map(()=>""),pick:p.pick?p.pick[1][0]:"",gift:false,giftNote:"",mode:p.song?"code":"",back:p.song==="tag"?"song":"",prevAccent:"red"};
-  const fieldHtml=(f,i)=>`<div class="field" id="fw${i}"><div class="flabel"><label for="f${i}">${esc(f[0])}</label><span class="cnt" id="fc${i}" aria-live="polite"></span></div><input id="f${i}" data-i="${i}" maxlength="${fo(f).max||(f[0].startsWith("Four")?120:28)}" placeholder="${esc(fo(f).ph||f[1])}" autocomplete="off"${isLink(f)?' type="url" inputmode="url"':""}${isOpt(f)?"":' aria-required="true"'}><p class="note" id="fn${i}" hidden></p></div>`;
+  const p=byId(id);if(!p||p.hide)return;
+  const L=PH(),wl=PHASE==="waitlist",pre=PHASE==="preorder",k=p.soon?{s:"in"}:stockOf(p);
+  const keep=cur&&cur.id===id&&$("pd").open?cur:null;
+  cur=keep||{id,qty:1,accent:p.noAccent?"":(p.song==="plate"?"ivory":"red"),vals:p.f.map(()=>""),pick:p.pick?p.pick[1][0]:"",gift:false,giftNote:"",mode:p.song?"code":"",back:p.song==="tag"?"song":"",prevAccent:"red"};
+  const fieldHtml=(f,i)=>`<div class="field" id="fw${i}"><div class="flabel"><label for="f${i}">${esc(f[0])}</label><span class="cnt" id="fc${i}" aria-live="polite"></span></div><input id="f${i}" data-i="${i}" value="${esc(cur.vals[i]||"")}" maxlength="${fo(f).max||(f[0].startsWith("Four")?120:28)}" placeholder="${esc(fo(f).ph||f[1])}" autocomplete="off"${isLink(f)?' type="url" inputmode="url"':""}${isOpt(f)||wl?"":' aria-required="true"'} aria-describedby="fn${i}"><p class="note" id="fn${i}" hidden></p></div>`;
   const split=p.song==="tag"?3:p.f.length;
-  const slides=(p.art?`<div class="slide" id="pdArt"></div>`:"")+p.imgs.map(m=>`<div class="slide"><img src="${img(m[0])}" alt="${esc(p.name)}, ${esc(m[1].toLowerCase())}" width="880" height="880"><span class="mono cap">${esc(m[1])}</span></div>`).join("")
-    +`<div class="slide"><img src="${img("bp_"+p.id)}" alt="${esc(p.name)}, blueprint with dimensions in millimetres" width="1200" height="1200"><span class="mono cap">Blueprint</span></div>`;
+  const slides=(p.art?`<div class="slide" id="pdArt"></div>`:"")+p.imgs.map((m,j)=>`<div class="slide"><img src="${img(m[0])}" alt="${esc(p.name)}, ${esc(m[1].toLowerCase())}" width="880" height="880"${j||p.art?' loading="lazy"':""} decoding="async"><span class="mono cap">${esc(m[1])}</span></div>`).join("")
+    +`<div class="slide"><img src="${img("bp_"+p.id)}" alt="${esc(p.name)}, blueprint with dimensions in millimetres" width="1200" height="1200" loading="lazy" decoding="async"><span class="mono cap">Blueprint</span></div>`;
   const n=p.imgs.length+(p.art?1:0)+1;
-  $("pd").innerHTML=`<button class="close" type="button" aria-label="Close" data-close>&times;</button>
-  <div class="pd-grid">
-    <div class="pd-stage"><div class="car" id="car">${slides}</div>${n>1?`<div class="car-nav"><button type="button" data-car="-1" aria-label="Previous image">&larr;</button><span class="car-dots" id="carDots"></span><button type="button" data-car="1" aria-label="Next image">&rarr;</button></div>`:""}</div>
-    <div class="pd-body">
-      <span class="eyebrow muted">${p.id} / ${SIDE_NAME[p.side]}${p.kind?" / "+esc(p.kind):""}</span>
-      <h2 id="pdName">${esc(p.name)}</h2>
-      <div class="pd-price">${p.soon?`<span class="badge out">Coming soon</span>`:inr(p.price)+(p.badge?`<span class="badge hot">${esc(p.badge)}</span>`:"")}</div>
-      ${p.ed?`<div class="pd-ed">${esc(p.ed)}${p.id==="C1"&&DROP.claimed?`. ${DROP.total-DROP.claimed} left`:""}</div>`:""}
-      <p class="pd-desc">${esc(p.desc)}</p>
-      ${p.soon?`<div class="pd-ed">${esc(p.soon)}</div><a class="btn red block" target="_blank" rel="noopener" href="${esc(wa(`Hi ${BRAND}, please tell me when ${p.name} (${p.kind}) is available.`))}">Tell me when it lands</a>`:`
-      ${p.song?`<div class="field"><span class="lab">Style</span><div class="seg"><button type="button" data-mode="code" aria-pressed="false">Spotify Code</button><button type="button" data-mode="wave" aria-pressed="false">Sound wave</button></div>
+  const form=`${p.song?`<div class="field"><span class="lab">Style</span><div class="seg"><button type="button" data-mode="code" aria-pressed="false">Spotify Code</button><button type="button" data-mode="wave" aria-pressed="false">Sound wave</button></div>
         <button class="hintbtn" type="button" data-hint aria-expanded="false" aria-controls="hintBox">What is the difference?</button><div class="hintbox" id="hintBox" hidden>${HINT(p.song==="tag")}</div></div>`:""}
       ${p.f.slice(0,split).map(fieldHtml).join("")}
       ${p.song==="tag"?`<div class="field"><span class="lab">Back of the tag</span><div class="seg"><button type="button" data-back="song" aria-pressed="false">Song and artist</button><button type="button" data-back="name" aria-pressed="false">Your name</button></div>
         <p class="note">Song and artist fit 18 characters each, your name fits 14, spaces included.</p></div>`:""}
-      ${p.f.slice(split).map((f,j)=>fieldHtml(f,j+split)).join("")}
-      ${p.pick?`<div class="field"><span class="lab">${esc(p.pick[0])}</span><div class="seg">${p.pick[1].map(o=>`<button type="button" data-pick="${esc(o)}" aria-pressed="false">${esc(o)}</button>`).join("")}</div></div>`:""}
-      <div class="row2">
-        ${p.noAccent?"":`<div class="field" id="accField"><span class="lab">Accent colour</span><div class="seg">
+      ${p.f.slice(split).map((f,j)=>fieldHtml(f,j+split)).join("")}`;
+  const accent=p.noAccent?"":`<div class="field" id="accField"><span class="lab">Accent colour</span><div class="seg">
           <button type="button" data-accent="red" aria-pressed="false"><i style="background:var(--p-red)"></i>Red</button>
-          <button type="button" data-accent="ivory" aria-pressed="false"><i style="background:var(--p-ivory)"></i>Ivory</button></div></div>`}
-        <div class="field"><span class="lab">Quantity</span><div class="qty"><button type="button" data-q="-1" aria-label="One fewer">&minus;</button><output id="qOut">1</output><button type="button" data-q="1" aria-label="One more">+</button></div></div>
+          <button type="button" data-accent="ivory" aria-pressed="false"><i style="background:var(--p-ivory)"></i>Ivory</button></div></div>`;
+  let act;
+  if(p.soon)act=`<div class="pd-ed ph"><i class="led"></i><span>${esc(p.soon)}</span></div>
+      <div class="pd-act">${waLink("btn red block",`Hi ${BRAND}, please tell me when ${p.name} (${p.kind}) is available.`,isSecond(p)?"Tell me the day it opens":"Tell me when it lands","pdOrder")}</div>
+      <p class="note">Opens WhatsApp with a short message. Nothing is ordered or charged.</p>`;
+  else if(wl)act=`<div class="pd-ed ph"><i class="led"></i><span>Pre-orders are not open yet. Join the early access list and you get the first message when they do.</span></div>
+      ${p.art?`${form}${accent}<p class="note">Try your own text above to see it on the piece. Nothing is ordered yet.</p><p class="warn" id="pdWarn" role="alert" hidden></p>`:""}
+      <div class="pd-act">${waLink("btn red block",earlyMsg([p.name]),L.cta,"pdOrder")}</div>
+      <button class="btn ghost block" type="button" id="pdAdd"${cart.some(it=>it.id===p.id)?" disabled>On your interest list":">"+L.add}</button>
+      <p class="note">Opens WhatsApp with a short message. Nothing is ordered or charged.</p>`;
+  else act=`${pre?`<div class="pd-ed ph"><i class="led"></i><span>Pre-order. Ships from ${esc(SHIP_FROM)}.${PREORDER_NOTE?" "+esc(PREORDER_NOTE):""}</span></div>`:""}
+      ${k.s==="out"?`<p class="stockline out">${p.id==="C1"?(DROP.claimed>=DROP.total?`All ${DROP.total} sets are claimed`:`The ${esc(DROP.batchName)} is full`):"Sold out right now"}</p>
+        <div class="pd-act">${p.id==="C1"&&DROP.claimed>=DROP.total?"":waLink("btn red block",p.id==="C1"?`Hi ${BRAND}, please tell me when the next batch of ${p.name} opens.`:`Hi ${BRAND}, please tell me when ${p.name} is back in stock.`,p.id==="C1"?"Tell me when the next batch opens":"Notify me on WhatsApp","pdOrder")}</div>`
+      :`${form}
+      ${p.pick?`<div class="field"><span class="lab">${esc(p.pick[0])}</span><div class="seg">${p.pick[1].map(o=>`<button type="button" data-pick="${esc(o)}" aria-pressed="false">${esc(o)}</button>`).join("")}</div></div>`:""}
+      <div class="row2">${accent}
+        <div class="field"><span class="lab" id="qLab">Quantity</span><div class="qty" role="group" aria-labelledby="qLab"><button type="button" data-q="-1" aria-label="One fewer">&minus;</button><output id="qOut" aria-live="polite">1</output><button type="button" data-q="1" aria-label="One more">+</button></div></div>
       </div>
-      <div class="gift"><label class="tick" for="gift"><input type="checkbox" id="gift" data-gift="tick">This is a gift</label>
-        <div class="field" id="giftBox" hidden><label for="giftNote">Short note for the card (optional)</label><input id="giftNote" data-gift="note" maxlength="90" placeholder="Happy birthday. Play it loud." autocomplete="off"></div></div>
-      ${(()=>{const k=stk(p.id);
-        if(k.s==="out")return `<p class="stockline out">Sold out right now</p><a class="btn red block" id="pdOrder" target="_blank" rel="noopener" href="${esc(wa(`Hi ${BRAND}, please tell me when ${p.name} is back in stock.`))}">Notify me on WhatsApp</a>`;
-        return (k.s==="low"?`<p class="stockline">${k.n?`Only ${k.n} left`:"Few left"}</p>`:"")+`<p class="warn" id="pdWarn" role="alert" hidden></p><p class="note" id="pdNeed" hidden></p>${agreeBox("agreePd")}<a class="btn red block" id="pdOrder" target="_blank" rel="noopener" href="#">Order on WhatsApp</a>
-      <button class="btn ghost block" type="button" id="pdAdd">Add to order list</button>`})()}
-      ${p.extra?`<p class="note">${esc(p.extra)}</p>`:""}`}
-      ${p.build?`<button class="linkish" type="button" data-gobuild="${p.build}">See how it builds, ${esc(BUILD[p.build].time)}</button>`:""}
+      <div class="gift"><label class="tick" for="gift"><input type="checkbox" id="gift" data-gift="tick"${cur.gift?" checked":""}>This is a gift</label>
+        <div class="field" id="giftBox"${cur.gift?"":" hidden"}><label for="giftNote">Short note for the card (optional)</label><input id="giftNote" data-gift="note" maxlength="90" value="${esc(cur.giftNote)}" placeholder="Happy birthday. Play it loud." autocomplete="off"></div></div>
+      ${k.s==="low"?`<p class="stockline">${k.n?`Only ${k.n} left`:"Few left"}</p>`:""}<p class="warn" id="pdWarn" role="alert" hidden></p>${agreeBox("agreePd")}
+      <div class="pd-act"><p class="note" id="pdNeed" role="status" hidden></p><a class="btn red block" id="pdOrder" target="_blank" rel="noopener" aria-describedby="pdNeed" href="#">${esc(L.cta)}</a></div>
+      <button class="btn ghost block" type="button" id="pdAdd">${esc(L.add)}</button>
+      <p class="note">${pre?"You pay by UPI in the chat to hold your place in the queue.":"Printed after you order. Your dispatch date is confirmed in the chat before you pay."}</p>`}
+      ${p.extra?`<p class="note">${esc(p.extra)}</p>`:""}`;
+  $("pd").innerHTML=`<button class="close" type="button" aria-label="Close" data-close>&times;</button>
+  <div class="pd-grid">
+    <div class="pd-stage"><div class="car" id="car" tabindex="0" role="group" aria-label="Pictures of ${esc(p.name)}">${slides}</div>${n>1?`<div class="car-nav"><button type="button" data-car="-1" aria-label="Previous image">&larr;</button><span class="car-dots" id="carDots" aria-hidden="true"></span><button type="button" data-car="1" aria-label="Next image">&rarr;</button></div>`:""}</div>
+    <div class="pd-body">
+      <span class="eyebrow muted">${p.id} / ${SIDE_NAME[p.side]}${p.kind?" / "+esc(p.kind):""}</span>
+      <h2 id="pdName">${esc(p.name)}</h2>
+      <div class="pd-price">${p.soon?(p.price?`<span class="muted">${inr(p.price)}</span>`:"")+`<span class="badge out">${isSecond(p)?"Second drop":"Coming soon"}</span>`:inr(p.price)+(pre&&k.s!=="out"?`<span class="badge out">Pre-order</span>`:"")+(p.badge?`<span class="badge hot">${esc(p.badge)}</span>`:"")}</div>
+      ${p.ed?`<div class="pd-ed">${esc(p.ed)}${p.id==="C1"&&DROP.claimed&&batchLeft()?`. ${batchLeft()} left${DROP.batch<DROP.total?" in the "+esc(DROP.batchName):""}`:""}</div>`:""}
+      <p class="pd-desc">${esc(p.desc)}</p>
+      ${act}
+      <div class="pd-links">${p.build?`<button class="linkish" type="button" data-gobuild="${p.build}">See how it builds, ${esc(BUILD[p.build].time)}</button>`:""}<button class="linkish" type="button" data-share>Share this piece</button></div>
       <dl class="specs"><dt>Size</dt><dd>${esc(p.size)}</dd><dt>In the box</dt><dd>Printed parts only, no magnets, glue or metal. ${esc(p.mat||"Printed in PLA, a plant-based plastic that softens with heat. Keep away from hot cars and direct summer sun.")}</dd><dt>Care</dt><dd>Not a toy. Small parts, keep away from children under 3.</dd><dt>Made</dt><dd>Printed to order in Bengaluru. No returns. Replacement if it arrives broken, faulty or not as approved, reported within 48 hours of delivery. <button class="linkish" type="button" data-terms>Terms</button></dd></dl>
     </div></div>`;
-  syncProduct();$("pd").showModal();
+  syncProduct();
+  if(!$("pd").open){$("pd").showModal();try{history.replaceState(null,"","#p-"+id)}catch(e){}}
   const car=$("car"),dd=$("carDots");
   if(dd){const paint=()=>{const k=Math.round(car.scrollLeft/car.clientWidth);dd.innerHTML=Array.from({length:n},(_,i)=>`<i class="${i===k?"on":""}"></i>`).join("")};car.addEventListener("scroll",paint,{passive:true});paint()}
 }
 function syncProduct(){
-  const p=P.find(x=>x.id===cur.id),d=defaults(p);if(p.soon)return;
-  if(p.art){const o={t1:cur.vals[0]||d.t1,t2:p.f.length>1?(cur.vals[1]||(p.art==="nametag"?"":d.t2)):d.t2,mode:cur.mode,back:cur.back,name:cur.vals[3]||(p.f[3]?p.f[3][1]:"")};$("pdArt").innerHTML=draw(p,o,cur.accent||"red")}
-  const pd=$("pd"),lim=limitsFor(p,cur)||{};
+  const p=byId(cur.id),d=defaults(p),pd=$("pd");
+  if(p.art&&$("pdArt")){const o={t1:cur.vals[0]||d.t1,t2:p.f.length>1?(cur.vals[1]||(p.art==="nametag"?"":d.t2)):d.t2,mode:cur.mode,back:cur.back,name:cur.vals[3]||(p.f[3]?p.f[3][1]:"")};$("pdArt").innerHTML=draw(p,o,cur.accent||"red")}
+  if(p.soon)return;
+  const lim=limitsFor(p,cur)||{};
   pd.querySelectorAll("[data-mode]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mode===cur.mode)));
   pd.querySelectorAll("[data-back]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.back===cur.back)));
   p.f.forEach((f,i)=>{const w=$("fw"+i);if(!w)return;w.hidden=!showF(f,cur);
     const n=fo(f).note,nt=n?(typeof n==="string"?n:(n[cur.mode]||"")):"";$("fn"+i).hidden=!nt;$("fn"+i).textContent=nt;
     const v=cur.vals[i]||"",L=lim[i],c=$("fc"+i);c.textContent=L?`${v.length}/${L}`:"";c.classList.toggle("over",!!L&&v.length>L);
-    $("f"+i).classList.toggle("bad",(!!L&&v.length>L)||(!!v&&printedIdx(p,cur).includes(i)&&!PRINTABLE.test(v))||(isLink(f)&&!!v&&!SPOTIFY_LINK.test(v)))});
+    const bad=(!!L&&v.length>L)||(!!v&&printedIdx(p,cur).includes(i)&&!PRINTABLE.test(v))||(isLink(f)&&!!v&&!SPOTIFY_LINK.test(v));
+    $("f"+i).classList.toggle("bad",bad);$("f"+i).setAttribute("aria-invalid",String(bad))});
   if($("accField"))$("accField").hidden=p.song==="plate"&&cur.mode==="code";
-  $("pd").querySelectorAll("[data-accent]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.accent===cur.accent)));
-  $("pd").querySelectorAll("[data-pick]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.pick===cur.pick)));
-  $("qOut").textContent=cur.qty;
-  if(stk(p.id).s!=="out"){
-    const probs=problems(p,cur),miss=missing(p,cur),ok=!probs.length&&!miss.length&&agreed;
-    $("pdWarn").hidden=!probs.length;$("pdWarn").innerHTML=probs.map(esc).join("<br>");
-    const need=[miss.length?`Fill in ${miss.join(" and ")} to order.`:"",!agreed?"Tick the box to agree to the Terms.":""].filter(Boolean).join(" ");
-    $("pdNeed").hidden=!need||!!probs.length;$("pdNeed").textContent=need;
-    const o=$("pdOrder");o.href=ok?wa(`Hi ${BRAND}, I would like to order:\n\n${itemText(cur)}\n\n${sign([cur])}`):"#";
-    o.setAttribute("aria-disabled",String(!ok));o.tabIndex=ok?0:-1;$("pdAdd").disabled=!(!probs.length&&!miss.length);
-  }
+  pd.querySelectorAll("[data-accent]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.accent===cur.accent)));
+  pd.querySelectorAll("[data-pick]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.pick===cur.pick)));
+  if($("qOut"))$("qOut").textContent=cur.qty;
+  const probs=$("pdWarn")?problems(p,cur):[];
+  if($("pdWarn")){$("pdWarn").hidden=!probs.length;$("pdWarn").innerHTML=probs.map(esc).join("<br>")}
+  if(!$("pdNeed"))return;
+  const miss=missing(p,cur),ok=!probs.length&&!miss.length&&agreed;
+  const need=[miss.length?`Fill in ${miss.join(" and ")} to order.`:"",!agreed?"Tick the box to agree to the Terms.":""].filter(Boolean).join(" ");
+  $("pdNeed").hidden=!need||!!probs.length;$("pdNeed").textContent=need;if(ok)$("pdNeed").classList.remove("nudge");
+  const o=$("pdOrder");o.href=ok?wa(orderMsg([cur],false)):"#";if(ok)delete o.dataset.blocked;else o.dataset.blocked="1";
+  $("pdAdd").disabled=!!probs.length||!!miss.length;
+}
+const calm=()=>!matchMedia("(prefers-reduced-motion:no-preference)").matches;
+/* the order button always answers a tap: if something is missing it takes you to it */
+function nudge(){
+  const p=byId(cur.id);
+  const bad=$("pd").querySelector("input.bad");
+  const empty=p.custom?p.f.map((f,i)=>showF(f,cur)&&!isOpt(f)&&!cur.vals[i]?$("f"+i):null).find(Boolean):null;
+  const el=bad||empty||(!agreed?$("agreePd"):null);
+  $("pdNeed").classList.add("nudge");
+  if(el){el.focus({preventScroll:true});el.scrollIntoView({block:"center",behavior:calm()?"auto":"smooth"})}
+}
+async function shareProduct(btn){
+  const p=byId(cur.id),url=location.origin+location.pathname+"#p-"+p.id;
+  const done=m=>{btn.textContent=m;setTimeout(()=>{if(btn.isConnected)btn.textContent="Share this piece"},2200)};
+  try{
+    if(navigator.share&&matchMedia("(pointer:coarse)").matches){await navigator.share({title:`${p.name} by ${BRAND}`,url});return}
+    await navigator.clipboard.writeText(url);done("Link copied");
+  }catch(e){if(e&&e.name==="AbortError")return;window.prompt("Copy this link",url)}
 }
 $("pd").addEventListener("input",e=>{if(e.target.dataset.i!==undefined){cur.vals[+e.target.dataset.i]=e.target.value.trim();syncProduct()}
   if(e.target.dataset.gift==="note"){cur.giftNote=e.target.value.trim();syncProduct()}});
 document.addEventListener("change",e=>{if(e.target.hasAttribute&&e.target.hasAttribute("data-agree")){agreed=e.target.checked;try{sessionStorage.setItem("ns-agree",agreed?"1":"0")}catch(_){}
   document.querySelectorAll("[data-agree]").forEach(x=>{x.checked=agreed});if($("pd").open&&cur)syncProduct();if($("list").open)paintListSend()}});
 $("pd").addEventListener("change",e=>{if(e.target.dataset.gift==="tick"){cur.gift=e.target.checked;$("giftBox").hidden=!cur.gift;if(!cur.gift){cur.giftNote="";$("giftNote").value=""}syncProduct()}});
+$("pd").addEventListener("close",()=>{if(/^#p-/.test(location.hash)){try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}});
 $("pd").addEventListener("click",e=>{
+  const a=e.target.closest("#pdOrder");
+  if(a&&a.dataset.blocked){e.preventDefault();nudge();return}
   const t=e.target.closest("button");
   if(e.target===$("pd")||(t&&t.hasAttribute("data-close"))){$("pd").close();return}
   if(!t)return;
-  if(t.dataset.car){const car=$("car");car.scrollBy({left:+t.dataset.car*car.clientWidth,behavior:"smooth"})}
+  if(t.dataset.car){const car=$("car");car.scrollBy({left:+t.dataset.car*car.clientWidth,behavior:calm()?"auto":"smooth"})}
   if(t.dataset.accent){cur.accent=t.dataset.accent;syncProduct()}
-  if(t.dataset.mode){const p=P.find(x=>x.id===cur.id);if(p.song==="plate"&&t.dataset.mode!==cur.mode){if(t.dataset.mode==="code"){cur.prevAccent=cur.accent;cur.accent="ivory"}else cur.accent=cur.prevAccent||"red"}cur.mode=t.dataset.mode;syncProduct()}
+  if(t.dataset.mode){const p=byId(cur.id);if(p.song==="plate"&&t.dataset.mode!==cur.mode){if(t.dataset.mode==="code"){cur.prevAccent=cur.accent;cur.accent="ivory"}else cur.accent=cur.prevAccent||"red"}cur.mode=t.dataset.mode;syncProduct()}
   if(t.dataset.back){cur.back=t.dataset.back;syncProduct()}
   if(t.hasAttribute("data-hint")){const h=$("hintBox");h.hidden=!h.hidden;t.setAttribute("aria-expanded",String(!h.hidden))}
   if(t.dataset.pick){cur.pick=t.dataset.pick;syncProduct()}
   if(t.dataset.q){cur.qty=Math.max(1,Math.min(99,cur.qty+ +t.dataset.q));syncProduct()}
   if(t.dataset.gobuild){$("pd").close();showBuild(t.dataset.gobuild,true)}
-  if(t.id==="pdAdd"){cart.push(JSON.parse(JSON.stringify(cur)));save();renderCount();$("pd").close();openList()}
+  if(t.hasAttribute("data-share"))shareProduct(t);
+  if(t.id==="pdAdd"){
+    if(PHASE==="waitlist"){if(!cart.some(it=>it.id===cur.id))cart.push(fixItem({id:cur.id}))}
+    else cart.push(fixItem(cur));
+    save();renderCount(true);$("pd").close();openList()}
 });
 
-/* ---------------- order list ---------------- */
-function renderCount(){$("count").textContent=cart.reduce((a,b)=>a+b.qty,0)}
+/* ---------------- order list (interest list in the waitlist phase) ---------------- */
+function renderCount(bump){
+  const n=cart.reduce((a,b)=>a+b.qty,0),c=$("count");c.textContent=n;
+  $("listBtn").setAttribute("aria-label",`${PH().list}, ${n} ${n===1?"piece":"pieces"}`);
+  if(bump){c.classList.remove("bump");void c.offsetWidth;c.classList.add("bump")}
+}
 function openList(){renderList();if(!$("list").open)$("list").showModal()}
 function renderList(){
-  const total=cart.reduce((a,it)=>a+P.find(p=>p.id===it.id).price*it.qty,0);
-  const msg=`Hi ${BRAND}, I would like to order:\n\n${cart.map((it,i)=>itemText(it,i+1)).join("\n")}\n\nTotal before shipping: ${inr(total)}\n${sign(cart)}`;
+  const L=PH(),wl=PHASE==="waitlist",pre=PHASE==="preorder";
+  const total=cart.reduce((a,it)=>a+byId(it.id).price*it.qty,0);
+  let gone=false;
+  const rows=cart.map((it,i)=>{const p=byId(it.id),out=stockOf(p).s==="out";gone=gone||out;
+    const opts=wl?(p.kind||""):[it.pick,p.song?(it.mode==="wave"?"Sound wave":"Spotify Code"):"",p.song==="tag"?(it.back==="name"?"Back: your name":"Back: song and artist"):"",it.accent&&("Accent "+it.accent),it.gift&&("Gift"+(it.giftNote?": "+it.giftNote:"")),...it.vals.filter((v,j)=>v&&p.f[j]&&showF(p.f[j],it))].filter(Boolean).join(", ");
+    return `<div class="li"><b>${p.id} ${esc(p.name)}${wl?"":` &times; ${it.qty}`}</b><span class="mono${wl?" muted":""}">${inr(p.price*it.qty)}</span><span class="opt">${esc(opts)}</span>
+      ${out?`<span class="gone">${p.id==="C1"?"This batch is full.":"Sold out right now."} Remove it to send the rest.</span>`:""}
+      <div class="li-ctl">${wl?"<span></span>":`<div class="qty" role="group" aria-label="Quantity of ${esc(p.name)}"><button type="button" data-lq="-1" data-i="${i}" aria-label="One fewer">&minus;</button><output>${it.qty}</output><button type="button" data-lq="1" data-i="${i}" aria-label="One more">+</button></div>`}<button type="button" data-rm="${i}" aria-label="Remove ${esc(p.name)}">Remove</button></div></div>`}).join("");
+  const names=[...new Set(cart.map(it=>byId(it.id).name))];
   $("list").innerHTML=`<div class="dl"><button class="close" type="button" aria-label="Close" data-close>&times;</button>
-    <h2 id="listTitle">Order list</h2>
-    ${cart.length?cart.map((it,i)=>{const p=P.find(x=>x.id===it.id);const opts=[it.pick,p.song?(it.mode==="wave"?"Sound wave":"Spotify Code"):"",p.song==="tag"?(it.back==="name"?"Back: your name":"Back: song and artist"):"",it.accent&&("Accent "+it.accent),it.gift&&("Gift"+(it.giftNote?": "+it.giftNote:"")),...it.vals.filter((v,j)=>v&&p.f[j]&&showF(p.f[j],it))].filter(Boolean).join(", ");
-      return `<div class="li"><b>${p.id} ${esc(p.name)} &times; ${it.qty}</b><span class="mono">${inr(p.price*it.qty)}</span><span class="opt">${esc(opts)}</span><button type="button" data-rm="${i}">Remove</button></div>`}).join("")
-      +`<div class="total"><span>Total before shipping</span><span>${inr(total)}</span></div>`
-      :`<p class="empty">Nothing here yet. Open a product and choose Add to order list.</p>`}
+    <h2 id="listTitle">${esc(L.list)}</h2>
+    ${wl&&cart.length?`<p class="note">Pieces you want first. Pre-orders are not open yet, so nothing here is ordered or charged.</p>`:""}
+    ${cart.length?rows+(wl?"":`<div class="total"><span>Total before shipping</span><span>${inr(total)}</span></div>`)
+      :`<p class="empty">Nothing here yet. Open a piece and tap ${esc(L.add)}.</p><button class="btn ghost block" type="button" data-browse>Browse the first drop</button>`}
     <div class="spacer"></div>
-    ${cart.length?`${agreeBox("agreeList")}<a class="btn red block" id="listSend" target="_blank" rel="noopener" data-href="${esc(wa(msg))}" href="#">Send list on WhatsApp</a><p class="note">Opens WhatsApp with this list written out. Nothing is charged here.</p>`:""}
+    ${!cart.length?"":wl?`${waLink("btn red block",earlyMsg(names),"Get early access on WhatsApp","listSend")}<p class="note">Opens WhatsApp with a short message naming these pieces. Prices are shown for reference.</p>`
+      :`${pre?`<p class="note">Pre-order. Ships from ${esc(SHIP_FROM)}.${PREORDER_NOTE?" "+esc(PREORDER_NOTE):""}</p>`:""}${agreeBox("agreeList")}<p class="note" id="listNeed" role="status" hidden></p><a class="btn red block" id="listSend" target="_blank" rel="noopener" aria-describedby="listNeed" data-href="${esc(wa(orderMsg(cart,true)))}"${gone?' data-gone="1"':""} href="#">${pre?"Send pre-order on WhatsApp":"Send list on WhatsApp"}</a><p class="note">Opens WhatsApp with this list written out. Nothing is charged here.</p>`}
   </div>`;
   paintListSend();
 }
-function paintListSend(){const a=$("listSend");if(!a)return;a.href=agreed?a.dataset.href:"#";a.setAttribute("aria-disabled",String(!agreed));a.tabIndex=agreed?0:-1}
+function paintListSend(){const a=$("listSend");if(!a||!a.dataset.href)return;const ok=agreed&&!a.dataset.gone;a.href=ok?a.dataset.href:"#";
+  if(ok){delete a.dataset.blocked;$("listNeed").hidden=true}else a.dataset.blocked="1"}
 $("list").addEventListener("click",e=>{
+  const a=e.target.closest("#listSend");
+  if(a&&a.dataset.blocked){e.preventDefault();const n=$("listNeed");n.hidden=false;n.textContent=a.dataset.gone?"Remove the piece that is sold out, then send.":"Tick the box to agree to the Terms.";if(!a.dataset.gone)$("agreeList").focus();return}
   const t=e.target.closest("button");
   if(e.target===$("list")||(t&&t.hasAttribute("data-close"))){$("list").close();return}
-  if(t&&t.dataset.rm){cart.splice(+t.dataset.rm,1);save();renderCount();renderList()}
+  if(!t)return;
+  if(t.hasAttribute("data-browse")){$("list").close();setSide("all");$("catalogue").scrollIntoView();return}
+  if(t.dataset.rm){cart.splice(+t.dataset.rm,1);save();renderCount();renderList();const f=$("list").querySelector("[data-rm],[data-browse],[data-close]");if(f)f.focus()}
+  if(t.dataset.lq){const it=cart[+t.dataset.i];it.qty=Math.max(1,Math.min(99,it.qty+ +t.dataset.lq));save();renderCount();renderList();const b=$("list").querySelector(`[data-lq="${t.dataset.lq}"][data-i="${t.dataset.i}"]`);if(b)b.focus()}
 });
 
 
@@ -1074,12 +1362,13 @@ const TERMS=`<h2 id="tcTitle">Terms, replacements and privacy</h2><p class="upd"
 function openTerms(){$("tcd").innerHTML=`<div class="tc"><button class="close" type="button" aria-label="Close" data-close>&times;</button>${TERMS}<p><button class="btn ghost" type="button" data-close>Close</button></p></div>`;if(!$("tcd").open)$("tcd").showModal()}
 $("tcd").addEventListener("click",e=>{const t=e.target.closest("button");if(e.target===$("tcd")||(t&&t.hasAttribute("data-close")))$("tcd").close()});
 
-/* ---------------- theme ---------------- */
-const root=document.documentElement;
-const isDark=()=>root.dataset.theme==="dark";
-function paintTheme(){$("themeBtn").textContent=isDark()?"Light":"Dark"}
-try{const t=localStorage.getItem("ns-theme");if(t)root.dataset.theme=t}catch(e){}
+/* ---------------- theme: light by default, the visitor's pick is remembered ---------------- */
+const mqDark=matchMedia("(prefers-color-scheme: dark)");
+const isDark=()=>root.dataset.theme?root.dataset.theme==="dark":mqDark.matches;
+function paintTheme(){const d=isDark();$("themeBtn").textContent=d?"Light":"Dark";$("themeBtn").setAttribute("aria-label",`Switch to the ${d?"light":"dark"} theme`);
+  if(root.dataset.theme)document.querySelectorAll('meta[name="theme-color"]').forEach(m=>{m.content=d?"#0E0D0C":"#EDEBE6"})}
 $("themeBtn").addEventListener("click",()=>{const n=isDark()?"light":"dark";root.dataset.theme=n;try{localStorage.setItem("ns-theme",n)}catch(e){}paintTheme()});
+if(mqDark.addEventListener)mqDark.addEventListener("change",paintTheme);
 
 /* ---------------- wiring ---------------- */
 document.addEventListener("click",e=>{
@@ -1087,18 +1376,29 @@ document.addEventListener("click",e=>{
   const o=e.target.closest("[data-open]");if(o&&!$("pd").open){openProduct(o.dataset.open);return}
   const b=e.target.closest("[data-build]");if(b)showBuild(b.dataset.build);
 });
-$("filters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b){filt=b.dataset.filter;renderGrid();swap($("grid"))}});
+$("filters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(b){filt=b.dataset.filter;renderGrid();swap($("grid"));const n=$("filters").querySelector(`[data-filter="${filt}"]`);if(n)n.focus()}});
 document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>setSide(b.dataset.side)));
 document.querySelectorAll("nav a[data-side]").forEach(a=>a.addEventListener("click",()=>setSide(a.dataset.side)));
+/* arrow keys move along a row of tabs */
+document.addEventListener("keydown",e=>{
+  if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;
+  const t=e.target.closest&&e.target.closest('[role="tab"]');if(!t)return;
+  const tabs=[...t.parentElement.querySelectorAll('[role="tab"]')],n=tabs[(tabs.indexOf(t)+(e.key==="ArrowRight"?1:-1)+tabs.length)%tabs.length];
+  e.preventDefault();n.click();
+  const again=n.isConnected?n:document.querySelector(`[data-build="${n.dataset.build}"]`);if(again)again.focus();
+});
 $("listBtn").addEventListener("click",openList);
 $("chatBulk").href=wa(`Hi ${BRAND}, I would like a quote for a run.\n\nAct or venue:\nProduct (gig coins or tags):\nQuantity:\nGig date:`);
-$("run50Price").textContent=inr(P.find(p=>p.id==="B5").price);
+$("run50Price").textContent=inr(byId("B5").price);
 function setView(v){if(v==="bp")root.dataset.view="bp";else delete root.dataset.view;
   document.querySelectorAll(".viewsw button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.view===v)))}
 document.querySelector(".viewsw").addEventListener("click",e=>{const b=e.target.closest("button");if(b)setView(b.dataset.view)});
+/* the ordering strip draws itself once, the first time it is scrolled into view */
+(function(){const h=$("order");if(!("IntersectionObserver" in window)||calm())return;
+  h.classList.add("arm");const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){h.classList.add("in");io.disconnect()}},{threshold:.3});io.observe($("howSteps"))})();
 window.addEventListener("hashchange",routeHash);
-if(location.hash==="#terms")openTerms();
-paintTheme();renderDrop();renderGrid();renderBuild();renderCount();routeHash();loadStock();
+paintTheme();loadCart();renderAll();renderBuild();
+loadStock().then(routeHash);
 </script>
 </body>
 </html>
