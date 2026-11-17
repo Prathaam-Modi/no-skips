@@ -33,7 +33,10 @@ button{font:inherit;cursor:pointer}
 .changed{box-shadow:inset 3px 0 0 var(--red);padding-left:10px}
 .save{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:center}
 .save span{color:var(--mut);font-size:13px}.ok{color:#1c7a3c!important;font-weight:600}
-.seg button[aria-pressed=true][data-ph]{background:var(--ink);color:var(--bg)}
+.seg button[aria-pressed=true][data-ph],.seg button[aria-pressed=true][data-v]{background:var(--ink);color:var(--bg)}
+.seg button[aria-pressed=true][data-v=hidden]{background:var(--mut);color:#fff}
+.lbl{font:12px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);min-width:84px}
+.seg.sm button{padding:8px 11px;font-size:14px}
 .fld{margin-top:14px}.fld label{font-weight:600;margin-bottom:6px}
 .tag{font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--line);border-radius:2px;padding:1px 6px;margin-left:8px;color:var(--mut)}
 .mk{width:22px;height:22px;flex:none;color:var(--ink)}.mk .ch{fill:none;stroke:var(--bg);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}.mk .bar{fill:var(--red)}
@@ -42,7 +45,7 @@ button{font:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--red);outline-offset:2px}
 [hidden]{display:none!important}
 </style></head><body><main>
-<h1><i></i>No Skips admin</h1><p class="sub">Set the site phase and update stock. Changes go live on the site about a minute after you save.</p>
+<h1><i></i>No Skips admin</h1><p class="sub">Set the site phase, choose what each product shows as, and update stock. Changes go live on the site about a minute after you save.</p>
 
 <section id="login" class="box">
   <label for="tok">Your access key</label>
@@ -73,6 +76,12 @@ button{font:inherit;cursor:pointer}
     <div class="ctl" style="margin-top:8px"><input class="q" id="claimed" type="number" min="0" max="50" value="0"><span class="ql">claimed so far. The meter appears on the site once this is above 0.</span></div>
     <div class="ctl" style="margin-top:8px"><input class="q" id="batch" type="number" min="1" max="50" value="15"><span class="ql">released so far (first batch = 15). When claimed reaches this, the set shows as batch full. Raise it to open the next batch.</span></div>
   </div>
+  <div class="box" id="mailBox">
+    <div class="nm">Email list and order updates</div>
+    <div class="fld"><label for="mailUrl">Web app address from Google Apps Script (leave empty to switch email off)</label><input id="mailUrl" type="text" maxlength="200" placeholder="https://script.google.com/macros/s/.../exec"></div>
+    <p class="help">When this is set, the site shows the email sign-up in the footer and logs every order (with its order number and the customer's email) in your No Skips Orders sheet. Customers always give an email with an order, set or not.</p>
+  </div>
+  <div class="box"><div class="nm">Products</div><p class="help" style="margin:4px 0 0">Shown as: <b>Default</b> follows the website code (first drop live, Track Plate, Track Tag and Side A second drop, the rest coming soon). Live makes it orderable in the current phase. Hidden removes it from the site. Max per order limits how many one customer can add (empty = 5).</p></div>
   <div class="box" id="list"></div>
 </section>
 </main>
@@ -80,19 +89,20 @@ button{font:inherit;cursor:pointer}
 
 <script>
 const OWNER="Prathaam-Modi",REPO="no-skips",BRANCH="main",PATH="stock.json";
-const LAUNCH=["C1","C2","C3","A3","D2","D5"];
+const LAUNCH=["C1","C2","C3","A3","D2","D5"],SECOND=["A1","A5","C4"],UNLISTED=["D13"];
+const defView=id=>LAUNCH.includes(id)?"Live":SECOND.includes(id)?"Second drop":UNLISTED.includes(id)?"Unlisted, coming soon":"Coming soon";
 const PRODUCTS=[{"id": "D13", "name": "Drumroll (Rolling machine)"}, {"id": "A4", "name": "45s (Record coasters)"}, {"id": "B6", "name": "Crate (USB stick keeper)"}, {"id": "D9", "name": "Perch (Sofa arm tray)"}, {"id": "C1", "name": "Vol. 01: The Studio (Collector set)"}, {"id": "C2", "name": "Studio Mini (Single piece)"}, {"id": "C3", "name": "Gig Coin (Show token)"}, {"id": "C4", "name": "Side A (Mixtape set of 4)"}, {"id": "C5", "name": "Gain (Fidget knob)"}, {"id": "A1", "name": "Track Plate (Scannable song display)"}, {"id": "A5", "name": "Track Tag (Song keytag)"}, {"id": "A3", "name": "Rail (Wristband display)"}, {"id": "B1", "name": "Stack (Pick amp with drawer)"}, {"id": "B2", "name": "Lift (Controller risers, pair)"}, {"id": "B3", "name": "Alias (Artist name tag)"}, {"id": "B5", "name": "Run 50 (Artist merch tags)"}, {"id": "D1", "name": "Horn (Phone stand and amplifier)"}, {"id": "D6", "name": "Fold (Flat-pack laptop stand)"}, {"id": "D7", "name": "Channel (Modular desk set)"}, {"id": "D8", "name": "B-Side (Catch-all tray)"}, {"id": "D10", "name": "Eject (Slim card wallet)"}, {"id": "D11", "name": "Standby (Rack for closed laptops)"}, {"id": "D12", "name": "Rotary (Key organiser)"}, {"id": "D2", "name": "Tape Case (Small storage box)"}, {"id": "D4", "name": "Sleeve (Vinyl display stand)"}, {"id": "D5", "name": "Hold (Headphone stand)"}];
 PRODUCTS.sort((a,b)=>LAUNCH.includes(b.id)-LAUNCH.includes(a.id));
 const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`;
 const $=id=>document.getElementById(id);
 let token="",sha=null,orig={},cur={},origClaimed=0,raw={},origMeta="",phase="waitlist";
 const PH_HELP={waitlist:"Nothing can be ordered. Every button collects early access interest on WhatsApp.",preorder:"The six launch pieces can be pre-ordered. Messages are marked PRE-ORDER with the ship date below.",live:"Normal ordering. Buttons say Order on WhatsApp."};
-const meta=()=>JSON.stringify([phase,$("shipFrom").value.trim(),$("preNote").value.trim(),+$("batch").value]);
+const meta=()=>JSON.stringify([phase,$("shipFrom").value.trim(),$("preNote").value.trim(),+$("batch").value,$("mailUrl").value.trim()]);
 function paintPhase(){document.querySelectorAll("[data-ph]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.ph===phase)));$("phaseHelp").textContent=PH_HELP[phase]}
 const hdr=()=>({Authorization:"Bearer "+token,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"});
 const b64e=s=>btoa(String.fromCharCode(...new TextEncoder().encode(s)));
 const b64d=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),c=>c.charCodeAt(0)));
-const norm=x=>({s:x&&["low","out"].includes(x.s)?x.s:"in",n:x&&Number.isFinite(x.n)&&x.n>0?x.n:null});
+const norm=x=>({s:x&&["low","out"].includes(x.s)?x.s:"in",n:x&&Number.isFinite(x.n)&&x.n>0?x.n:null,v:x&&["live","soon","second","hidden"].includes(x.v)?x.v:"",m:x&&Number.isFinite(x.m)&&x.m>0?x.m:null});
 
 async function load(){
   const rr=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}`,{headers:hdr()});
@@ -110,15 +120,18 @@ async function load(){
   $("shipFrom").value=typeof data.shipFrom==="string"&&data.shipFrom.trim()?data.shipFrom.trim():"January 2027";
   $("preNote").value=typeof data.preorderNote==="string"?data.preorderNote:"";
   $("batch").value=Math.max(1,Math.min(50,+(data.drop&&data.drop.batch)||15));
+  $("mailUrl").value=typeof data.mailEndpoint==="string"?data.mailEndpoint:"";
   origMeta=meta();paintPhase();
 }
 function draw(){
   const f=$("q").value.trim().toLowerCase();
   $("list").innerHTML=PRODUCTS.filter(p=>!f||(p.name+" "+p.id).toLowerCase().includes(f)).map(p=>{
     const c=cur[p.id],ch=JSON.stringify(c)!==JSON.stringify(orig[p.id]);
-    return `<div class="row${ch?" changed":""}" data-id="${p.id}"><div class="nm">${p.name}<small>${p.id}</small>${LAUNCH.includes(p.id)?'<span class="tag">First drop</span>':""}</div>
-      <div class="ctl"><div class="seg">${[["in","In stock"],["low","Few left"],["out","Sold out"]].map(([k,t])=>`<button type="button" data-s="${k}" aria-pressed="${c.s===k}">${t}</button>`).join("")}</div>
-      ${c.s==="low"?`<input class="q" type="number" min="1" placeholder="How many" data-n value="${c.n||""}"><span class="ql">left (optional)</span>`:""}</div></div>`}).join("")||'<p class="help">No match.</p>';
+    return `<div class="row${ch?" changed":""}" data-id="${p.id}"><div class="nm">${p.name}<small>${p.id}</small><span class="tag">Default: ${defView(p.id)}</span></div>
+      <div class="ctl"><span class="lbl">Shown as</span><div class="seg sm" role="group" aria-label="${p.name} shown as">${[["","Default"],["live","Live"],["soon","Coming soon"],["second","Second drop"],["hidden","Hidden"]].map(([k,t])=>`<button type="button" data-v="${k}" aria-pressed="${c.v===k}">${t}</button>`).join("")}</div></div>
+      <div class="ctl"><span class="lbl">Stock</span><div class="seg sm" role="group" aria-label="${p.name} stock">${[["in","In stock"],["low","Few left"],["out","Sold out"]].map(([k,t])=>`<button type="button" data-s="${k}" aria-pressed="${c.s===k}">${t}</button>`).join("")}</div>
+      ${c.s==="low"?`<input class="q" type="number" min="1" placeholder="How many" data-n value="${c.n||""}"><span class="ql">left (optional)</span>`:""}</div>
+      <div class="ctl"><span class="lbl">Max per order</span><input class="q" type="number" min="1" max="99" placeholder="5" data-m value="${c.m||""}"></div></div>`}).join("")||'<p class="help">No match.</p>';
   dirty();
 }
 function dirty(){
@@ -126,9 +139,11 @@ function dirty(){
   $("save").disabled=!n;$("msg").className="";$("msg").textContent=n?`${n} change${n>1?"s":""} not saved`:"No changes yet";
 }
 $("list").addEventListener("click",e=>{const b=e.target.closest("[data-s]");if(!b)return;const id=b.closest(".row").dataset.id;
-  cur[id]={s:b.dataset.s,n:b.dataset.s==="low"?cur[id].n:null};draw()});
-$("list").addEventListener("input",e=>{if(e.target.hasAttribute("data-n")){const id=e.target.closest(".row").dataset.id;const v=parseInt(e.target.value,10);cur[id].n=v>0?v:null;dirty()}});
-$("claimed").addEventListener("input",dirty);["shipFrom","preNote","batch"].forEach(i=>$(i).addEventListener("input",dirty));
+  cur[id]={...cur[id],s:b.dataset.s,n:b.dataset.s==="low"?cur[id].n:null};draw()});
+$("list").addEventListener("click",e=>{const b=e.target.closest("[data-v]");if(!b)return;const id=b.closest(".row").dataset.id;cur[id]={...cur[id],v:b.dataset.v};draw()});
+$("list").addEventListener("input",e=>{if(e.target.hasAttribute("data-m")){const id=e.target.closest(".row").dataset.id;const v=parseInt(e.target.value,10);cur[id].m=v>0?Math.min(99,v):null;const r=e.target.closest(".row");r.classList.toggle("changed",JSON.stringify(cur[id])!==JSON.stringify(orig[id]));dirty();return}
+  if(e.target.hasAttribute("data-n")){const id=e.target.closest(".row").dataset.id;const v=parseInt(e.target.value,10);cur[id].n=v>0?v:null;dirty()}});
+$("claimed").addEventListener("input",dirty);["shipFrom","preNote","batch","mailUrl"].forEach(i=>$(i).addEventListener("input",dirty));
 $("phaseSeg").addEventListener("click",e=>{const b=e.target.closest("[data-ph]");if(!b)return;phase=b.dataset.ph;paintPhase();dirty()});$("q").addEventListener("input",draw);
 
 async function save(){
@@ -136,12 +151,12 @@ async function save(){
   if(phase!==was&&!confirm("Change the site from "+was+" to "+phase+"? "+PH_HELP[phase]))return;
   $("save").disabled=true;$("busy").hidden=false;$("msg").className="";$("msg").textContent="Saving...";
   try{
-    const items={};PRODUCTS.forEach(p=>{const c=cur[p.id];if(c.s!=="in")items[p.id]=c.s==="low"&&c.n?{s:"low",n:c.n}:{s:c.s}});
+    const items={};PRODUCTS.forEach(p=>{const c=cur[p.id],o={};if(c.s!=="in"){o.s=c.s;if(c.s==="low"&&c.n)o.n=c.n}if(c.v)o.v=c.v;if(c.m)o.m=c.m;if(Object.keys(o).length)items[p.id]=o});
     const claimed=Math.max(0,Math.min(50,parseInt($("claimed").value,10)||0));
     const batch=Math.max(1,Math.min(50,parseInt($("batch").value,10)||15));
     /* keep any field this page does not know about */
-    const body={...raw,updated:new Date().toISOString(),phase,shipFrom:$("shipFrom").value.trim()||"January 2027",preorderNote:$("preNote").value.trim(),drop:{...(raw.drop&&typeof raw.drop==="object"?raw.drop:{}),claimed,batch},items};
-    const r=await fetch(API,{method:"PUT",headers:{...hdr(),"Content-Type":"application/json"},body:JSON.stringify({message:"Update stock and phase",branch:BRANCH,content:b64e(JSON.stringify(body,null,2)+"\n"),...(sha?{sha}:{})})});
+    const body={...raw,updated:new Date().toISOString(),phase,shipFrom:$("shipFrom").value.trim()||"January 2027",preorderNote:$("preNote").value.trim(),mailEndpoint:$("mailUrl").value.trim(),drop:{...(raw.drop&&typeof raw.drop==="object"?raw.drop:{}),claimed,batch},items};
+    const r=await fetch(API,{method:"PUT",headers:{...hdr(),"Content-Type":"application/json"},body:JSON.stringify({message:"Update stock, phase and product status from admin",branch:BRANCH,content:b64e(JSON.stringify(body,null,2)+"\n"),...(sha?{sha}:{})})});
     if(r.status===409||r.status===422){await load();draw();$("msg").textContent="The file changed somewhere else. Reloaded, check and save again.";return}
     if(r.status===401||r.status===403){$("msg").textContent="The key was refused ("+r.status+"). Lock, then unlock with a new key.";$("save").disabled=false;return}
     if(!r.ok){$("msg").textContent="Save failed ("+r.status+"). Try again.";$("save").disabled=false;return}

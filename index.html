@@ -329,6 +329,14 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 }
 [hidden]{display:none!important}
 .note{font-size:12px;color:var(--muted);margin:0}
+.refnote{margin:-4px 0 14px}
+.mailf{margin-top:12px}.mailf input[type=email]{width:100%}.mailf .agree{margin-top:10px;font-family:var(--body);text-transform:none;letter-spacing:0;font-size:13px;font-weight:400;color:var(--ink)}
+.mailsign{display:grid;grid-template-columns:1fr minmax(0,420px);gap:12px 32px;align-items:end;padding:0 0 22px;margin-bottom:22px;border-bottom:1px solid var(--line)}
+.mailsign h3{margin:0 0 4px;font-family:var(--display);letter-spacing:-.02em;line-height:1.1;font-size:20px}
+.mailrow{display:flex;gap:8px}.mailrow input{flex:1;min-width:0;height:46px;border:1px solid var(--line);border-radius:var(--r);padding:0 12px;font:inherit;background:var(--bg);color:var(--ink)}
+.mailsign #signMsg{grid-column:1/-1}
+@media (max-width:700px){.mailsign{grid-template-columns:1fr}}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .field .note{margin-top:2px}
 .flabel{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
 .cnt{font-family:var(--mono);font-size:11px;color:var(--muted)}
@@ -602,8 +610,11 @@ footer a{text-underline-offset:3px}
 
 <footer>
   <div class="wrap">
+    <form class="mailsign" id="mailSign" hidden novalidate><div><h3>New drops by email</h3><p class="note">First word on each drop and the odd launch price. A few emails a month at most. Unsubscribe in any email.</p></div>
+      <div class="mailrow"><label class="vh" for="signEmail">Your email</label><input id="signEmail" type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder="you@example.com" required><button class="btn red" type="submit">Sign up</button></div>
+      <p class="note" id="signMsg" role="status" aria-live="polite"></p></form>
     <div class="row"><span>No Skips. Printed to order in Bengaluru.</span><span>Instagram <a href="https://www.instagram.com/noskips.in/" target="_blank" rel="noopener">@noskips.in</a></span><span>Prices in INR, shipping extra.</span><span><button class="linkish" type="button" data-terms>Terms, replacements and privacy</button></span></div>
-    <div class="row" style="margin-top:10px"><span>Product pictures and blueprints are drawn from the actual print files, dimensions in millimetres. Song titles and artist names on example pieces show how personalisation looks. No Skips is an independent maker and is not affiliated with or endorsed by any artist. Artist names and silhouettes on coins and tags are used to show the artist the piece is about, and are not an endorsement. Spotify and Spotify Codes are trademarks of Spotify AB. No Skips is not affiliated with Spotify.</span></div>
+    <div class="row" style="margin-top:10px"><span>All pictures are 3D renders made from our print files and are for reference only. Every piece is printed to order, so colour, surface texture and small details can differ slightly from the pictures. Blueprint dimensions are in millimetres. Song titles and artist names on example pieces show how personalisation looks. No Skips is an independent maker and is not affiliated with or endorsed by any artist. Artist names and silhouettes on coins and tags are used to show the artist the piece is about, and are not an endorsement. Spotify and Spotify Codes are trademarks of Spotify AB. No Skips is not affiliated with Spotify.</span></div>
   </div>
 </footer>
 
@@ -633,9 +644,29 @@ const DROP = {total:50, batch:FIRST_BATCH, batchName:"first batch", claimed:0};
 const PHASES=["waitlist","preorder","live"];
 let PHASE="waitlist", SHIP_FROM="January 2027", PREORDER_NOTE="";
 try{const c=localStorage.getItem("ns-phase");if(PHASES.includes(c))PHASE=c}catch(e){}
-/* Live stock. Edited from /admin.html, saved to stock.json. Missing item = in stock. */
+/* Most pieces one customer can put in one order. Admin can set a different number per product. */
+const MAX_PER_ORDER=5, MAX_DEFAULTS={C1:2};
+/* Email list and order updates. The address of the Google Apps Script web app (tools/orders/SETUP.md),
+   set from /admin.html and saved to stock.json. Empty = no email anywhere on the site. */
+let MAIL_ENDPOINT="";
+/* Live stock and per-product status. Edited from /admin.html, saved to stock.json. Missing item = in stock, shown as the code says.
+   items[ID].v: "live" | "soon" | "second" | "hidden" overrides what the code says. items[ID].m = max per order. */
 let STOCK={items:{}};
 const stk=id=>{const x=(STOCK.items||{})[id]||{};return{s:x.s==="out"||x.s==="low"?x.s:"in",n:Number.isFinite(x.n)&&x.n>0?x.n:null}};
+const maxQ=id=>{const x=(STOCK.items||{})[id]||{};return Number.isFinite(x.m)&&x.m>0?Math.min(99,x.m):(MAX_DEFAULTS[id]||MAX_PER_ORDER)};
+const SOON_TXT="Coming after launch. We are test printing every design first. Tap to be told when it lands.";
+const SECOND_TXT="Second drop, opening before Valentine's. Tap to be told the day it opens.";
+function applyViews(){
+  P.forEach(p=>{
+    if(!("_soon" in p)){p._soon=p.soon||"";p._hide=!!p.hide}
+    p.soon=p._soon;p.hide=p._hide;
+    const v=((STOCK.items||{})[p.id]||{}).v;
+    if(v==="live")p.soon="";
+    else if(v==="soon")p.soon=p._soon&&!/^Second drop/.test(p._soon)?p._soon:SOON_TXT;
+    else if(v==="second")p.soon=SECOND_TXT;
+    else if(v==="hidden")p.hide=true;
+  });
+}
 const num=(v,d)=>{const n=typeof v==="number"?v:(typeof v==="string"&&v.trim()!==""?Number(v):NaN);return Number.isFinite(n)?Math.round(n):d};
 const str=(v,d,max)=>typeof v==="string"&&v.trim()?v.trim().slice(0,max):d;
 function applyStock(d){
@@ -647,6 +678,8 @@ function applyStock(d){
   DROP.batch=Math.max(1,Math.min(DROP.total,num(dr.batch,FIRST_BATCH)));
   DROP.batchName=str(dr.batchName,"first batch",24);
   DROP.claimed=Math.max(0,Math.min(DROP.total,num(dr.claimed,0)));
+  MAIL_ENDPOINT=typeof o.mailEndpoint==="string"&&/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(o.mailEndpoint.trim())?o.mailEndpoint.trim():"";
+  applyViews();renderMail();
   try{localStorage.setItem("ns-phase",PHASE)}catch(e){}
   loadCart();renderAll();
 }
@@ -694,6 +727,8 @@ function problems(p,c){
 }
 const TERMS_DATE="17 November 2026";
 let agreed=false;try{agreed=sessionStorage.getItem("ns-agree")==="1"}catch(e){}
+const emailBox=id=>`<div class="field mailf"><label for="${id}">Email for order updates</label><input id="${id}" data-email type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder="you@example.com" value="${esc(contact.email)}" aria-required="true"><p class="note">Your order number and every step come by email: approved, paid, printing, dispatched with tracking. The chat stays on WhatsApp, where we already have your number.</p>
+  <label class="agree"><input type="checkbox" data-news ${contact.news?"checked":""}><span>Also email me new drops and offers. Unsubscribe in any email.</span></label></div>`;
 const agreeBox=id=>`<label class="agree" for="${id}"><input type="checkbox" id="${id}" data-agree ${agreed?"checked":""}><span>I agree to the <button type="button" data-terms>Terms</button>, including replacements only within 48 hours of delivery.</span></label>`;
 const HINT=tag=>`<p><b>Spotify Code.</b> The bars are a code Spotify makes for your song. Open the Spotify app, tap Search, then the camera icon, and point it at the ${tag?"tag":"plate"}. The song starts playing. It scans only in the Spotify app and only for songs on Spotify. It is printed ivory on black so phones can read it.</p>
   <p><b>Sound wave.</b> The real shape of your song: its loud and quiet parts from start to finish, as raised bars. It does not scan, but it works for any song, even one that is not on Spotify, like your own unreleased track.</p>
@@ -1040,7 +1075,7 @@ let side="D", cart=[];
 const cartKey=()=>PHASE==="waitlist"?"ns-wish-v1":"ns-list-v2";
 function fixItem(it){
   const p=byId(it.id),v=Array.isArray(it.vals)?it.vals:[];
-  return {id:p.id,qty:Math.max(1,Math.min(99,parseInt(it.qty,10)||1)),accent:p.noAccent?"":(it.accent==="ivory"?"ivory":"red"),
+  return {id:p.id,qty:Math.max(1,Math.min(maxQ(p.id),parseInt(it.qty,10)||1)),accent:p.noAccent?"":(it.accent==="ivory"?"ivory":"red"),
     vals:p.f.map((f,i)=>typeof v[i]==="string"?v[i]:""),pick:p.pick?(p.pick[1].includes(it.pick)?it.pick:p.pick[1][0]):"",
     gift:!!it.gift,giftNote:str(it.giftNote,"",90),mode:p.song?(it.mode==="wave"?"wave":"code"):"",back:p.song==="tag"?(it.back==="name"?"name":"song"):""};
 }
@@ -1178,11 +1213,21 @@ function itemText(it,n){
 const sign=items=>(items.some(it=>byId(it.id).custom)?"Please share the preview and payment details.":"Please share the payment details.")
   +`\n\nI have read and agree to the No Skips Terms (${TERMS_DATE}), including replacements only within 48 hours of delivery.`;
 /* the WhatsApp message for one piece (numbered=false) or the whole list (numbered=true) */
+/* every order message carries its own order number, so chats never get mixed up.
+   NS-DDMM-XXXX: day and month, then four characters that cannot be misread (no 0/O, 1/I/L). */
+const REF_CH="23456789ABCDEFGHJKMNPQRSTUVWXYZ";
+function newRef(){const d=new Date(),r=new Uint32Array(4);try{crypto.getRandomValues(r)}catch(e){for(let i=0;i<4;i++)r[i]=Math.random()*1e9}
+  return "NS-"+pad2(d.getDate())+pad2(d.getMonth()+1)+"-"+Array.from(r,x=>REF_CH[x%REF_CH.length]).join("")}
+let contact={email:"",news:false};try{const c=JSON.parse(localStorage.getItem("ns-contact")||"{}");contact={email:typeof c.email==="string"?c.email:"",news:!!c.news}}catch(e){}
+const EMAIL_RE=/^[^\s@<>]+@[^\s@<>]+\.[a-z]{2,}$/i;
+const okEmail=()=>EMAIL_RE.test(contact.email.trim());
+const contactLines=()=>okEmail()?`\nEmail for order updates: ${contact.email.trim()}${contact.news?"\nAlso email me new drops and offers: yes":""}`:"";
 function orderMsg(items,numbered){
   const pre=PHASE==="preorder",total=items.reduce((a,it)=>a+byId(it.id).price*it.qty,0);
-  return `Hi ${BRAND}, ${pre?"this is a PRE-ORDER":"I would like to order"}:\n\n${items.map((it,i)=>itemText(it,numbered?i+1:0)).join("\n")}\n\n`
+  return `Hi ${BRAND}, ${pre?"this is a PRE-ORDER":"I would like to order"}.\nOrder no. ${newRef()}\n\n${items.map((it,i)=>itemText(it,numbered?i+1:0)).join("\n")}\n\n`
     +(numbered?`Total before shipping: ${inr(total)}\n`:"")
     +(pre?`PRE-ORDER. Ships from ${SHIP_FROM}.${PREORDER_NOTE?" "+PREORDER_NOTE:""}\n`:"")
+    +contactLines()+(contactLines()?"\n":"")
     +sign(items);
 }
 function openProduct(id){
@@ -1219,11 +1264,11 @@ function openProduct(id){
       :`${form}
       ${p.pick?`<div class="field"><span class="lab">${esc(p.pick[0])}</span><div class="seg">${p.pick[1].map(o=>`<button type="button" data-pick="${esc(o)}" aria-pressed="false">${esc(o)}</button>`).join("")}</div></div>`:""}
       <div class="row2">${accent}
-        <div class="field"><span class="lab" id="qLab">Quantity</span><div class="qty" role="group" aria-labelledby="qLab"><button type="button" data-q="-1" aria-label="One fewer">&minus;</button><output id="qOut" aria-live="polite">1</output><button type="button" data-q="1" aria-label="One more">+</button></div></div>
+        <div class="field"><span class="lab" id="qLab">Quantity</span><div class="qty" role="group" aria-labelledby="qLab"><button type="button" data-q="-1" aria-label="One fewer">&minus;</button><output id="qOut" aria-live="polite">1</output><button type="button" data-q="1" aria-label="One more">+</button></div><p class="note" id="qMax" role="status" hidden></p></div>
       </div>
       <div class="gift"><label class="tick" for="gift"><input type="checkbox" id="gift" data-gift="tick"${cur.gift?" checked":""}>This is a gift</label>
         <div class="field" id="giftBox"${cur.gift?"":" hidden"}><label for="giftNote">Short note for the card (optional)</label><input id="giftNote" data-gift="note" maxlength="90" value="${esc(cur.giftNote)}" placeholder="Happy birthday. Play it loud." autocomplete="off"></div></div>
-      ${k.s==="low"?`<p class="stockline">${k.n?`Only ${k.n} left`:"Few left"}</p>`:""}<p class="warn" id="pdWarn" role="alert" hidden></p>${agreeBox("agreePd")}
+      ${k.s==="low"?`<p class="stockline">${k.n?`Only ${k.n} left`:"Few left"}</p>`:""}<p class="warn" id="pdWarn" role="alert" hidden></p>${emailBox("emailPd")}${agreeBox("agreePd")}
       <div class="pd-act"><p class="note" id="pdNeed" role="status" hidden></p><a class="btn red block" id="pdOrder" target="_blank" rel="noopener" aria-describedby="pdNeed" href="#">${esc(L.cta)}</a></div>
       <button class="btn ghost block" type="button" id="pdAdd">${esc(L.add)}</button>
       <p class="note">${pre?"You pay by UPI in the chat to hold your place in the queue.":"Printed after you order. Your dispatch date is confirmed in the chat before you pay."}</p>`}
@@ -1237,6 +1282,7 @@ function openProduct(id){
       <div class="pd-price">${p.soon?(p.price?`<span class="muted">${inr(p.price)}</span>`:"")+`<span class="badge out">${isSecond(p)?"Second drop":"Coming soon"}</span>`:inr(p.price)+(pre&&k.s!=="out"?`<span class="badge out">Pre-order</span>`:"")+(p.badge?`<span class="badge hot">${esc(p.badge)}</span>`:"")}</div>
       ${p.ed?`<div class="pd-ed">${esc(p.ed)}${p.id==="C1"&&DROP.claimed&&batchLeft()?`. ${batchLeft()} left${DROP.batch<DROP.total?" in the "+esc(DROP.batchName):""}`:""}</div>`:""}
       <p class="pd-desc">${esc(p.desc)}</p>
+      <p class="note refnote">Pictures are 3D renders of the print files, shown for reference. Each piece is printed to order, so colour, surface texture and small details can look slightly different on the real thing.</p>
       ${act}
       <div class="pd-links">${p.build?`<button class="linkish" type="button" data-gobuild="${p.build}">See how it builds, ${esc(BUILD[p.build].time)}</button>`:""}<button class="linkish" type="button" data-share>Share this piece</button></div>
       <dl class="specs"><dt>Size</dt><dd>${esc(p.size)}</dd><dt>In the box</dt><dd>Printed parts only, no magnets, glue or metal. ${esc(p.mat||"Printed in PLA, a plant-based plastic that softens with heat. Keep away from hot cars and direct summer sun.")}</dd><dt>Care</dt><dd>Not a toy. Small parts, keep away from children under 3.</dd><dt>Made</dt><dd>Printed to order in Bengaluru. No returns. Replacement if it arrives broken, faulty or not as approved, reported within 48 hours of delivery. <button class="linkish" type="button" data-terms>Terms</button></dd></dl>
@@ -1265,8 +1311,9 @@ function syncProduct(){
   const probs=$("pdWarn")?problems(p,cur):[];
   if($("pdWarn")){$("pdWarn").hidden=!probs.length;$("pdWarn").innerHTML=probs.map(esc).join("<br>")}
   if(!$("pdNeed"))return;
-  const miss=missing(p,cur),ok=!probs.length&&!miss.length&&agreed;
-  const need=[miss.length?`Fill in ${miss.join(" and ")} to order.`:"",!agreed?"Tick the box to agree to the Terms.":""].filter(Boolean).join(" ");
+  const miss=missing(p,cur),em=okEmail(),ok=!probs.length&&!miss.length&&agreed&&em;
+  if($("emailPd")){const bad=!!contact.email.trim()&&!em;$("emailPd").classList.toggle("bad",bad);$("emailPd").setAttribute("aria-invalid",String(bad))}
+  const need=[miss.length?`Fill in ${miss.join(" and ")} to order.`:"",!em?(contact.email.trim()?"Check your email address.":"Add your email for order updates."):"",!agreed?"Tick the box to agree to the Terms.":""].filter(Boolean).join(" ");
   $("pdNeed").hidden=!need||!!probs.length;$("pdNeed").textContent=need;if(ok)$("pdNeed").classList.remove("nudge");
   const o=$("pdOrder");o.href=ok?wa(orderMsg([cur],false)):"#";if(ok)delete o.dataset.blocked;else o.dataset.blocked="1";
   $("pdAdd").disabled=!!probs.length||!!miss.length;
@@ -1277,7 +1324,7 @@ function nudge(){
   const p=byId(cur.id);
   const bad=$("pd").querySelector("input.bad");
   const empty=p.custom?p.f.map((f,i)=>showF(f,cur)&&!isOpt(f)&&!cur.vals[i]?$("f"+i):null).find(Boolean):null;
-  const el=bad||empty||(!agreed?$("agreePd"):null);
+  const el=bad||empty||(!okEmail()?$("emailPd"):null)||(!agreed?$("agreePd"):null);
   $("pdNeed").classList.add("nudge");
   if(el){el.focus({preventScroll:true});el.scrollIntoView({block:"center",behavior:calm()?"auto":"smooth"})}
 }
@@ -1293,6 +1340,27 @@ $("pd").addEventListener("input",e=>{if(e.target.dataset.i!==undefined){cur.vals
   if(e.target.dataset.gift==="note"){cur.giftNote=e.target.value.trim();syncProduct()}});
 document.addEventListener("change",e=>{if(e.target.hasAttribute&&e.target.hasAttribute("data-agree")){agreed=e.target.checked;try{sessionStorage.setItem("ns-agree",agreed?"1":"0")}catch(_){}
   document.querySelectorAll("[data-agree]").forEach(x=>{x.checked=agreed});if($("pd").open&&cur)syncProduct();if($("list").open)paintListSend()}});
+/* ---------------- email: sign-up and order log (only when MAIL_ENDPOINT is set) ---------------- */
+const saveContact=()=>{try{localStorage.setItem("ns-contact",JSON.stringify(contact))}catch(e){}};
+function postMail(o){if(!MAIL_ENDPOINT)return Promise.resolve();
+  /* text/plain keeps this a simple request, so Apps Script accepts it without a CORS preflight. The reply cannot be read (no-cors). */
+  return fetch(MAIL_ENDPOINT,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({...o,site:location.host||"local",at:new Date().toISOString()})}).catch(()=>{})}
+function renderMail(){const f=$("mailSign");if(f)f.hidden=!MAIL_ENDPOINT}
+document.addEventListener("input",e=>{if(e.target.matches("[data-email]")){contact.email=e.target.value;saveContact();
+  document.querySelectorAll("[data-email]").forEach(x=>{if(x!==e.target)x.value=contact.email});if($("pd").open&&cur)syncProduct();if($("list").open)renderListKeep()}});
+document.addEventListener("change",e=>{if(e.target.matches("[data-news]")){contact.news=e.target.checked;saveContact();document.querySelectorAll("[data-news]").forEach(x=>{x.checked=contact.news});if($("pd").open&&cur)syncProduct();if($("list").open)renderListKeep()}});
+function renderListKeep(){const a=$("listSend");if(a&&a.dataset.href!==undefined){a.dataset.href=wa(orderMsg(cart,true));paintListSend()}}
+$("mailSign")&&$("mailSign").addEventListener("submit",async e=>{e.preventDefault();const v=$("signEmail").value.trim(),m=$("signMsg");
+  if(!EMAIL_RE.test(v)){m.textContent="That email does not look right.";$("signEmail").focus();return}
+  await postMail({type:"signup",email:v,source:"footer"});$("signEmail").value="";m.textContent="You are on the list. Check your inbox for a welcome email (and the spam folder, the first time).";});
+/* log every order message that is actually opened in WhatsApp, with its order number */
+document.addEventListener("click",e=>{const a=e.target.closest('a[href^="https://wa.me/"]');if(!a||!MAIL_ENDPOINT||a.dataset.blocked)return;
+  let t="";try{t=decodeURIComponent(new URL(a.href).searchParams.get("text")||"")}catch(_){return}
+  const ref=(/Order no\. (NS-\d{4}-[A-Z0-9]{4})/.exec(t)||[])[1];if(!ref)return;
+  const items=a.id==="listSend"?cart:(cur?[cur]:[]);
+  postMail({type:"order",ref,phase:PHASE,email:okEmail()?contact.email.trim():"",news:okEmail()&&contact.news,
+    total:items.reduce((s,it)=>s+byId(it.id).price*it.qty,0),items:items.map(it=>`${it.id} ${byId(it.id).name} x${it.qty}`).join("; "),message:t.slice(0,3000)});
+},true);
 $("pd").addEventListener("change",e=>{if(e.target.dataset.gift==="tick"){cur.gift=e.target.checked;$("giftBox").hidden=!cur.gift;if(!cur.gift){cur.giftNote="";$("giftNote").value=""}syncProduct()}});
 $("pd").addEventListener("close",()=>{if(/^#p-/.test(location.hash)){try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}});
 $("pd").addEventListener("click",e=>{
@@ -1307,7 +1375,7 @@ $("pd").addEventListener("click",e=>{
   if(t.dataset.back){cur.back=t.dataset.back;syncProduct()}
   if(t.hasAttribute("data-hint")){const h=$("hintBox");h.hidden=!h.hidden;t.setAttribute("aria-expanded",String(!h.hidden))}
   if(t.dataset.pick){cur.pick=t.dataset.pick;syncProduct()}
-  if(t.dataset.q){cur.qty=Math.max(1,Math.min(99,cur.qty+ +t.dataset.q));syncProduct()}
+  if(t.dataset.q){const mx=maxQ(cur.id),nq=cur.qty+ +t.dataset.q;if(nq>mx){const w=$("qMax");if(w){w.hidden=false;w.textContent=`Up to ${mx} per order${cur.id==="C1"?", so more fans get a set":""}.`}}cur.qty=Math.max(1,Math.min(mx,nq));syncProduct()}
   if(t.dataset.gobuild){$("pd").close();showBuild(t.dataset.gobuild,true)}
   if(t.hasAttribute("data-share"))shareProduct(t);
   if(t.id==="pdAdd"){
@@ -1340,21 +1408,21 @@ function renderList(){
       :`<p class="empty">Nothing here yet. Open a piece and tap ${esc(L.add)}.</p><button class="btn ghost block" type="button" data-browse>Browse the first drop</button>`}
     <div class="spacer"></div>
     ${!cart.length?"":wl?`${waLink("btn red block",earlyMsg(names),"Get early access on WhatsApp","listSend")}<p class="note">Opens WhatsApp with a short message naming these pieces. Prices are shown for reference.</p>`
-      :`${pre?`<p class="note">Pre-order. Ships from ${esc(SHIP_FROM)}.${PREORDER_NOTE?" "+esc(PREORDER_NOTE):""}</p>`:""}${agreeBox("agreeList")}<p class="note" id="listNeed" role="status" hidden></p><a class="btn red block" id="listSend" target="_blank" rel="noopener" aria-describedby="listNeed" data-href="${esc(wa(orderMsg(cart,true)))}"${gone?' data-gone="1"':""} href="#">${pre?"Send pre-order on WhatsApp":"Send list on WhatsApp"}</a><p class="note">Opens WhatsApp with this list written out. Nothing is charged here.</p>`}
+      :`${pre?`<p class="note">Pre-order. Ships from ${esc(SHIP_FROM)}.${PREORDER_NOTE?" "+esc(PREORDER_NOTE):""}</p>`:""}${emailBox("emailList")}${agreeBox("agreeList")}<p class="note" id="listNeed" role="status" hidden></p><a class="btn red block" id="listSend" target="_blank" rel="noopener" aria-describedby="listNeed" data-href="${esc(wa(orderMsg(cart,true)))}"${gone?' data-gone="1"':""} href="#">${pre?"Send pre-order on WhatsApp":"Send list on WhatsApp"}</a><p class="note">Opens WhatsApp with this list written out. Nothing is charged here.</p>`}
   </div>`;
   paintListSend();
 }
-function paintListSend(){const a=$("listSend");if(!a||!a.dataset.href)return;const ok=agreed&&!a.dataset.gone;a.href=ok?a.dataset.href:"#";
+function paintListSend(){const a=$("listSend");if(!a||!a.dataset.href)return;const ok=agreed&&okEmail()&&!a.dataset.gone;a.href=ok?a.dataset.href:"#";
   if(ok){delete a.dataset.blocked;$("listNeed").hidden=true}else a.dataset.blocked="1"}
 $("list").addEventListener("click",e=>{
   const a=e.target.closest("#listSend");
-  if(a&&a.dataset.blocked){e.preventDefault();const n=$("listNeed");n.hidden=false;n.textContent=a.dataset.gone?"Remove the piece that is sold out, then send.":"Tick the box to agree to the Terms.";if(!a.dataset.gone)$("agreeList").focus();return}
+  if(a&&a.dataset.blocked){e.preventDefault();const n=$("listNeed");n.hidden=false;n.textContent=a.dataset.gone?"Remove the piece that is sold out, then send.":!okEmail()?"Add your email for order updates.":"Tick the box to agree to the Terms.";if(!a.dataset.gone)(okEmail()?$("agreeList"):$("emailList")).focus();return}
   const t=e.target.closest("button");
   if(e.target===$("list")||(t&&t.hasAttribute("data-close"))){$("list").close();return}
   if(!t)return;
   if(t.hasAttribute("data-browse")){$("list").close();setSide("all");$("catalogue").scrollIntoView();return}
   if(t.dataset.rm){cart.splice(+t.dataset.rm,1);save();renderCount();renderList();const f=$("list").querySelector("[data-rm],[data-browse],[data-close]");if(f)f.focus()}
-  if(t.dataset.lq){const it=cart[+t.dataset.i];it.qty=Math.max(1,Math.min(99,it.qty+ +t.dataset.lq));save();renderCount();renderList();const b=$("list").querySelector(`[data-lq="${t.dataset.lq}"][data-i="${t.dataset.i}"]`);if(b)b.focus()}
+  if(t.dataset.lq){const it=cart[+t.dataset.i];it.qty=Math.max(1,Math.min(maxQ(it.id),it.qty+ +t.dataset.lq));save();renderCount();renderList();const b=$("list").querySelector(`[data-lq="${t.dataset.lq}"][data-i="${t.dataset.i}"]`);if(b)b.focus()}
 });
 
 

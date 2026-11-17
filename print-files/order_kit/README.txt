@@ -10,8 +10,11 @@ Setup (once)
 
 Per order
 1. Spotify app: open the song > Share > Copy song link.
-2. spotifycodes.com: paste the link, format SVG, background #000000, bar colour white, Download.
-3. Run one of:
+2. Fastest: give the link and the script downloads the code itself:
+     python code_to_print.py tag --link "https://open.spotify.com/track/..." --title "Starboy" --artist "The Weeknd" -o order_0124
+   If the download fails (no internet, or Spotify changes its code service), make the SVG by hand at
+   spotifycodes.com: paste the link, format SVG, background #000000, bar colour white, Download.
+3. With a downloaded SVG, run one of:
      python code_to_print.py plate code.svg --title "Blinding Lights" --artist "The Weeknd" -o order_0123
      python code_to_print.py tag   code.svg --title "Starboy" --artist "The Weeknd" -o order_0124
      python code_to_print.py tag   code.svg --name "Dimo" -o order_0125

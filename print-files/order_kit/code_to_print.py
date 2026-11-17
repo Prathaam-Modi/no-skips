@@ -184,13 +184,42 @@ def preview(views, path):
         ax.set_xlim(x0 - 2, x1 + 2); ax.set_ylim(y0 - 2, y1 + 2); ax.set_aspect("equal"); ax.axis("off"); ax.set_title(t)
     fig.savefig(path, dpi=160, bbox_inches="tight", facecolor="white"); plt.close(fig)
 
+SPOTIFY_RE = re.compile(r"(?:open\.spotify\.com/(?:intl-[a-z]{2}(?:-[a-z]{2})?/)?(track|album|playlist|artist|episode)/|spotify:(track|album|playlist|artist|episode):)([A-Za-z0-9]{22})")
+
+def spotify_uri(link):
+    """Spotify share link or URI -> spotify:<kind>:<id>."""
+    m = SPOTIFY_RE.search(link.strip())
+    if not m: sys.exit("That does not look like a Spotify link. In the Spotify app: Share > Copy song link.")
+    return "spotify:%s:%s" % (m.group(1) or m.group(2), m.group(3))
+
+def fetch_code(link, out_dir):
+    """Download the code SVG (black background, white bars) from Spotify's code service."""
+    import urllib.request
+    uri = spotify_uri(link)
+    url = "https://scannables.scdn.co/uri/plain/svg/000000/white/640/" + uri
+    os.makedirs(out_dir, exist_ok=True)
+    dest = os.path.join(out_dir, "code.svg")
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=20) as r: data = r.read()
+        if b"<svg" not in data[:400]: raise ValueError("not an SVG")
+    except Exception as e:
+        sys.exit("Could not download the code (%s). Make it by hand at spotifycodes.com (SVG, background #000000, "
+                 "bars white) and give the file instead of --link." % e)
+    open(dest, "wb").write(data); print("downloaded", uri, "->", dest)
+    return dest
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="No Skips order kit, rev B")
     ap.add_argument("product", choices=["plate", "tag", "alias"]); ap.add_argument("svg", nargs="?")
     ap.add_argument("--title", default=""); ap.add_argument("--artist", default=""); ap.add_argument("--name", default="")
     ap.add_argument("--line1", default=""); ap.add_argument("--line2", default="")
     ap.add_argument("-o", "--out", default="print_files")
+    ap.add_argument("--link", default="", help="Spotify song link: downloads the code for you")
     a = ap.parse_args()
+    if a.link:
+        if a.product == "alias": sys.exit("Alias has no code, so it takes no --link.")
+        a.svg = fetch_code(a.link, a.out)
     if a.product != "alias" and not a.svg: sys.exit("Give the Spotify Code SVG file.")
     if a.product == "plate": files, views, fixed = plate(read_code(a.svg), a.title, a.artist)
     elif a.product == "tag": files, views, fixed = tag(read_code(a.svg), a.title, a.artist, a.name)
