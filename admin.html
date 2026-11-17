@@ -44,8 +44,43 @@ button{font:inherit;cursor:pointer}
 @media (prefers-reduced-motion:no-preference){.mk .ch{animation:run 1.1s cubic-bezier(.3,.7,.2,1) infinite}.mk .ch+.ch{animation-delay:.07s}}
 :focus-visible{outline:2px solid var(--red);outline-offset:2px}
 [hidden]{display:none!important}
+/* ---- tabs and orders ---- */
+.tabs{display:flex;gap:0;border:1px solid var(--ink);border-radius:6px;overflow:hidden;margin-bottom:14px;width:max-content}
+.tabs button{border:0;background:transparent;padding:10px 18px;font-weight:600;color:var(--ink)}
+.tabs button[aria-selected=true]{background:var(--ink);color:var(--bg)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+.chips button{border:1px solid var(--line);background:var(--card);border-radius:2px;padding:6px 10px;font:12px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.04em;color:var(--ink)}
+.chips button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chips b{font-weight:500;opacity:.7;margin-left:4px}
+.ord{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin-bottom:10px}
+.ord h3{margin:0;font:600 17px/1.1 "Archivo",sans-serif;letter-spacing:-.02em;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.st{font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.06em;border-radius:2px;padding:2px 6px;border:1px solid var(--line);color:var(--mut)}
+.st.new{background:var(--red);border-color:var(--red);color:#fff}.st.refund_due{background:#d98b1c;border-color:#d98b1c;color:#fff}
+.st.approved,.st.paid,.st.printing{border-color:var(--ink);color:var(--ink)}
+.meta{color:var(--mut);font-size:13px;margin:4px 0 8px}.meta a{color:inherit}
+.its{margin:0 0 8px;padding:0;list-style:none;border-top:1px solid var(--line)}
+.its li{padding:7px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:2px 12px}
+.its li span{color:var(--mut);font-size:13px;grid-column:1/-1}
+.its .k{font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}
+.flag{color:var(--red);font-weight:600;font-size:13px;margin:4px 0}
+.money{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:6px 0 10px}.money b{font-family:"DM Mono",monospace;font-weight:500}
+details.act{border-top:1px solid var(--line);padding:8px 0}
+details.act summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+details.act summary::after{content:"+";font-family:"DM Mono",monospace;color:var(--mut)}details.act[open] summary::after{content:"-"}
+details.act summary::-webkit-details-marker{display:none}
+details.act.go summary{color:var(--red)}
+.af{display:grid;gap:8px;margin-top:10px}.af label{font-weight:600;font-size:13px;margin:0}
+.af textarea{width:100%;min-height:70px;border:1px solid var(--line);border-radius:6px;padding:10px 12px;font:inherit;background:#fff;color:var(--ink)}
+.af .tk{display:flex;gap:8px;align-items:center;font-weight:400}
+.af .btn{justify-self:start}
+.hist{font:12px/1.5 "DM Mono",monospace;color:var(--mut);white-space:pre-wrap;margin:8px 0 0}
+.pf{margin-top:8px}.pf img{max-width:100%;border:1px solid var(--line);border-radius:6px;background:#fff;margin-top:8px}
+.pf .row2{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.small{font-size:13px}
+.empty{color:var(--mut);padding:18px 0}
+
 </style></head><body><main>
-<h1><i></i>No Skips admin</h1><p class="sub">Set the site phase, choose what each product shows as, and update stock. Changes go live on the site about a minute after you save.</p>
+<h1><i></i>No Skips admin</h1><p class="sub">Site: phase, what each product shows as, stock. Orders: review, approve, payments, print files, refunds and customer emails. Changes go live on the site about a minute after you save.</p>
 
 <section id="login" class="box">
   <label for="tok">Your access key</label>
@@ -62,6 +97,8 @@ button{font:inherit;cursor:pointer}
 </section>
 
 <section id="app" hidden>
+  <div class="tabs" role="tablist" aria-label="Admin"><button type="button" role="tab" id="tabSite" aria-selected="true">Site</button><button type="button" role="tab" id="tabOrders" aria-selected="false">Orders</button></div>
+  <div id="siteTab">
   <div class="bar"><input id="q" type="search" placeholder="Search products" style="max-width:300px"><button class="btn ghost" id="out" type="button">Lock</button></div>
   <div class="box" id="phaseBox">
     <div class="nm">Site phase</div>
@@ -83,6 +120,32 @@ button{font:inherit;cursor:pointer}
   </div>
   <div class="box"><div class="nm">Products</div><p class="help" style="margin:4px 0 0">Shown as: <b>Default</b> follows the website code (first drop live, Track Plate, Track Tag and Side A second drop, the rest coming soon). Live makes it orderable in the current phase. Hidden removes it from the site. Max per order limits how many one customer can add (empty = 5).</p></div>
   <div class="box" id="list"></div>
+  </div>
+  <div id="ordersTab" hidden>
+    <div class="box" id="okBox" hidden>
+      <label for="okey">Orders key</label>
+      <input id="okey" type="password" autocomplete="off" placeholder="From the Apps Script setup">
+      <label style="display:flex;gap:8px;align-items:center;font-weight:400;margin:12px 0 0"><input type="checkbox" id="ostay">Remember on this device</label>
+      <div style="margin-top:12px"><button class="btn red" id="ogo" type="button">Open orders</button></div>
+      <div class="err" id="oerr" hidden></div>
+      <p class="help">The orders key is printed when you run <b>setup</b> in the Apps Script editor (tools/orders/SETUP.md).</p>
+    </div>
+    <p class="help" id="oNoUrl" hidden>Email and orders are not switched on yet. Paste the Apps Script web app address in the Site tab, under Email list and order updates, and save. Setup steps: tools/orders/SETUP.md in the repo.</p>
+    <div id="oMain" hidden>
+      <div class="bar"><input id="oq" type="search" placeholder="Search order no., email, product" style="max-width:320px"><button class="btn ghost" id="orefresh" type="button">Refresh</button></div>
+      <p class="help" id="ostat" style="margin:0 0 10px"></p>
+      <div class="chips" id="ochips" role="group" aria-label="Filter orders"></div>
+      <div id="olist"></div>
+      <div class="box" id="nlBox">
+        <div class="nm">Email the list</div>
+        <p class="help" style="margin:4px 0 0" id="nlCount"></p>
+        <div class="fld"><label for="nlSub">Subject</label><input id="nlSub" type="text" maxlength="150" placeholder="Vol. 01 first batch is open"></div>
+        <div class="fld"><label for="nlBody">Message (blank line between paragraphs)</label><textarea id="nlBody" style="width:100%;min-height:120px;border:1px solid var(--line);border-radius:6px;padding:10px 12px;font:inherit"></textarea></div>
+        <div class="ctl" style="margin-top:10px"><button class="btn ghost" type="button" id="nlTest">Send a test to me</button><button class="btn red" type="button" id="nlSend">Send to the list</button></div>
+        <p class="help" id="nlMsg"></p>
+      </div>
+    </div>
+  </div>
 </section>
 </main>
 <div class="save" id="savebar" hidden><svg class="mk" id="busy" hidden viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="mkc"><rect width="100" height="100" rx="22"/></clipPath></defs><rect width="100" height="100" rx="22" fill="currentColor"/><g clip-path="url(#mkc)"><path class="ch" d="M17 30L35 50L17 70"/><path class="ch" d="M40 30L58 50L40 70"/><rect class="bar" x="71" y="20" width="10" height="60" rx="5"/></g></svg><span id="msg" role="status">No changes yet</span><button class="btn red" id="save" type="button" disabled>Save to site</button></div>
@@ -168,7 +231,7 @@ async function save(){
 $("save").addEventListener("click",save);
 
 /* The key is kept for this tab only, unless "Stay unlocked" is ticked. It is never logged or sent anywhere but api.github.com. */
-const forget=()=>{try{localStorage.removeItem("ns-admin-key");sessionStorage.removeItem("ns-admin-key")}catch(_){}};
+const forget=()=>{try{["ns-admin-key","ns-orders-key"].forEach(k=>{localStorage.removeItem(k);sessionStorage.removeItem(k)})}catch(_){}};
 async function unlock(t,keep){
   token=t;$("lerr").hidden=true;$("go").disabled=true;$("go").textContent="Checking...";
   try{await load();try{(keep?localStorage:sessionStorage).setItem("ns-admin-key",t)}catch(_){}
@@ -177,6 +240,203 @@ async function unlock(t,keep){
     if(e.auth)forget()}   /* a dropped connection no longer throws away a good key */
   $("go").disabled=false;$("go").textContent="Unlock";
 }
+
+/* ================= Orders ================= */
+const PRINT_REPO="no-skips-orders", PRINT_WF="print-files.yml";
+let okey="",ORD=null,ofilter="new",polls={};
+const GROUPS=[["new","To review"],["approved","Awaiting payment"],["paid","Paid"],["printing","Printing"],["dispatched","Dispatched"],["refund_due","Refund due"],["done","Done"],["all","All"]];
+const DONE=["delivered","rejected","cancelled","refunded"];
+const rs=n=>"₹"+Math.round(+n||0).toLocaleString("en-IN");
+const h=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const mailUrl=()=>(raw&&typeof raw.mailEndpoint==="string"?raw.mailEndpoint.trim():"");
+async function oapi(body){
+  const r=await fetch(mailUrl(),{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({type:"admin",key:okey,...body})});
+  if(!r.ok)throw new Error("The orders sheet did not answer ("+r.status+").");
+  return r.json();
+}
+function showTab(t){const o=t==="orders";$("tabSite").setAttribute("aria-selected",String(!o));$("tabOrders").setAttribute("aria-selected",String(o));
+  $("siteTab").hidden=o;$("ordersTab").hidden=!o;$("savebar").hidden=o;if(o)openOrders()}
+$("tabSite").addEventListener("click",()=>showTab("site"));$("tabOrders").addEventListener("click",()=>showTab("orders"));
+function openOrders(){
+  $("oNoUrl").hidden=!!mailUrl();
+  if(!mailUrl()){$("okBox").hidden=true;$("oMain").hidden=true;return}
+  if(!okey){try{okey=localStorage.getItem("ns-orders-key")||sessionStorage.getItem("ns-orders-key")||""}catch(_){}}
+  if(!okey){$("okBox").hidden=false;$("oMain").hidden=true;return}
+  loadOrders();
+}
+$("ogo").addEventListener("click",async()=>{const k=$("okey").value.trim();if(!k)return;okey=k;$("oerr").hidden=true;$("ogo").disabled=true;
+  try{const j=await oapi({action:"list"});if(!j.ok)throw new Error(j.error||"Not accepted.");
+    try{($("ostay").checked?localStorage:sessionStorage).setItem("ns-orders-key",k)}catch(_){}
+    $("okey").value="";$("okBox").hidden=true;ORD=j;$("oMain").hidden=false;drawOrders()}
+  catch(e){okey="";$("oerr").textContent=e.message||"Could not reach the orders sheet.";$("oerr").hidden=false}
+  $("ogo").disabled=false});
+async function loadOrders(){
+  $("ostat").textContent="Loading orders...";
+  try{const j=await oapi({action:"list"});
+    if(!j.ok){if(/key/i.test(j.error||"")){try{localStorage.removeItem("ns-orders-key");sessionStorage.removeItem("ns-orders-key")}catch(_){}okey="";$("okBox").hidden=false;$("oMain").hidden=true;$("oerr").textContent=j.error;$("oerr").hidden=false;return}throw new Error(j.error)}
+    ORD=j;$("oMain").hidden=false;$("okBox").hidden=true;drawOrders()}
+  catch(e){$("oMain").hidden=false;$("ostat").textContent=(e.message||"Could not reach the orders sheet.")+" Check your connection and press Refresh."}
+}
+$("orefresh").addEventListener("click",loadOrders);$("oq").addEventListener("input",()=>drawOrders());
+$("ochips").addEventListener("click",e=>{const b=e.target.closest("[data-f]");if(!b)return;ofilter=b.dataset.f;drawOrders()});
+
+/* turn an order's items into print jobs for the order kit (Track Plate, Track Tag, Alias, Run 50) */
+const KIT={A1:"plate",A5:"tag",B3:"alias",B5:"alias"};
+function fv(it,re){const f=(it.fields||[]).find(x=>re.test(x.label));return f?f.value:""}
+function jobsFor(o){
+  const jobs=[],manual=[];
+  o.items.forEach(it=>{const k=KIT[it.id];
+    if(!k){if(it.fields&&it.fields.length)manual.push(it.name+": made by hand in CAD");return}
+    if((k==="plate"||k==="tag")&&it.mode==="wave"){manual.push(it.name+": sound wave, made by hand from the song");return}
+    const j={product:k,link:"",title:"",artist:"",name:"",line1:"",line2:"",accent:it.accent==="ivory"?"ivory":"red",qty:Math.max(1,+it.qty||1),item:it.id+" "+it.name};
+    if(k!=="alias"){j.link=fv(it,/spotify/i)}
+    if(k==="plate"){j.title=fv(it,/^song title/i);j.artist=fv(it,/^artist/i)}
+    if(k==="tag"){if(it.back==="name")j.name=fv(it,/your name/i);else{j.title=fv(it,/^song title/i);j.artist=fv(it,/^artist/i)}}
+    if(it.id==="B3"){j.line1=fv(it,/^line one/i);j.line2=fv(it,/^line two/i)}
+    if(it.id==="B5"){j.name=fv(it,/name or text/i);manual.push("Run 50: the file holds one tag per piece ordered; copy it up to 50 in Bambu Studio")}
+    jobs.push(j)});
+  return {jobs,manual};
+}
+function itemLines(it){
+  const opts=[it.mode?(it.mode==="wave"?"Sound wave":"Spotify Code"):"",it.back==="name"?"Back: name":it.back==="song"?"Back: song and artist":"",it.accent?"Accent "+it.accent:"",it.pick||"",it.gift?"Gift"+(it.giftNote?": "+it.giftNote:""):""].filter(Boolean);
+  const f=(it.fields||[]).map(x=>/spotify/i.test(x.label)?`${x.label}: <a href="${h(x.value)}" target="_blank" rel="noopener">${h(x.value)}</a>`:`${h(x.label)}: <b>${h(x.value)}</b>`);
+  return `<li><div><b>${h(it.name)}</b> &times; ${it.qty} <span class="k">${h(it.id)}</span></div><div>${rs(it.price*it.qty)}</div>${opts.length||f.length?`<span>${[h(opts.join(", ")),...f].filter(Boolean).join("<br>")}</span>`:""}</li>`;
+}
+function actForms(o){
+  const nx=(ORD.next||{})[o.status]||[],F=[],ntf=`<label class="tk"><input type="checkbox" name="notify" checked>Email the customer</label>`;
+  const msg=(ph)=>`<label>Message to the customer (optional)<textarea name="message" placeholder="${h(ph)}"></textarea></label>`;
+  if(nx.includes("approved"))F.push(`<details class="act go"><summary>Approve and send the payment request</summary><form class="af" data-to="approved">
+    <label>Shipping (₹)<input type="number" name="shipping" min="0" step="1" required placeholder="80"></label>${msg("Ships in the first January batch.")}
+    <p class="help" style="margin:0">They get the total, your UPI ID and the order number to put in the UPI note.${ORD.upiReady?"":" <b>Add your UPI ID in the sheet's Settings tab first.</b>"}</p>
+    <button class="btn red" type="submit">Approve, ${rs(o.subtotal)} + shipping</button></form></details>`);
+  if(nx.includes("paid"))F.push(`<details class="act go"><summary>Mark as paid</summary><form class="af" data-to="paid">
+    <label>UPI reference (UTR) from your bank app<input type="text" name="utr" required maxlength="40" placeholder="412345678901"></label>
+    <p class="help" style="margin:0">Check that ${rs(o.total)} arrived with ${h(o.ref)} in the note before you confirm.</p>${ntf}<button class="btn red" type="submit">Confirm payment of ${rs(o.total)}</button></form></details>
+    <details class="act"><summary>Send the payment request again</summary><form class="af" data-resend="1"><button class="btn ghost" type="submit">Send reminder</button></form></details>`);
+  if(nx.includes("printing"))F.push(`<details class="act go"><summary>Start printing</summary><form class="af" data-to="printing">${ntf}<button class="btn red" type="submit">Mark as printing</button></form></details>`);
+  if(nx.includes("dispatched"))F.push(`<details class="act go"><summary>Mark as dispatched</summary><form class="af" data-to="dispatched">
+    <label>Courier<input type="text" name="courier" required maxlength="60" placeholder="Delhivery"></label>
+    <label>Tracking number or link<input type="text" name="tracking" required maxlength="200"></label>${ntf}<button class="btn red" type="submit">Send tracking</button></form></details>`);
+  if(nx.includes("delivered"))F.push(`<details class="act go"><summary>Mark as delivered</summary><form class="af" data-to="delivered">${ntf}<button class="btn red" type="submit">Delivered</button></form></details>`);
+  if(nx.includes("refunded"))F.push(`<details class="act go" open><summary>Send the refund</summary><form class="af" data-to="refunded">
+    <p class="help" style="margin:0">Send <b>${rs(o.refundAmount)}</b> from your bank app back to the account that paid${o.paidUtr?` (payment UTR ${h(o.paidUtr)})`:""}, within 7 days. Then enter the refund's UTR.</p>
+    <label>Refund UTR<input type="text" name="utr" required maxlength="40"></label>${ntf}<button class="btn red" type="submit">Refund sent</button></form></details>`);
+  if(nx.includes("rejected"))F.push(`<details class="act"><summary>Reject (nothing was charged)</summary><form class="af" data-to="rejected" data-confirm="Reject this order and email the customer?">
+    <label>Reason, shown to the customer<input type="text" name="reason" maxlength="300" placeholder="We cannot print this artwork cleanly at this size."></label>${ntf}<button class="btn ghost" type="submit">Reject order</button></form></details>`);
+  if(nx.includes("cancelled"))F.push(`<details class="act"><summary>Cancel (nothing was charged)</summary><form class="af" data-to="cancelled" data-confirm="Cancel this order?">
+    <label>Reason (optional)<input type="text" name="reason" maxlength="300" placeholder="${o.status==="new"?"Never sent on WhatsApp":"Not paid in time"}"></label>
+    <label class="tk"><input type="checkbox" name="notify" ${o.status==="new"?"":"checked"}>Email the customer</label><button class="btn ghost" type="submit">Cancel order</button></form></details>`);
+  if(nx.includes("refund_due"))F.push(`<details class="act"><summary>Cancel and refund</summary><form class="af" data-to="refund_due" data-confirm="Mark a refund as due and email the customer?">
+    <label>Refund amount (₹)<input type="number" name="amount" min="1" step="1" value="${Math.round(o.total)}" required></label>
+    <label>Reason, shown to the customer<input type="text" name="reason" maxlength="300" placeholder="The print failed our check twice."></label>${ntf}<button class="btn ghost" type="submit">Refund due</button></form></details>`);
+  return F.join("");
+}
+function printBlock(o){
+  const {jobs,manual}=jobsFor(o);
+  if(!jobs.length&&!manual.length)return "";
+  const live=!["rejected","cancelled","refunded"].includes(o.status);
+  return `<div class="pf" data-ref="${h(o.ref)}">
+    ${manual.map(m=>`<p class="help" style="margin:4px 0 0">${h(m)}</p>`).join("")}
+    ${jobs.length&&live?`<div class="row2"><button class="btn ghost" type="button" data-make="${h(o.ref)}">Make print files (${jobs.length})</button><button class="btn ghost" type="button" data-check="${h(o.ref)}">Show files</button></div>`:""}
+    <p class="help" data-pfmsg style="margin:6px 0 0">${o.printFiles?`Files: <a href="${h(o.printFiles)}" target="_blank" rel="noopener">${h(o.printFiles.replace(/^https:\/\/github\.com\//,""))}</a>`:""}</p><div data-pfout></div></div>`;
+}
+function drawOrders(){
+  if(!ORD)return;const all=ORD.orders||[],q=$("oq").value.trim().toLowerCase();
+  const cnt=k=>k==="all"?all.length:k==="done"?all.filter(o=>DONE.includes(o.status)).length:all.filter(o=>o.status===k).length;
+  $("ochips").innerHTML=GROUPS.map(([k,t])=>`<button type="button" data-f="${k}" aria-pressed="${ofilter===k}">${t}<b>${cnt(k)}</b></button>`).join("");
+  $("ostat").innerHTML=`${all.length} order${all.length===1?"":"s"}. Emails left today: <b>${ORD.quota}</b>.${ORD.upiReady?"":" <b style='color:var(--red)'>Add your UPI ID in the sheet's Settings tab before approving orders.</b>"}`;
+  const L=all.filter(o=>ofilter==="all"||(ofilter==="done"?DONE.includes(o.status):o.status===ofilter))
+    .filter(o=>!q||(o.ref+" "+o.email+" "+o.itemsText+" "+(o.items||[]).map(i=>(i.fields||[]).map(f=>f.value).join(" ")).join(" ")).toLowerCase().includes(q));
+  $("olist").innerHTML=L.map(o=>`<article class="ord" data-ref="${h(o.ref)}">
+    <h3>${h(o.ref)} <span class="st ${h(o.status)}">${h((ORD.labels||{})[o.status]||o.status)}</span>${o.phase==="preorder"?'<span class="st">Pre-order</span>':""}${o.previewApproved?'<span class="st">Preview OK</span>':""}</h3>
+    <p class="meta">${h(o.created)} &middot; ${o.email?`<a href="mailto:${h(o.email)}?subject=${encodeURIComponent("Your No Skips order "+o.ref)}">${h(o.email)}</a>`:"no email"}${o.news?" &middot; on the list":""}</p>
+    ${o.flags?`<p class="flag">${h(o.flags)}</p>`:""}
+    <ul class="its">${(o.items||[]).map(itemLines).join("")||`<li><div>${h(o.itemsText)}</div></li>`}</ul>
+    <div class="money"><span>Items <b>${rs(o.subtotal)}</b></span>${o.shipping!=null?`<span>Shipping <b>${rs(o.shipping)}</b></span><span>Total <b>${rs(o.total)}</b></span>`:""}${o.paidUtr?`<span>Paid UTR <b>${h(o.paidUtr)}</b></span>`:""}${o.tracking?`<span>${h(o.courier)} <b>${h(o.tracking)}</b></span>`:""}${o.refundAmount?`<span>Refund <b>${rs(o.refundAmount)}</b>${o.refundUtr?` UTR <b>${h(o.refundUtr)}</b>`:""}</span>`:""}</div>
+    ${o.reason?`<p class="help" style="margin:0 0 6px">Reason: ${h(o.reason)}</p>`:""}
+    ${printBlock(o)}
+    ${actForms(o)}
+    <details class="act"><summary>Note and history</summary><form class="af" data-note="1"><label>Private note (only you see it)<textarea name="note">${h(o.note)}</textarea></label><button class="btn ghost" type="submit">Save note</button></form><div class="hist">${h((o.history||[]).join("\n"))}</div></details>
+    <p class="help" data-omsg role="status"></p></article>`).join("")||`<p class="empty">No orders here.</p>`;
+  $("nlCount").textContent=`${ORD.subscribed||0} people on the email list. Sends up to the day's email limit and carries on the next day.`;
+}
+$("olist").addEventListener("submit",async e=>{
+  e.preventDefault();const f=e.target,card=f.closest(".ord"),ref=card.dataset.ref,m=card.querySelector("[data-omsg]");
+  if(f.dataset.confirm&&!confirm(f.dataset.confirm))return;
+  const d=Object.fromEntries(new FormData(f).entries());const btn=f.querySelector("button[type=submit]");btn.disabled=true;m.textContent="Saving...";
+  try{let j;
+    if(f.dataset.note)j=await oapi({action:"note",ref,note:d.note||""});
+    else if(f.dataset.resend)j=await oapi({action:"resend",ref});
+    else j=await oapi({action:"update",ref,to:f.dataset.to,notify:d.notify==="on"||!f.querySelector("[name=notify]"),shipping:d.shipping,utr:d.utr,courier:d.courier,tracking:d.tracking,reason:d.reason,amount:d.amount,message:d.message});
+    if(!j.ok){m.textContent=j.error||"Not saved.";btn.disabled=false;return}
+    const i=ORD.orders.findIndex(o=>o.ref===ref);if(j.order&&i>=0)ORD.orders[i]=j.order;
+    const keep=ofilter;drawOrders();ofilter=keep;
+    const c=$("olist").querySelector(`.ord[data-ref="${CSS.escape(ref)}"] [data-omsg]`);
+    if(c)c.textContent=j.warn||"Saved."+(f.dataset.to&&j.order&&j.order.status!==keep&&keep!=="all"?" It moved to "+((ORD.labels||{})[j.order.status]||j.order.status)+".":"");
+    loadCountsQuiet();
+  }catch(err){m.textContent=err.message||"Could not reach the orders sheet.";btn.disabled=false}
+});
+async function loadCountsQuiet(){try{const j=await oapi({action:"list"});if(j.ok){ORD=j}}catch(_){}}
+
+/* ---- print files: run the workflow in the private repo, then read orders/<ref>/ back ---- */
+const gh=(path,opt={})=>fetch(`https://api.github.com/repos/${OWNER}/${PRINT_REPO}${path}`,{...opt,headers:{...hdr(),...(opt.headers||{})},cache:"no-store"});
+$("olist").addEventListener("click",async e=>{
+  const mk=e.target.closest("[data-make]"),ck=e.target.closest("[data-check]"),pv=e.target.closest("[data-sendpv]");
+  if(!mk&&!ck&&!pv)return;
+  const ref=(mk||ck||pv).closest(".ord").dataset.ref,o=ORD.orders.find(x=>x.ref===ref),box=$("olist").querySelector(`.pf[data-ref="${CSS.escape(ref)}"]`),msg=box.querySelector("[data-pfmsg]");
+  if(mk){const {jobs}=jobsFor(o);if(!jobs.length)return;
+    if(!confirm(`Make print files for ${ref} (${jobs.length} file${jobs.length>1?"s":""})? Takes 2 to 6 minutes on GitHub.`))return;
+    mk.disabled=true;msg.textContent="Starting...";
+    try{const r=await gh(`/actions/workflows/${PRINT_WF}/dispatches`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({ref:"main",inputs:{ref,jobs:JSON.stringify(jobs)}})});
+      if(r.status===404){msg.innerHTML=`The private repo <b>${PRINT_REPO}</b> or its workflow is not there yet, or your GitHub key cannot see it. See tools/orders/SETUP.md, step 5.`;mk.disabled=false;return}
+      if(r.status===403||r.status===401){msg.textContent="Your GitHub key needs Actions: read and write on "+PRINT_REPO+".";mk.disabled=false;return}
+      if(!r.ok){msg.textContent="GitHub said "+r.status+". Try again.";mk.disabled=false;return}
+      msg.innerHTML=`Running on GitHub. This box updates by itself. <a href="https://github.com/${OWNER}/${PRINT_REPO}/actions" target="_blank" rel="noopener">Watch it</a>`;
+      pollFiles(ref,Date.now());
+    }catch(err){msg.textContent="Could not reach GitHub.";mk.disabled=false}
+    return}
+  if(ck){showFiles(ref,true);return}
+  if(pv){pv.disabled=true;msg.textContent="Emailing the preview...";
+    try{const r=await gh(`/contents/orders/${ref}/preview.png?ref=main`);if(!r.ok)throw new Error("No preview yet.");const j=await r.json();
+      const res=await oapi({action:"preview",ref,png:(j.content||"").replace(/\s/g,"")});
+      msg.textContent=res.ok?"Preview emailed. The customer can approve it from the email.":(res.error||"Not sent.");
+      if(res.ok&&res.order){const i=ORD.orders.findIndex(x=>x.ref===ref);ORD.orders[i]=res.order}
+    }catch(err){msg.textContent=err.message}pv.disabled=false}
+});
+async function pollFiles(ref,started){
+  clearTimeout(polls[ref]);
+  const found=await showFiles(ref,false,started);
+  if(!found&&Date.now()-started<12*60*1000)polls[ref]=setTimeout(()=>pollFiles(ref,started),15000);
+  else if(!found){const box=$("olist").querySelector(`.pf[data-ref="${CSS.escape(ref)}"]`);if(box)box.querySelector("[data-pfmsg]").innerHTML=`Still not done after 12 minutes. <a href="https://github.com/${OWNER}/${PRINT_REPO}/actions" target="_blank" rel="noopener">Check the run on GitHub</a>.`}
+}
+async function showFiles(ref,loud,since){
+  const box=$("olist").querySelector(`.pf[data-ref="${CSS.escape(ref)}"]`);if(!box)return false;const msg=box.querySelector("[data-pfmsg]"),out=box.querySelector("[data-pfout]");
+  try{const r=await gh(`/contents/orders/${ref}/summary.json?ref=main`);
+    if(r.status===404){if(loud)msg.textContent="No files yet. Press Make print files.";return false}
+    if(!r.ok){if(loud)msg.textContent="GitHub said "+r.status+".";return false}
+    const sm=JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(((await r.json()).content||"").replace(/\s/g,"")),c=>c.charCodeAt(0))));
+    if(since&&Date.parse(sm.created)<since-60000)return false;   /* an older run's files: keep waiting */
+    const tree=`https://github.com/${OWNER}/${PRINT_REPO}/tree/main/orders/${ref}`;
+    let img="";try{const p=await gh(`/contents/orders/${ref}/preview.png?ref=main`);if(p.ok){const pj=await p.json();if(pj.content)img=`<img alt="Preview of ${h(ref)}" src="data:image/png;base64,${pj.content.replace(/\s/g,"")}">`}}catch(_){}
+    out.innerHTML=`${(sm.jobs||[]).map(j=>`<p class="small" style="margin:6px 0 0">${j.ok?"Ready":"<b style='color:var(--red)'>Failed</b>"}: ${h(j.item||j.product)}${j.sliced?`, ${Math.round(j.sliced.time_s/60)} min, ${(+j.sliced.grams).toFixed(1)} g`:j.ok?", project file only (not sliced)":""}${j.error?` - ${h(j.error)}`:""}</p>`).join("")}
+      ${img}<div class="row2"><a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none" href="${tree}" target="_blank" rel="noopener">Open the files</a>${img&&o_(ref)&&o_(ref).email?`<button class="btn red" type="button" data-sendpv="1">Email the preview for approval</button>`:""}</div>`;
+    msg.textContent=sm.ok?"Files are ready.":"Some files failed. Fix the order details, then make them again.";
+    if(!o_(ref).printFiles||o_(ref).printFiles!==tree){oapi({action:"printfiles",ref,url:tree}).then(j=>{if(j.ok&&j.order){const i=ORD.orders.findIndex(x=>x.ref===ref);ORD.orders[i]=j.order}}).catch(()=>{})}
+    return true;
+  }catch(err){if(loud)msg.textContent="Could not read the files.";return false}
+}
+const o_=ref=>ORD.orders.find(x=>x.ref===ref);
+
+/* ---- newsletter ---- */
+async function sendNl(test){
+  const subject=$("nlSub").value.trim(),body=$("nlBody").value.trim(),m=$("nlMsg");
+  if(!subject||!body){m.textContent="Write a subject and a message first.";return}
+  if(!test&&!confirm(`Send "${subject}" to ${ORD.subscribed||0} people?`))return;
+  m.textContent="Sending...";
+  try{const j=await oapi({action:"newsletter",subject,body,test});m.textContent=j.ok?(test?"Test sent to you.":`Sent to ${j.sent}. ${j.note||""}`):(j.error||"Not sent.")}catch(e){m.textContent=e.message}
+}
+$("nlTest").addEventListener("click",()=>sendNl(true));$("nlSend").addEventListener("click",()=>sendNl(false));
+
 $("go").addEventListener("click",()=>{const t=$("tok").value.trim();if(t)unlock(t,$("stay").checked)});
 $("tok").addEventListener("keydown",e=>{if(e.key==="Enter")$("go").click()});
 $("out").addEventListener("click",()=>{forget();location.reload()});
