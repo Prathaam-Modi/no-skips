@@ -1,0 +1,11 @@
+# Bambu Studio (downloaded and extracted by the workflow)
+.bambu/
+*.AppImage
+squashfs-root/
+# working files
+orders/*/.plan.json
+.slice_tmp/
+__pycache__/
+*.pyc
+.venv/
+.cache/

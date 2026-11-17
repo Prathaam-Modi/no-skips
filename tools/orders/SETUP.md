@@ -37,8 +37,9 @@ Everything is free. Emails go from your Gmail, which allows about 100 emails a d
 ### 4. Print files on GitHub (private repo)
 
 1. On github.com: **New repository**, name **no-skips-orders**, **Private**, no README. Create it.
-2. Tell Claude it exists. Claude pushes the workflow and the order kit into it.
-3. Give your admin key access: github.com > Settings > Developer settings > Fine-grained tokens > your No Skips token > Edit. Repository access: add **no-skips-orders** next to no-skips. Permissions: **Actions: Read and write** and **Contents: Read and write**. Save. (The key value does not change.)
+2. Tell Claude it exists. Claude pushes the workflow and the order kit into it. (A copy of everything that goes in it is kept in this repo at tools/orders/print-repo/; with no Claude around, upload that folder's contents to the new repo.)
+3. In no-skips-orders: **Settings > Actions > General > Workflow permissions: Read and write permissions**. Save. This lets the workflow save the files it makes.
+4. Give your admin key access: github.com > Settings > Developer settings > Fine-grained tokens > your No Skips token > Edit. Repository access: add **no-skips-orders** next to no-skips. Permissions: **Actions: Read and write** and **Contents: Read and write**. Save. (The key value does not change.)
 
 Order details stay in the private repo; nothing about customers goes into the public no-skips repo.
 
