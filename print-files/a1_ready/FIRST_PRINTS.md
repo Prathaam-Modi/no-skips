@@ -23,7 +23,7 @@ File: 00_fit_coupon/00_fit_coupon.3mf
 ## Day 4: Hold (7.8 h over two plates)
 - Pass: post presses into base and saddle with no wobble and no glue; stands a 350 g pair of headphones for 24 hours without leaning; post printed lying down has no visible warp.
 
-## Day 4 add-on: Dock (about 4.5 h, only after Hold passes)
+## Day 4 add-on: Dock (2.6 h over two plates, only after Hold passes)
 - Pass: drops over the post past the fader without catching and sits flat on the knob; red caps slide on and do not fall off when the Dock is turned over (if loose, the coupon dovetail result sets DOVE in build6.py); a DualSense or Xbox controller hangs in each cradle and clears the ear cups of your own headphones; with one controller in front and no headphones, the stand does not tip when the desk is bumped.
 
 ## Day 5: second drop

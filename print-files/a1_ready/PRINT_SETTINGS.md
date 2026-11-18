@@ -47,7 +47,7 @@ Sliced 17 November 2026 with Bambu Studio 2.02 (command line) for the Bambu Lab 
 | B5 | Run 50 (12 tags + 25 straps sliced) | 2 | 0.20 | 3 | 100% | None | None | 1 Black, 2 Red | 4 | 3.4 | 115 | 117 |
 | A4 | 45s | 1 | 0.20 | 3 | 20% | None | None | 1 Black, 2 Red | 3 | 2.6 | 81 | 83 |
 | D9 | Perch | 3 | 0.20 | 3 | 15%/100% | Tree, auto | 5 mm on tall parts | 1 Black, 2 Red | 4 | 7.7 | 265 | 267 |
-| D14 | Dock (NOT SLICED, model estimate) | 2 | 0.20 | 4 | 25%/100% | None | None | 1 Black / 2 Red (separate plates) | 0 | about 4.5 | about 97 | about 98 |
+| D14 | Dock | 2 | 0.20 | 4/3 | 25%/100% | None | None | 1 Black / 2 Red (separate plates) | 0 | 2.6 | 88 | 88 |
 
 Where two values are shown (for example 15%/100%), the first is the plate default and the second is set on a single object such as a snap frame, pin or thin plate. Top and bottom shells: 4 and 3 at 0.20 mm, slicer defaults at finer layers. Infill pattern gyroid unless solid. Seam aligned. No ironing: the textured plate face is the show face.
 
@@ -125,9 +125,10 @@ Where two values are shown (for example 15%/100%), the first is the plate defaul
 - Drumroll: the TPU belts are sliced by hand, not in these files. Settings: TPU 95A from the external spool, 0.2 mm layers, one wall of 0.45 mm, no top or bottom layers, no infill (or spiral vase, one belt at a time), about 25 mm/s, no retraction tuning needed for a single wall. Start with the 8 mm belt.
 - PETG products (45s, Perch; Fold and Standby on request): the project files are PLA. For PETG pick the PETG filament profile in Bambu Studio, keep the Textured PEI plate (no glue), and expect slower, slightly stringier prints.
 
-## D14 Dock (added 18 November 2026, not sliced)
+## D14 Dock (added and sliced 18 November 2026)
 
-The Bambu Studio download was blocked in the session that made it, so these projects are placed and set up but not sliced. Open each, press Slice, and send back the time and grams.
-- D14_dock/D14_dock_plate1_dock.3mf: the Dock lying on its side, chevron face up, 4 walls, 25% infill, black. 227 x 60 mm footprint, 36 mm tall. No supports: every bridge is 10.4 mm or less.
-- D14_dock/D14_dock_plate2_caps_red.3mf: two red caps on their side, 100% zig-zag. Can ride along on any red job.
-- Grams and hours are a model estimate scaled by Hold's slicer-to-model ratio (1.15 on grams, 0.8 on the hour formula).
+Sliced on GitHub by the "Slice print files" workflow (Bambu Studio 2.02.02.56 command line, A1, Textured PEI, PLA Basic). The sliced plates are in git and ready to send to the printer.
+- D14_dock/D14_dock_plate1_dock.gcode.3mf: the Dock on its side, chevron face up, 4 walls, 25% gyroid, slot 1 Black. 1.92 h, 75.6 g. No supports.
+- D14_dock/D14_dock_plate2_caps_red.gcode.3mf: two red caps on their side, 3 walls, 100% zig-zag, slot 2 Red. 0.72 h, 12.6 g.
+- The project files (.3mf without gcode) are kept for re-slicing. Only warning: the usual bed temperature note (normal on an open A1).
+- To slice anything again on GitHub: list it in SLICE_QUEUE.json and push; results land in SLICED.json and next to the project.

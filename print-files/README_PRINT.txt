@@ -253,8 +253,8 @@ D13 DRUMROLL  about 42 g PLA plus a 7 g TPU belt, 1.9 h PLA (sliced) plus about 
   end of the capstan, a red hub into each end of roller A (round hole) and roller B (slot). Poker slides into
   the square hole. Checked in CAD only (no clashes over the full travel). Not printed.
 
-D14 DOCK  about 84 g model (about 98 g expected after slicing), about 4.5 h (estimate, not sliced)
+D14 DOCK  88 g, 2.6 h (sliced 18 Nov 2026: dock 75.6 g 1.92 h, two caps 12.6 g 0.72 h)
   Two-controller dock for D5 Hold. Drops over the post before the saddle, rests on the base.
   - D14_1_dock_BLACK.stl  226.7 x 60.0 x 36.0 mm, print lying on its side, chevron up, 4 walls, 25% infill
   - D14_2_cap_RED_x2.stl  8.0 x 22.0 x 36.0 mm, print 2, on the side, 100% infill
-  CAD: print-files/cad/build6.py (fit checks against Hold built in). Projects: a1_ready/D14_dock/.
+  CAD: print-files/cad/build6.py (fit checks against Hold built in). Projects and ready-sliced plates (.gcode.3mf): a1_ready/D14_dock/.
