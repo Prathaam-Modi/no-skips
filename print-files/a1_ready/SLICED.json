@@ -1,0 +1,31 @@
+{
+ "D14_dock/D14_dock_plate1_dock.3mf": {
+  "ok": true,
+  "time_s": 6912,
+  "grams": 75.6,
+  "plates": 1,
+  "when": "2026-11-18 12:48 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "4",
+   "sparse_infill_density": "25%"
+  },
+  "hours": 1.92,
+  "file": "D14_dock/D14_dock_plate1_dock.gcode.3mf"
+ },
+ "D14_dock/D14_dock_plate2_caps_red.3mf": {
+  "ok": true,
+  "time_s": 2584,
+  "grams": 12.6,
+  "plates": 1,
+  "when": "2026-11-18 12:48 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag"
+  },
+  "hours": 0.72,
+  "file": "D14_dock/D14_dock_plate2_caps_red.gcode.3mf"
+ }
+}
