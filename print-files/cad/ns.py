@@ -136,7 +136,7 @@ GROUPS = {
     "D4": {"foot_left_inlay": "foot_left", "foot_right_inlay": "foot_right", "ledge_art": "ledge"},
     "D5": {"dial": "base", "fader_and_scale": "post", "saddle_stripe": "saddle"}, "D6": {"brace_bar": "cross_brace"},
     "D7": {"tall_cup_rim": "tall_cup", "mid_cup_rim": "mid_cup", "tray_rim": "tray"}, "D8": {"label": "tray"},
-    "D9": {"table_mark": "table"}, "D10": {"eject_inlay": "face_plate"}, "D11": {"standby_dot": "base"},
+    "D9": {"table_mark": "table"}, "D10": {"eject_inlay": "front_body"}, "D11": {"standby_dot": "base"},
     "D12": {"pointer_inlay": "plate_b"},
     "D13": {"base_mark": "base", "base_bar": "base"},
 }

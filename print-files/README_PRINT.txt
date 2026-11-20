@@ -160,11 +160,11 @@ B6 CRATE  about 78 g, 5.2 h  [COMING SOON]
 DAILY
 ====================================================================================================
 
-D10 EJECT  about 23 g, 1.8 h
-  91 x 67 x 7.4 mm. Holds up to 6 flat cards (embossed cards take two slots). Push the red tab on the back up 18 mm: the ramp lifts the front card highest so the stack fans out. Tray prints back down, face plate face down with the ivory eject mark inlaid, slider as it is. Drop the slider in tab first, press the face plate on (side lips are a 0.05 mm press fit).
-  - D10_1_tray_BLACK.stl  90.8 x 66.6 x 6.2 mm, 10.4 g
-  - D10_2_face_plate_BLACK.stl  90.8 x 66.6 x 2.0 mm, 9.1 g
-  - D10_3_eject_inlay_IVORY.stl  9.0 x 7.9 x 0.6 mm, 0.0 g
+D10 EJECT  about 24 g, 1.8 h  (rev B, 20 Nov 2026)
+  92 x 67 x 7.4 mm. Holds up to 6 flat cards (embossed cards take two slots). Push the red tab on the back up 18 mm: the ramp lifts the front card highest so the stack fans out. Four spring bars on the back plate grip the card edges, so cards stay put whichever way up you hold it; push them back down with your thumb. The front is one piece (face, walls, floor) and prints face down with the ivory eject mark inlaid; the back plate prints outer face down with its bars standing up; the slider prints as it is. Drop the slider in from the back, then press the back plate on until the four noses click into the side pockets. Grip strength is set by NS_GRIP in cad/build3.py (0.3 mm default; try 0.2 to 0.4 if the first print grips too hard or too loose).
+  - D10_1_front_body_BLACK.stl  92.0 x 66.6 x 6.2 mm, 11.1 g
+  - D10_2_eject_inlay_IVORY.stl  9.0 x 7.9 x 0.6 mm, 0.0 g
+  - D10_3_back_plate_BLACK.stl  92.0 x 66.6 x 5.8 mm, 9.0 g
   - D10_4_slider_RED.stl  83.6 x 8.1 x 11.0 mm, 3.4 g
 
 D12 ROTARY  about 9 g, 0.9 h

@@ -30,33 +30,65 @@ def eject_symbol(cx, cy, w):
     tri = Polygon([(cx - w / 2, cy - w * 0.05), (cx + w / 2, cy - w * 0.05), (cx, cy + w * 0.5)])
     return unary_union([tri, box(cx - w / 2, cy - w * 0.38, cx + w / 2, cy - w * 0.2)])
 
-# ================================================================== D10 Eject: card wallet with a thumb slider
+# ================================================================== D10 Eject: card wallet with a thumb slider (rev B)
+# Rev B: the front is ONE piece (face, walls and floor), so nothing can peel off the front. The back plate snaps in
+# on four spring bars, and the same bars grip the card edges, so cards stay put in any position (hold, shake, upside down).
 def build_eject():
     p = Product("D10", "eject", "Eject")
-    W, H = 90.8, 66.6            # outer width (x) and height (z)
-    CAV_X, CAV_Y = 88.0, 5.0     # 86.4 clear between the face-plate lips; cards are 85.6 x 54 x 0.76
-    BACK, FLOOR = 1.2, 1.4
-    out = rrect(W, H, 4.0, 0, H / 2)                                  # in (x, z)
-    tray = xz(out, CAV_Y + BACK, 0.0)                                  # y 0 .. 6.2, front open
-    tray = tray - cube(CAV_X, CAV_Y + 0.01, H, 0, CAV_Y / 2 - 0.005, FLOOR)
-    slot = cube(8.4, BACK + 0.2, 25.0, 0, CAV_Y + BACK / 2, 1.3)       # back slot for the thumb tab, 18 mm travel
-    tray = tray - slot
-    tray = tray - mv(rot(cyl(9, 4, 0, seg=64), 90, 0, 0), 0, CAV_Y + BACK + 1, H + 3.5)  # thumb dip at the top of the back
-    # face plate, 1.2 mm, with side lips that press inside the tray walls
-    plate = xz(out, 1.2, -1.2)
-    lips = U([cube(0.85, 0.8, H - FLOOR - 4, s * (CAV_X / 2 - 0.4 + 0.025), 0.4, FLOOR + 0.5) for s in (-1, 1)])
+    W, H = 92.0, 66.6            # outer width (x) and height (z)
+    XW = 44.2                    # cavity half width (wall inner face); cards are 85.6 wide, half 42.8
+    FRONT, CAV_Y, BACK, FLOOR = 1.2, 5.0, 1.2, 1.4
+    GRIP = float(os.environ.get("NS_GRIP", "0.3"))    # how far each spring pad sits inside the card edge when empty
+    BT, BL, SLIT = 1.2, 15.0, 0.8                     # spring bar thickness, length, slit width
+    XP = 42.8 - GRIP; XO = XP + BT                    # pad face (touches the card) and outer face of the bar
+    NX = 44.7                                         # nose tip; pocket floor is 44.8
+    LOWER = (19.0, 34.0, "low"); UPPER = (39.0, 54.0, "up")   # bar z range; low bar is anchored at its top, upper at its bottom
+    sil = unary_union([rrect(W, H, 4.0, 0, H / 2), rrect(W, 12.0, 1.0, 0, H - 6.0)])      # round at the bottom, square at the top
+    # ---- front body: face wall, side walls, floor; open at the top (cards) and at the back (plate)
+    front = U([xz(sil, FRONT, -FRONT), xz(sil, CAV_Y + 0.01, -0.01)])
+    front = front - cube(2 * XW, CAV_Y + 0.03, H + 2.0, 0, CAV_Y / 2, FLOOR)
     sym = eject_symbol(33.5, 9.0, 9.0)
-    plate = U([plate, lips]) - xz(sym, 0.62, -1.21)
-    sym_in = xz(sym, 0.6, -1.2)
-    # carriage: ramp lifts the front card highest, so the stack fans out when pushed
+    front = front - xz(sym, 0.62, -FRONT - 0.01)
+    sym_in = xz(sym, 0.6, -FRONT)
+    pockets = []
+    for s in (-1, 1):
+        for zc in (22.0, 51.0):
+            pk = Polygon([(XW - 0.02, 0.3), (44.8, 0.3), (44.8, 2.97), (XW - 0.02, 3.25)])
+            if s < 0: pk = affinity.scale(pk, -1, 1, origin=(0, 0))
+            pockets.append(ext(pk, 5.0, zc - 2.5))
+    front = front - U(pockets)
+    # ---- back plate with four spring bars (grip + snap)
+    plate = xz(sil, BACK, CAV_Y)
+    plate = plate - cube(8.4, BACK + 0.2, 25.0, 0, CAV_Y + BACK / 2, 1.3)                  # slot for the slider tab, 18 mm travel
+    plate = plate - mv(rot(cyl(9, 4, 0, seg=64), 90, 0, 0), 0, CAV_Y + BACK + 1, H + 3.5)  # thumb dip
+    slits, blades = [], []
+    for s in (-1, 1):
+        for (z0, z1, kind) in (LOWER, UPPER):
+            xc = s * (XP + XO) / 2
+            lo, hi = (z0 - SLIT, z1) if kind == "low" else (z0, z1 + SLIT)
+            slits.append(cube(SLIT, BACK + 0.04, hi - lo, s * (XP - SLIT / 2), CAV_Y + BACK / 2, lo))     # inner slit
+            slits.append(cube(SLIT, BACK + 0.04, hi - lo, s * (XO + SLIT / 2), CAV_Y + BACK / 2, lo))     # outer slit
+            ez = (z0 - SLIT) if kind == "low" else z1
+            slits.append(cube(BT + 2 * SLIT, BACK + 0.04, SLIT, xc, CAV_Y + BACK / 2, ez))                # free-end slit
+            blade = cube(BT, CAV_Y - 0.4 + 0.02, BL, xc, (0.4 + CAV_Y + 0.02) / 2, z0)
+            zn = 20.0 if kind == "low" else 49.0                                                          # nose near the free end
+            nose = Polygon([(XO - 0.05, 0.4), (XO, 0.4), (NX, 2.0), (NX, 2.9), (XO, 3.2), (XO - 0.05, 3.2)])
+            if s < 0: nose = affinity.scale(nose, -1, 1, origin=(0, 0))
+            blade = U([blade, ext(nose, 4.0, zn)])
+            ch = Polygon([(XP - 0.02, z1 - 1.6), (XP + 0.9, z1 + 0.02), (XP - 0.02, z1 + 0.02)])            # lead-in at the top end, pad side
+            if s < 0: ch = affinity.scale(ch, -1, 1, origin=(0, 0))
+            blade = blade - xz(ch, CAV_Y - 0.2, 0.3)
+            blades.append(blade)
+    plate_all = U([plate - U(slits)] + blades)
+    # ---- slider: ramp lifts the front card highest, so the stack fans out when pushed
     ramp = Polygon([(0.1, 0), (4.9, 0), (4.9, 2.0), (0.1, 11.0)])
     car = yz(ramp, 83.6, -41.8)
     tab = cube(8.0, BACK + 2.2, 6.0, 0, 4.9 + (BACK + 2.2) / 2 - 0.05, 0)
     car = U([car, tab]) - U([cube(8.2, 0.5, 0.6, 0, 4.9 + BACK + 2.2 - 0.25, 1.0 + i * 1.6) for i in range(3)])
-    # print orientations
-    p.part("tray", mv(rot(tray, -90, 0, 0), 0, 0, CAV_Y + BACK), BLACK, infill=1.0)
-    p.part("face_plate", mv(rot(plate, 90, 0, 0), 0, 0, 1.2), BLACK, infill=1.0)
-    p.part("eject_inlay", mv(rot(sym_in, 90, 0, 0), 0, 0, 1.2), IVORY, infill=1.0)
+    # ---- print orientations: front face down, back plate outer face down (bars stand up), slider as it is
+    p.part("front_body", mv(rot(front, 90, 0, 0), 0, 0, FRONT), BLACK, infill=1.0)
+    p.part("eject_inlay", mv(rot(sym_in, 90, 0, 0), 0, 0, FRONT), IVORY, infill=1.0)
+    p.part("back_plate", mv(rot(plate_all, -90, 0, 0), 0, 0, CAV_Y + BACK), BLACK, infill=1.0)
     p.part("slider", car, RED, infill=1.0)
     car_w = mv(car, 0, 0, FLOOR)
     cards = []
@@ -64,15 +96,18 @@ def build_eject():
         y0 = i * 0.78 + 0.02
         h = 2.0 + (4.9 - (y0 + 0.1)) / 4.8 * 9.0 if y0 > 0.1 else 11.0
         cards.append(cube(85.6, 0.76, 54.0, 0, y0 + 0.38, FLOOR + min(11.0, h)))
-    shell = [(tray, BLACK), (plate, BLACK), (sym_in, IVORY)]
+    shell = [(front, BLACK), (sym_in, IVORY), (plate_all, BLACK)]
     p.scene("eject", shell + [(car_w, RED)] + [(c, PROP if i % 2 else PROP2) for i, c in enumerate(cards)])
     lift = 18.0
     p.scene("eject_open", place(shell + [(mv(car_w, 0, 0, lift), RED)] + [(mv(c, 0, 0, lift), PROP if i % 2 else PROP2) for i, c in enumerate(cards)], rz=180))
-    p.scene("eject_build", shell[:1] + [(mv(plate, 0, -40, 0), BLACK), (mv(sym_in, 0, -40, 0), IVORY), (mv(car_w, 0, -20, 70), RED)])
+    p.scene("eject_build", place([(front, BLACK), (sym_in, IVORY), (mv(plate_all, 0, 34, 0), BLACK), (mv(car_w, 0, 14, 66), RED)], rz=180))
     p.scene("bp_D10", p.scenes["eject_build"]); p.scene("bpo_D10", shell + [(car_w, RED)])
-    p.note = ("91 x 67 x 7.4 mm. Holds up to 6 flat cards (embossed cards take two slots). Push the red tab on the back up 18 mm: "
-              "the ramp lifts the front card highest so the stack fans out. Tray prints back down, face plate face down with the ivory "
-              "eject mark inlaid, slider as it is. Drop the slider in tab first, press the face plate on (side lips are a 0.05 mm press fit).")
+    p.checks = dict(front=front, plate=plate_all, car=car_w, cards=cards, XP=XP, XO=XO)
+    p.note = ("92 x 67 x 7.4 mm. Holds up to 6 flat cards (embossed cards take two slots). Push the red tab on the back up 18 mm: "
+              "the ramp lifts the front card highest so the stack fans out. Four spring bars on the back plate grip the card edges, so cards stay "
+              "put when held any way up; push them back down with your thumb. Front prints face down with the ivory eject mark inlaid, "
+              "back plate prints outer face down (bars stand up), slider as it is. Drop the slider in from the back, then press the back plate on "
+              "until the four noses click into the side pockets.")
     P["D10"] = p
 
 # ================================================================== D11 Standby: rack for closed laptops

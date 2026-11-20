@@ -31,7 +31,7 @@ SHEETS = {
  "D2": dict(piece="TAPE CASE", parts="TRAY + LID", cap="ISOMETRIC  CLOSED.  LID PRESSES ON", iso=dict(az=-28, el=34)),
  "D4": dict(piece="SLEEVE VINYL STAND", parts="LEDGE + 2 FEET", cap="EXPLODED  LEDGE + RECORD FEET.  VIEWS: BUILT", iso=dict(az=-36, el=22)),
  "D5": dict(piece="HOLD HEADPHONE STAND", parts="BASE, POST, SADDLE", cap="EXPLODED  BASE + POST + SADDLE.  VIEWS: BUILT", iso=dict(az=-28, el=14)),
- "D10": dict(piece="EJECT CARD WALLET", parts="TRAY, PLATE, SLIDER", cap="EXPLODED  TRAY + FACE PLATE + SLIDER.  PUSH THE TAB: CARDS FAN OUT.  VIEWS: CLOSED", iso=dict(az=-36, el=20)),
+ "D10": dict(piece="EJECT CARD WALLET", parts="FRONT, BACK PLATE, SLIDER", cap="EXPLODED  FRONT + BACK PLATE + SLIDER.  PUSH THE TAB: CARDS FAN OUT.  SPRING BARS HOLD THEM.  VIEWS: CLOSED", iso=dict(az=-36, el=20)),
  "D11": dict(piece="STANDBY LAPTOP RACK", parts="BASE + 3 FINS", cap="ISOMETRIC  FINS SLIDE IN THE DOVETAIL CHANNEL.  VIEWS: BUILT", iso=dict(az=-34, el=22)),
  "D12": dict(piece="ROTARY KEY ORGANISER", parts="2 PLATES, 2 POSTS", cap="EXPLODED  PLATES + SNAP POSTS + LOOP + SPACERS.  VIEWS: BUILT", iso=dict(az=-24, el=30)),
  "X1": dict(piece="CUE COVER  XDJ-RX3", parts="6 TILES, 2 HOODS", cap="EXPLODED  SIX TILES + SCREEN HOOD.  BOW-TIE KEYS UNDERNEATH.  VIEWS: COVER", iso=dict(az=-24, el=40)),

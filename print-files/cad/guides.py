@@ -246,12 +246,12 @@ G["fold_flat"] = dict(banner="Fold: how it goes together", labels=[
     dict(text="Notches", sub="press each rib down onto them", at=(-110, 85, 6), to=(-110, 175)),
 ])
 G["eject_build"] = dict(banner="Eject: how it goes together", labels=[
-    dict(text="Tray", tag="A", at=(-44, 3, 55), to=(-150, -60)),
-    dict(text="Face plate", sub="eject mark bottom right", tag="B", at=(30, -40, 18), to=(150, 130)),
-    dict(text="Slider", sub="red tab pokes out the back", tag="C", at=(42, -16, 76), to=(150, -110)),
+    dict(text="Front", sub="one piece, eject mark on the face", tag="A", at=(-45, -4, 30), to=(60, 235)),
+    dict(text="Slider", sub="red tab points out the back", tag="B", at=(0, -22, 72), to=(150, -150)),
+    dict(text="Back plate", sub="four noses click into the pockets", tag="C", at=(30, -40, 22), to=(140, 130)),
 ], arrows=[
-    dict(pts=[(-30, -16, 100), (-30, -16, 86)], step=1),
-    dict(pts=[(-60, -80, 34), (-60, -48, 34)], step=2),
+    dict(pts=[(-34, -18, 96), (-34, -4, 72)], step=1),
+    dict(pts=[(34, -68, 74), (34, -46, 74)], step=2),
 ])
 G["nametag"] = dict(banner="Alias: how the loop goes on", labels=[
     dict(text="Tag", tag="A", at=(30, 12, 4), to=(140, -80)),
@@ -294,10 +294,10 @@ G["studio_set"] = dict(banner="Vol. 01: where each piece goes", labels=[
 U = {}
 U["eject_open"] = dict(banner="Eject: push the tab, cards fan out", labels=[
     dict(text="Cards", sub="up to six, flat", tag="A", at=(0, -3, 80), to=(150, -60)),
-    dict(text="Red slider tab", sub="push up with your thumb", tag="B", at=(30, -8, 25), to=(150, 110)),
-    dict(text="Tray and face plate", tag="C", at=(-44, -3, 40), to=(-140, 80)),
+    dict(text="Red slider tab", sub="push up with your thumb", tag="B", at=(0, -8, 22), to=(150, 130)),
+    dict(text="Front and back plate", sub="spring bars grip the cards", tag="C", at=(-44, -3, 40), to=(-150, 80)),
 ], arrows=[
-    dict(pts=[(52, -8, 8), (52, -8, 40)], step=3),
+    dict(pts=[(16, -8, 14), (16, -8, 52)], step=3),
 ])
 U["standby"] = dict(banner="Standby: set the gaps to your laptops", labels=[
     dict(text="Closed laptop", sub="stands upright in its bay", tag="A", at=(-10, 0, 200), to=(-150, -60)),
