@@ -97,6 +97,9 @@ PRODUCTS = [
     {"code": "D14", "slug": "Dock", "name": "Dock",
      "kind": "Two-controller dock for Hold", "tagline": "Headphones up top. Both controllers below.",
      "price": 999, "phase": "soon", "image": "dock_use", "note": "FITS HOLD. THE FIRST ADD-ON."},
+    {"code": "D10", "slug": "Eject", "name": "Eject",
+     "kind": "Slim card wallet", "tagline": "Push the tab. Cards fan out. Stay put.",
+     "price": 599, "phase": "soon", "image": "eject_open"},
     # Add further products here in the same shape, for example:
     # {"code": "D7", "slug": "Channel", "name": "Channel", "kind": "Modular desk set",
     #  "tagline": "Your desk, mixed down.", "price": 1799, "phase": "soon", "image": "channel"},

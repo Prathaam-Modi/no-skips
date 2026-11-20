@@ -258,7 +258,7 @@ def build_bside():
     dish = revolve(prof, 160)
     grooves = U([revolve([(r, FLr - 0.45), (r + 1.3, FLr - 0.45), (r + 1.3, FLr + 0.1), (r, FLr + 0.1)], 160) for r in np.arange(31.0, 69.0, 3.4)])
     dish = dish - grooves
-    label = ext(circle(26.0).difference(circle(3.6)).difference(fit_text("B-Side", 3.6, 30, 0, 11.5)).difference(fit_text("No Skips", 2.2, 26, 0, -12.5)), RAISE, FLr)
+    label = ext(circle(26.0).difference(circle(3.6)).difference(fit_text("B-Side", 5.5, 34, 0, 10.5)).difference(fit_text("No Skips", 4.0, 36, 0, -13.0)), RAISE, FLr)
     p.part("tray", dish, BLACK); p.part("label", label, RED, infill=1.0)
     case = mv(rot(body(rrect(62, 48, 14), 22, c=3.0, steps=6, bottom=True), 0, 0, 24), -30, 22, FLr + 0.2)
     ringp = mv(Manifold.revolve(_cs2(circle(1.6, 9.5, 0, 24)), 64), 34, -30, FLr + 1.7)
