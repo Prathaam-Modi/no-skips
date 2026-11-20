@@ -129,7 +129,7 @@ def build_standby():
     # The open underside pockets needed 45 mm bridges under the show face. On an FDM printer sparse infill
     # does the lightening, so the base is left solid. Set NS_STANDBY_POCKETS=1 to bring the pockets back.
     if os.environ.get("NS_STANDBY_POCKETS") == "1": base = base - deep - shallow
-    base = base - ext(text("STANDBY", 3.2, -98, -42, "l"), 0.5, H - 0.49)
+    base = base - ext(text("STANDBY", 4.0, -98, -42, "l"), 0.5, H - 0.49)
     dot = ext(circle(2.2, -103.5, -42), RAISE, H)
     # fin: slab on a dovetail key with a sprung split
     prof = unary_union([rrect(92, 118, 14, 3, 71), box(-43, H, 49, 40)])

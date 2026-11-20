@@ -48,6 +48,7 @@ W20 = [0.54,0.98,0.97,0.57,0.48,1.0,0.98,0.99,0.64,0.4,0.42,0.44,0.32,0.91,0.95,
 def pill(cx, cy, w, h): return rrect(w, h, min(w, h) / 2 - 1e-3, cx, cy)
 def wave(data, x0, cy, pitch, w, maxh, minh):
     return unary_union([pill(x0 + i * pitch, cy, w, minh + (maxh - minh) * v) for i, v in enumerate(data)])
+MIN_TEXT = 4.0   # mm cap height, smallest text that prints clean (B-Side test, 20 Nov 2026)
 def fit_text(s, cap, maxw, cx=0.0, cy=0.0):
     """Poppins Bold caps, cap height = cap (shrunk to fit maxw), centred on (cx, cy)."""
     tp = TextPath((0, 0), s.upper(), size=cap / 0.698, prop=FONT)
@@ -56,6 +57,8 @@ def fit_text(s, cap, maxw, cx=0.0, cy=0.0):
         if len(ring) >= 4: g = g.symmetric_difference(Polygon(ring).buffer(0))
     if g.is_empty: return g
     k = min(1.0, maxw / (g.bounds[2] - g.bounds[0]))
+    if cap * k < MIN_TEXT - 1e-6:
+        sys.exit(f"{s!r} would print {cap * k:.1f} mm tall. Below {MIN_TEXT} mm the letters smear on a 0.4 mm nozzle: shorten it.")
     g = affinity.scale(g, k, k, origin=(0, 0))
     x0, _, x1, _ = g.bounds
     return affinity.translate(g, cx - (x0 + x1) / 2, cy - cap * k / 2)
@@ -138,9 +141,9 @@ def tag_body(L, front, back):
     return black, ext(front, RAISE, 3.0), inlay, outline
 
 def plate(code, title, artist):
-    check("Song title", title, 40); check("Artist", artist, 40)
+    check("Song title", title, 28); check("Artist", artist, 26)
     out = rrect(140, 70, 5)
-    art = unary_union([fit_code(code, 120, 0, 11), fit_text(title, 6.2, 110, 0, -14.5), fit_text(artist, 3.8, 100, 0, -24)])
+    art = unary_union([fit_code(code, 120, 0, 11), fit_text(title, 6.2, 110, 0, -14.5), fit_text(artist, 4.0, 100, 0, -24)])
     files = {"A1_1_plate_BLACK.stl": body(out, 3.0, bottom=True), "A1_2_code_and_title_IVORY.stl": ext(art, RAISE, 3.0)}
     return files, [("front", out, art, "#f0ebe0")], ["A1_3_base_bar_BLACK.stl", "A1_4_base_stripe_ACCENT.stl"]
 
@@ -149,8 +152,8 @@ def tag(code, title, artist, name):
     if name:
         check("Name", name, 14); back = fit_text(name, 5.0, 54, -6, 0)
     else:
-        check("Song title", title, 18); check("Artist", artist, 18)
-        back = unary_union([fit_text(title, 4.6, 54, -6, 4.2), fit_text(artist, 3.0, 54, -6, -4.6)])   # as read: hole is on the right
+        check("Song title", title, 14); check("Artist", artist, 14)
+        back = unary_union([fit_text(title, 5.0, 54, -6, 5.2), fit_text(artist, 4.0, 54, -6, -3.6)])   # as read: hole is on the right
     back_m = affinity.scale(back, -1, 1, origin=(0, 0))      # mirrored: printed face down on the bed
     black, art, inlay, out = tag_body(80, front, back_m)
     out = out.difference(circle(4.2, -31, 0))

@@ -401,7 +401,7 @@ G["crate_s2"] = dict(banner="2  Drop the red spine in from the top", labels=[
     dict(text="Shell", tag="C", at=(-45, -9, 20), to=(-190, 120)),
 ], arrows=[dict(pts=[(0, 8, 105), (0, 8, 52)], step=1)])
 G["crate_s3"] = dict(banner="3  Press a tag into each recess", labels=[
-    dict(text="Role tag", sub="Main, Backup, Rec, Spare", tag="E", at=(36, -9, 19), to=(150, -110)),
+    dict(text="Role tag", sub="Main, Bkup, Rec, Spare", tag="E", at=(36, -9, 19), to=(150, -110)),
     dict(text="Red window", sub="red means the stick is missing", tag="", at=(-36, -9, 6), to=(-190, 130)),
 ], arrows=[dict(pts=[(36, -40, 19), (36, -12, 19)], step=2)])
 G["crate_s4"] = dict(banner="4  Drop the sticks in, connector down", labels=[

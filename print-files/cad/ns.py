@@ -42,10 +42,13 @@ def text(s, size, cx=0.0, cy=0.0, anchor="c"):
     x0, y0, x1, y1 = g.bounds
     dx = {"c": -(x0 + x1) / 2, "l": -x0, "r": -x1}[anchor]
     return affinity.translate(g, cx + dx, cy - size / 2)
+TEXT_LOG = []
+MIN_TEXT = 4.0   # mm cap height: smaller text prints scribbled on a 0.4 nozzle (B-Side, 20 Nov 2026)
 def fit_text(s, size, maxw, cx=0.0, cy=0.0, anchor="c"):
     g = text(s, size, 0, size / 2, "c")
     if g.is_empty: return g
     k = min(1.0, maxw / (g.bounds[2] - g.bounds[0]))
+    TEXT_LOG.append((s, round(size * k, 2)))
     g = affinity.scale(g, k, k, origin=(0, 0))
     x0, x1 = g.bounds[0], g.bounds[2]
     dx = {"c": cx - (x0 + x1) / 2, "l": cx - x0, "r": cx - x1}[anchor]

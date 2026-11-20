@@ -32,7 +32,7 @@ def tag(L, front, back, accent_front, accent_back):
 def build_tags():
     p = Product("A5", "track_tag", "Track Tag")
     front = code_art("Starboy|The Weeknd", 6, 0, 56)
-    back_txt = affinity.scale(unary_union([fit_text("Starboy", 4.6, 54, -6, 4.2), fit_text("The Weeknd", 3.0, 54, -6, -4.6)]), -1, 1, origin=(0, 0))
+    back_txt = affinity.scale(unary_union([fit_text("Starboy", 5.0, 54, -6, 5.2), fit_text("The Weeknd", 4.0, 54, -6, -3.6)]), -1, 1, origin=(0, 0))
     blk, art, inl = tag(80, front, back_txt, IVORY, RED)
     p.part("tag_body", blk, BLACK, infill=1.0); p.part("front_code", art, IVORY, infill=1.0); p.part("back_text_inlay", inl, RED, infill=1.0)
     st = strap(); p.part("loop_strap", st, BLACK, infill=1.0)
@@ -61,9 +61,9 @@ def build_plate():
     out = rrect(140, 70, 5)
     plate = body(out, 3.0, bottom=True)
     code = ext(code_art("Blinding Lights|The Weeknd", 0, 11, 120), RAISE, 3.0)
-    txt = ext(unary_union([fit_text("Blinding Lights", 6.2, 110, 0, -14.5), fit_text("The Weeknd", 3.8, 100, 0, -24)]), RAISE, 3.0)
+    txt = ext(unary_union([fit_text("Blinding Lights", 6.2, 110, 0, -14.5), fit_text("The Weeknd", 4.0, 100, 0, -24)]), RAISE, 3.0)
     wav = ext(wave(W50, -58.8, 10, 2.4, 1.6, 34, 2.4), RAISE, 3.0)
-    wtxt = ext(unary_union([fit_text("Knowing", 6.0, 66, -60, -22, "l"), fit_text("Dimo Mähtarp", 3.6, 56, 60, -22, "r")]), RAISE, 3.0)
+    wtxt = ext(unary_union([fit_text("Knowing", 6.0, 66, -60, -22, "l"), fit_text("Dimo Mähtarp", 4.0, 56, 60, -22, "r")]), RAISE, 3.0)
     # one base bar replaces the two loose feet. Slot leans back 12 degrees.
     TH = 12.0; slot_y = 3.0; floor = 5.0
     cutter = mv(rot(cube(141.0, 3.5, 30, 0, 0, 0), -TH, 0, 0), 0, slot_y, floor)
@@ -95,7 +95,7 @@ def build_coin():
     a = np.linspace(0, 2 * math.pi, 720, endpoint=False)
     rr = 21.0 - 0.32 * (1 + np.cos(72 * a)) / 2
     reeded = Polygon(np.c_[rr * np.cos(a), rr * np.sin(a)])
-    back = affinity.scale(unary_union([fit_text("Dimo Mähtarp", 3.4, 30, 0, 5.4), fit_text("Bengaluru 2026", 2.3, 28, 0, -1.0), fit_text("07/50", 3.0, 16, 0, -8.2)]), -1, 1, origin=(0, 0))
+    back = affinity.scale(unary_union([fit_text("Dimo", 4.0, 28, 0, 9.6), fit_text("Mähtarp", 4.0, 33, 0, 3.3), fit_text("BLR 2026", 4.0, 33, 0, -3.0), fit_text("07/50", 4.0, 28, 0, -9.3)]), -1, 1, origin=(0, 0))
     inlay = ext(back, 0.4, 0)
     coin = U([body(reeded, 3.3, bottom=True, top=False, c=0.4, steps=2), ext(circle(20.4).difference(circle(18.6)), 0.7, 3.3)]) - inlay
     sil = ext(dj(), 0.5, 3.3)
@@ -127,7 +127,7 @@ def build_sidea():
         out = rrect(60, 38, 3)
         holes = unary_union([circle(4.4, -12.5, -4.5, 48), circle(4.4, 12.5, -4.5, 48)])
         b = body(out.difference(holes), 4.0, bottom=True)
-        label = rrect(52, 11, 2, 0, 11.2).difference(fit_text(title, 4.2, 46, 0, 11.2))
+        label = rrect(56, 11, 2, 0, 11.2).difference(fit_text(title, 4.2, 52, 0, 11.2))
         rings = unary_union([circle(7.4, -12.5, -4.5, 48).difference(circle(6.2, -12.5, -4.5, 48)), circle(7.4, 12.5, -4.5, 48).difference(circle(6.2, 12.5, -4.5, 48))])
         win = rrect(11, 5, 1.2, 0, -4.5).difference(rrect(8.6, 2.6, 0.6, 0, -4.5))
         trap = Polygon([(-20, -17.2), (20, -17.2), (16.5, -12.4), (-16.5, -12.4)]); trap = trap.difference(trap.buffer(-1.1))

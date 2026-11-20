@@ -39,7 +39,7 @@ def build_shell():
     cuts = []
     for c in CX:
         cuts.append(cube(WIN_W, 6.2, WIN_Z1 - WIN_Z0, c, -6.2, WIN_Z0))                        # window through wall and block
-        cuts.append(cube(17.4, 1.0, 10.4, c, -9 + 0.45, 14))                                     # tag recess, 0.9 deep
+        cuts.append(cube(21.8, 1.0, 10.4, c, -9 + 0.45, 14))                                     # tag recess, 0.9 deep
     for s in (-1, 1): cuts.append(cube(1.8, 1.7, H - FLOOR + 0.5, s * 48.5, 6.75, FLOOR))        # spine flange grooves in the end walls
     sh = sh - U(cuts)
     # raised numerals on the front, readable by touch
@@ -86,13 +86,13 @@ def build_crate():
     shell, spine = build_shell(), build_spine()
     hood, hin, hrd, fy = build_hood()
     shim = cube(19.5, 3.0, 36.0, 0, 0, 0)
-    # tags: ivory plate 17 x 0.85 x 10, black word inlaid flush on the front face. Reverse is blank to write on.
-    words = ["MAIN", "BACKUP", "REC", "SPARE"]
-    tag_pl = cube(17.0, 0.85, 10.0, 0, 0.425, 0)
+    # tags: ivory plate 21.4 x 0.85 x 10, black word inlaid flush on the front face. Reverse is blank to write on.
+    words = ["MAIN", "BKUP", "REC", "SPARE"]
+    tag_pl = cube(21.4, 0.85, 10.0, 0, 0.425, 0)
     tag_ws = []
     tags_w = []
     for i, wd in enumerate(words):
-        g = fit_text(wd, 2.6, 14.0, 0, 5.0)
+        g = fit_text(wd, 4.0, 19.0, 0, 5.0)
         wm = xz(g, 0.4, 0.0)
         tag_ws.append(wm)
     # print orientations

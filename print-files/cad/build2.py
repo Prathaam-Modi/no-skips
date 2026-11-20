@@ -362,7 +362,7 @@ def build_sleeve():
     lprof = unary_union([rrect(170, 34, 4, 0, 17), box(-59.2, 0, -50.8, 4), box(50.8, 0, 59.2, 4)])
     lprof = box(-85, 0, 85, 34).intersection(rrect(170, 34, 4, 0, 17))
     ledge = body(lprof, 6.0, c=0.5, steps=2, bottom=True)
-    art = unary_union([fit_text("Now Spinning", 7.0, 92, -76, 21, "l"), fit_text("33 RPM", 3.2, 30, -76, 8.5, "l"),
+    art = unary_union([fit_text("Now Spinning", 7.0, 92, -76, 21, "l"), fit_text("33 RPM", 4.0, 30, -76, 8.5, "l"),
                        pill(-30, 13.5, 92, 1.2), wave(W20, 26, 19, 2.6, 1.4, 16, 4)])
     lart = ext(art, RAISE, 6.0)
     p.part("foot_left", foot, BLACK, infill=0.2); p.part("foot_left_inlay", finlay, RED, infill=1.0)
