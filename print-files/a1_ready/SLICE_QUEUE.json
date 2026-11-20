@@ -1,3 +1,5 @@
-{
- "jobs": []
-}
+{"jobs": [
+ {"project": "E1_blr_coin/E1_blr_coin.3mf", "layer": "0.12", "over": {"wall_loops": "3", "sparse_infill_density": "100%", "sparse_infill_pattern": "zig-zag"}},
+ {"project": "E2_blr_rail/E2_blr_rail_plate1_rail.3mf", "layer": "0.20", "over": {"wall_loops": "3", "sparse_infill_density": "30%"}},
+ {"project": "E2_blr_rail/E2_blr_rail_plate2_pegs_red.3mf", "layer": "0.20", "over": {"wall_loops": "4", "sparse_infill_density": "100%", "sparse_infill_pattern": "zig-zag"}}
+]}
