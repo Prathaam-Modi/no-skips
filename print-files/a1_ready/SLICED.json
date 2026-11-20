@@ -31,21 +31,35 @@
  "D10_eject/D10_eject_plate1_black.3mf": {
   "ok": false,
   "error": "Bambu Studio: Invalid parameter value(s) included in the 3mf file. (code -18)",
-  "when": "2026-11-20 14:27 UTC",
+  "when": "2026-11-20 16:15 UTC",
   "layer": "0.16",
   "over": {
-   "wall_loops": 3,
+   "wall_loops": "3",
    "sparse_infill_density": "100%"
   }
  },
  "D10_eject/D10_eject_plate2_slider_red.3mf": {
   "ok": false,
   "error": "Bambu Studio: Invalid parameter value(s) included in the 3mf file. (code -18)",
-  "when": "2026-11-20 14:27 UTC",
+  "when": "2026-11-20 16:15 UTC",
   "layer": "0.16",
   "over": {
-   "wall_loops": 3,
+   "wall_loops": "3",
    "sparse_infill_density": "100%"
   }
+ },
+ "D8_b_side/D8_b_side.3mf": {
+  "ok": true,
+  "time_s": 7857,
+  "grams": 82.8,
+  "plates": 1,
+  "when": "2026-11-20 16:15 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 2.18,
+  "file": "D8_b_side/D8_b_side.gcode.3mf"
  }
 }
