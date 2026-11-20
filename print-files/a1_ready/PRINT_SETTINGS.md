@@ -8,7 +8,7 @@ Sliced 17 November 2026 with Bambu Studio 2.02 (command line) for the Bambu Lab 
 - AMS Lite slots are the same for the whole range: slot 1 Black, slot 2 Red, slot 3 Ivory (Jade White), slot 4 free.
 - Ready-sliced `.gcode.3mf` plates are in the zip sent in chat (not in git, about 45 MB). They were sliced for generic slots 1 to 3, so re-slicing from the project file on your own machine is the safer route for the first prints.
 - Bed: Textured PEI, PLA Basic defaults. Bambu Studio shows a note that the plate temperature is above the filament's soft limit. That is normal for an open A1; leave it.
-- Solid parts use zig-zag (rectilinear) infill because gyroid is refused at 100%.
+- Solid parts use zig-zag (rectilinear) infill because gyroid is refused at 100%. Every 100% slice job MUST pass "sparse_infill_pattern": "zig-zag" in the queue "over" (A5, B6 tags and D10 failed with code -18 on 20 Nov 2026 without it).
 - Drumroll belts are TPU 95A: feed from the external spool, not the AMS Lite. See the Drumroll note.
 
 ## Range table
