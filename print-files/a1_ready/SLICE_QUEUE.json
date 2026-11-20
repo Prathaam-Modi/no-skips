@@ -1,20 +1,3 @@
 {
- "jobs": [
-  {
-   "project": "D10_eject/D10_eject_plate1_black.3mf",
-   "layer": "0.16",
-   "over": {
-    "wall_loops": 3,
-    "sparse_infill_density": "100%"
-   }
-  },
-  {
-   "project": "D10_eject/D10_eject_plate2_slider_red.3mf",
-   "layer": "0.16",
-   "over": {
-    "wall_loops": 3,
-    "sparse_infill_density": "100%"
-   }
-  }
- ]
+ "jobs": []
 }
