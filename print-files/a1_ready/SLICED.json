@@ -213,5 +213,49 @@
   },
   "hours": 0.3,
   "file": "B6_crate/B6_crate_plate3_tags_ivory.gcode.3mf"
+ },
+ "E1_blr_coin/E1_blr_coin.3mf": {
+  "ok": true,
+  "time_s": 3064,
+  "grams": 14.4,
+  "plates": 1,
+  "when": "2026-11-20 18:00 UTC",
+  "layer": "0.12",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag"
+  },
+  "hours": 0.85,
+  "file": "E1_blr_coin/E1_blr_coin.gcode.3mf"
+ },
+ "E2_blr_rail/E2_blr_rail_plate1_rail.3mf": {
+  "ok": true,
+  "time_s": 2806,
+  "grams": 24.3,
+  "plates": 1,
+  "when": "2026-11-20 18:00 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "30%"
+  },
+  "hours": 0.78,
+  "file": "E2_blr_rail/E2_blr_rail_plate1_rail.gcode.3mf"
+ },
+ "E2_blr_rail/E2_blr_rail_plate2_pegs_red.3mf": {
+  "ok": true,
+  "time_s": 1372,
+  "grams": 3.8,
+  "plates": 1,
+  "when": "2026-11-20 18:00 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "4",
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag"
+  },
+  "hours": 0.38,
+  "file": "E2_blr_rail/E2_blr_rail_plate2_pegs_red.gcode.3mf"
  }
 }
