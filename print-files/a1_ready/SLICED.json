@@ -31,7 +31,7 @@
  "D10_eject/D10_eject_plate1_black.3mf": {
   "ok": false,
   "error": "Bambu Studio: Invalid parameter value(s) included in the 3mf file. (code -18)",
-  "when": "2026-11-20 16:15 UTC",
+  "when": "2026-11-20 16:39 UTC",
   "layer": "0.16",
   "over": {
    "wall_loops": "3",
@@ -41,7 +41,7 @@
  "D10_eject/D10_eject_plate2_slider_red.3mf": {
   "ok": false,
   "error": "Bambu Studio: Invalid parameter value(s) included in the 3mf file. (code -18)",
-  "when": "2026-11-20 16:15 UTC",
+  "when": "2026-11-20 16:39 UTC",
   "layer": "0.16",
   "over": {
    "wall_loops": "3",
@@ -61,5 +61,137 @@
   },
   "hours": 2.18,
   "file": "D8_b_side/D8_b_side.gcode.3mf"
+ },
+ "A5_track_tag/A5_track_tag.3mf": {
+  "ok": false,
+  "error": "Bambu Studio: Invalid parameter value(s) included in the 3mf file. (code -18)",
+  "when": "2026-11-20 16:39 UTC",
+  "layer": "0.12",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "100%"
+  }
+ },
+ "A1_track_plate/A1_track_plate.3mf": {
+  "ok": true,
+  "time_s": 6702,
+  "grams": 71.8,
+  "plates": 1,
+  "when": "2026-11-20 16:39 UTC",
+  "layer": "0.16",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 1.86,
+  "file": "A1_track_plate/A1_track_plate.gcode.3mf"
+ },
+ "C3_gig_coin/C3_gig_coin.3mf": {
+  "ok": true,
+  "time_s": 3938,
+  "grams": 17.5,
+  "plates": 1,
+  "when": "2026-11-20 16:39 UTC",
+  "layer": "0.12",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 1.09,
+  "file": "C3_gig_coin/C3_gig_coin.gcode.3mf"
+ },
+ "C4_side_a/C4_side_a.3mf": {
+  "ok": true,
+  "time_s": 9179,
+  "grams": 95.1,
+  "plates": 1,
+  "when": "2026-11-20 16:39 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 2.55,
+  "file": "C4_side_a/C4_side_a.gcode.3mf"
+ },
+ "D4_sleeve/D4_sleeve_plate2_ledge.3mf": {
+  "ok": true,
+  "time_s": 2303,
+  "grams": 22.4,
+  "plates": 1,
+  "when": "2026-11-20 16:39 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 0.64,
+  "file": "D4_sleeve/D4_sleeve_plate2_ledge.gcode.3mf"
+ },
+ "D11_standby/D11_standby_plate1_base.3mf": {
+  "ok": true,
+  "time_s": 7812,
+  "grams": 110.8,
+  "plates": 1,
+  "when": "2026-11-20 16:39 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 2.17,
+  "file": "D11_standby/D11_standby_plate1_base.gcode.3mf"
+ },
+ "D11_standby/D11_standby_plate2_fins.3mf": {
+  "ok": true,
+  "time_s": 18703,
+  "grams": 141.6,
+  "plates": 1,
+  "when": "2026-11-20 16:39 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "4",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 5.2,
+  "file": "D11_standby/D11_standby_plate2_fins.gcode.3mf"
+ },
+ "B6_crate/B6_crate_plate1_black.3mf": {
+  "ok": true,
+  "time_s": 8197,
+  "grams": 49.8,
+  "plates": 1,
+  "when": "2026-11-20 16:39 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 2.28,
+  "file": "B6_crate/B6_crate_plate1_black.gcode.3mf"
+ },
+ "B6_crate/B6_crate_plate2_red.3mf": {
+  "ok": true,
+  "time_s": 2497,
+  "grams": 23.2,
+  "plates": 1,
+  "when": "2026-11-20 16:39 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "30%"
+  },
+  "hours": 0.69,
+  "file": "B6_crate/B6_crate_plate2_red.gcode.3mf"
+ },
+ "B6_crate/B6_crate_plate3_tags_ivory.3mf": {
+  "ok": false,
+  "error": "Bambu Studio: Invalid parameter value(s) included in the 3mf file. (code -18)",
+  "when": "2026-11-20 16:39 UTC",
+  "layer": "0.12",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "100%"
+  }
  }
 }
