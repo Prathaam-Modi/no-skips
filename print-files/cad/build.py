@@ -1,6 +1,7 @@
 """No Skips range V2: print parts (STL) and display scenes for the new and redesigned pieces.
 Scenes use the same solids as the STLs, only moved. Run: python3 build.py"""
 import math, json, sys
+FR_H = 4.9   # coin frame height (rev C, 21 Nov 2026)
 from ns import *
 
 W50 = [0.16,0.27,0.96,0.97,0.98,0.96,0.97,0.96,0.35,0.28,0.36,0.42,0.87,1.0,1.0,1.0,0.95,0.98,0.99,0.99,0.78,0.52,0.42,0.41,0.4,0.41,0.42,0.43,0.43,0.45,0.44,0.12,0.26,0.99,0.97,0.98,0.93,0.94,0.97,0.98,0.95,0.87,0.99,0.94,0.98,0.98,0.99,0.98,1.0,0.73]
@@ -97,21 +98,22 @@ def build_coin():
     reeded = Polygon(np.c_[rr * np.cos(a), rr * np.sin(a)])
     back = affinity.scale(unary_union([fit_text("Dimo", 4.0, 28, 0, 9.6), fit_text("Mähtarp", 4.0, 33, 0, 3.3), fit_text("BLR 2026", 4.0, 33, 0, -3.0), fit_text("07/50", 4.0, 28, 0, -9.3)]), -1, 1, origin=(0, 0))
     inlay = ext(back, 0.4, 0)
-    coin = U([body(reeded, 3.3, bottom=True, top=False, c=0.4, steps=2), ext(circle(20.4).difference(circle(18.6)), 0.7, 3.3)]) - inlay
+    coin = U([body(reeded, 3.3, bottom=True, top=False, c=0.4, steps=2), ext(circle(20.0).difference(circle(18.2)), 0.7, 3.3)]) - inlay
     sil = ext(dj(), 0.5, 3.3)
     # frame: a split ring. Standing it in the foot squeezes the two half tabs together and locks the coin.
-    ring = circle(24.4).difference(circle(21.3)).union(box(-7, -29.5, 7, -21.6)).union(circle(5.6, 0, 27.6))
-    ring = ring.difference(circle(21.3)).difference(circle(2.6, 0, 28.4)).difference(box(-0.6, -30, 0.6, -20.5))
-    frame = body(ring, 4.0, c=0.4, steps=2, bottom=True)
-    lip = ext(circle(21.5).difference(circle(20.75)), 0.5, 0) + ext(circle(21.5).difference(circle(20.75)), 0.5, 3.5)
-    frame = frame + (lip - cube(1.4, 10, 5, 0, -21, 0))
-    foot = body(rrect(40, 18, 5), 9.0) - cube(14.5, 4.4, 7.0, 0, 0, 2.2)
+    ring = circle(24.4).difference(circle(21.2)).union(box(-7, -29.5, 7, -21.6)).union(circle(5.6, 0, 27.6))
+    ring = ring.difference(circle(21.2)).difference(circle(2.6, 0, 28.4)).difference(box(-0.6, -30, 0.6, -20.5))
+    frame = body(ring, FR_H, c=0.4, steps=2, bottom=True)
+    # coin seats on a 0.5 mm floor lip (overlaps the coin back by 0.6 to 0.9 mm) and under a 45 degree top lip (0.5 to 0.8 mm over the face), so it cannot fall out
+    lip = ext(circle(21.5).difference(circle(20.1)), 0.5, 0) + (cyl(21.5, 1.1, 3.8, seg=180) - cyl(21.21, 1.01, 3.795, r2=20.2, seg=180))
+    frame = frame + (lip - cube(1.4, 10, 6, 0, -21, 0))
+    foot = body(rrect(40, 18, 5), 9.0) - cube(14.5, FR_H + 0.4, 7.0, 0, 0, 2.2)
     mark = ext(pill(0, -6.0, 26, 1.8), RAISE, 9.0)
     p.part("coin", coin, BLACK, infill=1.0); p.part("silhouette", sil, RED, infill=1.0); p.part("back_text_inlay", inlay, RED, infill=1.0)
     p.part("frame", frame, BLACK, infill=1.0); p.part("foot", foot, BLACK, infill=0.3); p.part("foot_mark", mark, RED, infill=1.0)
     one = [(coin, BLACK), (sil, RED), (inlay, RED)]
-    inframe = [(mv(m, 0, 0, 0.0), c) for m, c in one] + [(frame, BLACK)]
-    stoodc = [(mv(rot(m, 90, 0, 0), 0, 2.0, 2.2 + 29.5), c) for m, c in inframe]
+    inframe = [(mv(m, 0, 0, 0.5), c) for m, c in one] + [(frame, BLACK)]
+    stoodc = [(mv(rot(m, 90, 0, 0), 0, FR_H / 2, 2.2 + 29.5), c) for m, c in inframe]
     p.scene("coin", place(stoodc + [(foot, BLACK), (mark, RED)], rz=-14, x=-16, y=8) + place([(flip(m), c) for m, c in one], rz=10, x=34, y=-22))
     # exploded for the build guide: coin above the frame, foot in front of the frame's two tabs
     p.scene("coin_build", [(mv(m, 0, 0, 30), c) for m, c in one] + [(frame, BLACK), (mv(foot, 0, -52, 0), BLACK), (mv(mark, 0, -52, 0), RED)])

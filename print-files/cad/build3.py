@@ -81,7 +81,7 @@ def build_eject():
             blades.append(blade)
     plate_all = U([plate - U(slits)] + blades)
     # ---- slider: ramp lifts the front card highest, so the stack fans out when pushed
-    ramp = Polygon([(0.1, 0), (4.9, 0), (4.9, 2.0), (0.1, 11.0)])
+    ramp = Polygon([(0.1, 0), (4.9, 0), (4.9, 2.0), (1.0, 10.6), (0.1, 10.6)])   # rev B1: 0.9 mm flat top, no knife edge
     car = yz(ramp, 83.6, -41.8)
     tab = cube(8.0, BACK + 2.2, 6.0, 0, 4.9 + (BACK + 2.2) / 2 - 0.05, 0)
     car = U([car, tab]) - U([cube(8.2, 0.5, 0.6, 0, 4.9 + BACK + 2.2 - 0.25, 1.0 + i * 1.6) for i in range(3)])
@@ -172,9 +172,9 @@ def build_rotary():
         head = cyl(3.0, 0.8, 0, seg=48)
         shaft = cyl(1.8, T - 0.8 + S + T - 0.9 + 0.05, 0.79, seg=40)
         z_b = 0.8 + (T - 0.8) + S + (T - 0.9)
-        barb = cyl(2.3, 0.9, z_b, r2=1.7, seg=40)
+        barb = cyl(2.2, 0.9, z_b, r2=1.8, seg=40)
         m = U([head, shaft, barb])
-        return m - cube(0.9, 8, 3.2, 0, 0, z_b + 0.9 - 3.2 + 0.01)
+        return m - cube(1.2, 8, 5.0, 0, 0, z_b + 0.9 - 5.0 + 0.01)   # rev B1 slit 1.2 x 5.0 (was 0.9 x 3.2)
     loop = pill(0, 0, 34, 14).difference(pill(5, 0, 18, 6.5)).difference(circle(1.95, -11, 0, 40))
     loop_m = body(loop, 2.4, c=0.4, steps=2, bottom=True)
     spacer = ext(ring(4.0, 2.0), 1.0)

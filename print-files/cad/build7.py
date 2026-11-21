@@ -12,6 +12,7 @@ from shapely.geometry import Polygon, box
 import build, build2
 
 P = {}
+FR_H = 4.9
 RAISE = 0.6
 R = math.radians
 flip = build.flip
@@ -28,20 +29,21 @@ def build_edition_coin():
     lines = unary_union([fit_text("BLR", 6.5, 30, 0, 9.0), fit_text(NIGHT, 6.5, 30, 0, 0.0), fit_text(f"{NUM}/100", 4.4, 32, 0, -9.2)])
     back = affinity.scale(lines, -1, 1)
     inlay = ext(back, 0.4, 0)
-    coin = U([body(reeded, 3.3, bottom=True, top=False, c=0.4, steps=2), ext(circle(20.4).difference(circle(18.6)), 0.7, 3.3)]) - inlay
+    coin = U([body(reeded, 3.3, bottom=True, top=False, c=0.4, steps=2), ext(circle(20.0).difference(circle(18.2)), 0.7, 3.3)]) - inlay
     sil = ext(build.dj(), 0.5, 3.3)
-    ring = circle(24.4).difference(circle(21.3)).union(box(-7, -29.5, 7, -21.6)).union(circle(5.6, 0, 27.6))
-    ring = ring.difference(circle(21.3)).difference(circle(2.6, 0, 28.4)).difference(box(-0.6, -30, 0.6, -20.5))
-    frame = body(ring, 4.0, c=0.4, steps=2, bottom=True)
-    lip = ext(circle(21.5).difference(circle(20.75)), 0.5, 0) + ext(circle(21.5).difference(circle(20.75)), 0.5, 3.5)
-    frame = frame + (lip - cube(1.4, 10, 5, 0, -21, 0))
-    foot = body(rrect(40, 18, 5), 9.0) - cube(14.5, 4.4, 7.0, 0, 0, 2.2)
+    ring = circle(24.4).difference(circle(21.2)).union(box(-7, -29.5, 7, -21.6)).union(circle(5.6, 0, 27.6))
+    ring = ring.difference(circle(21.2)).difference(circle(2.6, 0, 28.4)).difference(box(-0.6, -30, 0.6, -20.5))
+    frame = body(ring, FR_H, c=0.4, steps=2, bottom=True)
+    # coin seats on a 0.5 mm floor lip (overlaps the coin back by 0.6 to 0.9 mm) and under a 45 degree top lip (0.5 to 0.8 mm over the face), so it cannot fall out
+    lip = ext(circle(21.5).difference(circle(20.1)), 0.5, 0) + (cyl(21.5, 1.1, 3.8, seg=180) - cyl(21.21, 1.01, 3.795, r2=20.2, seg=180))
+    frame = frame + (lip - cube(1.4, 10, 6, 0, -21, 0))
+    foot = body(rrect(40, 18, 5), 9.0) - cube(14.5, FR_H + 0.4, 7.0, 0, 0, 2.2)
     mark = ext(pill(0, -6.0, 26, 1.8), RAISE, 9.0)
     p.part("coin", coin, BLACK, infill=1.0); p.part("silhouette", sil, RED, infill=1.0); p.part("back_text_inlay", inlay, RED, infill=1.0)
     p.part("frame", frame, BLACK, infill=1.0); p.part("foot", foot, BLACK, infill=0.3); p.part("foot_mark", mark, RED, infill=1.0)
     one = [(coin, BLACK), (sil, RED), (inlay, RED)]
-    inframe = [(mv(m, 0, 0, 0.0), c) for m, c in one] + [(frame, BLACK)]
-    stoodc = [(mv(rot(m, 90, 0, 0), 0, 2.0, 2.2 + 29.5), c) for m, c in inframe]
+    inframe = [(mv(m, 0, 0, 0.5), c) for m, c in one] + [(frame, BLACK)]
+    stoodc = [(mv(rot(m, 90, 0, 0), 0, FR_H / 2, 2.2 + 29.5), c) for m, c in inframe]
     p.scene("blr_coin", place(stoodc + [(foot, BLACK), (mark, RED)], rz=-14, x=-16, y=8) + place([(flip(m), c) for m, c in one], rz=10, x=34, y=-22))
     p.note = f"Bengaluru edition coin, night {NIGHT}, number {NUM} of 100. Same coin, frame and foot as C3 Gig Coin. Back text 6.5 / 6.5 / 4.2 mm."
     P["E1"] = p
