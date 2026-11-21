@@ -103,16 +103,16 @@
  },
  "C3_gig_coin/C3_gig_coin.3mf": {
   "ok": true,
-  "time_s": 4154,
-  "grams": 18.5,
+  "time_s": 4087,
+  "grams": 18.3,
   "plates": 1,
-  "when": "2026-11-21 13:53 UTC",
+  "when": "2026-11-21 13:57 UTC",
   "layer": "0.12",
   "over": {
    "wall_loops": "3",
    "sparse_infill_density": "15%"
   },
-  "hours": 1.15,
+  "hours": 1.14,
   "file": "C3_gig_coin/C3_gig_coin.gcode.3mf"
  },
  "C4_side_a/C4_side_a.3mf": {
