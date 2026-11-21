@@ -414,5 +414,33 @@
   },
   "hours": 0.4,
   "file": "D1_wedge/D1_wedge_plate2_lip_red.gcode.3mf"
+ },
+ "D15_stage/D15_stage_x1.3mf": {
+  "ok": true,
+  "time_s": 3772,
+  "grams": 33.7,
+  "plates": 1,
+  "when": "2026-11-21 14:49 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 1.05,
+  "file": "D15_stage/D15_stage_x1.gcode.3mf"
+ },
+ "D15_stage/D15_stage_x4_full_row.3mf": {
+  "ok": true,
+  "time_s": 12234,
+  "grams": 130.0,
+  "plates": 1,
+  "when": "2026-11-21 14:49 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 3.4,
+  "file": "D15_stage/D15_stage_x4_full_row.gcode.3mf"
  }
 }
