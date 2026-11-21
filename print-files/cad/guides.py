@@ -378,6 +378,13 @@ U["horn_rings"] = dict(banner="Horn: press in the red rings", labels=[
     dict(pts=[(-16.6, -52, 20), (-16.6, -27, 20)], step=1),
     dict(pts=[(6, -52, 43), (6, -27, 43)], step=1),
 ])
+U["wedge_build"] = dict(banner="Wedge: slide in the red lip", labels=[
+    dict(text="Body", sub="groove runs along the front", tag="A", at=(10, 20, 80), to=(150, -90)),
+    dict(text="Red lip", sub="slides in from either side", tag="B", at=(-110, -35.5, 24), to=(-120, -120)),
+    dict(text="Groove", sub="push until both ends are flush", tag="C", at=(-30, -35.5, 13), to=(60, 140)),
+], arrows=[
+    dict(pts=[(-46, -35.5, 19), (-24, -35.5, 19)], step=1),
+])
 U["riser"] = dict(banner="Lift: how it sits", labels=[
     dict(text="Wedge", sub="two in the box, 14 degrees", tag="A", at=(-75, 70, 22), to=(-130, 120)),
     dict(text="Front lip", sub="stops the controller sliding", tag="B", at=(0, -49, 30), to=(120, 130)),

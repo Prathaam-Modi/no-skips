@@ -27,7 +27,7 @@ SHEETS = {
  "B1": dict(piece="STACK PICK AMP", parts="5", cap="EXPLODED  HEAD / BASE / DRAWER / KNOBS / HANDLE.  VIEWS: BUILT", iso=dict(az=-34, el=22)),
  "B2": dict(piece="LIFT CONTROLLER RISERS", parts="2", cap="ISOMETRIC  PAIR.  VIEWS: ONE WEDGE", iso=dict(az=-36, el=22)),
  "B5": dict(piece="RUN 50 MERCH TAGS", parts="50 + LOOPS", cap="ISOMETRIC  12 OF 50.  VIEWS: ONE TAG", iso=dict(az=-20, el=46)),
- "D1": dict(piece="HORN PHONE STAND", parts="STAND + PLATE", cap="ISOMETRIC  STAND ON PLATE.  SEAT 29, RAMP 71 DEG, D29 HORN MOUTH.  REV C", iso=dict(az=-36, el=22)),
+ "D1": dict(piece="WEDGE PHONE STAND", parts="BODY + RED LIP", cap="ISOMETRIC.  80 x 77 x 105.  FACE 68 DEG, 14 GROOVE, DOVETAIL LIP, FLUTED BACK.  REV E", iso=dict(az=-36, el=22)),
  "D2": dict(piece="TAPE CASE", parts="TRAY + LID", cap="ISOMETRIC  CLOSED.  LID PRESSES ON", iso=dict(az=-28, el=34)),
  "D4": dict(piece="SLEEVE VINYL STAND", parts="LEDGE + 2 FEET", cap="EXPLODED  LEDGE + RECORD FEET.  VIEWS: BUILT", iso=dict(az=-36, el=22)),
  "D5": dict(piece="HOLD HEADPHONE STAND", parts="BASE, POST, SADDLE", cap="EXPLODED  BASE + POST + SADDLE.  VIEWS: BUILT", iso=dict(az=-28, el=14)),

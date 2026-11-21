@@ -16,7 +16,7 @@ SHOTS = {
  "bside": dict(az=-20, el=40, zoom=1.0), "bside_bare": dict(az=-20, el=40, zoom=1.0),
  "studio_set": dict(az=-24, el=40, zoom=1.0), "knob": dict(az=-20, el=34, zoom=1.0), "rail": dict(az=-22, el=12, zoom=1.0),
  "coasters": dict(az=-18, el=38, zoom=1.0), "amp": dict(az=-24, el=16, zoom=1.0), "amp_open": dict(az=-30, el=22, zoom=1.0),
- "riser": dict(az=24, el=14, zoom=1.0), "run": dict(az=-14, el=50, zoom=1.0), "phonestand": dict(az=-34, el=16, zoom=1.0), "horn_rings": dict(az=-42, el=10, zoom=1.0),
+ "riser": dict(az=24, el=14, zoom=1.0), "run": dict(az=-14, el=50, zoom=1.0), "phonestand": dict(az=-34, el=16, zoom=1.0), "horn_rings": dict(az=-42, el=10, zoom=1.0), "wedge": dict(az=-35, el=18, zoom=1.0), "wedge_phone": dict(az=-35, el=16, zoom=1.0), "wedge_back": dict(az=145, el=18, zoom=1.0), "wedge_build": dict(az=-30, el=22, zoom=1.0),
  "phonestand_horn_exploded": dict(az=-40, el=22, zoom=1.0), "cassettebox": dict(az=-20, el=40, zoom=1.0), "cassettebox_open": dict(az=-20, el=42, zoom=1.0),
  "vinylstand": dict(az=-38, el=18, zoom=1.0), "vinylstand_record": dict(az=-38, el=16, zoom=1.0), "headphonestand_bare": dict(az=-26, el=12, zoom=1.0),
  "studio_mini": dict(az=-14, el=30, zoom=1.0), "studio_mini2": dict(az=-14, el=30, zoom=1.0), "knob_build": dict(az=-18, el=24, zoom=1.0),

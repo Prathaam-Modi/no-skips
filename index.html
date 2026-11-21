@@ -904,9 +904,9 @@ const P=[
   size:"102 x 18 x 49 mm, 71 mm with the hood on. Four sticks, 52 to 66 mm long, up to 22 wide and 13 thick, USB A or C",f:[],
   extra:"PLA softens in heat, so do not leave it in a hot car. ",
   imgs:[["crate","Hood on"],["crate_open","Silver is home, red is missing"],["crate_section","Inside one slot"],["crate_build","Shell, spine, hood, tags and shims"]]},
- {id:"D1",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"Horn",kind:"Phone stand and amplifier",price:1499,line:"A studio monitor that holds and amplifies your phone",badge:"Top pick",build:"horn",
-  desc:"A small studio monitor for the desk with a hollow horn behind the woofer. Your phone rests on the seat at 71 degrees, upright or sideways, with its bottom speaker over two slits that feed the horn, so the sound is guided out of the front through the woofer opening, a little louder and more directed than the phone alone. The charging cable gets its own opening and runs out the back. Fits phones in cases from 7 to 11.5 mm thick, small iPhones to tall Androids. The stand slides onto a weighted plate by a dovetail, and the long tail behind it stops the stand tipping back when you tap the screen.",
-  size:"70 x 133 x 108 mm, stand and plate",f:[],imgs:[["phonestand","With a phone"],["phonestand_horn_exploded","Stand and plate"],["phonestand_horn_seat","Seat and slits"]]},
+ {id:"D1",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"Wedge",kind:"Phone stand",price:899,line:"A stage monitor for your phone",badge:"New",build:"wedge",
+  desc:"Shaped like the wedge monitors that lean up at a performer on stage. Your phone leans back at 68 degrees, upright or sideways, against a solid black body with a fluted back. The red lip it rests on slides in on a dovetail, so it never wobbles and can be swapped later. A slot behind the lip takes the charging cable down and out of the back.",
+  size:"80 x 77 x 105 mm. Takes phones up to 13 mm thick with a case",f:[],imgs:[["wedge_phone","With a phone"],["wedge","The stand"],["wedge_back","Fluted back and cable exit"]]},
  {id:"D6",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"Fold",kind:"Flat-pack laptop stand",price:1699,line:"Lifts your screen, packs flat in a bag",badge:"New",build:"fold",noAccent:true,mat:"Printed in PLA. Fine for a light laptop on a shaded desk. For a laptop that runs hot for hours, ask us for the PETG version.",
   desc:"A laptop stand in four flat pieces. Two side ribs press down onto two cross braces and it is built, no tools and no screws. It tilts the laptop 16 degrees and lifts the back by about 80 mm, so the screen comes up and the keyboard angles toward you. The slots in each rib follow a real waveform and let air through underneath. Pull it apart and the four pieces stack 24 mm thick, flat enough for a backpack sleeve.",
   size:"240 x 236 x 83 mm built. Four parts, each 6 mm thick. For laptops from 13 to 16 inches",f:[],
@@ -1039,11 +1039,10 @@ const BUILD={
    ["Swing a key out, fold it back","Pinch the plates, pull a key out with your fingernail and swing it round the post. Push it back flat to close. To change keys, squeeze a split post head and push it back through the plate.","rotary_s4_guide","turn"],
    ["Add the loop for a car fob","The loop takes the place of one key, so you get one fewer key. Drop it over a post like a key. Swing it out and thread your fob's split ring through the slot. Fold it back flat to close.","rotary_s5_guide"],
    ["Swing it out when you need the fob","Pull the loop out like a key. The fob hangs from its ring. Fold it back in to carry.","rotary_s6_guide"]]},
- horn:{name:"Horn",img:"phonestand_horn_exploded_use",parts:"Stand, plate and 2 red rings",time:"30 seconds",steps:[
-   ["Press in the red rings","Set the large ring (A) round the horn mouth and the small ring (B) above it, then press each one into its seat (C) with your thumb until it sits flat. They are a tight fit and stay in on their own.","horn_rings_use"],
-   ["Slide the stand onto the plate","Turn the stand so its groove underneath lines up with the dovetail rail on the plate and push it along the rail until it stops. The long tail of the plate stays behind to stop it tipping back.","phonestand_horn_exploded_use","side"],
-   ["Set the cable","Feed the charging cable up through the cable opening and out the back before you place the phone.","phonestand_use"],
-   ["Seat the phone","Rest the bottom of the phone on the seat, upright or sideways, with its bottom speaker over the two slits.","phonestand_use"]]},
+ wedge:{name:"Wedge",img:"wedge_build_use",parts:"Body and red lip",time:"10 seconds",steps:[
+   ["Slide in the red lip","Line the red lip (B) up with the groove at the front of the body (A) and slide it in from either side until both ends are flush.","wedge_build_use"],
+   ["Run the cable","Drop the charging cable into the slot behind the lip and out through the opening at the back."],
+   ["Lean the phone back","Rest the phone on the red lip, upright or sideways, and lean it against the face."]]},
  riser:{name:"Lift",img:"riser_use",parts:"2 wedges",time:"5 seconds",steps:[
    ["Place the two wedges","Set them about the width of your controller apart, tall end at the back, front lip toward you."],
    ["Rest the controller across both","It tilts 14 degrees toward you and the front lip stops it sliding.","riser_use"]]},

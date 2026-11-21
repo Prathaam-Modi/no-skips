@@ -321,6 +321,45 @@ def build_horn():
     p.note = "Rev D (21 Nov 2026): stand prints upright with no supports, red speaker and tweeter rings press into seats. Rev C rebuilt. Stand 70 x 50 x 108, plate 70 x 133 x 4 flat. Dovetail rail 20/24 x 5, socket 0.25 mm a side. Seat at 29 mm, ramp 71 degrees, phones 7 to 11.5 mm. Two 5.5 x 19.5 slits feed the chamber, D29 mouth. Cable shaft 11 x 11 runs down and out the back, walled off from the chamber."
     P["D1"] = p
 
+# ================================================================== D1 Wedge (replaces the Horn, 21 Nov 2026)
+def build_wedge():
+    """Phone stand shaped like a stage monitor wedge. One black body that prints upright as it stands (no supports),
+    a fluted back, 0.6 mm stepped side bevel, and a red lip that slides in on a dovetail (swap for ivory later).
+    Phone leans back at 68 degrees, 14 mm groove takes phones up to about 13 mm thick with a case. Cable runs down a slot
+    behind the lip and out of a tunnel at the back."""
+    p = Product("D1", "wedge", "Wedge")
+    W = 80.0; ANG = 68.0; SEAT = 14.0; TOP = 105.0
+    k = 1 / math.tan(R(ANG)); y0 = -19.0; yt = y0 + (TOP - SEAT) * k
+    prof = fillet(Polygon([(-42, 0), (35, 0), (35, 80), (25, TOP), (yt, TOP), (y0, SEAT), (-42, SEAT)]), 1.6)
+    def yzw(poly, w): return mv(rot(Manifold.extrude(_cs(poly), w), 90, 0, 90), -w / 2, 0, 0)
+    foot = box(-100, -1, 100, 0.6)
+    def inset(d): return prof.buffer(-d, join_style=2).union(prof.intersection(foot))   # bottom edge stays on the bed
+    body_ = U([yzw(prof, W - 1.2), yzw(inset(0.3), W - 0.6), yzw(inset(0.6), W)])
+    # red lip: dovetail tenon in the base, 5 mm lip standing 10 mm above the seat
+    tenon = Polygon([(-39.0, 8.5), (-32.0, 8.5), (-33.0, SEAT), (-38.0, SEAT)])
+    lipp = fillet(unary_union([tenon, box(-38.0, SEAT - 0.01, -33.0, SEAT + 10.0)]), 0.6)
+    lip = yzw(lipp, W - 0.6)
+    slot = yzw(lipp.buffer(0.15, join_style=2).intersection(box(-100, 0, 100, SEAT + 0.01)).union(box(-38.15, SEAT - 0.02, -32.85, SEAT + 1)), W + 2)
+    # cable: slot behind the lip down to the bed, tunnel out of the back (14 mm bridge)
+    cable = U([cube(14, 12.6, SEAT + 1, 0, (-31.4 + y0) / 2, -0.5), cube(14, 70, 9, 0, 1.6, -0.5)])
+    # fluted back, 16 half-round flutes
+    flutes = U([cyl(1.4, 66, 7, x, 35, seg=24) for x in np.arange(-33, 33.1, 4.4)])
+    word = ext(affinity.scale(text("NO SKIPS", 4.5, 23, 10), -1, 1, origin=(23, 10)), 0.6, -0.01)   # read from below
+    stand = body_ - slot - cable - flutes - word
+    p.part("stand", stand, BLACK, infill=0.12)
+    p.part("lip", lip, RED, infill=1.0)
+    # props: phone 75 x 160 x 9 leaning on the face
+    ph = mv(rot(body(rrect(75, 160, 9), 9.0, c=1.5, steps=3, bottom=True), 90, 0, 0), 0, 0, 80)
+    ph = mv(rot(ph, -(90 - ANG), 0, 0), 0, y0 - 0.3, SEAT + 0.2)
+    built = [(stand, BLACK), (lip, RED)]
+    p.scene("wedge", built); p.scene("wedge_back", built); p.scene("wedge_phone", built + [(ph, PROP)])
+    p.scene("wedge_build", [(stand, BLACK), (mv(lip, -W - 10, 0, 0), RED)])
+    p.scene("bp_D1", built); p.scene("bpo_D1", built)
+    p.note = (f"Rev E Wedge (replaces the Horn). Body {W:g} x 77 x {TOP:g} mm prints upright, no supports. Phone face at {ANG:g} degrees, "
+              "14 mm groove, red lip on a dovetail (0.15 mm a side) slides in from either side. Cable slot behind the lip, 14 mm tunnel out the back. "
+              "Fluted back, 0.6 mm stepped side bevel, NO SKIPS 4.5 mm debossed underneath.")
+    P["D1"] = p
+
 # ================================================================== D2 Tape Case
 def build_tape():
     p = Product("D2", "tape_case", "Tape Case")
@@ -428,7 +467,7 @@ def build_hold():
     p.note = f"116 mm base, {round(zc + 56, 1)} mm tall, saddle 108 mm wide. Post 30 x 10 x 227 prints on its back, saddle on its front face (red stripe inlay), base upright. Slot and socket 0.1 mm clearance a side: tight press fit."
     P["D5"] = p
 
-ALL = [build_studio, build_gain, build_rail, build_45s, build_stack, build_lift, build_run50, build_horn, build_tape, build_sleeve, build_hold]
+ALL = [build_studio, build_gain, build_rail, build_45s, build_stack, build_lift, build_run50, build_wedge, build_tape, build_sleeve, build_hold]
 if __name__ == "__main__":
     only = sys.argv[1:]
     for f in ALL: f()
