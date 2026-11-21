@@ -1,3 +1,20 @@
 {
- "jobs": []
+ "jobs": [
+  {
+   "project": "D15_stage/D15_stage_x1.3mf",
+   "layer": "0.20",
+   "over": {
+    "wall_loops": "3",
+    "sparse_infill_density": "15%"
+   }
+  },
+  {
+   "project": "D15_stage/D15_stage_x4_full_row.3mf",
+   "layer": "0.20",
+   "over": {
+    "wall_loops": "3",
+    "sparse_infill_density": "15%"
+   }
+  }
+ ]
 }
