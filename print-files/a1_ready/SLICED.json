@@ -385,5 +385,34 @@
   },
   "hours": 1.03,
   "file": "C2_05_studio_mini_mic/C2_05_studio_mini_mic.gcode.3mf"
+ },
+ "D1_wedge/D1_wedge_plate1_body_black.3mf": {
+  "ok": true,
+  "time_s": 10345,
+  "grams": 96.1,
+  "plates": 1,
+  "when": "2026-11-21 14:33 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "12%"
+  },
+  "hours": 2.87,
+  "file": "D1_wedge/D1_wedge_plate1_body_black.gcode.3mf"
+ },
+ "D1_wedge/D1_wedge_plate2_lip_red.3mf": {
+  "ok": true,
+  "time_s": 1433,
+  "grams": 8.3,
+  "plates": 1,
+  "when": "2026-11-21 14:33 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag",
+   "wall_loops": "3"
+  },
+  "hours": 0.4,
+  "file": "D1_wedge/D1_wedge_plate2_lip_red.gcode.3mf"
  }
 }
