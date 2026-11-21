@@ -272,5 +272,118 @@
   },
   "hours": 0.72,
   "file": "D12_rotary/D12_rotary.gcode.3mf"
+ },
+ "D1_horn/D1_horn_plate1_black.3mf": {
+  "ok": true,
+  "time_s": 10995,
+  "grams": 121.7,
+  "plates": 1,
+  "when": "2026-11-21 14:18 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 3.05,
+  "file": "D1_horn/D1_horn_plate1_black.gcode.3mf"
+ },
+ "D1_horn/D1_horn_plate2_rings_red.3mf": {
+  "ok": true,
+  "time_s": 501,
+  "grams": 0.5,
+  "plates": 1,
+  "when": "2026-11-21 14:18 UTC",
+  "layer": "0.12",
+  "over": {
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag",
+   "wall_loops": "3"
+  },
+  "hours": 0.14,
+  "file": "D1_horn/D1_horn_plate2_rings_red.gcode.3mf"
+ },
+ "C2_01_studio_mini_turntable/C2_01_studio_mini_turntable.3mf": {
+  "ok": true,
+  "time_s": 2681,
+  "grams": 15.2,
+  "plates": 1,
+  "when": "2026-11-21 14:18 UTC",
+  "layer": "0.16",
+  "over": {
+   "wall_loops": "2",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 0.74,
+  "file": "C2_01_studio_mini_turntable/C2_01_studio_mini_turntable.gcode.3mf"
+ },
+ "C2_02_studio_mini_synth/C2_02_studio_mini_synth.3mf": {
+  "ok": true,
+  "time_s": 2523,
+  "grams": 12.9,
+  "plates": 1,
+  "when": "2026-11-21 14:18 UTC",
+  "layer": "0.16",
+  "over": {
+   "wall_loops": "2",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 0.7,
+  "file": "C2_02_studio_mini_synth/C2_02_studio_mini_synth.gcode.3mf"
+ },
+ "C2_03_studio_mini_drum_machine/C2_03_studio_mini_drum_machine.3mf": {
+  "ok": true,
+  "time_s": 2998,
+  "grams": 15.8,
+  "plates": 1,
+  "when": "2026-11-21 14:18 UTC",
+  "layer": "0.16",
+  "over": {
+   "wall_loops": "2",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 0.83,
+  "file": "C2_03_studio_mini_drum_machine/C2_03_studio_mini_drum_machine.gcode.3mf"
+ },
+ "C2_04_studio_mini_mixer/C2_04_studio_mini_mixer.3mf": {
+  "ok": true,
+  "time_s": 3150,
+  "grams": 17.5,
+  "plates": 1,
+  "when": "2026-11-21 14:18 UTC",
+  "layer": "0.16",
+  "over": {
+   "wall_loops": "2",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 0.88,
+  "file": "C2_04_studio_mini_mixer/C2_04_studio_mini_mixer.gcode.3mf"
+ },
+ "C2_06_studio_mini_headphones/C2_06_studio_mini_headphones.3mf": {
+  "ok": true,
+  "time_s": 6004,
+  "grams": 26.5,
+  "plates": 1,
+  "when": "2026-11-21 14:18 UTC",
+  "layer": "0.16",
+  "over": {
+   "wall_loops": "2",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 1.67,
+  "file": "C2_06_studio_mini_headphones/C2_06_studio_mini_headphones.gcode.3mf"
+ },
+ "C2_05_studio_mini_mic/C2_05_studio_mini_mic.3mf": {
+  "ok": true,
+  "time_s": 3702,
+  "grams": 11.4,
+  "plates": 1,
+  "when": "2026-11-21 14:18 UTC",
+  "layer": "0.16",
+  "over": {
+   "wall_loops": "2",
+   "sparse_infill_density": "15%"
+  },
+  "hours": 1.03,
+  "file": "C2_05_studio_mini_mic/C2_05_studio_mini_mic.gcode.3mf"
  }
 }
