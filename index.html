@@ -652,8 +652,31 @@ let MAIL_ENDPOINT="";
 /* Live stock and per-product status. Edited from /admin.html, saved to stock.json. Missing item = in stock, shown as the code says.
    items[ID].v: "live" | "soon" | "second" | "hidden" overrides what the code says. items[ID].m = max per order. */
 let STOCK={items:{}};
-const stk=id=>{const x=(STOCK.items||{})[id]||{};return{s:x.s==="out"||x.s==="low"?x.s:"in",n:Number.isFinite(x.n)&&x.n>0?x.n:null}};
-const maxQ=id=>{const x=(STOCK.items||{})[id]||{};return Number.isFinite(x.m)&&x.m>0?Math.min(99,x.m):(MAX_DEFAULTS[id]||MAX_PER_ORDER)};
+/* Order cap. items[ID].c = how many of a product this drop can take in total (empty = no cap). Every order that is not rejected,
+   cancelled or refunded holds its slots, counted live by the orders sheet (HELD, below). A product with no slots left shows Sold out
+   by itself; a freed slot (rejected, cancelled, or unpaid after the pay window) reopens by itself. Vol. 01 uses the batch size as its cap. */
+let HELD=null; /* {ID: units held}, or null when the orders sheet cannot be reached: then caps are not applied on the site */
+const capOf=id=>{if(id==="C1")return DROP.batch;const x=(STOCK.items||{})[id]||{};return Number.isFinite(x.c)&&x.c>0?x.c:null};
+const heldOf=id=>HELD&&Number.isFinite(HELD[id])?HELD[id]:0;
+const slotsLeft=id=>{const c=capOf(id);if(c===null||!HELD)return null;return Math.max(0,c-(id==="C1"?DROP.claimed:heldOf(id)))};
+const stk=id=>{const x=(STOCK.items||{})[id]||{};let s=x.s==="out"||x.s==="low"?x.s:"in",n=Number.isFinite(x.n)&&x.n>0?x.n:null;
+  const l=slotsLeft(id);if(l!==null&&s!=="out"){if(l<=0){s="out";n=null}else if(l<=3&&(n===null||l<n)){s="low";n=l}}
+  return{s,n}};
+const maxQ=id=>{const x=(STOCK.items||{})[id]||{};const m=Number.isFinite(x.m)&&x.m>0?Math.min(99,x.m):(MAX_DEFAULTS[id]||MAX_PER_ORDER);
+  const l=PHASE==="waitlist"?null:slotsLeft(id);return l===null?m:Math.max(1,Math.min(m,l))};
+let availAt=0;
+async function loadAvail(force){
+  if(!MAIL_ENDPOINT||PHASE==="waitlist")return;
+  const t=Date.now();if(!force&&t-availAt<20000)return;availAt=t;
+  try{const r=await fetch(MAIL_ENDPOINT+"?a=avail&t="+t,{cache:"no-store"});const d=r.ok?await r.json():null;
+    if(d&&d.ok&&d.held&&typeof d.held==="object"){HELD=d.held;setClaimed();
+      fixCart();renderAll();if($("pd").open&&cur)syncProduct();if($("list").open)renderListKeep()}}catch(e){}
+}
+/* Vol. 01 claimed = the larger of the hand-set number in admin (sets sold elsewhere) and the sets held by orders */
+function setClaimed(){DROP.claimed=Math.max(0,Math.min(DROP.total,Math.max(DROP.manual||0,HELD?heldOf("C1"):0)))}
+function fixCart(){cart.forEach(it=>{it.qty=Math.max(1,Math.min(maxQ(it.id),it.qty))})}
+setInterval(()=>{if(!document.hidden)loadAvail()},90000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadAvail()});
 const SOON_TXT="Coming after launch. We are test printing every design first. Tap to be told when it lands.";
 const SECOND_TXT="Second drop, opening before Valentine's. Tap to be told the day it opens.";
 function applyViews(){
@@ -677,7 +700,7 @@ function applyStock(d){
   const dr=o.drop&&typeof o.drop==="object"?o.drop:{};
   DROP.batch=Math.max(1,Math.min(DROP.total,num(dr.batch,FIRST_BATCH)));
   DROP.batchName=str(dr.batchName,"first batch",24);
-  DROP.claimed=Math.max(0,Math.min(DROP.total,num(dr.claimed,0)));
+  DROP.manual=Math.max(0,Math.min(DROP.total,num(dr.claimed,0)));setClaimed();
   MAIL_ENDPOINT=typeof o.mailEndpoint==="string"&&/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(o.mailEndpoint.trim())?o.mailEndpoint.trim():"";
   applyViews();renderMail();
   try{localStorage.setItem("ns-phase",PHASE)}catch(e){}
@@ -686,7 +709,7 @@ function applyStock(d){
 async function loadStock(){
   let d=null;
   try{const r=await fetch("stock.json?t="+Date.now(),{cache:"no-store"});if(r.ok)d=await r.json()}catch(e){}
-  applyStock(d);
+  applyStock(d);loadAvail(true);
 }
 const SIGNATURE_LABEL = "Signature piece";  // change to "Top seller" once your sales say so
 
@@ -878,7 +901,7 @@ const P=[
      ["Spotify song link","",{max:300,show:"code",ph:"https://open.spotify.com/track/...",note:{code:"Needed for the Spotify Code. In Spotify: Share, then Copy song link. Song not on Spotify? Choose Sound wave above."}}],
      ["Your name for the back","Dimo",{max:14,show:"name"}]],
   imgs:[["songtag","Code side and loop"],["songtag_sides","Front and back"]]},
- {id:"A3",side:"A",name:"Rail",kind:"Wristband display",price:1299,art:"rail",custom:true,line:"Every festival, one wall",build:"rail",
+ {id:"A3",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"A",name:"Rail",kind:"Wristband display",price:1299,art:"rail",custom:true,line:"Every festival, one wall",build:"rail",
   desc:"A wall rail with five short red T-head pegs for the wristbands you never throw away. Loop a few bands on one peg, the cap keeps them on. Pegs press in by hand. Wall screws or mounting tape are not included, so use what suits your wall.",
   size:"200 x 36 x 8 mm rail, pegs stand 15 mm out. Two 4 mm screw holes, 120 mm apart",f:[["Name on the rail","Front Row"]],
   imgs:[["rail","On the wall"],["rail_build","Pegs press in"]]},
@@ -904,7 +927,7 @@ const P=[
   size:"102 x 18 x 49 mm, 71 mm with the hood on. Four sticks, 52 to 66 mm long, up to 22 wide and 13 thick, USB A or C",f:[],
   extra:"PLA softens in heat, so do not leave it in a hot car. ",
   imgs:[["crate","Hood on"],["crate_open","Silver is home, red is missing"],["crate_section","Inside one slot"],["crate_build","Shell, spine, hood, tags and shims"]]},
- {id:"D1",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"Wedge",kind:"Phone stand",price:899,line:"A stage monitor for your phone",badge:"New",build:"wedge",
+ {id:"D1",side:"D",name:"Wedge",kind:"Phone stand",price:899,line:"A stage monitor for your phone",badge:"New",build:"wedge",
   desc:"Shaped like the wedge monitors that lean up at a performer on stage. Your phone leans back at 68 degrees, upright or sideways, against a solid black body with a fluted back. The red lip it rests on slides in on a dovetail, so it never wobbles and can be swapped later. A slot behind the lip takes the charging cable down and out of the back.",
   size:"80 x 77 x 105 mm. Takes phones up to 13 mm thick with a case",f:[],imgs:[["wedge_phone","With a phone"],["wedge","The stand"],["wedge_back","Fluted back and cable exit"]]},
  {id:"D6",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"Fold",kind:"Flat-pack laptop stand",price:1699,line:"Lifts your screen, packs flat in a bag",badge:"New",build:"fold",noAccent:true,mat:"Printed in PLA. Fine for a light laptop on a shaded desk. For a laptop that runs hot for hours, ask us for the PETG version.",
@@ -916,7 +939,7 @@ const P=[
   desc:"Three desk modules styled as mixer channels, each with its own fader on the front. A tall cup for pens and brushes, a mid cup for markers and scissors, and a tray with a divider for cards, clips and earbuds. Each module has a dovetail on one side and a socket on the other: lower one beside the next and they lock into a single row. Rearrange them any time, or run them apart.",
   size:"Tall cup 60 x 60 x 100 mm, mid cup 60 x 60 x 60 mm, tray 120 x 60 x 24 mm. 254 mm linked",f:[],
   imgs:[["channel","Linked, in use"],["channel_build","Three modules"]]},
- {id:"D8",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"B-Side",kind:"Catch-all tray",price:1099,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
+ {id:"D8",side:"D",name:"B-Side",kind:"Catch-all tray",price:1099,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
   desc:"A tray for the things you drop when you walk in: keys, rings, earbuds, a watch, loose change. It is drawn as a record, with grooves cut into the floor and a raised centre label, and a 20 mm rim so nothing rolls off. One piece, nothing to build.",
   size:"160 mm across, 20 mm tall",f:[],
   imgs:[["bside","In use"],["bside_bare","Grooves and label"]]},
@@ -930,7 +953,7 @@ const P=[
   size:"Base 230 x 110 x 12 mm, fins 92 x 130 mm. Two bays, each 10 to 30 mm",f:[],
   extra:"Made for laptops that are closed and driving a monitor. A gaming laptop running hot for hours can soften PLA, so keep those vents clear. ",
   imgs:[["standby","Two laptops parked"],["standby_bare","Base and fins"],["standby_build","Fins slide in from either end"]]},
- {id:"D12",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"Rotary",kind:"Key organiser",price:449,line:"Keys that swing out like a knife, not a jingle",badge:"New",build:"rotary",noAccent:false,
+ {id:"D12",side:"D",name:"Rotary",kind:"Key organiser",price:449,line:"Keys that swing out like a knife, not a jingle",badge:"New",build:"rotary",noAccent:false,
   desc:"Two slim plates hold your keys between them, folded in like a pocket knife. Swing out the one you need, fold it back flat. Posts snap through by hand, short ones for two to four keys and long ones for up to seven, with spacers so the stack stays firm. The loop takes a car fob or a ring.",
   size:"82 x 20 mm, 10 to 14 mm thick depending on your keys",f:[],
   imgs:[["rotary","Two keys swung out"],["rotary_open","Four keys on the organiser"],["rotary_s1_guide","Every part, labelled"]]},
@@ -947,7 +970,7 @@ const P=[
  {id:"D4",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"Sleeve",kind:"Vinyl display stand",price:1299,line:"For the record you are playing now",build:"vinyl",
   desc:"Two feet cut from records, grooves and label included, hold a 12-inch sleeve leaning back like the racks in a record shop. The Now Spinning ledge slides into both feet at the front. It also holds a framed print, a book or a 7-inch.",
   size:"170 x 130 x 120 mm. Holds sleeves up to 10 mm thick",f:[],imgs:[["vinylstand","The stand"],["vinylstand_record","With a 12-inch sleeve"],["vinylstand_build","Ledge and feet"]]},
- {id:"D5",side:"D",name:"Hold",kind:"Headphone stand",price:2199,line:"A home for the cans",build:"headphones",
+ {id:"D5",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"Hold",kind:"Headphone stand",price:2199,line:"A home for the cans",build:"headphones",
   desc:"Mixer parts at full size. The base is a giant gain knob, knurled round the edge with its dial and pointer on top. The post is a channel fader, track and scale included. The headband rests on a ribbed saddle that will not crease it. Three parts press together by hand. Add a Dock under the saddle and it holds two controllers as well.",
   size:"116 mm base, 253 mm tall, saddle 108 mm wide",f:[],imgs:[["headphonestand_bare","Knob, fader, saddle"],["headphonestand","With headphones"],["headphonestand_build","Three parts"]]},
  {id:"D14",soon:"Coming after launch. It fits Hold, so we test print the two together first. Tap to be told when it lands.",side:"D",name:"Dock",kind:"Two-controller dock for Hold",price:999,line:"Your headphones up top, both controllers below",badge:"New",build:"dock",noAccent:true,

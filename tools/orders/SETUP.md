@@ -28,6 +28,21 @@ Everything is free. Emails go from your Gmail, which allows about 100 emails a d
 1. In the editor: **Deploy > New deployment**. Type: **Web app**. Execute as: **Me**. Who has access: **Anyone**. Press Deploy and copy the **Web app URL** (it ends in `/exec`).
 2. "Anyone" only means the site can send orders and sign-ups to it. Reading or changing orders needs the orders key.
 
+### 2b. Order caps and the unpaid-order check (added 21 Nov 2026)
+
+Do this whenever you paste a new Code.gs, and once now:
+
+1. Paste the new Code.gs over the old one and save.
+2. Run **installTriggers** once from the editor and press **Allow** when Google asks for permission (the script now reads the site's stock.json to know the caps). It sets an hourly check that cancels an approved order not paid within the "Pay within (hours)" setting (48), which gives its slots back. The customer gets an email.
+3. **Deploy > Manage deployments > pencil > Version: New version > Deploy.** Without this step the live web app keeps running the old code. The URL stays the same.
+
+How the caps work:
+- Admin page > Site tab > each product has **Order cap** (the most this drop can take in total). Vol. 01 uses its batch size.
+- An order holds its slots from the moment it is logged until it is rejected, cancelled or refunded. At the cap the product shows **Sold out** on the site by itself and reopens if a slot is freed.
+- The site counts from the sheet every 90 seconds and when the page is opened. A page left open can be a minute stale, so an order that asks for more than is left is still logged but flagged **OVER CAP** in the Flags column. Reject it (nothing is charged) or approve part of it by hand.
+- If the sheet cannot be reached, the site simply does not apply caps. Stock set by hand (Sold out, Few left) still works.
+- Sets or pieces sold outside the site (cash, a friend): raise the cap down, or for Vol. 01 set "Sets already claimed" in the Site tab. The larger of that number and the sheet's count is used.
+
 ### 3. Switch the site on
 
 1. Turn on GitHub Pages: on github.com open **Prathaam-Modi/no-skips > Settings > Pages**. Source: **Deploy from a branch**, Branch: **main**, folder **/ (root)**, Save. After a minute the site is at `https://prathaam-modi.github.io/no-skips/` and the admin page at `https://prathaam-modi.github.io/no-skips/admin.html`.

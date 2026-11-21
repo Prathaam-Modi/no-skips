@@ -47,6 +47,10 @@ const NEXT = {
   rejected: [], cancelled: [], refunded: []
 };
 
+/* Statuses whose orders hold their slots against a product's order cap (admin > Products > Order cap).
+   Rejected, cancelled and refund statuses give the slots back. */
+const HOLD = ['new', 'approved', 'paid', 'printing', 'dispatched', 'delivered'];
+
 const SETTINGS_DEFAULT = [
   ['Business name', 'No Skips', 'Shown in emails'],
   ['UPI ID', '', 'Where customers pay, e.g. yourname@okaxis. Required before you approve an order'],
@@ -126,6 +130,7 @@ function doPost(e) {
 
 function doGet(e) {
   const q = (e && e.parameter) || {};
+  if (q.a === 'avail') return json_({ ok: true, held: heldCounts_(), at: stamp_() });
   if (q.a === 'unsub') {
     if (!q.e || q.t !== sign_('unsub:' + q.e.toLowerCase())) return page_('That link did not work', 'Reply to any of our emails and we will take you off the list by hand.');
     setSubscriber_(q.e, 'unsubscribed', 'link');
@@ -174,6 +179,7 @@ function newOrder_(b) {
     const open = countOpen_(email), max = Number(setting_('Max open orders per email')) || 3;
     if (open >= max) flags.push('Repeat buyer: ' + open + ' open orders');
   }
+  capFlags_(items).forEach(f => flags.push(f));
   const sh = sheet_(SHEET_ORDERS, ORDER_COLS);
   const row = {
     'Order no.': ref, 'Created': stamp_(), 'Status': 'new', 'Email': email, 'Newsletter': b.news ? 'yes' : '',
@@ -182,6 +188,7 @@ function newOrder_(b) {
     'Flags': flags.join('; '), 'History': stamp_() + ' Order received from the site', 'Message': String(b.message || '').slice(0, 3000)
   };
   sh.appendRow(ORDER_COLS.map(c => row[c] !== undefined ? row[c] : ''));
+  CacheService.getScriptCache().remove('held');
   if (b.news && email) setSubscriber_(email, 'subscribed', 'order');
   if (email) {
     send_(email, 'We got your order ' + ref, [
@@ -308,6 +315,7 @@ function updateOrder_(b) {
   }
   if (note && to !== 'approved') blocks.push(p_(esc_(note)));
   writeFields_(row, f);
+  CacheService.getScriptCache().remove('held');
   addHistory_(row, STATUS[from] + ' > ' + STATUS[to] + (reason ? ' (' + reason + ')' : '') + (notify ? ', emailed' : ', no email'));
   if (notify && subject) {
     const q = MailApp.getRemainingDailyQuota();
@@ -491,6 +499,73 @@ function addHistory_(row, line) {
   const cell = sh.getRange(row, i);
   cell.setValue(String(cell.getValue() || '') + '\n' + stamp_() + ' ' + line);
 }
+/* ------------------------------------------------------------------ order caps */
+
+/** Units held per product by orders that have not been rejected, cancelled or refunded. Cached for 20 seconds. */
+function heldCounts_() {
+  const c = CacheService.getScriptCache(), hit = c.get('held');
+  if (hit) return JSON.parse(hit);
+  const held = {};
+  rows_(SHEET_ORDERS, ORDER_COLS).forEach(o => {
+    if (HOLD.indexOf(o['Status']) < 0) return;
+    parseItems_(o['Items JSON']).forEach(it => { if (it && it.id) held[it.id] = (held[it.id] || 0) + (Math.max(1, Math.round(Number(it.qty) || 1))); });
+  });
+  c.put('held', JSON.stringify(held), 20);
+  return held;
+}
+/** The caps from the site's stock.json (items[ID].c; Vol. 01 uses drop.batch). Cached for 2 minutes. Empty when the site cannot be read. */
+function caps_() {
+  const c = CacheService.getScriptCache(), hit = c.get('caps');
+  if (hit) return JSON.parse(hit);
+  let caps = {};
+  try {
+    const r = UrlFetchApp.fetch(setting_('Site URL').replace(/\/?$/, '/') + 'stock.json?t=' + Date.now(), { muteHttpExceptions: true });
+    if (r.getResponseCode() === 200) {
+      const d = JSON.parse(r.getContentText()), items = d.items || {};
+      Object.keys(items).forEach(k => { const n = Number(items[k] && items[k].c); if (n > 0) caps[k] = n; });
+      const batch = Number(d.drop && d.drop.batch); if (batch > 0) caps.C1 = batch;
+      c.put('caps', JSON.stringify(caps), 120);
+    }
+  } catch (err) {}
+  return caps;
+}
+/** Flags for an incoming order that asks for more than is left. The site stops this from its own count, but a stale page can slip through. */
+function capFlags_(items) {
+  const flags = [], caps = caps_(), held = heldCounts_(), want = {};
+  items.forEach(it => { if (it && it.id) want[it.id] = (want[it.id] || 0) + Math.max(1, Math.round(Number(it.qty) || 1)); });
+  Object.keys(want).forEach(id => {
+    if (!caps[id]) return;
+    const left = Math.max(0, caps[id] - (held[id] || 0));
+    if (want[id] > left) flags.push('OVER CAP ' + id + ': wants ' + want[id] + ', ' + left + ' left. Reject, or approve part by hand');
+  });
+  return flags;
+}
+
+/** Time trigger (hourly, see installTriggers): an approved order that is not paid inside the pay window is cancelled, which frees its slots. */
+function expireUnpaid() {
+  const lock = LockService.getScriptLock();
+  lock.waitLock(30000);
+  try {
+    const hours = Number(setting_('Pay within (hours)')) || 48, now = Date.now();
+    rows_(SHEET_ORDERS, ORDER_COLS).forEach(o => {
+      if (o['Status'] !== 'approved') return;
+      const lines = String(o['History'] || '').split('\n').filter(l => l.indexOf('> ' + STATUS.approved) >= 0);
+      const m = lines.length && /^(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2})/.exec(lines[lines.length - 1]);
+      if (!m) return;
+      const at = new Date(m[1] + 'T' + m[2] + ':00+05:30').getTime();
+      if (!(at > 0) || now - at < hours * 3600 * 1000) return;
+      updateOrder_({ ref: o['Order no.'], to: 'cancelled', notify: true,
+        reason: 'It was not paid within ' + hours + ' hours, so the pieces went back on sale. If you already paid, message us on WhatsApp with the UPI reference and we will sort it out.' });
+    });
+  } finally { lock.releaseLock(); }
+}
+/** Run once from the editor after pasting a new version: sets the hourly check for unpaid orders. */
+function installTriggers() {
+  ScriptApp.getProjectTriggers().filter(t => t.getHandlerFunction() === 'expireUnpaid').forEach(t => ScriptApp.deleteTrigger(t));
+  ScriptApp.newTrigger('expireUnpaid').timeBased().everyHours(1).create();
+  Logger.log('Hourly unpaid-order check is on.');
+}
+
 function countOpen_(email) {
   return rows_(SHEET_ORDERS, ORDER_COLS).filter(o => String(o['Email']).toLowerCase() === email && ['new', 'approved', 'paid', 'printing'].indexOf(o['Status']) >= 0).length;
 }

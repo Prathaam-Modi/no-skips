@@ -118,7 +118,7 @@ details.act.go summary{color:var(--red)}
     <div class="fld"><label for="mailUrl">Web app address from Google Apps Script (leave empty to switch email off)</label><input id="mailUrl" type="text" maxlength="200" placeholder="https://script.google.com/macros/s/.../exec"></div>
     <p class="help">When this is set, the site shows the email sign-up in the footer and logs every order (with its order number and the customer's email) in your No Skips Orders sheet. Customers always give an email with an order, set or not.</p>
   </div>
-  <div class="box"><div class="nm">Products</div><p class="help" style="margin:4px 0 0">Shown as: <b>Default</b> follows the website code (first drop live, Track Plate, Track Tag and Side A second drop, the rest coming soon). Live makes it orderable in the current phase. Hidden removes it from the site. Max per order limits how many one customer can add (empty = 5).</p></div>
+  <div class="box"><div class="nm">Products</div><p class="help" style="margin:4px 0 0">Shown as: <b>Default</b> follows the website code (first drop of seven live: Vol. 01, Studio Mini, Gig Coin, Wedge, Tape Case, B-Side, Rotary. Track Plate, Track Tag and Side A second drop, the rest coming soon). Live makes it orderable in the current phase. Hidden removes it from the site. Max per order limits how many one customer can add (empty = 5). Order cap is the total this drop can take: every order that is not rejected, cancelled or refunded holds its slots, and the product shows Sold out by itself at the cap. A rejected or cancelled order, or one not paid in time, gives its slots back. It needs the Orders email address set above; without it the cap is not applied. Use Sold out only to close a product by hand.</p></div>
   <div class="box" id="list"></div>
   </div>
   <div id="ordersTab" hidden>
@@ -152,7 +152,7 @@ details.act.go summary{color:var(--red)}
 
 <script>
 const OWNER="Prathaam-Modi",REPO="no-skips",BRANCH="main",PATH="stock.json";
-const LAUNCH=["C1","C2","C3","A3","D2","D5"],SECOND=["A1","A5","C4"],UNLISTED=["D13"];
+const LAUNCH=["C1","C2","C3","D1","D2","D8","D12"],SECOND=["A1","A5","C4"],UNLISTED=["D13"];
 const defView=id=>LAUNCH.includes(id)?"Live":SECOND.includes(id)?"Second drop":UNLISTED.includes(id)?"Unlisted, coming soon":"Coming soon";
 const PRODUCTS=[{"id": "D13", "name": "Drumroll (Rolling machine)"}, {"id": "A4", "name": "45s (Record coasters)"}, {"id": "B6", "name": "Crate (USB stick keeper)"}, {"id": "D9", "name": "Perch (Sofa arm tray)"}, {"id": "C1", "name": "Vol. 01: The Studio (Collector set)"}, {"id": "C2", "name": "Studio Mini (Single piece)"}, {"id": "C3", "name": "Gig Coin (Show token)"}, {"id": "E1", "name": "Bengaluru Coin (Numbered show token)"}, {"id": "E2", "name": "Bengaluru Rail (Wristband display)"}, {"id": "C4", "name": "Side A (Mixtape set of 4)"}, {"id": "C5", "name": "Gain (Fidget knob)"}, {"id": "A1", "name": "Track Plate (Scannable song display)"}, {"id": "A5", "name": "Track Tag (Song keytag)"}, {"id": "A3", "name": "Rail (Wristband display)"}, {"id": "B1", "name": "Stack (Pick amp with drawer)"}, {"id": "B2", "name": "Lift (Controller risers, pair)"}, {"id": "B3", "name": "Alias (Artist name tag)"}, {"id": "B5", "name": "Run 50 (Artist merch tags)"}, {"id": "D1", "name": "Wedge (Phone stand)"}, {"id": "D6", "name": "Fold (Flat-pack laptop stand)"}, {"id": "D7", "name": "Channel (Modular desk set)"}, {"id": "D8", "name": "B-Side (Catch-all tray)"}, {"id": "D10", "name": "Eject (Slim card wallet)"}, {"id": "D11", "name": "Standby (Rack for closed laptops)"}, {"id": "D12", "name": "Rotary (Key organiser)"}, {"id": "D2", "name": "Tape Case (Small storage box)"}, {"id": "D4", "name": "Sleeve (Vinyl display stand)"}, {"id": "D5", "name": "Hold (Headphone stand)"}, {"id": "D14", "name": "Dock (Two-controller dock for Hold)"}, {"id": "D15", "name": "Stage (Desk base tile for Channel)"}];
 PRODUCTS.sort((a,b)=>LAUNCH.includes(b.id)-LAUNCH.includes(a.id));
@@ -165,7 +165,7 @@ function paintPhase(){document.querySelectorAll("[data-ph]").forEach(b=>b.setAtt
 const hdr=()=>({Authorization:"Bearer "+token,Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"});
 const b64e=s=>btoa(String.fromCharCode(...new TextEncoder().encode(s)));
 const b64d=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,"")),c=>c.charCodeAt(0)));
-const norm=x=>({s:x&&["low","out"].includes(x.s)?x.s:"in",n:x&&Number.isFinite(x.n)&&x.n>0?x.n:null,v:x&&["live","soon","second","hidden"].includes(x.v)?x.v:"",m:x&&Number.isFinite(x.m)&&x.m>0?x.m:null});
+const norm=x=>({s:x&&["low","out"].includes(x.s)?x.s:"in",n:x&&Number.isFinite(x.n)&&x.n>0?x.n:null,v:x&&["live","soon","second","hidden"].includes(x.v)?x.v:"",m:x&&Number.isFinite(x.m)&&x.m>0?x.m:null,c:x&&Number.isFinite(x.c)&&x.c>0?x.c:null});
 
 async function load(){
   const rr=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}`,{headers:hdr()});
@@ -194,7 +194,8 @@ function draw(){
       <div class="ctl"><span class="lbl">Shown as</span><div class="seg sm" role="group" aria-label="${p.name} shown as">${[["","Default"],["live","Live"],["soon","Coming soon"],["second","Second drop"],["hidden","Hidden"]].map(([k,t])=>`<button type="button" data-v="${k}" aria-pressed="${c.v===k}">${t}</button>`).join("")}</div></div>
       <div class="ctl"><span class="lbl">Stock</span><div class="seg sm" role="group" aria-label="${p.name} stock">${[["in","In stock"],["low","Few left"],["out","Sold out"]].map(([k,t])=>`<button type="button" data-s="${k}" aria-pressed="${c.s===k}">${t}</button>`).join("")}</div>
       ${c.s==="low"?`<input class="q" type="number" min="1" placeholder="How many" data-n value="${c.n||""}"><span class="ql">left (optional)</span>`:""}</div>
-      <div class="ctl"><span class="lbl">Max per order</span><input class="q" type="number" min="1" max="99" placeholder="5" data-m value="${c.m||""}"></div></div>`}).join("")||'<p class="help">No match.</p>';
+      <div class="ctl"><span class="lbl">Max per order</span><input class="q" type="number" min="1" max="99" placeholder="5" data-m value="${c.m||""}"></div>
+      <div class="ctl"><span class="lbl">Order cap</span><input class="q" type="number" min="1" max="999" placeholder="${p.id==="C1"?"set by Vol. 01 batch":"none"}" data-c value="${c.c||""}" ${p.id==="C1"?"disabled":""}><span class="ql">${p.id==="C1"?"in total":"in total, then Sold out"}</span></div></div>`}).join("")||'<p class="help">No match.</p>';
   dirty();
 }
 function dirty(){
@@ -205,6 +206,7 @@ $("list").addEventListener("click",e=>{const b=e.target.closest("[data-s]");if(!
   cur[id]={...cur[id],s:b.dataset.s,n:b.dataset.s==="low"?cur[id].n:null};draw()});
 $("list").addEventListener("click",e=>{const b=e.target.closest("[data-v]");if(!b)return;const id=b.closest(".row").dataset.id;cur[id]={...cur[id],v:b.dataset.v};draw()});
 $("list").addEventListener("input",e=>{if(e.target.hasAttribute("data-m")){const id=e.target.closest(".row").dataset.id;const v=parseInt(e.target.value,10);cur[id].m=v>0?Math.min(99,v):null;const r=e.target.closest(".row");r.classList.toggle("changed",JSON.stringify(cur[id])!==JSON.stringify(orig[id]));dirty();return}
+  if(e.target.hasAttribute("data-c")){const id=e.target.closest(".row").dataset.id;const v=parseInt(e.target.value,10);cur[id].c=v>0?Math.min(999,v):null;const r=e.target.closest(".row");r.classList.toggle("changed",JSON.stringify(cur[id])!==JSON.stringify(orig[id]));dirty();return}
   if(e.target.hasAttribute("data-n")){const id=e.target.closest(".row").dataset.id;const v=parseInt(e.target.value,10);cur[id].n=v>0?v:null;dirty()}});
 $("claimed").addEventListener("input",dirty);["shipFrom","preNote","batch","mailUrl"].forEach(i=>$(i).addEventListener("input",dirty));
 $("phaseSeg").addEventListener("click",e=>{const b=e.target.closest("[data-ph]");if(!b)return;phase=b.dataset.ph;paintPhase();dirty()});$("q").addEventListener("input",draw);
@@ -214,7 +216,7 @@ async function save(){
   if(phase!==was&&!confirm("Change the site from "+was+" to "+phase+"? "+PH_HELP[phase]))return;
   $("save").disabled=true;$("busy").hidden=false;$("msg").className="";$("msg").textContent="Saving...";
   try{
-    const items={};PRODUCTS.forEach(p=>{const c=cur[p.id],o={};if(c.s!=="in"){o.s=c.s;if(c.s==="low"&&c.n)o.n=c.n}if(c.v)o.v=c.v;if(c.m)o.m=c.m;if(Object.keys(o).length)items[p.id]=o});
+    const items={};PRODUCTS.forEach(p=>{const c=cur[p.id],o={};if(c.s!=="in"){o.s=c.s;if(c.s==="low"&&c.n)o.n=c.n}if(c.v)o.v=c.v;if(c.m)o.m=c.m;if(c.c)o.c=c.c;if(Object.keys(o).length)items[p.id]=o});
     const claimed=Math.max(0,Math.min(50,parseInt($("claimed").value,10)||0));
     const batch=Math.max(1,Math.min(50,parseInt($("batch").value,10)||15));
     /* keep any field this page does not know about */
