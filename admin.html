@@ -105,7 +105,7 @@ details.act.go summary{color:var(--red)}
     <div class="ctl" style="margin-top:8px"><div class="seg" id="phaseSeg" role="group" aria-label="Site phase">
       <button type="button" data-ph="waitlist" aria-pressed="false">Waitlist</button><button type="button" data-ph="preorder" aria-pressed="false">Pre-order</button><button type="button" data-ph="live" aria-pressed="false">Live</button></div></div>
     <p class="help" id="phaseHelp"></p>
-    <div class="fld"><label for="shipFrom">Ships from</label><input id="shipFrom" type="text" maxlength="40" placeholder="January 2027"></div>
+    <div class="fld"><label for="shipFrom">Ships from</label><input id="shipFrom" type="text" maxlength="40" placeholder="late January 2027"></div>
     <div class="fld"><label for="preNote">Pre-order note (optional, shown beside the ship date)</label><input id="preNote" type="text" maxlength="160" placeholder="First batch gets the launch price."></div>
   </div>
   <div class="box" id="dropBox">
@@ -180,7 +180,7 @@ async function load(){
   orig={};cur={};PRODUCTS.forEach(p=>{orig[p.id]=norm((data.items||{})[p.id]);cur[p.id]={...orig[p.id]}});
   origClaimed=Math.max(0,Math.min(50,+(data.drop&&data.drop.claimed)||0));$("claimed").value=origClaimed;
   raw=data;phase=["waitlist","preorder","live"].includes(data.phase)?data.phase:"waitlist";
-  $("shipFrom").value=typeof data.shipFrom==="string"&&data.shipFrom.trim()?data.shipFrom.trim():"January 2027";
+  $("shipFrom").value=typeof data.shipFrom==="string"&&data.shipFrom.trim()?data.shipFrom.trim():"late January 2027";
   $("preNote").value=typeof data.preorderNote==="string"?data.preorderNote:"";
   $("batch").value=Math.max(1,Math.min(50,+(data.drop&&data.drop.batch)||15));
   $("mailUrl").value=typeof data.mailEndpoint==="string"?data.mailEndpoint:"";
@@ -220,7 +220,7 @@ async function save(){
     const claimed=Math.max(0,Math.min(50,parseInt($("claimed").value,10)||0));
     const batch=Math.max(1,Math.min(50,parseInt($("batch").value,10)||15));
     /* keep any field this page does not know about */
-    const body={...raw,updated:new Date().toISOString(),phase,shipFrom:$("shipFrom").value.trim()||"January 2027",preorderNote:$("preNote").value.trim(),mailEndpoint:$("mailUrl").value.trim(),drop:{...(raw.drop&&typeof raw.drop==="object"?raw.drop:{}),claimed,batch},items};
+    const body={...raw,updated:new Date().toISOString(),phase,shipFrom:$("shipFrom").value.trim()||"late January 2027",preorderNote:$("preNote").value.trim(),mailEndpoint:$("mailUrl").value.trim(),drop:{...(raw.drop&&typeof raw.drop==="object"?raw.drop:{}),claimed,batch},items};
     const r=await fetch(API,{method:"PUT",headers:{...hdr(),"Content-Type":"application/json"},body:JSON.stringify({message:"Update stock, phase and product status from admin",branch:BRANCH,content:b64e(JSON.stringify(body,null,2)+"\n"),...(sha?{sha}:{})})});
     if(r.status===409||r.status===422){await load();draw();$("msg").textContent="The file changed somewhere else. Reloaded, check and save again.";return}
     if(r.status===401||r.status===403){$("msg").textContent="The key was refused ("+r.status+"). Lock, then unlock with a new key.";$("save").disabled=false;return}

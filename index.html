@@ -462,7 +462,7 @@ footer a{text-underline-offset:3px}
 </head>
 <body>
 <div class="ticker"><div class="wrap">
-  <span><i class="led"></i><span id="tickPhase">Pre-orders opening soon</span></span>
+  <span><i class="led"></i><span id="tickPhase">Pre-orders open Sat 9 Jan, 7 pm</span></span>
   <span id="tickEd"></span>
   <span class="opt">Only filament in the box. No magnets, no glue, no metal</span>
   <span class="opt">Printed to order in Bengaluru</span>
@@ -697,7 +697,7 @@ function applyStock(d){
   const o=d&&typeof d==="object"&&!Array.isArray(d)?d:{};
   STOCK={items:o.items&&typeof o.items==="object"&&!Array.isArray(o.items)?o.items:{}};
   PHASE=PHASES.includes(o.phase)?o.phase:"waitlist";
-  SHIP_FROM=str(o.shipFrom,"January 2027",40);PREORDER_NOTE=str(o.preorderNote,"",160);
+  SHIP_FROM=str(o.shipFrom,"late January 2027",40);PREORDER_NOTE=str(o.preorderNote,"",160);
   const dr=o.drop&&typeof o.drop==="object"?o.drop:{};
   DROP.batch=Math.max(1,Math.min(DROP.total,num(dr.batch,FIRST_BATCH)));
   DROP.batchName=str(dr.batchName,"first batch",24);
@@ -1123,7 +1123,7 @@ const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 /* stock is ignored while nothing can be ordered */
 const stockOf=p=>PHASE==="waitlist"?{s:"in",n:null}:(p.id==="C1"&&c1Full()?{s:"out",n:null}:stk(p.id));
 const PH=()=>({
-  waitlist:{tick:"Pre-orders opening soon",list:"Interest list",add:"Add to interest list",cta:"Get early access",go:"Get early access",label:"First drop, early access"},
+  waitlist:{tick:"Pre-orders open Sat 9 Jan, 7 pm",list:"Interest list",add:"Add to interest list",cta:"Get early access",go:"Get early access",label:"First drop, early access"},
   preorder:{tick:`Pre-orders open. Shipping from ${SHIP_FROM}`,list:"Pre-order list",add:"Add to pre-order list",cta:"Pre-order on WhatsApp",go:"Pre-order",label:"First drop, pre-order open"},
   live:{tick:"Open for orders",list:"Order list",add:"Add to order list",cta:"Order on WhatsApp",go:"Order",label:"Available now"}}[PHASE]);
 const wa=text=>"https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text);
@@ -1202,7 +1202,7 @@ function renderPhase(){
   $("tickPhase").textContent=L.tick;$("listLbl").textContent=L.list;
   const batchTxt=part?`The ${DROP.batchName} is ${DROP.batch} sets. `:"";
   const line=full?(gone?`All ${DROP.total} sets are claimed.`:`The ${DROP.batchName} is full. Ask to be told when the next one opens.`)
-    :wl?`Pre-orders open soon. ${batchTxt}The early access list gets the first message.`
+    :wl?`Pre-orders open Saturday 9 January, 7 pm. ${batchTxt}The early access list gets the first message.`
     :pre?`Pre-orders are open. ${batchTxt}Ships from ${SHIP_FROM}.`
     :part?`The ${DROP.batchName} is ${DROP.batch} sets, printed to order.`:"";
   $("heroPhase").hidden=!line;$("heroPhase").innerHTML=`<i class="led"></i><span>${esc(line)}</span>`;
