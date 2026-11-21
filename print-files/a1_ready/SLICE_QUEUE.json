@@ -1,3 +1,12 @@
 {
- "jobs": []
+ "jobs": [
+  {
+   "project": "C3_gig_coin/C3_gig_coin.3mf",
+   "layer": "0.12",
+   "over": {
+    "wall_loops": "3",
+    "sparse_infill_density": "15%"
+   }
+  }
+ ]
 }

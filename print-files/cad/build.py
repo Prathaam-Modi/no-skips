@@ -105,7 +105,7 @@ def build_coin():
     ring = ring.difference(circle(21.2)).difference(circle(2.6, 0, 28.4)).difference(box(-0.6, -30, 0.6, -20.5))
     frame = body(ring, FR_H, c=0.4, steps=2, bottom=True)
     # coin seats on a 0.5 mm floor lip (overlaps the coin back by 0.6 to 0.9 mm) and under a 45 degree top lip (0.5 to 0.8 mm over the face), so it cannot fall out
-    lip = ext(circle(21.5).difference(circle(20.1)), 0.5, 0) + (cyl(21.5, 1.1, 3.8, seg=180) - cyl(21.21, 1.01, 3.795, r2=20.2, seg=180))
+    lip = ext(circle(21.5).difference(circle(20.1)), 0.5, 0) + (cyl(21.5, 1.1, 3.8, seg=180) - cyl(21.21, 1.01, 3.795, r2=20.2, seg=180) - cyl(20.2, 0.4, 4.7, seg=180))
     frame = frame + (lip - cube(1.4, 10, 6, 0, -21, 0))
     foot = body(rrect(40, 18, 5), 9.0) - cube(14.5, FR_H + 0.4, 7.0, 0, 0, 2.2)
     mark = ext(pill(0, -6.0, 26, 1.8), RAISE, 9.0)
