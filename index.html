@@ -954,6 +954,10 @@ const P=[
   desc:"The first add-on for Hold. It drops over the post before the saddle goes on and rests on the knob. One controller hangs in front and one behind, by the gap between the grips, so the weight balances and the stand stays put. A fence keeps both clear of the ear cups, and a red fader cap on each end stops them sliding off. Fits DualSense, DualShock 4, Xbox and Switch Pro controllers. Needs a Hold.",
   size:"233 x 62 x 36 mm. Cradle 60 mm deep, arm 36 mm wide. Holds a controller 70 mm above the knob",f:[],
   imgs:[["dock_use","Two controllers and headphones on Hold"],["dock_hold","On Hold"],["dock","The Dock and two red caps"],["dock_s1_guide","Fitting it, labelled"]]},
+ {id:"D15",soon:"Coming after launch. It fits Channel, so we test print the two together first. Tap to be told when it lands.",side:"D",name:"Stage",kind:"Desk base tile for Channel",price:449,line:"The riser your Channel stands on",badge:"New",build:"stage",
+  ed:"One tile Rs 449. A full row of four Rs 1,499",
+  desc:"A ribbed tile that lifts your Channel set off the desk. Each tile is one Channel width, so a cup sits on one tile and the tray spans two. Tiles link side by side with the same dovetail as Channel: lower the next one on from above. A shallow recess keeps the modules from sliding, and the front ledge holds your phone face down, earbuds or keys. The red line on the ledge runs on from tile to tile. Four tiles take a full Channel row.",
+  size:"64 x 87 x 16 mm per tile. Four tiles make a 254 mm row",f:[],imgs:[["stage","Four tiles under a Channel row"],["stage_tiles","Two tiles linked"],["stage_build_use","Lower the next tile on"]]},
  {id:"D9",side:"D",name:"Perch",kind:"Sofa arm tray",price:0,line:"A steady table for the arm of your sofa",noAccent:true,
   soon:"A cup of chai will end up on this, so it will be printed in PETG, which holds up to about 70 C, and tested with hot cups before release.",
   desc:"A tray that wraps over a sofa arm. The centre is a rigid table with a raised rim and a cup well, so a glass cannot slide off. Two hinged slats on each side fold down and grip arms of different widths. The hinge pins slide in by hand.",
@@ -1056,6 +1060,10 @@ const BUILD={
    ["Stand the feet","Place the two record feet about 110 mm apart, grooves facing out, the slotted ends at the front."],
    ["Slide in the ledge","Push the Now Spinning ledge down into the front slot of both feet until it reaches the bottom.","","down"],
    ["Add the record","Rest the sleeve on the base behind the ledge and lean it back on the cut edge of the records.","vinylstand_record_use"]]},
+ stage:{name:"Stage",img:"stage_build_use",parts:"Tiles, one per cup, two for the tray",time:"30 seconds",steps:[
+   ["Link the tiles","Stand the first tile (A) where you want the set. Hold the next tile (B) above it so its socket sits over the dovetail on the right, and lower it straight down until it is flush.","stage_build_use"],
+   ["Set the Channel on top","Lower your linked Channel cups and tray into the recess (C). Each cup sits on one tile, the tray on two."],
+   ["Use the ledge","The front ledge takes your phone face down, earbuds or keys."]]},
  dock:{name:"Dock",img:"dock_s1_guide",parts:"Dock and 2 red caps, on a Hold",time:"1 minute",steps:[
    ["Saddle off","Pull the saddle straight up and off the Hold post.","","up"],
    ["Dock down to the base","Drop the Dock over the post with the wide channel facing the red fader, and let it slide all the way down onto the knob.","","down"],
