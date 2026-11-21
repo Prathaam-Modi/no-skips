@@ -284,10 +284,15 @@ $("ochips").addEventListener("click",e=>{const b=e.target.closest("[data-f]");if
 
 /* turn an order's items into print jobs for the order kit (Track Plate, Track Tag, Alias, Run 50) */
 const KIT={A1:"plate",A5:"tag",B3:"alias",B5:"alias"};
+const ENGRAVE_IDS=["D1","D2","D8","D12"];   /* products that offer the Engrave add-on: text cut into the base (kit/engrave.py) */
 function fv(it,re){const f=(it.fields||[]).find(x=>re.test(x.label));return f?f.value:""}
 function jobsFor(o){
   const jobs=[],manual=[];
   o.items.forEach(it=>{const k=KIT[it.id];
+    if(it.engrave&&ENGRAVE_IDS.includes(it.id)){
+      jobs.push({product:"engrave",base:it.id,link:"",title:"",artist:"",name:"",line1:it.engrave.line1||"",line2:it.engrave.line2||"",accent:"red",qty:Math.max(1,+it.qty||1),item:it.id+" "+it.name});
+      if(it.fields&&it.fields.length)manual.push(it.name+": the other text on it is made by hand in CAD");
+      return}
     if(!k){if(it.fields&&it.fields.length)manual.push(it.name+": made by hand in CAD");return}
     if((k==="plate"||k==="tag")&&it.mode==="wave"){manual.push(it.name+": sound wave, made by hand from the song");return}
     const j={product:k,link:"",title:"",artist:"",name:"",line1:"",line2:"",accent:it.accent==="ivory"?"ivory":"red",qty:Math.max(1,+it.qty||1),item:it.id+" "+it.name};
@@ -300,7 +305,7 @@ function jobsFor(o){
   return {jobs,manual};
 }
 function itemLines(it){
-  const opts=[it.mode?(it.mode==="wave"?"Sound wave":"Spotify Code"):"",it.back==="name"?"Back: name":it.back==="song"?"Back: song and artist":"",it.accent?"Accent "+it.accent:"",it.pick||"",it.gift?"Gift"+(it.giftNote?": "+it.giftNote:""):""].filter(Boolean);
+  const opts=[it.mode?(it.mode==="wave"?"Sound wave":"Spotify Code"):"",it.back==="name"?"Back: name":it.back==="song"?"Back: song and artist":"",it.accent?"Accent "+it.accent:"",it.pick||"",it.gift?"Gift"+(it.giftNote?": "+it.giftNote:""):"",it.engrave?"Engraved "+(it.engrave.where||"on the base")+": "+[it.engrave.line1,it.engrave.line2].filter(Boolean).join(" / "):""].filter(Boolean);
   const f=(it.fields||[]).map(x=>/spotify/i.test(x.label)?`${x.label}: <a href="${h(x.value)}" target="_blank" rel="noopener">${h(x.value)}</a>`:`${h(x.label)}: <b>${h(x.value)}</b>`);
   return `<li><div><b>${h(it.name)}</b> &times; ${it.qty} <span class="k">${h(it.id)}</span></div><div>${rs(it.price*it.qty)}</div>${opts.length||f.length?`<span>${[h(opts.join(", ")),...f].filter(Boolean).join("<br>")}</span>`:""}</li>`;
 }

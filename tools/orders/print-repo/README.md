@@ -12,6 +12,10 @@ For each item in the order:
    - `plate` - A1 Track Plate: Spotify Code, title and artist.
    - `tag` - A5 Track Tag: Spotify Code on the front; title and artist, or a name, on the back.
    - `alias` - B3 Alias (or B5 Run 50): one name, or two lines. No code.
+   - `engrave` - the Engrave add-on (Rs 99) on D1 Wedge, D2 Tape Case, D8 B-Side and D12 Rotary: one or two lines of text cut
+     0.6 mm into the base (the face on the print bed), Poppins Bold caps at least 4.0 mm tall (`kit/engrave.py`). The product's other
+     parts are copied from `kit/engrave/<ID>/` and the project keeps the first-print settings. `preview.png` shows the base as the
+     customer will see it from underneath. Text that is too long, or would shrink below 4.0 mm, fails that job with a message.
    The Spotify Code is downloaded from the song link.
 2. Builds a Bambu Studio project (`.3mf`) with every part placed on the bed and set to its AMS Lite slot
    (1 Black, 2 Red, 3 Ivory; accent parts go to slot 2 for a red accent, slot 3 for ivory), with `qty`

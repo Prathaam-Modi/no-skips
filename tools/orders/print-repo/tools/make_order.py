@@ -16,10 +16,12 @@ import bambu3mf  # noqa: E402
 
 ROOT = bambu3mf.ROOT
 KIT = os.path.join(ROOT, "kit", "code_to_print.py")
+ENGRAVE = os.path.join(ROOT, "kit", "engrave.py")
 REF_RE = re.compile(r"^NS-(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[0-2])-[A-Z0-9]{4}$")
 LINK_RE = re.compile(r"^(https://open\.spotify\.com/(intl-[a-z]{2}(-[a-z]{2})?/)?(track|album|playlist|artist|episode)/[A-Za-z0-9]{22}"
                      r"(\?[A-Za-z0-9=&._-]*)?|spotify:(track|album|playlist|artist|episode):[A-Za-z0-9]{22})$")
-PRODUCTS = {"plate": "A1 Track Plate", "tag": "A5 Track Tag", "alias": "B3 Alias"}
+PRODUCTS = {"plate": "A1 Track Plate", "tag": "A5 Track Tag", "alias": "B3 Alias", "engrave": "Engraved base"}
+ENGRAVE_BASES = ("D1", "D2", "D8", "D12")     # kit/engrave.py: the Engrave add-on, cut into the base of these products
 TEXT_FIELDS = ("title", "artist", "name", "line1", "line2")
 MAX_JOBS, MAX_QTY = 20, 50
 GLOBAL = {"curr_bed_type": "Textured PEI Plate", "sparse_infill_pattern": "gyroid", "ironing_type": "no ironing",
@@ -40,8 +42,12 @@ def clean_job(j):
         raise JobError("Job is not an object.")
     product = str(j.get("product", "")).strip().lower()
     if product not in PRODUCTS:
-        raise JobError("Unknown product %r. Use plate, tag or alias." % j.get("product"))
+        raise JobError("Unknown product %r. Use plate, tag, alias or engrave." % j.get("product"))
     out = {"product": product, "item": str(j.get("item") or PRODUCTS[product])[:60]}
+    base = str(j.get("base") or "").strip().upper()
+    if product == "engrave" and base not in ENGRAVE_BASES:
+        raise JobError("Engraving is for %s, not %r." % (", ".join(ENGRAVE_BASES), j.get("base")))
+    out["base"] = base if product == "engrave" else ""
     for k in TEXT_FIELDS:
         v = j.get(k) or ""
         if not isinstance(v, str):
@@ -59,9 +65,9 @@ def clean_job(j):
         raise JobError("qty must be between 1 and %d." % MAX_QTY)
     out["qty"] = qty
     link = str(j.get("link") or "").strip()
-    if link and product != "alias" and not LINK_RE.match(link):
+    if link and product not in ("alias", "engrave") and not LINK_RE.match(link):
         raise JobError("That does not look like a Spotify link. In the Spotify app: Share > Copy song link.")
-    out["link"] = link if product != "alias" else ""
+    out["link"] = link if product not in ("alias", "engrave") else ""
     return out
 
 
@@ -69,6 +75,15 @@ def clean_job(j):
 def run_kit(job, out_dir, svg):
     """Run the order kit with every input as its own argv entry (no shell)."""
     p = job["product"]
+    if p == "engrave":
+        if not job["line1"]:
+            raise JobError("The engraving text is empty.")
+        cmd = [sys.executable, ENGRAVE, job["base"], "--line1=" + job["line1"], "--line2=" + job["line2"], "-o", out_dir]
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+        if r.returncode != 0:
+            lines = [l for l in (r.stderr or r.stdout).strip().splitlines() if l.strip()]
+            raise JobError(lines[-1] if lines else "The engraving step failed (exit %d)." % r.returncode)
+        return []
     cmd = [sys.executable, KIT, p]
     if p != "alias":
         if svg:
@@ -113,6 +128,14 @@ def plan(job, d):
     part = lambda path: (path, slot(path), re.sub(r"^[A-Z]\d_\d_|_(BLACK|IVORY|ACCENT)\.stl$", "", os.path.basename(path)))
     solid = {"sparse_infill_density": "100%", "sparse_infill_pattern": "zig-zag"}
     p = job["product"]
+    if p == "engrave":    # objects, layer and settings are the first-print project's, written next to the STLs by kit/engrave.py
+        pl = json.load(open(os.path.join(d, "plan.json")))
+        objects = []
+        for i in range(job["qty"]):
+            for o in pl["objects"]:
+                objects.append(dict(name=o["name"] + (" (%d)" % (i + 1) if job["qty"] > 1 else ""),
+                                    parts=[(os.path.join(d, fn), sl, nm) for fn, sl, nm in o["parts"]], settings=o["settings"]))
+        return objects, pl["layer"], dict(GLOBAL, **pl["over"])
     if p == "plate":      # A1: 0.16, 3 walls, 15% gyroid, plate solid
         groups = [("A1 plate", f("A1_1_*") + f("A1_2_*"), solid), ("A1 base bar", f("A1_3_*") + f("A1_4_*"), {})]
         layer, over = "0.16", {"wall_loops": "3", "sparse_infill_density": "15%"}
@@ -145,7 +168,7 @@ def build_job(ref, n, raw, order_dir, svg):
         d = os.path.join(order_dir, "%d_%s" % (n, job["product"]))
         shutil.rmtree(d, ignore_errors=True); os.makedirs(d)
         warn = run_kit(job, d, svg)
-        if job["accent"] == "ivory":
+        if job["accent"] == "ivory" and job["product"] != "engrave":
             recolour_preview(os.path.join(d, "preview.png"))
         objects, layer, over = plan(job, d)
         proj = os.path.join(d, "%s_%d_%s.3mf" % (ref, n, job["product"]))
@@ -171,7 +194,7 @@ def combined_preview(order_dir, jobs):
         if j["ok"] and j.get("preview") and os.path.exists(os.path.join(ROOT, j["preview"])):
             im = Image.open(os.path.join(ROOT, j["preview"])).convert("RGB")
             k = 360 / im.height; im = im.resize((max(1, int(im.width * k)), 360), Image.LANCZOS)
-            cells.append((im, "%d. %s%s" % (j["n"], j["item"], (" x%d" % j["qty"] if j.get("qty", 1) > 1 else "") + ", " + j.get("accent", "red") + " accent")))
+            cells.append((im, "%d. %s%s" % (j["n"], j["item"], (" x%d" % j["qty"] if j.get("qty", 1) > 1 else "") + ("" if j.get("product") == "engrave" else ", " + j.get("accent", "red") + " accent"))))
     if not cells:
         return None
     font_path = os.path.join(ROOT, "kit", "Poppins-Bold.ttf")

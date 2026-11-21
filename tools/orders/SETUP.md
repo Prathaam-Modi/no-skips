@@ -60,6 +60,10 @@ Order details stay in the private repo; nothing about customers goes into the pu
 
 ---
 
+### Engraving orders (added 21 Nov 2026)
+
+An order line with "+ engraving" (D1 Wedge, D2 Tape Case, D8 B-Side, D12 Rotary, Rs 99 each) shows the engraved text in the order card. Press **Make print files** as for the other personalised pieces: the engraved base is built by `kit/engrave.py`, with a preview picture (the base seen from underneath). Send the customer that picture to approve before you print. The text is cut into the base, so the rest of the piece is unchanged. If the text does not fit, the job fails with the reason: ask the customer to shorten it. Copy the updated `tools/orders/print-repo` folder (kit/engrave.py, kit/engrave/, tools/make_order.py) into the private no-skips-orders repo.
+
 ## Daily use
 
 - **Admin page > Orders**. The chips show what needs you: To review, Awaiting payment, Paid, Printing, Dispatched, Refund due.

@@ -302,6 +302,7 @@ dialog::backdrop{background:rgba(8,7,6,.66)}
 .gift{display:flex;flex-direction:column;gap:10px;border:1px solid var(--line);border-radius:var(--r);padding:12px}
 .gift label.tick{display:flex;gap:10px;align-items:center;font-size:15px;cursor:pointer}
 .gift input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}
+#engBox{display:flex;flex-direction:column;gap:10px}#engBox .note{margin:0}
 .terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:clamp(28px,4vw,44px);border-top:1px solid var(--line);padding-top:24px}
 .terms h3{font-size:15px;font-stretch:112%;margin-bottom:8px}
 .terms p{margin:0;font-size:14px;color:var(--muted)}
@@ -719,6 +720,11 @@ const W20=[0.54,0.98,0.97,0.57,0.48,1.0,0.98,0.99,0.64,0.4,0.42,0.44,0.32,0.91,0
 
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const inr=n=>"₹"+n.toLocaleString("en-IN");
+/* Engrave add-on: text cut 0.6 mm into the base of D1, D2, D8 and D12 (product.engrave = {max characters a line, where}). One or two lines,
+   letters at least 4 mm tall. The order kit (kit/engrave.py) builds the engraved file and refuses text that would not fit. */
+const ENGRAVE_PRICE=99;
+const engOn=it=>!!(it&&it.eng&&byId(it.id).engrave);
+const unitOf=it=>byId(it.id).price+(engOn(it)?ENGRAVE_PRICE:0);
 const fit=(s,base,width)=>Math.min(base,width/(Math.max(s.length,1)*0.66)).toFixed(1);
 const up=s=>esc(String(s).toUpperCase());
 const pad2=n=>String(n).padStart(2,"0");
@@ -739,12 +745,16 @@ const limitsFor=(p,c)=>p.song==="plate"?LIMITS.plate[c.mode]:p.song==="tag"?LIMI
 const PRINTABLE=/^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF0-9 .,'&!?()\-]*$/;
 const SPOTIFY_LINK=/^(https?:\/\/)?(open\.spotify\.com\/(intl-[a-z-]+\/)?track\/[A-Za-z0-9]{10,}|spotify\.link\/[A-Za-z0-9]+)|^spotify:track:[A-Za-z0-9]{10,}/;
 const printedIdx=(p,c)=>p.f.map((f,i)=>i).filter(i=>showF(p.f[i],c)&&!isLink(p.f[i])&&!(p.song==="tag"&&c.back==="name"&&i<2));
-function missing(p,c){return p.custom?p.f.filter((f,i)=>showF(f,c)&&!isOpt(f)&&!c.vals[i]).map(f=>{const l=f[0].replace(/ for the back/,"").toLowerCase();const m=l.replace(/spotify/,"Spotify");return /^(your|line) /.test(m)?m:"the "+m}):[]}
+function missing(p,c){const m=missingFields(p,c);if(p.engrave&&c.eng&&!c.e1)m.push("your engraving text");return m}
+function missingFields(p,c){return p.custom?p.f.filter((f,i)=>showF(f,c)&&!isOpt(f)&&!c.vals[i]).map(f=>{const l=f[0].replace(/ for the back/,"").toLowerCase();const m=l.replace(/spotify/,"Spotify");return /^(your|line) /.test(m)?m:"the "+m}):[]}
 function problems(p,c){
   const out=[],lim=limitsFor(p,c)||{};
   p.f.forEach((f,i)=>{const v=c.vals[i]||"";if(!showF(f,c)||!v)return;
     if(lim[i]&&v.length>lim[i])out.push(`${f[0].replace(/ for the back/,"")} is ${v.length} characters and fits ${lim[i]}. Shorten it${p.song==="tag"&&c.back==="song"?", or choose Your name for the back of the tag":""}.`);});
   printedIdx(p,c).forEach(i=>{const v=c.vals[i]||"";if(v&&!PRINTABLE.test(v))out.push(`${p.f[i][0].replace(/ for the back/,"")}: we can print letters (accents are fine), numbers, spaces and . , ' & ! ? ( ) -. Please remove the other characters.`)});
+  if(p.engrave&&c.eng)[c.e1,c.e2].forEach((v,i)=>{if(!v)return;
+    if(v.length>p.engrave.max)out.push(`Engraving line ${i+1} is ${v.length} characters and fits ${p.engrave.max}. Shorten it.`);
+    if(!PRINTABLE.test(v))out.push(`Engraving line ${i+1}: we can print letters (accents are fine), numbers, spaces and . , ' & ! ? ( ) -. Please remove the other characters.`)});
   p.f.forEach((f,i)=>{const v=c.vals[i]||"";if(isLink(f)&&showF(f,c)&&v&&!SPOTIFY_LINK.test(v))out.push("That does not look like a Spotify song link. It should start with https://open.spotify.com/track/. In Spotify: Share, then Copy song link.")});
   return out;
 }
@@ -927,7 +937,7 @@ const P=[
   size:"102 x 18 x 49 mm, 71 mm with the hood on. Four sticks, 52 to 66 mm long, up to 22 wide and 13 thick, USB A or C",f:[],
   extra:"PLA softens in heat, so do not leave it in a hot car. ",
   imgs:[["crate","Hood on"],["crate_open","Silver is home, red is missing"],["crate_section","Inside one slot"],["crate_build","Shell, spine, hood, tags and shims"]]},
- {id:"D1",side:"D",name:"Wedge",kind:"Phone stand",price:899,line:"A stage monitor for your phone",badge:"New",build:"wedge",
+ {id:"D1",engrave:{max:14,where:"underneath the stand"},side:"D",name:"Wedge",kind:"Phone stand",price:899,line:"A stage monitor for your phone",badge:"New",build:"wedge",
   desc:"Shaped like the wedge monitors that lean up at a performer on stage. Your phone leans back at 68 degrees, upright or sideways, against a solid black body with a fluted back. The red lip it rests on slides in on a dovetail, so it never wobbles and can be swapped later. A slot behind the lip takes the charging cable down and out of the back.",
   size:"80 x 77 x 105 mm. Takes phones up to 13 mm thick with a case",f:[],imgs:[["wedge_phone","With a phone"],["wedge","The stand"],["wedge_back","Fluted back and cable exit"]]},
  {id:"D6",soon:"Coming after launch. We are test printing every design first. Tap to be told when it lands.",side:"D",name:"Fold",kind:"Flat-pack laptop stand",price:1699,line:"Lifts your screen, packs flat in a bag",badge:"New",build:"fold",noAccent:true,mat:"Printed in PLA. Fine for a light laptop on a shaded desk. For a laptop that runs hot for hours, ask us for the PETG version.",
@@ -939,7 +949,7 @@ const P=[
   desc:"Three desk modules styled as mixer channels, each with its own fader on the front. A tall cup for pens and brushes, a mid cup for markers and scissors, and a tray with a divider for cards, clips and earbuds. Each module has a dovetail on one side and a socket on the other: lower one beside the next and they lock into a single row. Rearrange them any time, or run them apart.",
   size:"Tall cup 60 x 60 x 100 mm, mid cup 60 x 60 x 60 mm, tray 120 x 60 x 24 mm. 254 mm linked",f:[],
   imgs:[["channel","Linked, in use"],["channel_build","Three modules"]]},
- {id:"D8",side:"D",name:"B-Side",kind:"Catch-all tray",price:1099,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
+ {id:"D8",engrave:{max:18,where:"underneath the tray"},side:"D",name:"B-Side",kind:"Catch-all tray",price:1099,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
   desc:"A tray for the things you drop when you walk in: keys, rings, earbuds, a watch, loose change. It is drawn as a record, with grooves cut into the floor and a raised centre label, and a 20 mm rim so nothing rolls off. One piece, nothing to build.",
   size:"160 mm across, 20 mm tall",f:[],
   imgs:[["bside","In use"],["bside_bare","Grooves and label"]]},
@@ -953,7 +963,7 @@ const P=[
   size:"Base 230 x 110 x 12 mm, fins 92 x 130 mm. Two bays, each 10 to 30 mm",f:[],
   extra:"Made for laptops that are closed and driving a monitor. A gaming laptop running hot for hours can soften PLA, so keep those vents clear. ",
   imgs:[["standby","Two laptops parked"],["standby_bare","Base and fins"],["standby_build","Fins slide in from either end"]]},
- {id:"D12",side:"D",name:"Rotary",kind:"Key organiser",price:449,line:"Keys that swing out like a knife, not a jingle",badge:"New",build:"rotary",noAccent:false,
+ {id:"D12",engrave:{max:12,where:"on the back plate"},side:"D",name:"Rotary",kind:"Key organiser",price:449,line:"Keys that swing out like a knife, not a jingle",badge:"New",build:"rotary",noAccent:false,
   desc:"Two slim plates hold your keys between them, folded in like a pocket knife. Swing out the one you need, fold it back flat. Posts snap through by hand, short ones for two to four keys and long ones for up to seven, with spacers so the stack stays firm. The loop takes a car fob or a ring.",
   size:"82 x 20 mm, 10 to 14 mm thick depending on your keys",f:[],
   imgs:[["rotary","Two keys swung out"],["rotary_open","Four keys on the organiser"],["rotary_s1_guide","Every part, labelled"]]},
@@ -963,7 +973,7 @@ const P=[
   desc:"A pocket rolling machine built like a tape transport: two rollers, one belt, and red reel hubs that turn as you roll. Lay in a filter tip and your blend, close it, give it a turn, feed the paper and roll it through. Comes with three belts for a slimmer or fuller roll, and a red poker that stows in the base. Sold empty: no papers, tips or contents. For adults only.",
   size:"126 x 35 x 33 mm, about 50 g. Takes king size slim papers up to 110 mm. Belts for 7, 8 and 9 mm rolls",f:[],
   imgs:[["drumroll","Closed, ready to roll"],["drumroll_open","Open, with a tip and paper"],["drumroll_build_guide","Every part, labelled"]]},
- {id:"D2",side:"D",name:"Tape Case",kind:"Small storage box",price:849,custom:true,line:"A tape that holds your small things",build:"box",
+ {id:"D2",engrave:{max:16,where:"underneath the case"},side:"D",name:"Tape Case",kind:"Small storage box",price:849,custom:true,line:"A tape that holds your small things",build:"box",
   desc:"A box drawn from a real tape: reel hubs, a tape window, corner screws, the head slots and the seam between the two halves, with your own text on the label. Two compartments inside for picks, SD cards, earbud tips or a gig coin. The lid presses on and holds by friction, so there is no hinge to break.",
   size:"100 x 64 x 21 mm. Compartments 35 x 59 and 58 x 59 mm, 16 mm deep",f:[["Label text","Side A"]],
   imgs:[["cassettebox","Red and ivory labels"],["cassettebox_open","Open, with picks and a coin"]]},
@@ -1128,6 +1138,7 @@ function fixItem(it){
   const p=byId(it.id),v=Array.isArray(it.vals)?it.vals:[];
   return {id:p.id,qty:Math.max(1,Math.min(maxQ(p.id),parseInt(it.qty,10)||1)),accent:p.noAccent?"":(it.accent==="ivory"?"ivory":"red"),
     vals:p.f.map((f,i)=>typeof v[i]==="string"?v[i]:""),pick:p.pick?(p.pick[1].includes(it.pick)?it.pick:p.pick[1][0]):"",
+    eng:!!(p.engrave&&it.eng),e1:p.engrave?str(it.e1,"",40):"",e2:p.engrave?str(it.e2,"",40):"",
     gift:!!it.gift,giftNote:str(it.giftNote,"",90),mode:p.song?(it.mode==="wave"?"wave":"code"):"",back:p.song==="tag"?(it.back==="name"?"name":"song"):""};
 }
 function loadCart(){
@@ -1253,9 +1264,10 @@ function routeHash(){
 /* ---------------- product dialog ---------------- */
 let cur=null;
 function itemText(it,n){
-  const p=byId(it.id);let s=`${n?n+". ":""}${p.id} ${p.name} x${it.qty} (${inr(p.price*it.qty)})`;
+  const p=byId(it.id);let s=`${n?n+". ":""}${p.id} ${p.name} x${it.qty} (${inr(unitOf(it)*it.qty)})`;
   if(it.pick)s+=`\n   ${p.pick[0]}: ${it.pick}`;
   if(it.accent)s+=`\n   Accent: ${it.accent}`;
+  if(engOn(it))s+=`\n   Engraving (${p.engrave.where}, +${inr(ENGRAVE_PRICE)} each): ${it.e1}${it.e2?" / "+it.e2:""}`;
   if(it.gift)s+=`\n   Gift: yes${it.giftNote?". Note on the card: "+it.giftNote:""}`;
   if(p.song)s+=`\n   Style: ${it.mode==="wave"?"Sound wave":"Spotify Code"}`;
   if(p.song==="tag")s+=`\n   Back of the tag: ${it.back==="name"?"Your name":"Song and artist"}`;
@@ -1274,7 +1286,7 @@ const EMAIL_RE=/^[^\s@<>]+@[^\s@<>]+\.[a-z]{2,}$/i;
 const okEmail=()=>EMAIL_RE.test(contact.email.trim());
 const contactLines=()=>okEmail()?`\nEmail for order updates: ${contact.email.trim()}${contact.news?"\nAlso email me new drops and offers: yes":""}`:"";
 function orderMsg(items,numbered){
-  const pre=PHASE==="preorder",total=items.reduce((a,it)=>a+byId(it.id).price*it.qty,0);
+  const pre=PHASE==="preorder",total=items.reduce((a,it)=>a+unitOf(it)*it.qty,0);
   return `Hi ${BRAND}, ${pre?"this is a PRE-ORDER":"I would like to order"}.\nOrder no. ${newRef()}\n\n${items.map((it,i)=>itemText(it,numbered?i+1:0)).join("\n")}\n\n`
     +(numbered?`Total before shipping: ${inr(total)}\n`:"")
     +(pre?`PRE-ORDER. Ships from ${SHIP_FROM}.${PREORDER_NOTE?" "+PREORDER_NOTE:""}\n`:"")
@@ -1285,7 +1297,7 @@ function openProduct(id){
   const p=byId(id);if(!p||p.hide)return;
   const L=PH(),wl=PHASE==="waitlist",pre=PHASE==="preorder",k=p.soon?{s:"in"}:stockOf(p);
   const keep=cur&&cur.id===id&&$("pd").open?cur:null;
-  cur=keep||{id,qty:1,accent:p.noAccent?"":(p.song==="plate"?"ivory":"red"),vals:p.f.map(()=>""),pick:p.pick?p.pick[1][0]:"",gift:false,giftNote:"",mode:p.song?"code":"",back:p.song==="tag"?"song":"",prevAccent:"red"};
+  cur=keep||{id,qty:1,accent:p.noAccent?"":(p.song==="plate"?"ivory":"red"),vals:p.f.map(()=>""),pick:p.pick?p.pick[1][0]:"",eng:false,e1:"",e2:"",gift:false,giftNote:"",mode:p.song?"code":"",back:p.song==="tag"?"song":"",prevAccent:"red"};
   const fieldHtml=(f,i)=>`<div class="field" id="fw${i}"><div class="flabel"><label for="f${i}">${esc(f[0])}</label><span class="cnt" id="fc${i}" aria-live="polite"></span></div><input id="f${i}" data-i="${i}" value="${esc(cur.vals[i]||"")}" maxlength="${fo(f).max||(f[0].startsWith("Four")?120:28)}" placeholder="${esc(fo(f).ph||f[1])}" autocomplete="off"${isLink(f)?' type="url" inputmode="url"':""}${isOpt(f)||wl?"":' aria-required="true"'} aria-describedby="fn${i}"><p class="note" id="fn${i}" hidden></p></div>`;
   const split=p.song==="tag"?3:p.f.length;
   const slides=(p.art?`<div class="slide" id="pdArt"></div>`:"")+p.imgs.map((m,j)=>`<div class="slide"><img src="${img(m[0])}" alt="${esc(p.name)}, ${esc(m[1].toLowerCase())}" width="880" height="880"${j||p.art?' loading="lazy"':""} decoding="async"><span class="mono cap">${esc(m[1])}</span></div>`).join("")
@@ -1317,6 +1329,10 @@ function openProduct(id){
       <div class="row2">${accent}
         <div class="field"><span class="lab" id="qLab">Quantity</span><div class="qty" role="group" aria-labelledby="qLab"><button type="button" data-q="-1" aria-label="One fewer">&minus;</button><output id="qOut" aria-live="polite">1</output><button type="button" data-q="1" aria-label="One more">+</button></div><p class="note" id="qMax" role="status" hidden></p></div>
       </div>
+      ${p.engrave?`<div class="gift eng"><label class="tick" for="engTick"><input type="checkbox" id="engTick" data-eng="tick"${cur.eng?" checked":""}>Engrave a name or message, +${inr(ENGRAVE_PRICE)} each</label>
+        <div id="engBox"${cur.eng?"":" hidden"}><p class="note">Cut into the base, ${esc(p.engrave.where)}. One or two lines, up to ${p.engrave.max} characters a line, in letters at least 4 mm tall. We send you a picture to approve before we print.</p>
+          <div class="field"><label for="e1">Line one</label><input id="e1" data-eng="e1" maxlength="${p.engrave.max+8}" value="${esc(cur.e1)}" placeholder="Home sweet home" autocomplete="off"></div>
+          <div class="field"><label for="e2">Line two (optional)</label><input id="e2" data-eng="e2" maxlength="${p.engrave.max+8}" value="${esc(cur.e2)}" autocomplete="off"></div></div></div>`:""}
       <div class="gift"><label class="tick" for="gift"><input type="checkbox" id="gift" data-gift="tick"${cur.gift?" checked":""}>This is a gift</label>
         <div class="field" id="giftBox"${cur.gift?"":" hidden"}><label for="giftNote">Short note for the card (optional)</label><input id="giftNote" data-gift="note" maxlength="90" value="${esc(cur.giftNote)}" placeholder="Happy birthday. Play it loud." autocomplete="off"></div></div>
       ${k.s==="low"?`<p class="stockline">${k.n?`Only ${k.n} left`:"Few left"}</p>`:""}<p class="warn" id="pdWarn" role="alert" hidden></p>${emailBox("emailPd")}${agreeBox("agreePd")}
@@ -1375,7 +1391,7 @@ function nudge(){
   const p=byId(cur.id);
   const bad=$("pd").querySelector("input.bad");
   const empty=p.custom?p.f.map((f,i)=>showF(f,cur)&&!isOpt(f)&&!cur.vals[i]?$("f"+i):null).find(Boolean):null;
-  const el=bad||empty||(!okEmail()?$("emailPd"):null)||(!agreed?$("agreePd"):null);
+  const el=bad||empty||(p.engrave&&cur.eng&&!cur.e1?$("e1"):null)||(!okEmail()?$("emailPd"):null)||(!agreed?$("agreePd"):null);
   $("pdNeed").classList.add("nudge");
   if(el){el.focus({preventScroll:true});el.scrollIntoView({block:"center",behavior:calm()?"auto":"smooth"})}
 }
@@ -1388,7 +1404,8 @@ async function shareProduct(btn){
   }catch(e){if(e&&e.name==="AbortError")return;window.prompt("Copy this link",url)}
 }
 $("pd").addEventListener("input",e=>{if(e.target.dataset.i!==undefined){cur.vals[+e.target.dataset.i]=e.target.value.trim();syncProduct()}
-  if(e.target.dataset.gift==="note"){cur.giftNote=e.target.value.trim();syncProduct()}});
+  if(e.target.dataset.gift==="note"){cur.giftNote=e.target.value.trim();syncProduct()}
+  if(e.target.dataset.eng==="e1"||e.target.dataset.eng==="e2"){cur[e.target.dataset.eng]=e.target.value.replace(/\s+/g," ").trim();syncProduct()}});
 document.addEventListener("change",e=>{if(e.target.hasAttribute&&e.target.hasAttribute("data-agree")){agreed=e.target.checked;try{sessionStorage.setItem("ns-agree",agreed?"1":"0")}catch(_){}
   document.querySelectorAll("[data-agree]").forEach(x=>{x.checked=agreed});if($("pd").open&&cur)syncProduct();if($("list").open)paintListSend()}});
 /* ---------------- email: sign-up and order log (only when MAIL_ENDPOINT is set) ---------------- */
@@ -1410,12 +1427,13 @@ document.addEventListener("click",e=>{const a=e.target.closest('a[href^="https:/
   const ref=(/Order no\. (NS-\d{4}-[A-Z0-9]{4})/.exec(t)||[])[1];if(!ref)return;
   const items=a.id==="listSend"?cart:(cur?[cur]:[]);
   postMail({type:"order",ref,phase:PHASE,email:okEmail()?contact.email.trim():"",news:okEmail()&&contact.news,
-    total:items.reduce((s,it)=>s+byId(it.id).price*it.qty,0),itemsText:items.map(it=>`${it.id} ${byId(it.id).name} x${it.qty}`).join("; "),
-    items:items.map(it=>{const p=byId(it.id);return {id:p.id,name:p.name,qty:it.qty,price:p.price,accent:it.accent||"",mode:it.mode||"",back:it.back||"",pick:it.pick||"",
+    total:items.reduce((s,it)=>s+unitOf(it)*it.qty,0),itemsText:items.map(it=>`${it.id} ${byId(it.id).name}${engOn(it)?" + engraving":""} x${it.qty}`).join("; "),
+    items:items.map(it=>{const p=byId(it.id);return {id:p.id,name:p.name+(engOn(it)?" + engraving":""),qty:it.qty,price:unitOf(it),engrave:engOn(it)?{price:ENGRAVE_PRICE,where:p.engrave.where,line1:it.e1,line2:it.e2}:null,accent:it.accent||"",mode:it.mode||"",back:it.back||"",pick:it.pick||"",
       gift:!!it.gift,giftNote:it.giftNote||"",fields:p.f.map((f,i)=>({label:f[0],value:(it.vals[i]||"").trim()})).filter((x,i)=>x.value&&showF(p.f[i],it))}}),
     message:t.slice(0,3000)});
 },true);
-$("pd").addEventListener("change",e=>{if(e.target.dataset.gift==="tick"){cur.gift=e.target.checked;$("giftBox").hidden=!cur.gift;if(!cur.gift){cur.giftNote="";$("giftNote").value=""}syncProduct()}});
+$("pd").addEventListener("change",e=>{if(e.target.dataset.gift==="tick"){cur.gift=e.target.checked;$("giftBox").hidden=!cur.gift;if(!cur.gift){cur.giftNote="";$("giftNote").value=""}syncProduct()}
+  if(e.target.dataset.eng==="tick"){cur.eng=e.target.checked;$("engBox").hidden=!cur.eng;if(!cur.eng){cur.e1="";cur.e2="";$("e1").value="";$("e2").value=""}syncProduct();if(cur.eng)$("e1").focus()}});
 $("pd").addEventListener("close",()=>{if(/^#p-/.test(location.hash)){try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}}});
 $("pd").addEventListener("click",e=>{
   const a=e.target.closest("#pdOrder");
@@ -1447,11 +1465,11 @@ function renderCount(bump){
 function openList(){renderList();if(!$("list").open)$("list").showModal()}
 function renderList(){
   const L=PH(),wl=PHASE==="waitlist",pre=PHASE==="preorder";
-  const total=cart.reduce((a,it)=>a+byId(it.id).price*it.qty,0);
+  const total=cart.reduce((a,it)=>a+unitOf(it)*it.qty,0);
   let gone=false;
   const rows=cart.map((it,i)=>{const p=byId(it.id),out=stockOf(p).s==="out";gone=gone||out;
-    const opts=wl?(p.kind||""):[it.pick,p.song?(it.mode==="wave"?"Sound wave":"Spotify Code"):"",p.song==="tag"?(it.back==="name"?"Back: your name":"Back: song and artist"):"",it.accent&&("Accent "+it.accent),it.gift&&("Gift"+(it.giftNote?": "+it.giftNote:"")),...it.vals.filter((v,j)=>v&&p.f[j]&&showF(p.f[j],it))].filter(Boolean).join(", ");
-    return `<div class="li"><b>${p.id} ${esc(p.name)}${wl?"":` &times; ${it.qty}`}</b><span class="mono${wl?" muted":""}">${inr(p.price*it.qty)}</span><span class="opt">${esc(opts)}</span>
+    const opts=wl?(p.kind||""):[it.pick,p.song?(it.mode==="wave"?"Sound wave":"Spotify Code"):"",p.song==="tag"?(it.back==="name"?"Back: your name":"Back: song and artist"):"",it.accent&&("Accent "+it.accent),it.gift&&("Gift"+(it.giftNote?": "+it.giftNote:"")),engOn(it)&&("Engraved: "+it.e1+(it.e2?" / "+it.e2:"")),...it.vals.filter((v,j)=>v&&p.f[j]&&showF(p.f[j],it))].filter(Boolean).join(", ");
+    return `<div class="li"><b>${p.id} ${esc(p.name)}${wl?"":` &times; ${it.qty}`}</b><span class="mono${wl?" muted":""}">${inr(unitOf(it)*it.qty)}</span><span class="opt">${esc(opts)}</span>
       ${out?`<span class="gone">${p.id==="C1"?"This batch is full.":"Sold out right now."} Remove it to send the rest.</span>`:""}
       <div class="li-ctl">${wl?"<span></span>":`<div class="qty" role="group" aria-label="Quantity of ${esc(p.name)}"><button type="button" data-lq="-1" data-i="${i}" aria-label="One fewer">&minus;</button><output>${it.qty}</output><button type="button" data-lq="1" data-i="${i}" aria-label="One more">+</button></div>`}<button type="button" data-rm="${i}" aria-label="Remove ${esc(p.name)}">Remove</button></div></div>`}).join("");
   const names=[...new Set(cart.map(it=>byId(it.id).name))];
