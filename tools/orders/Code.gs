@@ -61,7 +61,10 @@ const SETTINGS_DEFAULT = [
   ['WhatsApp', '917411148303', 'Digits only'],
   ['Site URL', 'https://prathaam-modi.github.io/no-skips/', ''],
   ['Pay within (hours)', '48', 'Shown in the payment email'],
-  ['Max open orders per email', '3', 'More than this is flagged for review, not blocked']
+  ['Max open orders per email', '3', 'More than this is flagged for review, not blocked'],
+  ['Max unreviewed units per email', '4', 'Units in orders still To review for one email. Over this, a new order is logged as Rejected (spam guard) and holds no slots'],
+  ['Max new orders per 10 minutes', '12', 'A burst bigger than this is logged as Rejected and you get one alert email an hour. Raise it before a big launch push'],
+  ['Release unreviewed after (days)', '4', 'An order still To review after this many days is cancelled by the hourly check, the customer is emailed and the slots go back on sale']
 ];
 
 /* ------------------------------------------------------------------ setup */
@@ -181,6 +184,27 @@ function newOrder_(b) {
   }
   capFlags_(items).forEach(f => flags.push(f));
   const sh = sheet_(SHEET_ORDERS, ORDER_COLS);
+  /* Spam guard: the order address is public, so a bot could post fake orders that hold slots. Over-limit orders are
+     still written to the sheet (so nothing is lost) but as Rejected, which holds no slots and sends no email. */
+  const units = items.reduce((n, it) => n + (it && it.id ? Math.max(1, Math.round(Number(it.qty) || 1)) : 0), 0);
+  let block = '';
+  if (!email) block = 'No valid email';
+  else if (unreviewedUnits_(email) + units > (Number(setting_('Max unreviewed units per email')) || 4)) block = 'Too many unreviewed orders from this email';
+  else if (recentOrders_(10) >= (Number(setting_('Max new orders per 10 minutes')) || 12)) block = 'Too many orders in 10 minutes';
+  if (block) {
+    const bad = {
+      'Order no.': ref, 'Created': stamp_(), 'Status': 'rejected', 'Email': email, 'Newsletter': '', 'Phase': String(b.phase || '').slice(0, 12),
+      'Items': String(b.itemsText || '').slice(0, 1000), 'Items JSON': JSON.stringify(items).slice(0, 40000), 'Subtotal': subtotal, 'Total': subtotal,
+      'Reason': block, 'Flags': 'AUTO-REJECTED: ' + block, 'History': stamp_() + ' Auto-rejected by the spam guard: ' + block, 'Message': String(b.message || '').slice(0, 3000)
+    };
+    sh.appendRow(ORDER_COLS.map(c => bad[c] !== undefined ? bad[c] : ''));
+    CacheService.getScriptCache().remove('held');
+    if (block.indexOf('10 minutes') > 0 && !CacheService.getScriptCache().get('burst')) {
+      CacheService.getScriptCache().put('burst', '1', 3600);
+      send_(ownerEmail_(), 'Order burst blocked', [p_('More than ' + (Number(setting_('Max new orders per 10 minutes')) || 12) + ' orders arrived in 10 minutes, so the extras were logged as Rejected. If this is a real rush, raise the limit in the Settings tab. Check the Orders tab for AUTO-REJECTED rows.')]);
+    }
+    return { ok: true, blocked: true };
+  }
   const row = {
     'Order no.': ref, 'Created': stamp_(), 'Status': 'new', 'Email': email, 'Newsletter': b.news ? 'yes' : '',
     'Phase': String(b.phase || '').slice(0, 12), 'Items': String(b.itemsText || '').slice(0, 1000),
@@ -557,6 +581,22 @@ function expireUnpaid() {
       updateOrder_({ ref: o['Order no.'], to: 'cancelled', notify: true,
         reason: 'It was not paid within ' + hours + ' hours, so the pieces went back on sale. If you already paid, message us on WhatsApp with the UPI reference and we will sort it out.' });
     });
+    /* Orders nobody reviewed: release them after N days, and nudge the owner once a day while any wait. */
+    const days = Number(setting_('Release unreviewed after (days)')) || 4, waiting = [];
+    rows_(SHEET_ORDERS, ORDER_COLS).forEach(o => {
+      if (o['Status'] !== 'new') return;
+      const at = stampMs_(o['Created']);
+      if (!at) return;
+      if (now - at >= days * 86400000) {
+        updateOrder_({ ref: o['Order no.'], to: 'cancelled', notify: true,
+          reason: 'We could not review it in time, so the pieces went back on sale. If it was a real order, message us on WhatsApp and we will put it straight back.' });
+      } else if (now - at >= 20 * 3600000) waiting.push(o['Order no.'] + ' (' + Math.round((now - at) / 3600000) + ' h)');
+    });
+    const props = PropertiesService.getScriptProperties(), today = stamp_().slice(0, 10);
+    if (waiting.length && props.getProperty('REMIND_DAY') !== today) {
+      props.setProperty('REMIND_DAY', today);
+      send_(ownerEmail_(), waiting.length + ' order(s) waiting for review', [p_('Still To review: ' + waiting.join(', ') + '. Each one holds product slots and is released automatically after ' + days + ' days. Open the admin page, Orders tab.')]);
+    }
   } finally { lock.releaseLock(); }
 }
 /** Run once from the editor after pasting a new version: sets the hourly check for unpaid orders. */
@@ -566,6 +606,26 @@ function installTriggers() {
   Logger.log('Hourly unpaid-order check is on.');
 }
 
+/** Units in orders still To review for this email. */
+function unreviewedUnits_(email) {
+  let n = 0;
+  rows_(SHEET_ORDERS, ORDER_COLS).forEach(o => {
+    if (o['Status'] !== 'new' || String(o['Email']).toLowerCase() !== email) return;
+    parseItems_(o['Items JSON']).forEach(it => { if (it && it.id) n += Math.max(1, Math.round(Number(it.qty) || 1)); });
+  });
+  return n;
+}
+/** Orders logged in the last N minutes (any status). */
+function recentOrders_(minutes) {
+  const now = Date.now();
+  return rows_(SHEET_ORDERS, ORDER_COLS).filter(o => { const t = stampMs_(o['Created']); return t && now - t < minutes * 60000; }).length;
+}
+/** The sheet's 'yyyy-MM-dd HH:mm' (India time) as milliseconds, or 0. */
+function stampMs_(v) {
+  const m = /^(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2})/.exec(typeof v === 'string' ? v : Utilities.formatDate(new Date(v), 'Asia/Kolkata', 'yyyy-MM-dd HH:mm'));
+  const t = m ? new Date(m[1] + 'T' + m[2] + ':00+05:30').getTime() : 0;
+  return t > 0 ? t : 0;
+}
 function countOpen_(email) {
   return rows_(SHEET_ORDERS, ORDER_COLS).filter(o => String(o['Email']).toLowerCase() === email && ['new', 'approved', 'paid', 'printing'].indexOf(o['Status']) >= 0).length;
 }

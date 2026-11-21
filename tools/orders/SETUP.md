@@ -43,6 +43,15 @@ How the caps work:
 - If the sheet cannot be reached, the site simply does not apply caps. Stock set by hand (Sold out, Few left) still works.
 - Sets or pieces sold outside the site (cash, a friend): raise the cap down, or for Vol. 01 set "Sets already claimed" in the Site tab. The larger of that number and the sheet's count is used.
 
+### 2c. Spam guard and unreviewed orders (added 21 Nov 2026)
+
+The order address is public, so anyone could post fake orders. The script now defends itself; new rows appear in the Settings tab only after you run **setup** again, otherwise the built-in defaults apply (4, 12, 4).
+- **Max unreviewed units per email (4):** one email can have at most 4 units sitting in To review. Beyond that a new order is written to the sheet as **Rejected** with the flag AUTO-REJECTED, holds no slots and sends no email.
+- **Max new orders per 10 minutes (12):** a burst bigger than this is logged as Rejected, and you get one alert email an hour. Raise it before a big launch push.
+- **Release unreviewed after (days) (4):** the hourly check cancels an order still To review after 4 days, emails the customer (message us on WhatsApp and we put it straight back) and frees the slots. Once a day, while any order has waited over 20 hours, you get a reminder email listing them.
+- Orders with no valid email are also logged as Rejected. Real customers always have one because the site requires it.
+- Look through Rejected rows now and then: a real customer who hit a limit shows up in WhatsApp and can be re-entered by hand.
+
 ### 3. Switch the site on
 
 1. Turn on GitHub Pages: on github.com open **Prathaam-Modi/no-skips > Settings > Pages**. Source: **Deploy from a branch**, Branch: **main**, folder **/ (root)**, Save. After a minute the site is at `https://prathaam-modi.github.io/no-skips/` and the admin page at `https://prathaam-modi.github.io/no-skips/admin.html`.
