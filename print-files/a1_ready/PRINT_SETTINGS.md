@@ -11,6 +11,15 @@ Sliced 17 November 2026 with Bambu Studio 2.02 (command line) for the Bambu Lab 
 - Solid parts use zig-zag (rectilinear) infill because gyroid is refused at 100%. Every 100% slice job MUST pass "sparse_infill_pattern": "zig-zag" in the queue "over" (A5, B6 tags and D10 failed with code -18 on 20 Nov 2026 without it).
 - Drumroll belts are TPU 95A: feed from the external spool, not the AMS Lite. See the Drumroll note.
 
+## Supports and orientation (21 Nov 2026, after the Horn print)
+
+- Owner printed the Horn rev C (stand lying on its back) and the tree supports inside the phone slot and horn chamber were very hard to remove.
+- Rule from now: every part is oriented so it needs NO supports. If a part cannot print without supports, it is redesigned (45 degree chamfers, flat-topped teardrop holes, bridges no longer than about 25 mm, colour details as separate press-in parts) before it goes on sale.
+- Check any part with: python3 tools/overhang_audit.py <folder>. Results in a1_ready/SUPPORT_AUDIT.json. "trapped" is support that would grow from the part itself (inside cavities or under lips): it must be zero. Flat bridges inside closed parts are fine up to about 25 mm.
+- Fixed: D1 Horn rev D (stand prints upright as it stands; speaker and tweeter rings are red press-in parts on their own small plate; throat is a flat-topped teardrop; dovetail groove 0.4 mm deeper for bridge sag). Mini 05 mic rev B (45 degree neck under the head).
+- Still need supports, fix before they are promoted: B6 Crate hood (drop the back wall or change orientation), D11 Standby fins, B1 Stack head and drawer, D9 Perch slats and pins, D13 Drumroll base.
+- Mini numbers on the underside are now 4.0 mm and 0.6 mm deep (were 2.4 to 3.0 mm, under the 4 mm rule).
+
 ## Range table
 
 | ID | Product | Plates | Layer (mm) | Walls | Infill | Supports | Brim | Slots | Colour changes | Time (h) | Model (g) | With purge (g) |
@@ -21,7 +30,7 @@ Sliced 17 November 2026 with Bambu Studio 2.02 (command line) for the Bambu Lab 
 | C2_02 | Mini 02 synth | 1 | 0.16 | 2 | 15% | None | None | 1 Black, 3 Ivory | 6 | 0.7 | 9 | 13 |
 | C2_03 | Mini 03 drum machine | 1 | 0.16 | 2 | 15% | None | None | 1 Black, 2 Red | 8 | 0.9 | 12 | 16 |
 | C2_04 | Mini 04 mixer | 1 | 0.16 | 2 | 15% | None | None | 1 Black, 3 Ivory | 10 | 0.9 | 11 | 17 |
-| C2_05 | Mini 05 mic | 1 | 0.16 | 2 | 15% | Tree, auto | None | 1 Black, 2 Red | 6 | 1.1 | 5 | 12 |
+| C2_05 | Mini 05 mic (rev B, 45 degree neck) | 1 | 0.16 | 2 | 15% | None | None | 1 Black, 2 Red | 6 | 1.1 | 5 | 12 |
 | C2_06 | Mini 06 headphones | 1 | 0.16 | 2/3 | 15%/30% | None | None | 1 Black, 3 Ivory | 38 | 1.7 | 8 | 26 |
 | C1 | Vol. 01 tray | 1 | 0.20 | 2 | 15% | None | None | 1 Black, 2 Red | 1 | 1.7 | 62 | 63 |
 | A3 | Rail | 2 | 0.20 | 3/4 | 25%/100% | None | None | 1 Black, 2 Red | 1 | 1.8 | 39 | 41 |
@@ -39,7 +48,7 @@ Sliced 17 November 2026 with Bambu Studio 2.02 (command line) for the Bambu Lab 
 | D13 | Drumroll (PLA parts only) | 2 | 0.20 | 4 | 25%/100% | None | None | 1 Black, 2 Red, 3 Ivory | 6 | 1.9 | 42 | 45 |
 | B6 | Crate | 3 | 0.12/0.20 | 3 | 20%/30%/100% | Tree, auto | None | 1 Black, 2 Red, 3 Ivory | 9 | 3.4 | 71 | 76 |
 | B2 | Lift | 1 | 0.20 | 4 | 20% | None | None | 1 Black, 3 Ivory | 4 | 4.2 | 138 | 140 |
-| D1 | Horn | 1 | 0.20 | 3 | 15%/25% | Tree, auto | None | 1 Black, 2 Red | 5 | 4.7 | 119 | 127 |
+| D1 | Horn (rev D: stand upright, red rings separate) | 2 | 0.20/0.12 | 3 | 15%/40%/100% | None | None | 1 Black, 2 Red | 5 | 4.7 | 119 | 127 |
 | D4 | Sleeve | 2 | 0.20 | 3 | 20% | None | None | 1 Black, 2 Red | 4 | 3.0 | 87 | 89 |
 | D6 | Fold | 2 | 0.20 | 4 | 25% | None | None | 1 Black, 2 Red | 1 | 4.3 | 133 | 134 |
 | D7 | Channel | 1 | 0.20 | 3 | 15% | None | None | 1 Black, 2 Red, 3 Ivory | 13 | 3.9 | 141 | 157 |

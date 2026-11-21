@@ -30,9 +30,10 @@ def radial(r0, r1, ang, w):
     return seg(r0 * math.cos(a), r0 * math.sin(a), r1 * math.cos(a), r1 * math.sin(a), w)
 def ring(r_out, r_in, cx=0.0, cy=0.0, seg_=SEG):
     return circle(r_out, cx, cy, seg_).difference(circle(r_in, cx, cy, seg_))
-def number(s, size=3.0, cx=0.0, cy=0.0):
+def number(s, size=4.0, cx=0.0, cy=0.0):      # rev B (21 Nov 2026): 4 mm minimum, was 2.4 to 3.0
+    TEXT_LOG.append((s, size))
     """Number debossed 0.4 mm into the underside, mirrored so it reads from below."""
-    return ext(affinity.scale(text(s, size, cx, cy), -1, 1, origin=(cx, cy)), 0.4, -0.01)
+    return ext(affinity.scale(text(s, size, cx, cy), -1, 1, origin=(cx, cy)), 0.6, -0.01)
 def holes_ring(n, r, rr, z0, h):
     return U([cyl(rr, h, z0, r * math.cos(2 * math.pi * i / n), r * math.sin(2 * math.pi * i / n), seg=24) for i in range(n)])
 def logo(cx, cy, s=1.0):
@@ -58,7 +59,7 @@ def mini_synth():
     blacks = unary_union([rrect(2.4, 8, 0.5, -24 + i * 4, -2.0) for i in (0, 1, 3, 4, 5, 7, 8, 10, 11, 12)])
     ivory = ext(unary_union(whites).difference(blacks.buffer(0.3)), 1.0, 8.0)
     ivory = U([ivory, ext(rrect(11, 4.4, 1, 21, 8.5), RAISE, 8.0)])
-    blk = U([blk, ext(blacks, 2.0, 8.0), *[cyl(1.8, 2.0, 8.0, -26 + i * 5, 8.5, seg=32) for i in range(5)]]) - number("02/06", 2.6)
+    blk = U([blk, ext(blacks, 2.0, 8.0), *[cyl(1.8, 2.0, 8.0, -26 + i * 5, 8.5, seg=32) for i in range(5)]]) - number("02/06")
     return [(blk, BLACK), (ivory, IVORY)]
 def mini_drums():
     blk = body(rrect(50, 50, 3), 9.0, c=0.6, bottom=True)
@@ -74,9 +75,9 @@ def mini_mixer():
     caps = unary_union([rrect(5.2, 3.2, 0.8, x, y) for x, y in zip(xs, (-3, -14, -8, -18))])
     return [(blk, BLACK), (ext(caps, 1.6, 9.0), IVORY)]
 def mini_mic():
-    base = body(circle(15), 4.0, c=0.6, bottom=True) - number("05/06", 2.6)
+    base = body(circle(15), 4.0, c=0.6, bottom=True) - number("05/06")
     post = cyl(2.4, 30, 3.9, seg=48)
-    prof = [(0, 33.0), (6.5, 33.0)] + [(6.5 * math.cos(a), 47.0 + 6.5 * math.sin(a)) for a in np.linspace(0, math.pi / 2, 16)]
+    prof = [(0, 28.9), (2.4, 28.9), (6.5, 33.0)] + [(6.5 * math.cos(a), 47.0 + 6.5 * math.sin(a)) for a in np.linspace(0, math.pi / 2, 16)]   # rev B: 45 degree neck, no supports
     head = revolve(prof, 64)
     band = cyl(6.85, 2.5, 38.0, seg=64)
     blk = U([base, post, head]) - band
@@ -94,7 +95,7 @@ def headphone_band():
     return blk, ivory
 def mini_headphones():
     base = body(rrect(50, 20, 3), 5.0, c=0.6, bottom=True)
-    base = base - U([cube(8.2, 10.2, 3.6, s * 21.3, 0, 1.41) for s in (-1, 1)]) - number("06/06", 2.4)
+    base = base - U([cube(8.2, 10.2, 3.6, s * 21.3, 0, 1.41) for s in (-1, 1)]) - number("06/06")
     blk, ivory = headphone_band()
     return [(base, BLACK)], [(blk, BLACK), (ivory, IVORY)]
 def stood_band(items):
@@ -285,14 +286,17 @@ def build_horn():
     chamber = cube(60, 17, 22, 0, -12.5, 4) - cube(14.2, 17.2, 22.2, 0, -12.5, 3.9)
     slits = U([cube(19.5, 5.5, 3.4, s * 16.85, -15, 25.8) for s in (-1, 1)])
     shaft = cube(11, 11, 21.0, 0, -15, 9.0) + cube(11, 46.0, 11, 0, 2.5 + 0.5, 9.0)
-    throat = mv(rot(cyl(10, 4.2, 0, seg=64), 90, 0, 0), 0, -20.9, 16)
+    tear = unary_union([circle(10, 0, 0, 96), Polygon([(-7.071, 7.071), (7.071, 7.071), (3.34, 10.8), (-3.34, 10.8)])])   # flat-top teardrop: prints upright without supports
+    throat = mv(rot(ext(tear, 4.2), 90, 0, 0), 0, -20.9, 16)
     mouth = mv(rot(cyl(14.5, 2.0, 0, seg=96), 90, 0, 0), 0, -23.0, 16)
-    tweet = mv(rot(cyl(4.4, 1.0, 0, seg=48), 90, 0, 0), 0, -24.0, 39)
+    tweet = mv(rot(cyl(4.4, 1.6, 0, seg=48), 90, 0, 0), 0, -23.4, 39)
+    bores = U([mv(rot(cyl(16.55, 0.9, 0, seg=128), 90, 0, 0), 0, -24.2, 16), mv(rot(cyl(5.95, 0.9, 0, seg=64), 90, 0, 0), 0, -24.2, 39)])   # seats for the red rings
     sock = yz(Polygon([(-25.1, -0.1), (25.1, -0.1), (25.1, 0), (-25.1, 0)])) # placeholder for orientation check
-    dove = mv(rot(Manifold.extrude(_cs(Polygon([(-10.25, -0.01), (10.25, -0.01), (12.25, 5.2), (-12.25, 5.2)])), 50.4), 90, 0, 0), 0, 25.2, 0)
-    stand = stand - chamber - slits - shaft - throat - mouth - tweet - dove
-    red = U([mv(rot(ext(ring(16.2, 14.5), RAISE), 90, 0, 0), 0, -25, 16), mv(rot(ext(ring(5.8, 4.4), RAISE), 90, 0, 0), 0, -25, 39),
-             mv(rot(ext(circle(1.3), RAISE), 90, 0, 0), 28, -25, 5)])
+    dove = mv(rot(Manifold.extrude(_cs(Polygon([(-10.25, -0.01), (10.25, -0.01), (12.40, 5.6), (-12.40, 5.6)])), 50.4), 90, 0, 0), 0, 25.2, 0)   # 0.4 mm extra so a sagging bridge cannot rub the rail
+    stand = stand - chamber - slits - shaft - throat - mouth - tweet - dove - bores
+    # red rings press into 0.8 mm seats (0.1 mm tight on the outside) and stand 0.6 proud, so the stand prints black only, upright, with no supports
+    ring_big = ext(ring(16.6, 14.5), 1.4); ring_small = ext(ring(6.0, 4.4), 1.4)
+    red = U([mv(rot(ring_big, 90, 0, 0), 0, -24.2, 16), mv(rot(ring_small, 90, 0, 0), 0, -24.2, 39)])
     # plate: stand footprint at the front, tail behind
     plate = mv(body(rrect(70, 133, 5), 4.0, c=0.6, bottom=True), 0, 41.5, 0)
     rail = mv(rot(Manifold.extrude(_cs(Polygon([(-10, 0), (10, 0), (12, 5), (-12, 5)])), 49.0), 90, 0, 0), 0, 24.5, 4.0)
@@ -300,8 +304,8 @@ def build_horn():
     plate = U([plate, rail])
     mark = ext(affinity.rotate(logo(0, 0, 1.6), 90, origin=(0, 0)), RAISE, 4.0)
     mark = mv(mark, 0, 82, 0)
-    p.part("stand", rot(U([stand]), -90, 0, 0), BLACK, infill=0.15)
-    p.part("speaker_rings", rot(red, -90, 0, 0), RED, infill=1.0)
+    p.part("stand", stand, BLACK, infill=0.15)                       # rev D: prints upright as it stands, no supports
+    p.part("speaker_ring", ring_big, RED, infill=1.0); p.part("tweeter_ring", ring_small, RED, infill=1.0)
     p.part("plate", plate, BLACK, infill=0.4); p.part("plate_mark", mark, RED, infill=1.0)
     # phone: 9 mm thick, back face on the 71 degree ramp, bottom-back edge in the corner of the seat
     ph = mv(rot(body(rrect(75, 160, 9), 9.0, c=1.5, steps=3, bottom=True), 90, 0, 0), 0, 0, 80)     # thickness along -y, back face y = 0
@@ -311,8 +315,10 @@ def build_horn():
     p.scene("bp_D1", built); p.scene("bpo_D1", built); p.scene("phonestand_horn_seat", built)
     p.scene("phonestand_horn_exploded", [(mv(stand, 0, -60, 30), BLACK), (mv(red, 0, -60, 30), RED), (plate, BLACK), (mark, RED)])
     # build picture: stand sits on the plate's tail, groove over the end of the rail, then slides forward onto the plate's front
+    # build picture: the two red rings press into their seats on the front (stand shown upright, rings pulled 30 mm forward)
+    p.scene("horn_rings", [(mv(stand, 0, 0, 4.0), BLACK), (mv(red, 0, -30, 4.0), RED), (plate, BLACK), (mark, RED)])
     p.scene("horn_slide", [(mv(stand, 0, 62, 4.0), BLACK), (mv(red, 0, 62, 4.0), RED), (plate, BLACK), (mark, RED)])
-    p.note = "Rev C rebuilt. Stand 70 x 50 x 108 prints front face up, plate 70 x 133 x 4 flat. Dovetail rail 20/24 x 5, socket 0.25 mm a side. Seat at 29 mm, ramp 71 degrees, phones 7 to 11.5 mm. Two 5.5 x 19.5 slits feed the chamber, D29 mouth. Cable shaft 11 x 11 runs down and out the back, walled off from the chamber."
+    p.note = "Rev D (21 Nov 2026): stand prints upright with no supports, red speaker and tweeter rings press into seats. Rev C rebuilt. Stand 70 x 50 x 108, plate 70 x 133 x 4 flat. Dovetail rail 20/24 x 5, socket 0.25 mm a side. Seat at 29 mm, ramp 71 degrees, phones 7 to 11.5 mm. Two 5.5 x 19.5 slits feed the chamber, D29 mouth. Cable shaft 11 x 11 runs down and out the back, walled off from the chamber."
     P["D1"] = p
 
 # ================================================================== D2 Tape Case

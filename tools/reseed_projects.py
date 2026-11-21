@@ -9,10 +9,11 @@ REN = {"tag_backup": "tag_bkup", "tag_backup_word": "tag_bkup_word"}
 def stl_for(folder, part):
     part = REN.get(part, part)
     for f in sorted(glob.glob(f"{S}/{folder}/*.stl")):
-        if re.match(rf"^[A-Z0-9]+_\d+_{re.escape(part)}_[A-Z]+(_x\d+)?\.stl$", os.path.basename(f)): return f
+        if re.match(rf"^[A-Z0-9]+(?:_\d\d)?_\d+_{re.escape(part)}_[A-Z]+(_x\d+)?\.stl$", os.path.basename(f)): return f
     raise SystemExit(f"no stl for {folder} {part}")
 jobs = []
-for folder in sys.argv[1:]:
+NOSUP = "--no-supports" in sys.argv   # drop per-object support settings (part redesigned to print without supports)
+for folder in [a for a in sys.argv[1:] if not a.startswith("--")]:
     for p in sorted(glob.glob(f"{A}/{folder}/*.3mf")):
         if p.endswith(".gcode.3mf"): continue
         z = zipfile.ZipFile(p)
@@ -25,7 +26,7 @@ for folder in sys.argv[1:]:
         objs = []
         for o in root.findall("object"):
             md = {m.get("key"): m.get("value") for m in o.findall("metadata")}
-            sett = {k: v for k, v in md.items() if k not in ("name", "extruder")}
+            sett = {k: v for k, v in md.items() if k not in ("name", "extruder") and not (NOSUP and str(k).startswith(("support", "enable_support")))}
             parts = []
             for pt in o.findall("part"):
                 pm = {m.get("key"): m.get("value") for m in pt.findall("metadata")}

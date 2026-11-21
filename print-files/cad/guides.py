@@ -370,6 +370,14 @@ U["phonestand_horn_exploded"] = dict(banner="Horn: stand slides onto the plate",
     dict(text="Plate", sub="long tail stops it tipping back", tag="B", at=(0, 90, 5), to=(140, 90)),
     dict(text="Dovetail rail", sub="groove slides over it", tag="C", at=(0, 40, 8), to=(-140, 130)),
 ])
+U["horn_rings"] = dict(banner="Horn: press in the red rings", labels=[
+    dict(text="Speaker ring", sub="large ring, round the horn mouth", tag="A", at=(0, -55, 36), to=(-150, -90)),
+    dict(text="Tweeter ring", sub="small ring, above it", tag="B", at=(0, -55, 43), to=(150, -110)),
+    dict(text="Seats", sub="press until flush with a thumb", tag="C", at=(14, -25, 20), to=(160, 110)),
+], arrows=[
+    dict(pts=[(0, -52, 20), (0, -27, 20)], step=1),
+    dict(pts=[(0, -52, 43), (0, -27, 43)], step=1),
+])
 U["riser"] = dict(banner="Lift: how it sits", labels=[
     dict(text="Wedge", sub="two in the box, 14 degrees", tag="A", at=(-75, 70, 22), to=(-130, 120)),
     dict(text="Front lip", sub="stops the controller sliding", tag="B", at=(0, -49, 30), to=(120, 130)),
