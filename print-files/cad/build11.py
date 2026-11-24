@@ -49,7 +49,8 @@ def build_ripple():
             (mv(rot(U([cyl(12, 2.2, 0), cube(50, 7, 2.2, 34, 0, 0)]), 0, 0, -160), 55, 12, FLOOR + 0.4), "steel")]
     p.scene("ripple", [(named, IVORY), (dot_in, RED)] + keys)
     p.scene("ripple_top", [(named, IVORY), (dot_in, RED)])
-    p.scene("ripple_black", [(named, BLACK), (dot_in, RED)])
+    p.scene("ripple_black", [(named, BLACK), (dot_in, RED)] + keys)
+    p.scene("ripple_black_top", [(named, BLACK), (dot_in, RED)])
     p.scene("bp_D18", [(named, IVORY), (dot_in, RED)]); p.scene("bpo_D18", [(plain, IVORY), (dot_in, RED)])
     g = grams(plain, 0.15) + grams(dot, 1.0)
     p.note = (f"D18 Ripple. {TW:g} x {TD:g} x {TH:g} mm, matte ivory, prints flat as it sits, no supports. "

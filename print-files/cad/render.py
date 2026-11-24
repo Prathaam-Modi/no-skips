@@ -31,6 +31,7 @@ SHOTS = {
  "crate_s1": dict(az=-14, el=40, zoom=1.12), "crate_back": dict(az=152, el=18, zoom=1.0), "crate_s2": dict(az=-30, el=26, zoom=1.0), "crate_s3": dict(az=-32, el=22, zoom=1.0), "crate_s4": dict(az=-28, el=22, zoom=1.0), "crate_s5": dict(az=-28, el=20, zoom=1.0),
  "cover": dict(az=-26, el=24, zoom=1.0), "cover_lifted": dict(az=-30, el=20, zoom=1.0), "cover_top": dict(az=0, el=89, zoom=1.0), "cover_tiles": dict(az=-24, el=40, zoom=1.0),
  "perch": dict(az=-36, el=30, zoom=1.0, focus=("black", "red", "glass", "prop")), "perch_flat": dict(az=-26, el=44, zoom=1.0),
+ "ripple": dict(az=-24, el=34, zoom=1.0, soft=0.55), "ripple_black": dict(az=-24, el=34, zoom=1.0, soft=0.8), "ripple_top": dict(az=-8, el=62, zoom=1.0, soft=0.5), "ripple_black_top": dict(az=-8, el=62, zoom=1.0, soft=0.8),
 }
 
 def mat(name):
@@ -88,8 +89,9 @@ def render(scene_name, draft=False, res=880):
         l = bpy.data.lights.new("l", "AREA"); l.size = size * rad; l.energy = power * rad * rad; l.color = color
         o = bpy.data.objects.new("l", l); sc.collection.objects.link(o)
         o.location = tgt + Vector(loc) * rad; o.rotation_euler = (tgt - o.location).to_track_quat("-Z", "Y").to_euler()
-    area((-2.6, -2.2, 3.6), 3.2, 380, (1.0, 0.97, 0.93))
-    area((3.2, -1.6, 1.6), 3.0, 95)
+    sf = shot.get("soft", 1.0)
+    area((-2.6, -2.2, 3.6), 3.2, 380 * sf, (1.0, 0.97, 0.93))
+    area((3.2, -1.6, 1.6), 3.0, 95 * (1.5 if sf < 1 else 1))
     area((0.6, 3.4, 2.6), 2.4, 170)
     r = sc.render; r.engine = "CYCLES"; r.resolution_x = r.resolution_y = res; r.resolution_percentage = 50 if draft else 100
     sc.cycles.samples = 24 if draft else 72; sc.cycles.use_denoising = True; sc.cycles.device = "CPU"
