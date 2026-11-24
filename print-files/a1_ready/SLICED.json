@@ -552,5 +552,47 @@
   },
   "hours": 4.81,
   "file": "H3_echo/H3_echo_M.gcode.3mf"
+ },
+ "P1_crosses/P1_coasters_x3.3mf": {
+  "ok": true,
+  "time_s": 7112,
+  "grams": 82.3,
+  "plates": 1,
+  "when": "2026-11-24 17:42 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "25%",
+   "wall_loops": "3"
+  },
+  "hours": 1.98,
+  "file": "P1_crosses/P1_coasters_x3.gcode.3mf"
+ },
+ "P1_crosses/P1_caddy.3mf": {
+  "ok": true,
+  "time_s": 4763,
+  "grams": 43.1,
+  "plates": 1,
+  "when": "2026-11-24 17:42 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "25%",
+   "wall_loops": "3"
+  },
+  "hours": 1.32,
+  "file": "P1_crosses/P1_caddy.gcode.3mf"
+ },
+ "P3_pawn_test/P3_pawn_test.3mf": {
+  "ok": true,
+  "time_s": 25321,
+  "grams": 110.9,
+  "plates": 1,
+  "when": "2026-11-24 17:42 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "25%",
+   "wall_loops": "3"
+  },
+  "hours": 7.03,
+  "file": "P3_pawn_test/P3_pawn_test.gcode.3mf"
  }
 }
