@@ -1,3 +1,28 @@
 {
- "jobs": []
+ "jobs": [
+  {
+   "project": "P3_pawn_test/P3_pawn_black.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "25%",
+    "wall_loops": "3"
+   }
+  },
+  {
+   "project": "P3_pawn_test/P3_pawn_ivory.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "25%",
+    "wall_loops": "3"
+   }
+  },
+  {
+   "project": "P3_pawn_test/P3_pawns_black_x8.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "25%",
+    "wall_loops": "3"
+   }
+  }
+ ]
 }

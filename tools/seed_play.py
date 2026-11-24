@@ -17,6 +17,9 @@ coaster = lambda i: dict(name=f"P1 coaster {i}", parts=[(c("P1_1_coaster_BLACK_x
 seed("P1_crosses", "P1_coasters_x3.3mf", [coaster(i) for i in range(1, 4)])   # print this plate three times for the set of nine
 seed("P1_crosses", "P1_caddy.3mf", [dict(name="P1 caddy", parts=[(c("P1_4_caddy_BLACK.stl"), 1, "caddy")], settings=dict(ST, sparse_infill_density="20%"))])
 p = s("P3_pawn_test")
-seed("P3_pawn_test", "P3_pawn_test.3mf", [dict(name="P3 pawn black", parts=[(p("P3_1_pawn_BLACK.stl"), 1, "pawn")], settings=ST), dict(name="P3 pawn ivory", parts=[(p("P3_1_pawn_BLACK.stl"), 3, "pawn")], settings=ST)])
+# one colour per plate: a black and an ivory pawn together sliced at 7 h and 111 g (colour swap every layer)
+seed("P3_pawn_test", "P3_pawn_black.3mf", [dict(name="P3 pawn black", parts=[(p("P3_1_pawn_BLACK.stl"), 1, "pawn")], settings=ST)])
+seed("P3_pawn_test", "P3_pawn_ivory.3mf", [dict(name="P3 pawn ivory", parts=[(p("P3_1_pawn_BLACK.stl"), 3, "pawn")], settings=ST)])
+seed("P3_pawn_test", "P3_pawns_black_x8.3mf", [dict(name=f"P3 pawn {i}", parts=[(p("P3_1_pawn_BLACK.stl"), 1, "pawn")], settings=ST) for i in range(1, 9)])
 q = os.path.join(A, "SLICE_QUEUE.json"); json.dump({"jobs": queue}, open(q, "w"), indent=1)
 print("ok", len(queue))
