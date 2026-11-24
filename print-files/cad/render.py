@@ -4,7 +4,7 @@ import numpy as np, bpy, trimesh
 from mathutils import Vector
 
 OUT = os.environ.get("NS_OUT", "/home/claude/out")
-COL = {"black": (0.016, 0.015, 0.014, 0.52), "ivory": (0.86, 0.80, 0.68, 0.55), "red": (0.56, 0.022, 0.03, 0.5),
+COL = {"black": (0.016, 0.015, 0.014, 0.52), "ivory": (0.60, 0.555, 0.47, 0.6), "red": (0.56, 0.022, 0.03, 0.5),
        "prop": (0.085, 0.085, 0.085, 0.35), "prop2": (0.50, 0.48, 0.44, 0.5), "brass": (0.70, 0.50, 0.17, 0.30), "steel": (0.62, 0.63, 0.66, 0.28), "sofa": (0.30, 0.27, 0.235, 1.0), "glass": (0.9, 0.93, 0.95, 0.05), "blue": (0.03, 0.17, 0.55, 0.32)}
 # scene: az (deg, 0 = straight on from the front, + = camera to the right), el, zoom (1 = fit), optional look-at shift
 SHOTS = {
