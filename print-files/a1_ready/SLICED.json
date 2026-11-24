@@ -622,5 +622,47 @@
   },
   "hours": 1.79,
   "file": "P3_pawn_test/P3_pawns_black_x8.gcode.3mf"
+ },
+ "P2_tangram/P2_pieces_ivory.3mf": {
+  "ok": true,
+  "time_s": 4386,
+  "grams": 53.3,
+  "plates": 1,
+  "when": "2026-11-24 18:18 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "25%",
+   "wall_loops": "3"
+  },
+  "hours": 1.22,
+  "file": "P2_tangram/P2_pieces_ivory.gcode.3mf"
+ },
+ "P2_tangram/P2_piece_red.3mf": {
+  "ok": true,
+  "time_s": 1040,
+  "grams": 7.8,
+  "plates": 1,
+  "when": "2026-11-24 18:18 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "25%",
+   "wall_loops": "3"
+  },
+  "hours": 0.29,
+  "file": "P2_tangram/P2_piece_red.gcode.3mf"
+ },
+ "P2_tangram/P2_frame.3mf": {
+  "ok": true,
+  "time_s": 4647,
+  "grams": 59.2,
+  "plates": 1,
+  "when": "2026-11-24 18:18 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "25%",
+   "wall_loops": "3"
+  },
+  "hours": 1.29,
+  "file": "P2_tangram/P2_frame.gcode.3mf"
  }
 }
