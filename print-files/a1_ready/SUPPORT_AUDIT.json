@@ -1,1 +1,17 @@
-{}
+{
+ "P3_pawn_test/P3_1_pawn_BLACK.stl": {
+  "current": {
+   "overhang": 0.0,
+   "flat": 265.9,
+   "on_model": 237.2,
+   "height": 40.9
+  },
+  "best": "x+90",
+  "best_score": {
+   "overhang": 327.6,
+   "flat": 73.7,
+   "on_model": 32.4,
+   "height": 28.0
+  }
+ }
+}
