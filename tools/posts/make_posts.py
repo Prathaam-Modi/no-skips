@@ -58,15 +58,8 @@ PHASES = {
 # (without .webp). note is an optional small mono line (keep it short).
 PRODUCTS = [
     # --- V3 range (24 Nov 2026). Launch pieces show COMING SOON until launch day, no prices before then. ---
-    {"code": "G1", "slug": "Patched-In", "name": "Patched In", "kind": "Couple keychains",
-     "tagline": "Click together. Come apart. Still yours.", "price": 399, "phase": "soon", "image": "patched",
-     "note": "A NAME ON EACH. SOLD AS A PAIR."},
-    {"code": "D16", "slug": "Lean", "name": "Lean", "kind": "Phone stand",
-     "tagline": "Lean it back.", "price": 499, "phase": "soon", "image": "lean", "note": "BLACK OR IVORY. RED TOP."},
     {"code": "D18", "slug": "Ripple", "name": "Ripple", "kind": "Key tray",
      "tagline": "Drop your keys. Make a ripple.", "price": 699, "phase": "soon", "image": "ripple", "note": "YOUR NAME ON THE LIP."},
-    {"code": "D19", "slug": "Key-Rail", "name": "Key rail", "kind": "Wall rail with hooks",
-     "tagline": "Hooks that slide where you need them.", "price": 799, "phase": "soon", "image": "keyrail", "note": "THREE HOOKS. MOVE THEM ANYTIME."},
     {"code": "D12", "slug": "Rotary", "name": "Rotary", "kind": "Key organiser",
      "tagline": "Keys that swing out, not jingle.", "price": 449, "phase": "soon", "image": "rotary"},
     {"code": "D8", "slug": "B-Side", "name": "B-Side", "kind": "Catch-all tray",
@@ -74,11 +67,16 @@ PRODUCTS = [
     {"code": "C1", "slug": "Vol-01-The-Studio", "name": "Vol. 01: The Studio", "kind": "Collector set",
      "tagline": "Six pieces. Twenty-five sets. No repress.", "price": 1999, "phase": "soon", "image": "studio_set",
      "note": "RESERVE. NUMBERED RUN OF 25."},
+    # --- Room Tone planters (V4, 24 Nov 2026), coming soon until the first prints pass ---
+    {"code": "H1", "slug": "Terrace", "name": "Terrace", "kind": "Cover planter",
+     "tagline": "Six tiers, finer toward the light.", "price": 999, "phase": "soon", "image": "terrace", "note": "FITS A 3 INCH POT. IVORY OR BLACK."},
+    {"code": "H2", "slug": "Twist", "name": "Twist", "kind": "Cover planter",
+     "tagline": "Twenty flutes, turning as they rise.", "price": 999, "phase": "soon", "image": "twist_black", "note": "FITS A 3 INCH POT. BLACK OR IVORY."},
+    {"code": "H3", "slug": "Echo", "name": "Echo", "kind": "Cover planter",
+     "tagline": "Ripples that fade like a last note.", "price": 999, "phase": "soon", "image": "echo", "note": "FITS A 3 INCH POT. IVORY OR BLACK."},
     # --- second drop, before Valentine's ---
     {"code": "A1", "slug": "Track-Plate", "name": "Track Plate", "kind": "Scannable song display",
      "tagline": "Scan it. It still hits.", "price": 1299, "phase": "second", "image": "plate"},
-    {"code": "RS1", "slug": "Desk-Set-Reserve", "name": "Desk set", "kind": "Reserve, run of 25",
-     "tagline": "Steel-weighted. Numbered. Boxed in black.", "price": 2999, "phase": "second", "image": "desk_night"},
     {"code": "D17", "slug": "Bookends", "name": "Bookends", "kind": "Reserve, run of 25 pairs",
      "tagline": "A shelf that stays upright.", "price": 1499, "phase": "second", "image": "bookends"},
 ]

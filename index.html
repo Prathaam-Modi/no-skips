@@ -474,6 +474,7 @@ footer a{text-underline-offset:3px}
       <a href="#collectibles">Collectibles</a>
       <a href="#catalogue" data-side="G" hidden>Gifts</a>
       <a href="#catalogue" data-side="D">Everyday</a>
+      <a href="#catalogue" data-side="H">Room Tone</a>
       <a href="#catalogue" data-side="R">Reserve</a>
       <a href="#build">Build it</a>
       <a href="#order">How to order</a>
@@ -540,6 +541,7 @@ footer a{text-underline-offset:3px}
       <div class="tabs" role="tablist" aria-label="Collection">
         <button role="tab" type="button" aria-controls="grid" data-side="G" id="tabG" hidden>Gifts</button>
         <button role="tab" type="button" aria-controls="grid" data-side="D" id="tabD">Everyday</button>
+        <button role="tab" type="button" aria-controls="grid" data-side="H" id="tabH">Room Tone</button>
         <button role="tab" type="button" aria-controls="grid" data-side="R" id="tabR">Reserve</button>
         <button role="tab" type="button" aria-controls="grid" data-side="all" id="tabAll">Everything</button>
       </div>
@@ -878,6 +880,21 @@ const P=[
   size:"Rail 200 x 36 x 10 mm, about 57 g with three hooks",f:[],
   extra:"Screws and wall plugs are not in the box. 3M strips suit smooth walls and light loads only. ",
   imgs:[["keyrail","On the wall"],["keyrail_build","Rail and hooks, labelled"]]},
+ {id:"H1",soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Terrace",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Six tiers that get finer toward the rim",
+  pick:["Colour",["Ivory","Black"]],
+  desc:"Six stepped tiers, each a little shorter than the one below, so the pot gets lighter as your eye moves up. It is a cover pot: your plant stays in its plastic nursery pot and drops straight in, so there is no drainage hole and nothing to repot. Walls are at least 4 mm and the base is 8 mm, so it has real weight in the hand. Felt pads underneath, three small risers inside keep the pot out of any drained water. Indoors only.",
+  size:"Fits a 3 inch (7.5 to 8 cm) nursery pot. About 115 mm across the base, 86 mm tall. A 4 inch size is made on request",f:[],
+  imgs:[["terrace","Ivory, with a plant"],["terrace_bare","Ivory"],["planters_family","Terrace, Twist and Echo"]]},
+ {id:"H2",soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Twist",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Twenty flutes that turn as they rise",
+  pick:["Colour",["Black","Ivory"]],
+  desc:"Twenty soft flutes turn a tenth of the way round from base to rim, shallow at the bottom and deeper at the top, so the light moves across it as you walk past. It is a cover pot: your plant stays in its plastic nursery pot and drops straight in, so there is no drainage hole and nothing to repot. Walls are at least 4 mm and the base is 8 mm, so it has real weight in the hand. Felt pads underneath, three small risers inside keep the pot out of any drained water. Indoors only.",
+  size:"Fits a 3 inch (7.5 to 8 cm) nursery pot. About 104 mm across, 86 mm tall. A 4 inch size is made on request",f:[],
+  imgs:[["twist_black","Black, with a plant"],["twist","Ivory, with a plant"],["planters_family","Terrace, Twist and Echo"]]},
+ {id:"H3",soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Echo",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Ripples that tighten toward the rim, like a sound dying out",
+  pick:["Colour",["Ivory","Black"]],
+  desc:"Ripples run round the pot, wide and faint at the base and tighter and deeper toward the rim, over a soft shoulder. It is a cover pot: your plant stays in its plastic nursery pot and drops straight in, so there is no drainage hole and nothing to repot. Walls are at least 4 mm and the base is 8 mm, so it has real weight in the hand. Felt pads underneath, three small risers inside keep the pot out of any drained water. Indoors only.",
+  size:"Fits a 3 inch (7.5 to 8 cm) nursery pot. About 108 mm across, 86 mm tall. A 4 inch size is made on request",f:[],
+  imgs:[["echo","Ivory, with a plant"],["planters_family","Terrace, Twist and Echo"]]},
  {id:"RS1",deferred:true,hide:true,soon:"Reserve opens before Valentine's, after the first drop. Tap to be told the day it opens.",side:"R",name:"Desk set",kind:"Reserve, numbered run of 25",price:2999,noAccent:true,build:"stage",badge:"Reserve",line:"Channel on four Stage tiles, steel weighted, in a black box",
   pick:["Colourway",["Night","Bone"]],ed:"Numbered 01/25 to 25/25",
   desc:"Our desk organiser, the Channel with its tall cup, mid cup and tray, standing on four Stage tiles that link on a grid. In the Reserve version a steel weight sits hidden under each tile, so it never slides, and the set has felt feet, a run number underneath and a black gift box with a care card. Night or Bone colourway. Twenty-five are made.",
@@ -1004,13 +1021,13 @@ const P=[
   size:"Table 122 x 240 mm with a 9 mm rim. 264 mm wide laid flat",f:[],
   imgs:[["perch","On a sofa arm"],["perch_flat","Laid flat"]]}
 ];
-const SIDES={G:["Gifts","Made for two people, or for one person you want to surprise. A name goes on every one."],
+const SIDES={H:["Room Tone","Pieces for the shelf and the windowsill. Thick, weighted, shaped to catch the light. Printed one at a time, never thin."],G:["Gifts","Made for two people, or for one person you want to surprise. A name goes on every one."],
              R:["Reserve","Numbered runs of 25, weighted with steel and boxed in black. When a run is gone, it is gone."],
              D:["Everyday","Pieces that live out in the open, so they are made to be looked at and picked up: thick, heavy trays and a key organiser that sit by the door. Home pieces for shelves and plants follow after launch."],
              A:["Listen","For people who live for the music. Keepsakes and gifts built around a song, a show or a night you want to keep."],
              B:["Make","For people who make the music. Small, useful things for the desk, the booth and the gig bag."],
              all:["Everything","The whole range. One design system, one material, nothing in the box but printed parts."]};
-const SIDE_NAME={A:"Listen",B:"Make",C:"Collectibles",D:"Everyday",G:"Gifts",R:"Reserve"};
+const SIDE_NAME={H:"Room Tone",A:"Listen",B:"Make",C:"Collectibles",D:"Everyday",G:"Gifts",R:"Reserve"};
 const live=p=>!p.soon&&!p.hide&&!p.unlisted;
 const FILTERS=[["all","All"],["new","New"],["u999","Under ₹999"],["custom","Made for you"],["build","Build it yourself"]];
 const passes=(p,f)=>f==="all"||(f==="new"&&p.badge==="New")||(f==="u999"&&p.price<1000)||(f==="custom"&&!!p.custom)||(f==="build"&&!!p.build);
@@ -1182,7 +1199,7 @@ function card(p,booth){
 let filt="all";
 function renderGrid(){
   const [t,c]=SIDES[side];$("sideTitle").textContent=t;$("sideCopy").textContent=c;
-  ["G","D","R","all"].forEach(s=>{const b=$("tab"+(s==="all"?"All":s));b.setAttribute("aria-selected",String(s===side));b.tabIndex=s===side?0:-1});
+  ["G","D","H","R","all"].forEach(s=>{const b=$("tab"+(s==="all"?"All":s));b.setAttribute("aria-selected",String(s===side));b.tabIndex=s===side?0:-1});
   const inSide=P.filter(p=>live(p)&&(side==="all"||p.side===side));
   const soon=P.filter(p=>p.soon&&!p.hide&&!p.unlisted&&(side==="all"||p.side===side)).sort((a,b)=>isSecond(b)-isSecond(a));
   const few=inSide.length<=2;
@@ -1275,7 +1292,7 @@ function routeHash(){
   const h=location.hash;let m;
   if(h==="#terms"){openTerms();return}
   if((m=/^#build-([a-z]+)$/.exec(h))){showBuild(m[1],true);return}
-  if((m=/^#p-([A-D]\d{1,2})$/.exec(h))){const p=byId(m[1]);if(p&&!p.hide&&!$("pd").open)openProduct(p.id)}
+  if((m=/^#p-([A-Z]{1,2}\d{1,2})$/.exec(h))){const p=byId(m[1]);if(p&&!p.hide&&!$("pd").open)openProduct(p.id)}
 }
 
 /* ---------------- product dialog ---------------- */

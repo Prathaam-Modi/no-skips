@@ -140,7 +140,7 @@ if __name__ == "__main__":
                 p.scene(f"{key}", [(m, IVORY)] + pl)
                 p.scene(f"{key}_black", [(m, BLACK)] + pl)
                 p.scene(f"{key}_bare", [(m, IVORY)])
-                p.scene(f"bp_{pid}", [(m, IVORY)])
+                p.scene(f"bp_{pid}", [(m, IVORY)]); p.scene(f"bpo_{pid}", [(m, IVORY)])
             else:
                 trio.append((m, H))
             print(pid, sz, "height", H, "grams", gs[sz], "est h", round(0.47 + gs[sz] / 41.7, 2))
