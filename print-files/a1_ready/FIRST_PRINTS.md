@@ -34,3 +34,11 @@ Stack, B-Side, Gain, Alias, Rotary, Eject, Drumroll (PLA parts, then the 8 mm TP
 
 ## What to send back
 For each print: a photo, the Bambu Studio time and grams from the finished job, and a pass or fail per line above. Those numbers replace the slicer figures in the cost sheet.
+
+## V3 test prints (24 Nov 2026). Projects are in a1_ready: D16_lean, D17_bookends, D18_ripple, D19_keyrail, G1_patched_in (slot 1 black, 2 red, 3 ivory)
+- G1 Patched In pair (about 0.8 h, 0.12 mm layers): plug and socket click together with a firm push and come apart by hand; the jaws do not whiten or crack after 20 cycles; the pair holds when shaken on a key ring. Names readable at 5 mm. If it is too tight or too loose, tell me the feel and I shift the clearance in build11.py.
+- D19 Key rail (about 2.1 h with three hooks): each hook slides down a slot by hand and holds without rattling or dropping out; rail lies flat on a wall; screws sit below the face. Print one rail and three hooks first; wide hook and ledge only after the key hook passes.
+- D16 Lean (about 2.1 h): stands upright without a support; a phone in a case sits at the angle and does not slide; red top clean (one colour change). Black first, then ivory.
+- D18 Ripple (about 2.4 h): the grooves print clean, the red dot presses in and sits flush, name on the lip reads at 6 mm. Print the tray ivory.
+- D17 Bookends (pair, about 4.7 h, needs steel): in Bambu Studio add a pause at layer height 7.2 mm for both bookends, drop an 80 x 60 x 5 mm steel plate into each base pocket, resume. Pass: the lid bridges over the plate without sagging, the plate does not rattle, the pair holds a shelf of books. Do this last, and only after the steel plate price and supplier are known.
+- Slice each project first (the GitHub workflow does it) and write the real time and grams into the docs.
