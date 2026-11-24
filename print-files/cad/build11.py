@@ -122,7 +122,9 @@ def build_keyrail():
         # shelf with a 6 mm lip and a 45 degree brace under it, all in one profile across the full width
         prof = fillet(Polygon([(0, 14), (-16, 30), (-50, 30), (-50, 38), (-46, 38), (-46, 34), (0, 34)]), 0.8)
         shelf = mv(rot(ext(prof, 70.0), 90, 0, 90), -35.0, -4.0 + 0.01, z0 - 2.0)
-        return U([pl, shelf, tenon(z0, z0 + 30.0)])
+        # two tenons, so the ledge spans two slots (40 mm apart) and sits on the rail without blocking a neighbour
+        two = U([prism_z(trap(NECK, TIP, DEPTH, x), z0, z0 + 30.0) for x in (-20.0, 20.0)])
+        return U([pl, shelf, two])
     jh, wh = jack_hook(), wide_hook()
     lg = ledge()
     # print orientations: rail face up; plug-ins on their side (width along z), so the dovetail and hooks need no support
@@ -139,18 +141,17 @@ def build_keyrail():
     def key_on(x, col):
         k = U([mv(rot(ring_m(9.0, 7.6, 2.0), 90, 0, 0), 0, 0, 0), mv(rot(U([cyl(8, 2.0, -1.0), cube(6, 2.0, 40, 0, 0, -48)]), 90, 0, 0), 0, 0, -14)])
         return (lift(mv(k, x, -21.0, -RHt / 2 + STOP + 10.0 + 2.0)), col)
-    items = [(lift(rail), BLACK), (lift(mv(jh, -80, 0, 0)), RED), (lift(mv(jh, -40, 0, 0)), RED), (lift(mv(jh, 0, 0, 0)), RED),
-             (lift(mv(wh, 40, 0, 0)), RED)]
-    ledge_items = [(lift(mv(lg, 80, 0, 0)), BLACK)]
+    items = [(lift(rail), BLACK), (lift(mv(jh, -80, 0, 0)), RED), (lift(mv(jh, -40, 0, 0)), RED), (lift(mv(wh, 0, 0, 0)), RED)]
+    ledge_items = [(lift(mv(lg, 60, 0, 0)), BLACK)]          # ledge takes the 40 and 80 slots
     p.scene("keyrail", items + ledge_items + [key_on(-80, "brass"), key_on(-40, "steel"), (wall, "prop2")])
     p.scene("keyrail_bare", [(rail, BLACK)])
-    loose = [(rail, BLACK), (mv(jh, -80, 0, 34), RED), (mv(wh, 40, 0, 34), RED), (mv(lg, 80, -0, 34), BLACK)]
+    loose = [(rail, BLACK), (mv(jh, -80, 0, 34), RED), (mv(wh, 0, 0, 34), RED), (mv(lg, 60, -0, 34), BLACK)]
     p.scene("keyrail_build", loose)
     p.scene("bp_D19", loose); p.scene("bpo_D19", items + ledge_items)
     g_rail = grams(rail, 0.25); g_jh = grams(jh, 0.4); g_wh = grams(wh, 0.4); g_lg = grams(lg, 0.2)
     p.note = (f"D19 Key rail. Rail {RL:g} x {RHt:g} x {RT:g} mm, five dovetail slots on a 40 mm pitch (open at the top, closed {STOP:g} mm "
               f"above the bottom), two countersunk 4 mm screw holes 120 mm apart or 3M strips, logo on the back. Plug-ins slide down from the top: "
-              f"jack-plug key hook, wide hook (bags, headphones), ledge 70 x 50 with a 6 mm lip (black). Rail prints face up; plug-ins print on their side. No supports. "
+              f"jack-plug key hook, wide hook (bags, headphones), ledge 70 x 50 with a 6 mm lip (black, two tenons, takes two slots). Rail prints face up; plug-ins print on their side. No supports. "
               f"Estimates: rail {g_rail:.0f} g, key hook {g_jh:.0f} g, wide hook {g_wh:.0f} g, ledge {g_lg:.0f} g.")
     return p, dict(rail=g_rail, key_hook=g_jh, wide_hook=g_wh, ledge=g_lg)
 
