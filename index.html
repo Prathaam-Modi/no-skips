@@ -722,9 +722,10 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 const inr=n=>"₹"+n.toLocaleString("en-IN");
 /* Engrave add-on: text cut 0.6 mm into the base of D1, D2, D8 and D12 (product.engrave = {max characters a line, where}). One or two lines,
    letters at least 4 mm tall. The order kit (kit/engrave.py) builds the engraved file and refuses text that would not fit. */
-const ENGRAVE_PRICE=99;
+const ENGRAVE_PRICE=99, GIFT_PRICE=49;
+const giftOk=p=>p.side!=="R"&&p.id!=="C1";   /* Reserve and Vol. 01 already ship in the black box */
 const engOn=it=>!!(it&&it.eng&&byId(it.id).engrave);
-const unitOf=it=>byId(it.id).price+(engOn(it)?ENGRAVE_PRICE:0);
+const unitOf=it=>byId(it.id).price+(engOn(it)?ENGRAVE_PRICE:0)+(it.gift&&giftOk(byId(it.id))?GIFT_PRICE:0);
 const fit=(s,base,width)=>Math.min(base,width/(Math.max(s.length,1)*0.66)).toFixed(1);
 const up=s=>esc(String(s).toUpperCase());
 const pad2=n=>String(n).padStart(2,"0");
@@ -867,35 +868,35 @@ const P=[
   ed:`Numbered 01/${DROP.total} to ${DROP.total}/${DROP.total}`,build:"studio",
   desc:"The whole first volume: turntable, synth, drum machine, mixer, mic and headphones, each numbered 01/06 to 06/06 underneath, on a tray that carries your set number. Three pieces come in red, three in ivory. Twenty-five sets are made. After that the files are retired.",
   size:"Tray 196 x 124 mm. Pieces 30 to 62 mm wide, 9 to 54 mm tall",f:[],imgs:[["studio_set","The full set"],["studio_mini","01 Turntable, 05 Mic, 02 Synth"],["studio_mini2","03 Drums, 06 Headphones, 04 Mixer"]]},
- {id:"G1",side:"G",nobp:true,name:"Patched In",kind:"Couple keychains",price:399,custom:true,noAccent:true,badge:"Gift",line:"Two keychains that click together, a name on each",
-  ed:"Sold as a pair",build:"",
+ {id:"G1",side:"G",name:"Patched In",kind:"Couple keychains",price:399,custom:true,noAccent:true,badge:"Gift",line:"Two keychains that click together, a name on each",
+  ed:"Sold as a pair",build:"patched",
   desc:"A matching pair for two people. A black plug and an ivory socket click together when you are side by side and come apart when you are not. A name goes on the front of each, up to eight letters, and the No Skips mark sits on the back. Comes with two metal key rings. Good for couples, friends, siblings, or a person and their dog.",
   size:"Plug 14 x 10 x 57 mm, socket 14 x 10 x 40 mm. Pair weighs about 9 g",
   f:[["Name on the black plug","Maya",{max:8,note:"Up to 8 letters. Longer names shrink a little to fit, never below 4 mm tall."}],["Name on the ivory socket","Jay",{max:8}]],
   box:"Two printed keychains and two metal key rings.",extra:"The click is tested on every pair before it ships. ",
   imgs:[["patched","The pair, apart"],["patched_clicked","Clicked together"]]},
- {id:"D16",side:"D",nobp:true,name:"Lean",kind:"Phone stand",price:499,noAccent:true,badge:"New",line:"A hollow A-frame that holds your phone at 65 degrees",
+ {id:"D16",side:"D",name:"Lean",kind:"Phone stand",price:499,noAccent:true,badge:"New",line:"A hollow A-frame that holds your phone at 65 degrees",
   pick:["Body colour",["Black","Ivory"]],
   desc:"A phone stand with one idea: lean it back. The A-frame is hollow, so it is light and strong, with a 12 mm groove that takes a phone in a case, a lip to stop it sliding and a cable channel underneath so charging does not tip it. Fine flutes run up the back. The top 4 mm is red either way. One piece, nothing to build.",
   size:"70 x 88 x 88 mm, about 60 g. Groove takes phones up to about 11 mm thick with a case",f:[],
   imgs:[["lean","Black body"],["lean_ivory","Ivory body"],["lean_phone","With a phone"],["lean_back","Back, with the cable channel"]]},
- {id:"D18",side:"D",nobp:true,name:"Ripple",kind:"Key tray",price:699,custom:true,noAccent:true,badge:"New",line:"Ripples spread from one red dot, your name on the lip",
+ {id:"D18",side:"D",name:"Ripple",kind:"Key tray",price:699,custom:true,noAccent:true,badge:"New",build:"ripple",line:"Ripples spread from one red dot, your name on the lip",
   desc:"An ivory tray for keys and wallet by the door. Fine ripple grooves spread out from a single red dot, and a flat lip at the front carries your name. Four felt pads underneath keep the table safe. One piece, nothing to build.",
   size:"170 x 95 x 18 mm, about 78 g",
   f:[["Name for the front lip (optional)","",{max:12,opt:true,note:"Up to 12 letters. Leave it empty for a plain lip."}]],
   imgs:[["ripple","On a shelf"],["ripple_top","From above"]]},
- {id:"D19",side:"D",nobp:true,name:"Key rail",kind:"Wall rail with hooks",price:799,noAccent:true,badge:"New",build:"keyrail",line:"A slim rail, three hooks that slide in and out",
+ {id:"D19",side:"D",name:"Key rail",kind:"Wall rail with hooks",price:799,noAccent:true,badge:"New",build:"keyrail",line:"A slim rail, three hooks that slide in and out",
   desc:"A 200 mm rail for the wall by your door. Five dovetail slots sit along it and the hooks slide down into any of them, so you set them where you want them and move them when that changes. Comes with three jack-plug key hooks. Fix it with two screws or 3M strips. Wider hooks and a small ledge are planned as add-ons, ask in the chat.",
   size:"Rail 200 x 36 x 10 mm, about 57 g with three hooks",f:[],
   extra:"Screws and wall plugs are not in the box. 3M strips suit smooth walls and light loads only. ",
   imgs:[["keyrail","On the wall"],["keyrail_build","Rail and hooks, labelled"]]},
- {id:"RS1",soon:"Reserve opens before Valentine's, after the first drop. Tap to be told the day it opens.",side:"R",nobp:true,name:"Desk set",kind:"Reserve, numbered run of 25",price:2999,noAccent:true,badge:"Reserve",line:"Channel on four Stage tiles, steel weighted, in a black box",
+ {id:"RS1",soon:"Reserve opens before Valentine's, after the first drop. Tap to be told the day it opens.",side:"R",name:"Desk set",kind:"Reserve, numbered run of 25",price:2999,noAccent:true,build:"stage",badge:"Reserve",line:"Channel on four Stage tiles, steel weighted, in a black box",
   pick:["Colourway",["Night","Bone"]],ed:"Numbered 01/25 to 25/25",
   desc:"Our desk organiser, the Channel with its tall cup, mid cup and tray, standing on four Stage tiles that link on a grid. In the Reserve version a steel weight sits hidden under each tile, so it never slides, and the set has felt feet, a run number underneath and a black gift box with a care card. Night or Bone colourway. Twenty-five are made.",
   size:"Channel on a 4-tile Stage grid, about 287 g plus the weights",f:[],
   box:"Printed parts, concealed steel weights under the tiles, felt feet and a black gift box.",
   imgs:[["desk_night","Night"],["desk_bone","Bone"]]},
- {id:"D17",soon:"Reserve opens before Valentine's, after the first drop. Tap to be told the day it opens.",side:"R",nobp:true,name:"Bookends",kind:"Reserve, numbered run of 25 pairs",price:1499,noAccent:true,badge:"Reserve",line:"A weighted pair that holds a shelf of books upright",
+ {id:"D17",soon:"Reserve opens before Valentine's, after the first drop. Tap to be told the day it opens.",side:"R",name:"Bookends",kind:"Reserve, numbered run of 25 pairs",price:1499,noAccent:true,badge:"Reserve",line:"A weighted pair that holds a shelf of books upright",
   pick:["Colourway",["Night","Bone"]],ed:"Numbered 01/25 to 25/25",
   desc:"A pair of L-shaped bookends, a smooth face to the books and fluted back. A steel plate is sealed inside each base, so they take the weight of a shelf without sliding, and felt pads protect the shelf. The top is red. Sold as a pair, run number underneath. Twenty-five pairs are made.",
   size:"Each 90 x 90 x 110 mm, about 188 g of steel in each base",f:[],
@@ -1049,6 +1050,13 @@ const draw=(p,o,accent)=>svg(ART[p.art](o||defaults(p)),accent||"red");
    steps: [title, text, picture or "", direction]. direction is optional: "down", "up", "side" or "turn".
    It draws a small arrow beside the step title, so only set it where the text itself says which way the part moves. */
 const BUILD={
+ patched:{name:"Patched In",img:"patched_guide",parts:"Plug and socket",time:"10 seconds",steps:[
+   ["Find the two parts","A is the black plug with the red collar. B is the ivory socket. Each has your name on the front and a hole for the key ring.","patched_guide"],
+   ["Click them together","Hold the plug with the pin pointing at the socket. Push the pin straight into the split top until you feel and hear a click. Pull them apart by hand to separate.","patched_clicked_guide","side"],
+   ["Add the key rings","Thread a key ring through the hole in each one.",""]]},
+ ripple:{name:"Ripple",img:"ripple_black_guide",parts:"Tray and red dot",time:"20 seconds",steps:[
+   ["Press the red dot in","The red dot (A) sits in a round hole at the centre of the ripples. Press it down with your thumb until it is flush.","ripple_black_guide","down"],
+   ["Stick on the pads","Peel and stick the four felt pads into the recesses underneath. The name goes on the front lip (B)."]]},
  keyrail:{name:"Key rail",img:"keyrail_build",parts:"Rail and 3 hooks",time:"5 minutes",steps:[
    ["Fix the rail to the wall","Two countersunk screw holes, or 3M strips on a smooth wall. Screws and plugs are not in the box. Tape suits light loads only."],
    ["Slide the hooks in from the top","Each hook has a dovetail on its back. Line it up with a slot at the top of the rail and push it straight down until it stops.","","down"],
@@ -1308,7 +1316,7 @@ function itemText(it,n){
   if(it.pick)s+=`\n   ${p.pick[0]}: ${it.pick}`;
   if(it.accent)s+=`\n   Accent: ${it.accent}`;
   if(engOn(it))s+=`\n   Engraving (${p.engrave.where}, +${inr(ENGRAVE_PRICE)} each): ${it.e1}${it.e2?" / "+it.e2:""}`;
-  if(it.gift)s+=`\n   Gift: yes${it.giftNote?". Note on the card: "+it.giftNote:""}`;
+  if(it.gift)s+=`\n   Gift: yes${giftOk(p)?` (gift box +${inr(GIFT_PRICE)})`:""}${it.giftNote?". Note on the card: "+it.giftNote:""}`;
   if(p.song)s+=`\n   Style: ${it.mode==="wave"?"Sound wave":"Spotify Code"}`;
   if(p.song==="tag")s+=`\n   Back of the tag: ${it.back==="name"?"Your name":"Song and artist"}`;
   it.vals.forEach((v,i)=>{if(v&&p.f[i]&&showF(p.f[i],it))s+=`\n   ${p.f[i][0]}: ${v}`});return s;
@@ -1373,7 +1381,7 @@ function openProduct(id){
         <div id="engBox"${cur.eng?"":" hidden"}><p class="note">Cut into the base, ${esc(p.engrave.where)}. One or two lines, up to ${p.engrave.max} characters a line, in letters at least 4 mm tall. We send you a picture to approve before we print.</p>
           <div class="field"><label for="e1">Line one</label><input id="e1" data-eng="e1" maxlength="${p.engrave.max+8}" value="${esc(cur.e1)}" placeholder="Home sweet home" autocomplete="off"></div>
           <div class="field"><label for="e2">Line two (optional)</label><input id="e2" data-eng="e2" maxlength="${p.engrave.max+8}" value="${esc(cur.e2)}" autocomplete="off"></div></div></div>`:""}
-      <div class="gift"><label class="tick" for="gift"><input type="checkbox" id="gift" data-gift="tick"${cur.gift?" checked":""}>This is a gift</label>
+      <div class="gift"><label class="tick" for="gift"><input type="checkbox" id="gift" data-gift="tick"${cur.gift?" checked":""}>${giftOk(p)?`Gift box and card, +${inr(GIFT_PRICE)} each`:"This is a gift"}</label>
         <div class="field" id="giftBox"${cur.gift?"":" hidden"}><label for="giftNote">Short note for the card (optional)</label><input id="giftNote" data-gift="note" maxlength="90" value="${esc(cur.giftNote)}" placeholder="Happy birthday. Play it loud." autocomplete="off"></div></div>
       ${k.s==="low"?`<p class="stockline">${k.n?`Only ${k.n} left`:"Few left"}</p>`:""}<p class="warn" id="pdWarn" role="alert" hidden></p>${emailBox("emailPd")}${agreeBox("agreePd")}
       <div class="pd-act"><p class="note" id="pdNeed" role="status" hidden></p><a class="btn red block" id="pdOrder" target="_blank" rel="noopener" aria-describedby="pdNeed" href="#">${esc(L.cta)}</a></div>

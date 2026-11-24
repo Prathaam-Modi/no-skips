@@ -293,6 +293,8 @@ function jobsFor(o){
       jobs.push({product:"engrave",base:it.id,link:"",title:"",artist:"",name:"",line1:it.engrave.line1||"",line2:it.engrave.line2||"",accent:"red",qty:Math.max(1,+it.qty||1),item:it.id+" "+it.name});
       if(it.fields&&it.fields.length)manual.push(it.name+": the other text on it is made by hand in CAD");
       return}
+    if(it.id==="G1"){manual.push("Patched In: in print-files/cad run NS_NAME_A=\""+fv(it,/black plug/i).toUpperCase()+"\" NS_NAME_B=\""+fv(it,/ivory socket/i).toUpperCase()+"\" python3 build11.py (names up to 8 letters, 5 mm, never under 4 mm), then test the click on the first pair");return}
+    if(it.id==="D18"){const nm=fv(it,/name/i);manual.push("Ripple tray: "+(nm?"run NS_TRAY=\""+nm.toUpperCase()+"\" python3 build11.py in print-files/cad (6 mm letters, 12 max)":"plain lip, use the standard D18 file"));return}
     if(!k){if(it.fields&&it.fields.length)manual.push(it.name+": made by hand in CAD");return}
     if((k==="plate"||k==="tag")&&it.mode==="wave"){manual.push(it.name+": sound wave, made by hand from the song");return}
     const j={product:k,link:"",title:"",artist:"",name:"",line1:"",line2:"",accent:it.accent==="ivory"?"ivory":"red",qty:Math.max(1,+it.qty||1),item:it.id+" "+it.name};
@@ -301,7 +303,8 @@ function jobsFor(o){
     if(k==="tag"){if(it.back==="name")j.name=fv(it,/your name/i);else{j.title=fv(it,/^song title/i);j.artist=fv(it,/^artist/i)}}
     if(it.id==="B3"){j.line1=fv(it,/^line one/i);j.line2=fv(it,/^line two/i)}
     if(it.id==="B5"){j.name=fv(it,/name or text/i);manual.push("Run 50: the file holds one tag per piece ordered; copy it up to 50 in Bambu Studio")}
-    jobs.push(j)});
+    jobs.push(j)
+    if(it.gift)manual.push(it.name+": gift box upgrade (band, stamp, card)")});
   return {jobs,manual};
 }
 function itemLines(it){

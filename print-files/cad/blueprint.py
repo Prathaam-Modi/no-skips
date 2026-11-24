@@ -37,6 +37,12 @@ SHEETS = {
  "X1": dict(piece="CUE COVER  XDJ-RX3", parts="6 TILES, 2 HOODS", cap="EXPLODED  SIX TILES + SCREEN HOOD.  BOW-TIE KEYS UNDERNEATH.  VIEWS: COVER", iso=dict(az=-24, el=40)),
  "B6": dict(piece="CRATE USB KEEPER", parts="SHELL, SPINE, HOOD + 8", cap="ISOMETRIC  HOOD ON.  4 SLOTS AT 24.2 PITCH.  VIEWS: CLOSED", iso=dict(az=-26, el=18)),
  "D9": dict(piece="PERCH SOFA ARM TRAY", parts="TABLE, 4 SLATS, 4 PINS", cap="ISOMETRIC  LAID FLAT.  CONCEPT, NOT RELEASED", iso=dict(az=-32, el=40)),
+ "D16": dict(piece="LEAN PHONE STAND", parts="STAND + RED RIDGE", cap="ISOMETRIC  HOLLOW A-FRAME, FACE AT 65 DEG, 12 GROOVE.  PRINTS UPRIGHT", iso=dict(az=-36, el=22)),
+ "D17": dict(piece="BOOKENDS (PAIR)", parts="2 + 2 STEEL PLATES", cap="ISOMETRIC  ONE BOOKEND.  STEEL PLATE SEALED IN THE BASE.  VIEWS: ONE", iso=dict(az=-36, el=24)),
+ "D18": dict(piece="RIPPLE KEY TRAY", parts="TRAY + RED DOT", cap="ISOMETRIC  RIPPLE GROOVES FROM A RED PRESS-IN DOT", iso=dict(az=-30, el=38)),
+ "D19": dict(piece="KEY RAIL", parts="RAIL + 3 HOOKS", cap="ISOMETRIC  RAIL AND PLUG-INS.  45 DEG DOVETAIL, SLIDE IN FROM THE TOP", iso=dict(az=-30, el=20)),
+ "G1": dict(piece="PATCHED IN KEYCHAINS", parts="PLUG + SOCKET", cap="ISOMETRIC  PLUG AND SOCKET APART.  CLICK TOGETHER", iso=dict(az=-30, el=30)),
+ "RS1": dict(piece="DESK SET (RESERVE)", parts="CHANNEL + 4 STAGE TILES", cap="ISOMETRIC  CHANNEL ON FOUR STAGE TILES.  63.6 GRID", iso=dict(az=-32, el=30)),
 }
 
 def load(scene_name):
