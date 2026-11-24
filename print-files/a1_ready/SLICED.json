@@ -498,19 +498,5 @@
   },
   "hours": 2.96,
   "file": "D19_keyrail/D19_keyrail.gcode.3mf"
- },
- "G1_patched_in/G1_patched_in.3mf": {
-  "ok": true,
-  "time_s": 42519,
-  "grams": 166.1,
-  "plates": 1,
-  "when": "2026-11-24 15:36 UTC",
-  "layer": "0.12",
-  "over": {
-   "wall_loops": "3",
-   "sparse_infill_density": "20%"
-  },
-  "hours": 11.81,
-  "file": "G1_patched_in/G1_patched_in.gcode.3mf"
  }
 }
