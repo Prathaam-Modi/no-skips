@@ -1,5 +1,5 @@
 """Rebuild Bambu projects in print-files/a1_ready/<folder> from the current STLs, keeping objects, slots and settings, and queue them for slicing.
-Run from the repo root: python3 tools/reseed_projects.py C3_gig_coin D10_eject"""
+Run from the repo root: python3 tools/reseed_projects.py D10_eject D12_rotary"""
 import sys, os, re, json, zipfile, glob
 import xml.etree.ElementTree as ET
 sys.path.insert(0, "tools/orders/print-repo/tools")

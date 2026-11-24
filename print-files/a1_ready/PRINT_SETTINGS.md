@@ -25,7 +25,6 @@ Sliced 17 November 2026 with Bambu Studio 2.02 (command line) for the Bambu Lab 
 | ID | Product | Plates | Layer (mm) | Walls | Infill | Supports | Brim | Slots | Colour changes | Time (h) | Model (g) | With purge (g) |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 00 | Fit coupon | 1 | 0.20 | 3 | 20% | None | None | 1 Black | 0 | 1.4 | 39 | 39 |
-| C3 | Gig Coin | 1 | 0.12 | 3/4 | 15%/20% | None | None | 1 Black, 2 Red | 8 | 1.4 | 13 | 17 |
 | C2_01 | Mini 01 turntable | 1 | 0.16 | 2 | 15% | None | None | 1 Black, 2 Red | 7 | 0.8 | 11 | 15 |
 | C2_02 | Mini 02 synth | 1 | 0.16 | 2 | 15% | None | None | 1 Black, 3 Ivory | 6 | 0.7 | 9 | 13 |
 | C2_03 | Mini 03 drum machine | 1 | 0.16 | 2 | 15% | None | None | 1 Black, 2 Red | 8 | 0.9 | 12 | 16 |
@@ -64,7 +63,6 @@ Where two values are shown (for example 15%/100%), the first is the plate defaul
 
 | File | Layer | Plate default (walls, infill) | Object overrides | Time (h) | Grams by slot (model / with purge) | Changes |
 |---|---|---|---|---|---|---|
-| C3_gig_coin/C3_gig_coin.3mf | 0.12 | 3, 15% | sparse_infill_density 20%, wall_loops 4 | 1.37 | 1 Black: 12.2 / 14.3; 2 Red: 0.4 / 2.5 | 8 |
 | C2_05_studio_mini_mic/C2_05_studio_mini_mic.3mf | 0.16 | 2, 15% | enable_support 1, support_type tree(auto) | 1.11 | 1 Black: 5.0 / 10.3; 2 Red: 0.3 / 2.1 | 6 |
 | C1_studio_tray/C1_studio_tray.3mf | 0.20 | 2, 15% | - | 1.67 | 1 Black: 61.4 / 62.2; 2 Red: 0.3 / 0.7 | 1 |
 | 00_fit_coupon/00_fit_coupon.3mf | 0.20 | 3, 20% | - | 1.40 | 1 Black: 38.9 / 38.9 | 0 |
@@ -129,7 +127,7 @@ Where two values are shown (for example 15%/100%), the first is the plate defaul
 
 ## Things to look at on the first prints
 
-- Fine text is close to one nozzle line wide: Gig Coin back text, Crate tag words, Track Tag back text. If it prints faint or broken, the text needs to be made bolder in CAD.
+- Fine text is close to one nozzle line wide: Crate tag words, Track Tag back text. If it prints faint or broken, the text needs to be made bolder in CAD.
 - Press fits to measure: Hold tongue 30.0 x 10.0 into a 30.2 x 10.2 socket; Rail pegs 6.35 over ribs into 6.3 sockets; Stack pins 3.9 into 4.1; Gain post head 9.5 through an 8.6 bore; Rotary posts 3.6 in 3.9 holes; Tape Case lid plug 0.35 a side.
 - Drumroll: the TPU belts are sliced by hand, not in these files. Settings: TPU 95A from the external spool, 0.2 mm layers, one wall of 0.45 mm, no top or bottom layers, no infill (or spiral vase, one belt at a time), about 25 mm/s, no retraction tuning needed for a single wall. Start with the 8 mm belt.
 - PETG products (45s, Perch; Fold and Standby on request): the project files are PLA. For PETG pick the PETG filament profile in Bambu Studio, keep the Textured PEI plate (no glue), and expect slower, slightly stringier prints.

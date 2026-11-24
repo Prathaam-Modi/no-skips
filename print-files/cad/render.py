@@ -10,7 +10,7 @@ COL = {"black": (0.016, 0.015, 0.014, 0.52), "ivory": (0.60, 0.555, 0.47, 0.6), 
 SHOTS = {
  "songtag": dict(az=-22, el=52, zoom=1.02), "songtag_sides": dict(az=0, el=62, zoom=1.0), "nametag": dict(az=-22, el=52, zoom=1.02),
  "plate": dict(az=-24, el=14, zoom=1.0), "plate_wave": dict(az=-24, el=14, zoom=1.0), "plate_build": dict(az=-18, el=48, zoom=1.0),
- "coin": dict(az=-20, el=28, zoom=1.0), "coin_build": dict(az=-26, el=40, zoom=0.82), "horn_slide": dict(az=-38, el=26, zoom=0.86), "standees": dict(az=-26, el=20, zoom=1.02), "standee_build": dict(az=-16, el=46, zoom=1.0),
+ "horn_slide": dict(az=-38, el=26, zoom=0.86), "standees": dict(az=-26, el=20, zoom=1.02), "standee_build": dict(az=-16, el=46, zoom=1.0),
  "fold": dict(az=-52, el=16, zoom=1.0), "fold_bare": dict(az=-52, el=20, zoom=1.0), "fold_flat": dict(az=-24, el=46, zoom=1.0),
  "channel": dict(az=-28, el=24, zoom=1.0), "channel_build": dict(az=-28, el=26, zoom=1.0),
  "bside": dict(az=-20, el=40, zoom=1.0), "bside_bare": dict(az=-20, el=40, zoom=1.0),

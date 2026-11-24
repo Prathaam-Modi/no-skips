@@ -301,18 +301,6 @@ def p6(r, a):
     return c.im
 
 
-def p7(r, a):
-    c = Canvas(r, DARK, 7, "Gig Coin")
-    t = c.t
-    text_h = 262
-    c.hero(c.ct, c.cb - text_h - 44, "coin")
-    y = c.cb - text_h
-    c.red_bar(y)
-    c.headline(y + 44, ["You were there.", "Carry the proof."], 84)
-    c.mono((M, c.cb - 24), "C3 GIG COIN. 42 MM. ONE SHOW, ONE NUMBERED RUN.", 22, t["muted"])
-    return c.im
-
-
 def p8(r, a):
     c = Canvas(r, LIGHT, 8, "How ordering works")
     y = c.headline(c.ct + 10, ["How ordering", "works."], 112, bar=True)
@@ -339,12 +327,12 @@ def p9(r, a):
 
 POSTS = [(1, "Logo-Reveal", p1), (2, "Music-You-Can-Hold", p2), (3, "Drawn-First", p3),
          (4, "Vol-01-Teaser", p4), (5, "Design-Rules", p5), (6, "On-The-Bench", p6),
-         (7, "Gig-Coin-Teaser", p7), (8, "How-Ordering-Works", p8), (9, "Early-Access", p9)]
+         (8, "How-Ordering-Works", p8), (9, "Early-Access", p9)]
 
 
 def main():
     ap = argparse.ArgumentParser(description="Generate the No Skips soft launch kit.")
-    ap.add_argument("posts", nargs="*", type=int, help="post numbers 1 to 9 (default: all)")
+    ap.add_argument("posts", nargs="*", type=int, help="post numbers 1 to 9, 7 retired (default: all)")
     ap.add_argument("--out", default=os.path.join(HERE, "out", "softlaunch"))
     ap.add_argument("--bench-photo", help="real photo for the slot in post 6")
     a = ap.parse_args()

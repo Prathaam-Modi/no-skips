@@ -8,8 +8,7 @@ File: 00_fit_coupon/00_fit_coupon.3mf
 - Write down which hole gives a firm hand press for the pin, which slot holds the plate without wobble, which socket takes the tongue, and which dovetail slides without rattling.
 - Pass: the fits the range uses (0.1 press, 0.2 to 0.25 slide) are the ones that feel right. If your printer wants more or less, tell me the numbers and I will shift the clearances in CAD before anything else is printed.
 
-## Day 1 to 2: Gig Coin (1.4 h) and one Studio Mini (0.8 h)
-- Gig Coin pass: coin snaps into the frame and cannot be shaken out; frame split does not whiten or crack after ten cycles; foot holds the frame shut; back text readable; rim stands proud of the silhouette.
+## Day 1 to 2: one Studio Mini (0.8 h)
 - Mini 01 turntable pass: red accents clean, no black bleeding into red, number readable underneath.
 
 ## Day 2 to 3: the other five minis (5.3 h) and the Vol. 01 tray (1.7 h)

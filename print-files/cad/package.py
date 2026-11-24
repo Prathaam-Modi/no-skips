@@ -4,11 +4,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from ns import hours
 
 OUT = "/home/claude/out"; DST = "/home/claude/pkg/no_skips_print_files"
-ORDER = [("COLLECTIBLES", ["C1", "C2_01", "C2_02", "C2_03", "C2_04", "C2_05", "C2_06", "C3", "C4", "C5"]),
+ORDER = [("COLLECTIBLES", ["C1", "C2_01", "C2_02", "C2_03", "C2_04", "C2_05", "C2_06", "C4", "C5"]),
          ("LISTEN", ["A1", "A5", "A3", "A4"]), ("MAKE", ["B1", "B2", "B3", "B5", "B6"]),
          ("DAILY", ["D10", "D12", "D11", "D1", "D6", "D7", "D8", "D2", "D4", "D5", "D9"])]
 STATUS = {"B6": "COMING SOON", "A4": "COMING SOON (heat test)", "D9": "COMING SOON (heat test)"}
-PLATES = {"C1": 1, "C3": 2, "C4": 2, "A1": 2, "A3": 1, "A4": 2, "B1": 2, "B2": 1, "B5": 6, "B6": 3, "D1": 2, "D6": 2, "D7": 2, "D4": 2, "D5": 2, "D9": 3, "D10": 1, "D11": 1, "D12": 1}
+PLATES = {"C1": 1, "C4": 2, "A1": 2, "A3": 1, "A4": 2, "B1": 2, "B2": 1, "B5": 6, "B6": 3, "D1": 2, "D6": 2, "D7": 2, "D4": 2, "D5": 2, "D9": 3, "D10": 1, "D11": 1, "D12": 1}
 
 rep = json.load(open(f"{OUT}/report.json"))
 if os.path.exists(DST): shutil.rmtree(DST)

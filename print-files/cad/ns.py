@@ -133,7 +133,7 @@ GROUPS = {
     "B6": {"hood_mark": "hood", "hood_bar": "hood", "tag_main_word": "tag_main", "tag_backup_word": "tag_backup",
            "tag_rec_word": "tag_rec", "tag_spare_word": "tag_spare"},
     "C1": {"tray_lettering": "tray"}, "C2_01": _MINI, "C2_02": _MINI, "C2_03": _MINI, "C2_04": _MINI, "C2_05": _MINI,
-    "C2_06": {"ear_pads": "band"}, "C3": {"silhouette": "coin", "back_text_inlay": "coin", "foot_mark": "foot"},
+    "C2_06": {"ear_pads": "band"},
     "C4": {"cassette_face_example": "cassette_body", "rail_bar": "rail_section"}, "C5": {"level_marks": "base", "pointer": "knob"},
     "D1": {"speaker_rings": "stand", "plate_mark": "plate"}, "D2": {"label_inlay": "lid"},
     "D4": {"foot_left_inlay": "foot_left", "foot_right_inlay": "foot_right", "ledge_art": "ledge"},

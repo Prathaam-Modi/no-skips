@@ -58,15 +58,6 @@ C2_06 STUDIO MINI 06  about 9 g, 0.9 h
   - C2_06_2_band_BLACK.stl  50.6 x 39.0 x 10.0 mm, 4.9 g
   - C2_06_3_ear_pads_IVORY.stl  50.6 x 10.0 x 6.0 mm, 0.2 g
 
-C3 GIG COIN  about 14 g, 1.4 h
-  Rev B. Reeded edge, rim 0.7 mm above a 0.5 mm silhouette, back text as a first-layer inlay. New snap frame with bag loop and a foot that locks the frame shut.
-  - C3_1_coin_BLACK.stl  42.0 x 42.0 x 4.0 mm, 5.7 g
-  - C3_2_silhouette_RED.stl  25.0 x 26.4 x 0.5 mm, 0.2 g
-  - C3_3_back_text_inlay_RED.stl  30.0 x 18.1 x 0.4 mm, 0.0 g
-  - C3_4_frame_BLACK.stl  48.8 x 62.7 x 4.0 mm, 2.9 g
-  - C3_5_foot_BLACK.stl  40.0 x 18.0 x 9.0 mm, 4.7 g
-  - C3_6_foot_mark_RED.stl  26.0 x 1.8 x 0.6 mm, 0.0 g
-
 C4 SIDE A  about 96 g, 5.7 h
   Rev B. The four loose feet become two linking rail sections (132 x 34 x 10, two cassettes each). Sliding dovetail, 0.25 mm clearance a side. Add sections to grow the row. Cassettes unchanged at 60 x 38 x 4.
   - C4_1_cassette_body_BLACK_x4.stl  60.0 x 38.0 x 4.0 mm, 42.1 g

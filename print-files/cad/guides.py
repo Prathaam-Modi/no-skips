@@ -99,13 +99,6 @@ G["rail_build"] = dict(banner="Rail: how it goes together", labels=[
     dict(pts=[(40, -56, 68), (40, -8, 68)], step=2),
     dict(pts=[(80, -56, 68), (80, -8, 68)], step=2),
 ])
-G["coin"] = dict(banner="Gig Coin: how it goes together", labels=[
-    dict(text="Coin", tag="A", at=(-16, 8, 40), to=(150, -100)),
-    dict(text="Frame", sub="split at the bottom", tag="B", at=(-30, 12, 50), to=(-130, -60)),
-    dict(text="Foot", sub="holds the split shut", tag="C", at=(34, -20, 3), to=(130, 100)),
-], arrows=[
-    dict(pts=[(36, -38, 18), (12, -10, 14)], step=2),
-])
 G["cassettebox_open"] = dict(banner="Tape Case: how it opens", labels=[
     dict(text="Tray", sub="narrow side for picks", tag="A", at=(0, 0, 18), to=(-60, -130)),
     dict(text="Lid", sub="label with your text", tag="B", at=(110, 0, 7), to=(60, -140)),
@@ -208,14 +201,6 @@ G["rail_build"] = dict(banner="Rail: how it goes together", labels=[
     dict(pts=[(-6, -56, 68), (-6, -26, 68)], step=2),
     dict(pts=[(40, -56, 68), (40, -26, 68)], step=2),
     dict(pts=[(80, -56, 68), (80, -26, 68)], step=2),
-])
-G["coin_build"] = dict(banner="Gig Coin: how it goes together", labels=[
-    dict(text="Coin", sub="back text facing down", tag="A", at=(0, 12, 36), to=(150, -80)),
-    dict(text="Frame", sub="split at the bottom", tag="B", at=(-22, 12, 3), to=(-150, 20)),
-    dict(text="Foot", sub="holds the split shut", tag="C", at=(14, -52, 9), to=(150, 110)),
-], arrows=[
-    dict(pts=[(0, 0, 66), (0, 0, 26)], step=1),
-    dict(pts=[(0, -62, 14), (0, -36, 14)], step=2),
 ])
 G["cassettebox_open"] = dict(banner="Tape Case: how it opens", labels=[
     dict(text="Tray", sub="narrow side for picks", tag="A", at=(0, 0, 18), to=(-60, -130)),
@@ -439,7 +424,7 @@ SRC = "/home/claude/no-skips/img"
 def run(names):
     for n in names or G:
         g = G[n]
-        src = f"{SRC}/{n}.webp" if (n in ("amp_build","plate_build","standee_build","knob_build","rail_build","coin","cassettebox_open","vinylstand_build","headphonestand_build","fold_flat","studio_set","channel_build","eject_build","standby_build","nametag") and os.path.exists(f"{SRC}/{n}.webp")) else None
+        src = f"{SRC}/{n}.webp" if (n in ("amp_build","plate_build","standee_build","knob_build","rail_build","cassettebox_open","vinylstand_build","headphonestand_build","fold_flat","studio_set","channel_build","eject_build","standby_build","nametag") and os.path.exists(f"{SRC}/{n}.webp")) else None
         print(annotate(n, g.get("labels", ()), g.get("arrows", ()), banner=g.get("banner"), src=src))
 
 def run_use(names):

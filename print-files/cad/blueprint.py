@@ -14,7 +14,6 @@ SHEETS = {
  "A1": dict(piece="TRACK PLATE", parts="PLATE + BASE BAR", cap="ISOMETRIC  PLATE IN BASE BAR.  REV B"),
  "A5": dict(piece="TRACK TAG", parts="1 + LOOP", cap="ISOMETRIC  TAG + LOOP.  RIM STANDS 0.4 ABOVE THE CODE.  REV B", iso=dict(az=-30, el=40)),
  "B3": dict(piece="ALIAS NAME TAG", parts="1 + LOOP", cap="ISOMETRIC  TAG + LOOP.  REV B", iso=dict(az=-30, el=40)),
- "C3": dict(piece="GIG COIN", parts="COIN, FRAME, FOOT", cap="ISOMETRIC  COIN IN FRAME ON FOOT.  VIEWS: COIN IN FRAME.  REV B"),
  "C4": dict(piece="SIDE A MIXTAPE SET", parts="4 + 2 RAILS", cap="ISOMETRIC  FOUR ON TWO LINKED RAILS.  VIEWS: ONE RAIL.  REV B"),
  "D6": dict(piece="FOLD LAPTOP STAND", parts="2 RIBS + 2 BRACES", cap="ISOMETRIC  ASSEMBLED.  ALL PARTS 6 THICK, PACK FLAT", iso=dict(az=-50, el=24)),
  "D7": dict(piece="CHANNEL DESK SET", parts="3 MODULES", cap="ISOMETRIC  TALL CUP, MID CUP, TRAY LINKED BY DOVETAIL"),

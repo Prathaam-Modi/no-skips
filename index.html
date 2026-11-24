@@ -512,7 +512,7 @@ footer a{text-underline-offset:3px}
           <h2 id="boothTitle" style="margin-top:14px">The collectibles</h2>
           <p>Small enough to carry, numbered so no two are the same. Each run has a fixed size. When a run is finished, the files are retired and the next volume takes its place.</p>
         </div>
-        <button class="btn red" type="button" data-open="C3" id="boothCta">See the Gig Coin</button>
+        <button class="btn red" type="button" data-open="C1" id="boothCta">See the set</button>
       </div>
       <div class="booth-grid" id="boothGrid"></div>
     </div>
@@ -601,8 +601,8 @@ footer a{text-underline-offset:3px}
     </div>
     <div class="bulk">
       <div>
-        <h2>Coins and tags for your act or venue</h2>
-        <p>Run 50 is fifty name tags with your act's name, ready for the merch table, at <span id="run50Price"></span>. It opens after launch. Gig coins and tags also come in runs of 25 or more for artists, DJs, clubs and festivals: one run per show, numbered, never reprinted.</p>
+        <h2>Tags for your act or venue</h2>
+        <p>Run 50 is fifty name tags with your act's name, ready for the merch table, at <span id="run50Price"></span>. It opens after launch. Name tags also come in runs of 25 or more for artists, DJs, clubs and festivals.</p>
       </div>
       <div class="cta" style="margin:0"><a class="btn ghost bulk-ghost" id="chatBulk" target="_blank" rel="noopener" href="#">Ask about a custom run</a></div>
     </div>
@@ -615,7 +615,7 @@ footer a{text-underline-offset:3px}
       <div class="mailrow"><label class="vh" for="signEmail">Your email</label><input id="signEmail" type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder="you@example.com" required><button class="btn red" type="submit">Sign up</button></div>
       <p class="note" id="signMsg" role="status" aria-live="polite"></p></form>
     <div class="row"><span>No Skips. Printed to order in Bengaluru.</span><span>Instagram <a href="https://www.instagram.com/noskips.in/" target="_blank" rel="noopener">@noskips.in</a></span><span>Prices in INR, shipping extra.</span><span><button class="linkish" type="button" data-terms>Terms, replacements and privacy</button></span></div>
-    <div class="row" style="margin-top:10px"><span>All pictures are 3D renders made from our print files and are for reference only. Every piece is printed to order, so colour, surface texture and small details can differ slightly from the pictures. Blueprint dimensions are in millimetres. Song titles and artist names on example pieces show how personalisation looks. No Skips is an independent maker and is not affiliated with or endorsed by any artist. Artist names and silhouettes on coins and tags are used to show the artist the piece is about, and are not an endorsement. Spotify and Spotify Codes are trademarks of Spotify AB. No Skips is not affiliated with Spotify.</span></div>
+    <div class="row" style="margin-top:10px"><span>All pictures are 3D renders made from our print files and are for reference only. Every piece is printed to order, so colour, surface texture and small details can differ slightly from the pictures. Blueprint dimensions are in millimetres. Song titles and artist names on example pieces show how personalisation looks. No Skips is an independent maker and is not affiliated with or endorsed by any artist. Artist names on example pieces are used to show the artist the piece is about, and are not an endorsement. Spotify and Spotify Codes are trademarks of Spotify AB. No Skips is not affiliated with Spotify.</span></div>
   </div>
 </footer>
 
@@ -829,19 +829,6 @@ const ART={
       +[45.6,57,68.4].map(cx=>`<circle class="hole" cx="${x+cx}" cy="${y+58.5}" r="2.2"/>`).join("")};
     return shadow(160,208,122)+one(36,14,0)+one(170,14,1)+one(36,112,2)+one(170,112,3);
   },
-  coin(o){
-    /* face A: performer silhouette (pictogram). face B: artist name, city and year */
-    const [n1,...rest]=String(o.t1||"").trim().split(/\s+/);const n2=rest.join(" ");
-    const A=`<g transform="translate(88 110)"><circle class="pb" r="70"/><circle class="pe" r="68.4"/><circle class="pas" r="63" stroke-width="2.6"/>
-      <circle class="pa" cy="-24" r="13.5"/><path class="pas" d="M-18 -26a18 18 0 0 1 36 0" stroke-width="3.4"/><rect class="pa" x="-22" y="-33" width="8" height="16" rx="4"/><rect class="pa" x="14" y="-33" width="8" height="16" rx="4"/>
-      <path class="pa" d="M-23 -6h46l7 30h-60z"/><path class="pas" d="M20 -3l17 -13l-3 -22" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path class="pas" d="M-21 -3l-14 14l12 12" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-      <rect class="pa" x="-48" y="27" width="96" height="14" rx="4"/><circle class="pb" cx="-31" cy="34" r="4"/><circle class="pb" cx="31" cy="34" r="4"/></g>`;
-    const B=`<g transform="translate(232 110)"><circle class="pb" r="70"/><circle class="pe" r="68.4"/><circle class="pas" r="63" stroke-width="2.6"/>
-      <text text-anchor="middle" y="${n2?-19:-6}" font-size="${fit(n1||"",20,96)}">${up(n1||"")}</text>${n2?`<text text-anchor="middle" y="3" font-size="${fit(n2,20,104)}">${up(n2)}</text>`:""}
-      <text text-anchor="middle" y="20" font-size="${fit(o.t2||"",7.6,96)}" opacity=".85">${up(o.t2||"")}</text>
-      ${bars(W20.slice(3,14),-40,36,8,5,15,4,"pa")}<text text-anchor="middle" y="54" font-size="5.6" opacity=".8">NO. 01</text></g>`;
-    return shadow(88,186,60)+shadow(232,186,60)+A+B;
-  },
   songtag(o){
     const X=28,k=3.3,Y1=8,Y2=114,cy1=Y1+15*k,cy2=Y2+15*k,cx=X+33.5*k;
     let r=body(X,Y1,264,99,16)+`<circle class="hole" cx="${X+8.5*k}" cy="${cy1}" r="${3.4*k}"/>`
@@ -907,22 +894,6 @@ const P=[
   desc:"A single piece from The Studio. Start with the one you play, then fill the shelf. Every mini has its number in the volume printed into the base.",
   size:"30 to 62 mm wide, 9 to 54 mm tall, depending on the piece",f:[],pick:["Which piece",["01 Turntable","02 Synth","03 Drum machine","04 Mixer","05 Mic","06 Headphones"]],
   imgs:[["studio_mini","01 Turntable, 05 Mic, 02 Synth"],["studio_mini2","03 Drums, 06 Headphones, 04 Mixer"]]},
- {id:"C3",soon:SOON_TXT,side:"C",name:"Gig Coin",kind:"Show token",price:499,art:"coin",custom:true,line:"One show, one coin, never reprinted",badge:"Pocket size",
-  ed:"One numbered run per gig",build:"coin",
-  desc:"A pocket coin for the night you were there. One face carries the artist's silhouette inside a raised rim, so pockets and keys rub the rim and not the artwork. The other face carries the name, a city code and the year with your coin's number, set flush into the surface. The edge is reeded like a real coin. It comes with a snap frame and a small foot: stand it on a shelf, or hang it from a bag by the loop.",
-  size:"Coin 42 mm across, 4 mm thick, about 6 g. Frame 49 mm, foot 40 x 18 mm",f:[["Artist name","Dimo Mähtarp",{max:19,note:"Printed on two lines, about 9 letters each, so the letters stay big enough to print cleanly."}],["City code and year","BLR 2026",{max:9,note:"A short city code keeps the text readable, for example BLR, MUM, DEL."}]],pick:["Silhouette",["DJ","Guitarist","Vocalist","Traced from a photo"]],
-  extra:"For a traced silhouette, send a photo in the chat. ",
-  imgs:[["coin","In its frame, and the back"]]},
- {id:"E1",soon:"Bengaluru edition. Orders open 25 Nov and close 5 Dec, shipping by 10 Dec. Tap to be told the day it opens.",side:"C",name:"Bengaluru Coin",kind:"Numbered show token",price:599,art:"coin",line:"Bengaluru, 12.12 or 13.12. One of 100, numbered",badge:"Limited 100",
-  ed:"Numbered 001 to 100, never reprinted",
-  desc:"A pocket coin for the Bengaluru nights. One face carries the DJ silhouette inside a raised rim. The other carries BLR, your night and your coin's number out of 100, set flush into the surface. Reeded edge, snap frame and a small foot, same as the Gig Coin. Pick your night. Orders close 5 Dec so every coin is printed, numbered and shipped by 10 Dec.",
-  size:"Coin 42 mm across, 4 mm thick. Frame 49 mm, foot 40 x 18 mm. Text 4.4 mm and up",f:[],pick:["Night",["12.12","13.12"]],
-  imgs:[["blr_coin","In its frame, and the back"]]},
- {id:"E2",soon:"Bengaluru edition. Orders open 25 Nov and close 5 Dec, shipping by 10 Dec. Tap to be told the day it opens.",side:"C",name:"Bengaluru Rail",kind:"Wristband display",price:699,line:"Hang your wristband, keep the night",badge:"Limited 30",
-  ed:"Run of 30",
-  desc:"A slim black rail with three red pegs. Press your festival wristbands onto the pegs and hang it on the wall. BLR and the night are inlaid in red beside a sound wave. Screw mounted, two countersunk holes.",
-  size:"130 x 36 x 8 mm, pegs 22 mm tall, 35 mm apart",f:[],pick:["Night",["12.12","13.12"]],
-  imgs:[["blr_rail","On the wall with three pegs"],["blr_rail_build","Pegs press into the rail"]]},
  {id:"C4",soon:"Second drop, opening before Valentine's. Tap to be told the day it opens.",side:"C",name:"Side A",kind:"Mixtape set of 4",price:1299,art:"standees",custom:true,line:"Four cassettes, your four songs, one rail",badge:"Made for you",
   ed:"Your own four-track edition",build:"standees",
   desc:"Four pocket cassettes, each with a label carrying a song you choose, standing in a slotted rail. The rail comes as two sections that slide together with a dovetail, so the set reads as one piece on the shelf. Order a second set and the row keeps going.",
@@ -1082,9 +1053,6 @@ const BUILD={
    ["Join the rail","Hold one section flat. Lower the dovetail on the end of the other section straight down into its socket until both sit level.","","down"],
    ["Stand the cassettes","Press the bottom edge of each cassette into a slot. Track one on the left."],
    ["Add to it","A second set links onto either end the same way."]]},
- coin:{name:"Gig Coin",img:"coin_build_guide",parts:"Coin, frame, foot",time:"30 seconds",steps:[
-   ["Snap the coin into the frame","Open the split at the bottom of the frame a little, seat the coin, and let the frame close around it."],
-   ["Stand it or hang it","Press the two tabs at the bottom of the frame into the foot. The foot holds the split shut, so the coin is locked in. Or leave the foot off and use the loop."]]},
  fold:{name:"Fold",img:"fold_flat_guide",parts:"2 ribs, 2 braces",time:"1 minute",steps:[
    ["Lay out the braces","Place the two braces about 170 mm apart, notches facing up, red bars facing you."],
    ["Press on the first rib","Line the two notches under a rib up with the notches at one end of the braces and press down until the rib touches the table. The tall end goes at the back.","","down"],
@@ -1259,7 +1227,7 @@ function renderPhase(){
     :`<button class="btn red" type="button" data-open="C1">${pre?"Pre-order a numbered set":"Claim a numbered set"}</button>`;
   $("heroCta").innerHTML=primary+(wl?`<button class="btn ghost" type="button" data-open="C1">See the set, ${inr(c1.price)}</button>`
     :`<button class="btn ghost" type="button" data-open="C2">Start with one piece, ${inr(c2.price)}</button>`);
-  $("boothCta").textContent=wl?"See the Gig Coin":pre?"Pre-order a Gig Coin":"Mint a Gig Coin";
+  $("boothCta").textContent=wl?"See the set":pre?"Pre-order a numbered set":"Claim a numbered set";
   $("sigLabel").textContent=SIGNATURE_LABEL+(isSecond(a1)?" · Second drop":a1.soon?" · Coming soon":"");
   $("sigCta").textContent=a1.soon?"Tell me when it opens":"Make it with your song";
   $("howLead").textContent=wl?"Pre-orders are not open yet. Tap Get early access on any piece and you get the first message when they do. After that, ordering takes three steps."
@@ -1552,7 +1520,7 @@ const TERMS=`<h2 id="tcTitle">Terms, replacements and privacy</h2><p class="upd"
 <h3>1. Who we are</h3><p>No Skips is a small studio in Bengaluru, Karnataka, India that designs and 3D prints music pieces to order. This website is a catalogue. Orders, previews, payment and support all happen on WhatsApp at +91 74111 48303.</p>
 <h3>2. Orders and payment</h3><ul><li>Every order gets an order number. We check each order by hand and then email you the final price with shipping and our UPI details. Your order is confirmed only when we have approved it and received full payment by UPI. Nothing is charged before we approve it.</li><li>Please give an email address you check. Order updates (approval, payment, printing, dispatch and tracking) come by email; the chat stays on WhatsApp.</li><li>To keep things fair, we may limit how many of a piece one customer can order, and we may decline repeat orders that look like reselling. An order holds its pieces only while it waits for review and payment: one that we have not reviewed within four days, or that is approved but unpaid after 48 hours, is cancelled and the pieces go back on sale. You can order again any time.</li><li>Prices are in Indian rupees and include printing and packing. Shipping is extra and is quoted in the chat before you pay.</li><li>We may decline or cancel an order before printing, for example if we cannot print it well, or if it uses content that is hateful, unlawful or someone else's logo or artwork without permission. If we cancel, you get a full refund.</li><li>Prices on the site can change. Your order keeps the price confirmed in the chat.</li></ul>
 <h3>3. Early access and pre-orders</h3><ul><li><b>Early access list.</b> Joining the list is free and is not an order. We message you on WhatsApp when pre-orders open. Reply STOP at any time and we remove you.</li><li><b>A pre-order</b> is a paid order for a piece we have not started making yet. It is confirmed only when we have approved it and received full payment by UPI.</li><li><b>Ship-from date.</b> The date shown on the site and confirmed in the chat is our best estimate, not a guarantee. If dispatch will be later, we tell you in the chat as soon as we know.</li><li><b>Your way out.</b> You can cancel a pre-order for a full refund at any time before we start printing your piece. If we have not dispatched within 30 days after the ship-from date we confirmed, you can cancel for a full refund even if printing has started.</li><li><b>If we cancel.</b> If we cannot make a pre-ordered piece to our standard, we cancel it and refund you in full to the UPI account you paid from within 7 days, and email you the refund reference.</li><li><b>Limited batches.</b> Numbered editions such as Vol. 01 are released in batches. A place in a batch is held only by a confirmed, paid order, and set numbers are given in the order payments arrive.</li><li><b>Launch prices.</b> A launch or pre-order price applies only as confirmed in the chat for that order.</li><li><b>Small changes.</b> Pictures on the site are 3D renders made from the print files. After test printing we may adjust a size or a fit slightly. If a change affects how the piece looks or works, we tell you before printing and you can cancel for a full refund.</li></ul>
-<h3>4. Personalised pieces</h3><ul><li>You are responsible for the text, song, link and names you send. Please check the spelling.</li><li>For every personalised piece we send a preview. Once you approve it, we print exactly what you approved. A mistake in an approved preview is not a fault.</li><li><b>Spotify Codes</b> need the song's Spotify link, and are made with Spotify's own code generator from that link. If the link opens a different song or version from the one you named, we check with you in the chat before printing. We scan each code with a phone before it ships. A code scans only in the Spotify app. It keeps working as long as Spotify keeps the song and its code service. If Spotify removes the song or changes how codes work, that is outside our control and is not a fault in the piece.</li><li>If Spotify asks makers to stop producing pieces with its codes, we will offer you the same piece as a sound wave, or a full refund if it has not shipped.</li><li>Songs that are not on Spotify can be ordered as a sound wave.</li><li><b>Silhouettes.</b> Coin silhouettes are simplified outlines, either one of ours or traced from a photo you send. Send only a photo you took or have the right to use. A traced outline is an artistic shape, not a portrait, and we may simplify it so it prints cleanly. We may decline a photo, or ask for a different one, if printing it could misuse another person's name or image.</li><li><b>Sound waves</b> are an artistic picture of the song's loud and quiet parts, not a measurement.</li></ul>
+<h3>4. Personalised pieces</h3><ul><li>You are responsible for the text, song, link and names you send. Please check the spelling.</li><li>For every personalised piece we send a preview. Once you approve it, we print exactly what you approved. A mistake in an approved preview is not a fault.</li><li><b>Spotify Codes</b> need the song's Spotify link, and are made with Spotify's own code generator from that link. If the link opens a different song or version from the one you named, we check with you in the chat before printing. We scan each code with a phone before it ships. A code scans only in the Spotify app. It keeps working as long as Spotify keeps the song and its code service. If Spotify removes the song or changes how codes work, that is outside our control and is not a fault in the piece.</li><li>If Spotify asks makers to stop producing pieces with its codes, we will offer you the same piece as a sound wave, or a full refund if it has not shipped.</li><li>Songs that are not on Spotify can be ordered as a sound wave.</li><li><b>Sound waves</b> are an artistic picture of the song's loud and quiet parts, not a measurement.</li></ul>
 <h3>5. Cancellations</h3><p>You can cancel for a full refund until we start printing. Pieces are made to order for you, so once printing has started we cannot cancel or take the piece back.</p>
 <h3>6. Replacements within 48 hours of delivery</h3><p>We replace a piece that arrives broken, has a print fault, or is not what you approved. To claim:</p><ul><li>Message us on WhatsApp within <b>48 hours of delivery</b>, going by the delivery time on the courier tracking.</li><li>Send photos of the piece, the box and the shipping label, and an unboxing video. Without an unboxing video we may not be able to accept a claim for a broken or missing part.</li><li>Keep the piece and the packing until we reply.</li></ul><p>If the claim is accepted, we reprint the piece and ship it at our cost. If we cannot reprint it, we refund the price of that piece. Claims made after 48 hours are not accepted, except where the law requires otherwise.</p>
 <p>These are not faults: the fine layer lines, small seams and slight colour differences that come with 3D printing; damage from heat, drops, misuse or wear after delivery; and phones or cases outside the sizes listed for a product.</p>
@@ -1592,7 +1560,7 @@ document.addEventListener("keydown",e=>{
   const again=n.isConnected?n:document.querySelector(`[data-build="${n.dataset.build}"]`);if(again)again.focus();
 });
 $("listBtn").addEventListener("click",openList);
-$("chatBulk").href=wa(`Hi ${BRAND}, I would like a quote for a run.\n\nAct or venue:\nProduct (gig coins or tags):\nQuantity:\nGig date:`);
+$("chatBulk").href=wa(`Hi ${BRAND}, I would like a quote for a run.\n\nAct or venue:\nProduct (tags):\nQuantity:\nGig date:`);
 $("run50Price").textContent=inr(byId("B5").price);
 function setView(v){if(v==="bp")root.dataset.view="bp";else delete root.dataset.view;
   document.querySelectorAll(".viewsw button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.view===v)))}
