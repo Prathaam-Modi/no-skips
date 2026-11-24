@@ -555,72 +555,72 @@
  },
  "P1_crosses/P1_coasters_x3.3mf": {
   "ok": true,
-  "time_s": 7112,
-  "grams": 82.3,
+  "time_s": 9269,
+  "grams": 85.0,
   "plates": 1,
-  "when": "2026-11-24 17:42 UTC",
+  "when": "2026-11-24 17:53 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "25%",
    "wall_loops": "3"
   },
-  "hours": 1.98,
+  "hours": 2.57,
   "file": "P1_crosses/P1_coasters_x3.gcode.3mf"
  },
  "P1_crosses/P1_caddy.3mf": {
   "ok": true,
-  "time_s": 4763,
-  "grams": 43.1,
+  "time_s": 5504,
+  "grams": 43.8,
   "plates": 1,
-  "when": "2026-11-24 17:42 UTC",
+  "when": "2026-11-24 17:53 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "25%",
    "wall_loops": "3"
   },
-  "hours": 1.32,
+  "hours": 1.53,
   "file": "P1_crosses/P1_caddy.gcode.3mf"
  },
  "P3_pawn_test/P3_pawn_black.3mf": {
   "ok": true,
-  "time_s": 1951,
-  "grams": 7.2,
+  "time_s": 2081,
+  "grams": 7.3,
   "plates": 1,
-  "when": "2026-11-24 17:46 UTC",
+  "when": "2026-11-24 17:53 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "25%",
    "wall_loops": "3"
   },
-  "hours": 0.54,
+  "hours": 0.58,
   "file": "P3_pawn_test/P3_pawn_black.gcode.3mf"
  },
  "P3_pawn_test/P3_pawn_ivory.3mf": {
   "ok": true,
-  "time_s": 1951,
-  "grams": 7.2,
+  "time_s": 2081,
+  "grams": 7.3,
   "plates": 1,
-  "when": "2026-11-24 17:46 UTC",
+  "when": "2026-11-24 17:53 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "25%",
    "wall_loops": "3"
   },
-  "hours": 0.54,
+  "hours": 0.58,
   "file": "P3_pawn_test/P3_pawn_ivory.gcode.3mf"
  },
  "P3_pawn_test/P3_pawns_black_x8.3mf": {
   "ok": true,
-  "time_s": 6455,
-  "grams": 56.8,
+  "time_s": 7620,
+  "grams": 57.7,
   "plates": 1,
-  "when": "2026-11-24 17:46 UTC",
+  "when": "2026-11-24 17:53 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "25%",
    "wall_loops": "3"
   },
-  "hours": 1.79,
+  "hours": 2.12,
   "file": "P3_pawn_test/P3_pawns_black_x8.gcode.3mf"
  }
 }
