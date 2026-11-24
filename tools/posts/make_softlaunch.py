@@ -272,31 +272,6 @@ def p6(r, a):
     if a.bench_photo:
         c.im.paste(cover(a.bench_photo, box[2] - box[0], box[3] - box[1]), box[:2])
         c.d.rectangle(box, outline=t["line"], width=1)
-    else:
-        c.d.rectangle(box, fill=(232, 228, 219))
-        x = box[0]
-        while x < box[2]:                   # dashed hairline frame
-            x2 = min(x + 14, box[2])
-            c.d.line((x, y0, x2, y0), fill=t["muted"], width=1)
-            c.d.line((x, y1, x2, y1), fill=t["muted"], width=1)
-            x += 24
-        yy = y0
-        while yy < y1:
-            y2 = min(yy + 14, y1)
-            c.d.line((box[0], yy, box[0], y2), fill=t["muted"], width=1)
-            c.d.line((box[2], yy, box[2], y2), fill=t["muted"], width=1)
-            yy += 24
-        for cx, cy, sx, sy in ((box[0], y0, 1, 1), (box[2], y0, -1, 1), (box[0], y1, 1, -1), (box[2], y1, -1, -1)):
-            c.d.line((cx + 22 * sx, cy + 22 * sy, cx + 70 * sx, cy + 22 * sy), fill=t["red"], width=3)
-            c.d.line((cx + 22 * sx, cy + 22 * sy, cx + 22 * sx, cy + 70 * sy), fill=t["red"], width=3)
-        mid = (y0 + y1) / 2
-        f = F_head(54)
-        tw = c.tracked((0, 0), "Photo slot", f, t["ink"], -0.02, draw=False)
-        c.tracked(((W - tw) / 2, mid - 70), "Photo slot", f, t["ink"], -0.02)
-        for i, ln in enumerate(["REAL PHOTO OR VIDEO GOES HERE", "THE PRINTER, OR THE FIRST TEST PRINT", "DO NOT POST THIS TEMPLATE AS IT IS"]):
-            fm = F_mono(21)
-            lw = fm.getlength(ln) + 0.04 * 21 * (len(ln) - 1)
-            c.mono(((W - lw) / 2, mid + 14 + i * 34), ln, 21, t["red"] if i == 2 else t["muted"])
     c.mono((M, c.cb - 24), "TEST PRINT. FIT TEST. THEN IT GOES ON SALE.", 22, t["muted"])
     return c.im
 
@@ -334,14 +309,14 @@ def main():
     ap = argparse.ArgumentParser(description="Generate the No Skips soft launch kit.")
     ap.add_argument("posts", nargs="*", type=int, help="post numbers 1 to 9, 7 retired (default: all)")
     ap.add_argument("--out", default=os.path.join(HERE, "out", "softlaunch"))
-    ap.add_argument("--bench-photo", help="real photo for the slot in post 6")
+    ap.add_argument("--bench-photo", help="real photo for post 6; post 6 is skipped without one")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     for n, slug, fn in POSTS:
         if a.posts and n not in a.posts:
             continue
         if n == 6 and not a.bench_photo:
-            slug += "_TEMPLATE"
+            continue  # held back until a real photo exists; no empty placeholder slide
         for r in ("4x5", "9x16"):
             path = os.path.join(a.out, "SoftLaunch_%02d_%s_%s.jpg" % (n, slug, r))
             fn(r, a).save(path, quality=93, subsampling=0, optimize=True)
