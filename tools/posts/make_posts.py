@@ -60,8 +60,6 @@ PRODUCTS = [
     # --- V3 range (24 Nov 2026). Launch pieces show COMING SOON until launch day, no prices before then. ---
     {"code": "D18", "slug": "Ripple", "name": "Ripple", "kind": "Key tray",
      "tagline": "Drop your keys. Make a ripple.", "price": 699, "phase": "soon", "image": "ripple", "note": "YOUR NAME ON THE LIP."},
-    {"code": "D12", "slug": "Rotary", "name": "Rotary", "kind": "Key organiser",
-     "tagline": "Keys that swing out, not jingle.", "price": 449, "phase": "soon", "image": "rotary"},
     {"code": "D8", "slug": "B-Side", "name": "B-Side", "kind": "Catch-all tray",
      "tagline": "Everything you drop at the door.", "price": 999, "phase": "soon", "image": "bside"},
     {"code": "C1", "slug": "Vol-01-The-Studio", "name": "Vol. 01: The Studio", "kind": "Collector set",
