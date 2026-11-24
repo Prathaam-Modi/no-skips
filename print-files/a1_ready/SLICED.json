@@ -498,5 +498,33 @@
   },
   "hours": 2.96,
   "file": "D19_keyrail/D19_keyrail.gcode.3mf"
+ },
+ "G1_patched_in/G1_plug.3mf": {
+  "ok": true,
+  "time_s": 4271,
+  "grams": 11.9,
+  "plates": 1,
+  "when": "2026-11-24 15:38 UTC",
+  "layer": "0.12",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 1.19,
+  "file": "G1_patched_in/G1_plug.gcode.3mf"
+ },
+ "G1_patched_in/G1_socket.3mf": {
+  "ok": true,
+  "time_s": 2882,
+  "grams": 4.4,
+  "plates": 1,
+  "when": "2026-11-24 15:38 UTC",
+  "layer": "0.12",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 0.8,
+  "file": "G1_patched_in/G1_socket.gcode.3mf"
  }
 }
