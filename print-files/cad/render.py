@@ -5,7 +5,7 @@ from mathutils import Vector
 
 OUT = os.environ.get("NS_OUT", "/home/claude/out")
 COL = {"black": (0.016, 0.015, 0.014, 0.52), "ivory": (0.60, 0.555, 0.47, 0.6), "red": (0.56, 0.022, 0.03, 0.5),
-       "prop": (0.085, 0.085, 0.085, 0.35), "prop2": (0.50, 0.48, 0.44, 0.5), "brass": (0.70, 0.50, 0.17, 0.30), "steel": (0.62, 0.63, 0.66, 0.28), "sofa": (0.30, 0.27, 0.235, 1.0), "glass": (0.9, 0.93, 0.95, 0.05), "blue": (0.03, 0.17, 0.55, 0.32)}
+       "prop": (0.085, 0.085, 0.085, 0.35), "prop2": (0.50, 0.48, 0.44, 0.5), "brass": (0.70, 0.50, 0.17, 0.30), "steel": (0.62, 0.63, 0.66, 0.28), "sofa": (0.30, 0.27, 0.235, 1.0), "glass": (0.9, 0.93, 0.95, 0.05), "blue": (0.03, 0.17, 0.55, 0.32), "leaf": (0.05, 0.16, 0.045, 0.55), "soil": (0.045, 0.03, 0.02, 0.95)}
 # scene: az (deg, 0 = straight on from the front, + = camera to the right), el, zoom (1 = fit), optional look-at shift
 SHOTS = {
  "songtag": dict(az=-22, el=52, zoom=1.02), "songtag_sides": dict(az=0, el=62, zoom=1.0), "nametag": dict(az=-22, el=52, zoom=1.02),
@@ -31,6 +31,10 @@ SHOTS = {
  "crate_s1": dict(az=-14, el=40, zoom=1.12), "crate_back": dict(az=152, el=18, zoom=1.0), "crate_s2": dict(az=-30, el=26, zoom=1.0), "crate_s3": dict(az=-32, el=22, zoom=1.0), "crate_s4": dict(az=-28, el=22, zoom=1.0), "crate_s5": dict(az=-28, el=20, zoom=1.0),
  "cover": dict(az=-26, el=24, zoom=1.0), "cover_lifted": dict(az=-30, el=20, zoom=1.0), "cover_top": dict(az=0, el=89, zoom=1.0), "cover_tiles": dict(az=-24, el=40, zoom=1.0),
  "perch": dict(az=-36, el=30, zoom=1.0, focus=("black", "red", "glass", "prop")), "perch_flat": dict(az=-26, el=44, zoom=1.0),
+ "terrace": dict(az=-24, el=16, zoom=0.95, soft=0.6), "twist": dict(az=-24, el=16, zoom=0.95, soft=0.85), "echo": dict(az=-24, el=16, zoom=0.95, soft=0.6),
+ "terrace_black": dict(az=-24, el=16, zoom=0.95, soft=0.85), "twist_black": dict(az=-24, el=16, zoom=0.95, soft=0.85), "echo_black": dict(az=-24, el=16, zoom=0.95, soft=0.85),
+ "terrace_bare": dict(az=-20, el=26, zoom=1.0, soft=0.6), "twist_bare": dict(az=-20, el=26, zoom=1.0, soft=0.6), "echo_bare": dict(az=-20, el=26, zoom=1.0, soft=0.6),
+ "planters_family": dict(az=-14, el=14, zoom=1.0, soft=0.7),
  "ripple": dict(az=-24, el=34, zoom=1.0, soft=0.55), "ripple_black": dict(az=-24, el=34, zoom=1.0, soft=0.8), "ripple_top": dict(az=-8, el=62, zoom=1.0, soft=0.5), "ripple_black_top": dict(az=-8, el=62, zoom=1.0, soft=0.8),
 }
 
