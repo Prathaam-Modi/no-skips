@@ -20,25 +20,9 @@ def x_mark():
 def o_mark():
     return circle(26.0, seg=160).difference(circle(16.5, seg=160))
 
-# House texture (owner, 24 Nov 11:20 pm: "follow the same texture"): B-Side record grooves on flat faces
-# (1.3 mm wide, 0.45 mm deep, 3.4 mm pitch) and bookend-style vertical flutes on upright faces.
-GW, GD, GP = 1.3, 0.45, 3.4
-def groove_rings():
-    """Rounded-square rings following the coaster outline, clear of the X and O marks."""
-    rings = []
-    h = 30.0
-    while h + GW <= CS / 2 - 4.5:
-        rings.append(rrect(2 * (h + GW), 2 * (h + GW), 8.0 * (h + GW) / (CS / 2)).difference(rrect(2 * h, 2 * h, 8.0 * h / (CS / 2))))
-        h += GP
-    return unary_union(rings)
-def flutes(points, r, z0, h, seg=24):
-    return U([cyl(r, h, z0, x, y, seg=seg) for x, y in points])
-
 def coaster():
     sq = rrect(CS, CS, 8.0)
     blk = body(sq, CT, c=0.6, top=True, bottom=True)
-    g = groove_rings()
-    blk = blk - ext(g, GD + 0.01, CT - GD) - ext(g, GD, -0.01)
     # O lies in the bed face, mirrored so it reads right way round when flipped (a ring is symmetric anyway)
     o = ext(o_mark(), BAND, 0.0)
     x = ext(x_mark(), BAND + 0.01, CT - BAND)
@@ -59,15 +43,6 @@ def caddy():
     posts_2d = unary_union([L(-1, 1), L(1, -1)]).intersection(rrect(outer, outer, 9.0))
     posts = body(posts_2d, post_h - base_h + 0.02, base_h - 0.02, c=0.6, top=True)
     m = U([base, posts])
-    # vertical flutes on the two outer faces of each L post, 4 mm pitch like the bookends
-    fl = []
-    for sx, sy in ((-1, 1), (1, -1)):
-        edge_x, edge_y = sx * outer / 2, sy * outer / 2
-        for k in range(5):
-            d = 4.5 + 4.0 * k
-            fl.append((edge_x, edge_y - sy * d))          # face along y
-            fl.append((edge_x - sx * d, edge_y))          # face along x
-    m = m - flutes(fl, 0.8, base_h + 2.0, post_h - base_h)
     lg = ext(affinity.scale(logo(0, 0, 0.9), -1, 1, origin=(0, 0)), 0.6, -0.01)
     pads = U([cyl(6.1, 0.8, -0.01, sx * (outer / 2 - 12), sy * (outer / 2 - 12)) for sx in (-1, 1) for sy in (-1, 1)])
     return m - lg - pads, base_h
@@ -83,10 +58,6 @@ def pawn():
     zc = zs + math.sqrt(R * R - rs * rs)
     head = Manifold.sphere(R, 160).translate((0, 0, zc))
     m = U([stem, head])
-    # flutes round the base disk, between the bed chamfer and the top chamfer
-    n = 28
-    fl = [(rb * math.cos(2 * math.pi * k / n), rb * math.sin(2 * math.pi * k / n)) for k in range(n)]
-    m = m - flutes(fl, 0.7, 1.2, hb - 2.4, seg=20)
     lg = ext(affinity.scale(logo(0, 0, 0.75), -1, 1, origin=(0, 0)), 0.6, -0.01)
     cav = cyl(WASH["r"], WASH["h"], WASH["z"], seg=96)
     return m - lg - cav, zc + R
