@@ -35,6 +35,7 @@ SHOTS = {
  "terrace_black": dict(az=-24, el=16, zoom=0.95, soft=0.85), "twist_black": dict(az=-24, el=16, zoom=0.95, soft=0.85), "echo_black": dict(az=-24, el=16, zoom=0.95, soft=0.85),
  "terrace_bare": dict(az=-20, el=26, zoom=1.0, soft=0.6), "twist_bare": dict(az=-20, el=26, zoom=1.0, soft=0.6), "echo_bare": dict(az=-20, el=26, zoom=1.0, soft=0.6),
  "planters_family": dict(az=-14, el=14, zoom=1.0, soft=0.7),
+ "crosses": dict(az=-20, el=48, zoom=1.0, soft=0.7), "crosses_one": dict(az=-22, el=40, zoom=1.0, soft=0.7), "crosses_stack": dict(az=-30, el=22, zoom=1.0, soft=0.7), "pawns": dict(az=-30, el=20, zoom=1.0, soft=0.7),
  "ripple": dict(az=-24, el=34, zoom=1.0, soft=0.55), "ripple_black": dict(az=-24, el=34, zoom=1.0, soft=0.8), "ripple_top": dict(az=-8, el=62, zoom=1.0, soft=0.5), "ripple_black_top": dict(az=-8, el=62, zoom=1.0, soft=0.8),
 }
 
