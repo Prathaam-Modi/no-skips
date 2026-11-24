@@ -1,3 +1,20 @@
 {
- "jobs": []
+ "jobs": [
+  {
+   "project": "P1_crosses/P1_coasters_x3.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "25%",
+    "wall_loops": "3"
+   }
+  },
+  {
+   "project": "P1_crosses/P1_caddy.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "25%",
+    "wall_loops": "3"
+   }
+  }
+ ]
 }

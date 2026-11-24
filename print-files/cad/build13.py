@@ -23,9 +23,10 @@ def o_mark():
 def coaster():
     sq = rrect(CS, CS, 8.0)
     blk = body(sq, CT, c=0.6, top=True, bottom=True)
-    # O lies in the bed face, mirrored so it reads right way round when flipped (a ring is symmetric anyway)
-    o = ext(o_mark(), BAND, 0.0)
-    x = ext(x_mark(), BAND + 0.01, CT - BAND)
+    # X face prints on the textured PEI bed (owner, 24 Nov: the matte bed finish of the Rotary and wallet goes on the
+    # face people see in the caddy). The X is symmetric, so no mirroring. The O is the smooth top face.
+    x = ext(x_mark(), BAND, 0.0)
+    o = ext(o_mark(), BAND + 0.01, CT - BAND)
     return blk - o - x, x, o
 
 def caddy():
@@ -87,16 +88,16 @@ if __name__ == "__main__":
     for k, v in enumerate(lay):
         if not v: continue
         cx, cy = (k % 3 - 1) * (CS + 6), (1 - k // 3) * (CS + 6)
-        if v == 1: parts = [(blk, BLACK), (x, IVORY), (o, RED)]
+        if v == 2: parts = [(blk, BLACK), (x, IVORY), (o, RED)]
         else: parts = [(flip(blk), BLACK), (flip(x), IVORY), (flip(o), RED)]
         sc += [(mv(m, cx, cy, 0), c) for m, c in parts]
     ox = 1.5 * (CS + 6) + CS / 2 + 30
     sc.append((mv(cad, ox, 60, 0), BLACK))
     for i in range(4):
-        sc += [(mv(m, ox, 60, base_h + i * CT), c) for m, c in [(blk, BLACK), (x, IVORY), (o, RED)]]
+        sc += [(mv(flip(m), ox, 60, base_h + i * CT), c) for m, c in [(blk, BLACK), (x, IVORY), (o, RED)]]
     p.scene("crosses", sc)
-    p.scene("crosses_one", [(blk, BLACK), (x, IVORY), (o, RED)])
-    stack = [(cad, BLACK)] + [(mv(m, 0, 0, base_h + i * CT), c) for i in range(9) for m, c in [(blk, BLACK), (x, IVORY), (o, RED)]]
+    p.scene("crosses_one", [(flip(blk), BLACK), (flip(x), IVORY), (flip(o), RED)])
+    stack = [(cad, BLACK)] + [(mv(flip(m), 0, 0, base_h + i * CT), c) for i in range(9) for m, c in [(blk, BLACK), (x, IVORY), (o, RED)]]
     p.scene("crosses_stack", stack)
     rep["P1"] = p.export()
     # P3 pawn test
