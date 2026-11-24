@@ -555,24 +555,24 @@
  },
  "P1_crosses/P1_coasters_x3.3mf": {
   "ok": true,
-  "time_s": 7112,
-  "grams": 82.3,
+  "time_s": 7223,
+  "grams": 82.8,
   "plates": 1,
-  "when": "2026-11-24 17:42 UTC",
+  "when": "2026-11-24 17:58 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "25%",
    "wall_loops": "3"
   },
-  "hours": 1.98,
+  "hours": 2.01,
   "file": "P1_crosses/P1_coasters_x3.gcode.3mf"
  },
  "P1_crosses/P1_caddy.3mf": {
   "ok": true,
-  "time_s": 4763,
+  "time_s": 4762,
   "grams": 43.1,
   "plates": 1,
-  "when": "2026-11-24 17:42 UTC",
+  "when": "2026-11-24 17:58 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "25%",
