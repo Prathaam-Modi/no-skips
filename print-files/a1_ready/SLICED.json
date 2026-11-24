@@ -442,5 +442,75 @@
   },
   "hours": 3.4,
   "file": "D15_stage/D15_stage_x4_full_row.gcode.3mf"
+ },
+ "D16_lean/D16_lean.3mf": {
+  "ok": true,
+  "time_s": 10005,
+  "grams": 72.6,
+  "plates": 1,
+  "when": "2026-11-24 15:35 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 2.78,
+  "file": "D16_lean/D16_lean.gcode.3mf"
+ },
+ "D17_bookends/D17_bookends.3mf": {
+  "ok": true,
+  "time_s": 19162,
+  "grams": 161.7,
+  "plates": 1,
+  "when": "2026-11-24 15:36 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 5.32,
+  "file": "D17_bookends/D17_bookends.gcode.3mf"
+ },
+ "D18_ripple/D18_ripple.3mf": {
+  "ok": true,
+  "time_s": 8924,
+  "grams": 82.7,
+  "plates": 1,
+  "when": "2026-11-24 15:36 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 2.48,
+  "file": "D18_ripple/D18_ripple.gcode.3mf"
+ },
+ "D19_keyrail/D19_keyrail.3mf": {
+  "ok": true,
+  "time_s": 10673,
+  "grams": 69.6,
+  "plates": 1,
+  "when": "2026-11-24 15:36 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 2.96,
+  "file": "D19_keyrail/D19_keyrail.gcode.3mf"
+ },
+ "G1_patched_in/G1_patched_in.3mf": {
+  "ok": true,
+  "time_s": 42519,
+  "grams": 166.1,
+  "plates": 1,
+  "when": "2026-11-24 15:36 UTC",
+  "layer": "0.12",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "20%"
+  },
+  "hours": 11.81,
+  "file": "G1_patched_in/G1_patched_in.gcode.3mf"
  }
 }
