@@ -1,20 +1,3 @@
 {
- "jobs": [
-  {
-   "project": "G1_patched_in/G1_plug.3mf",
-   "layer": "0.20",
-   "over": {
-    "wall_loops": "3",
-    "sparse_infill_density": "20%"
-   }
-  },
-  {
-   "project": "G1_patched_in/G1_socket.3mf",
-   "layer": "0.20",
-   "over": {
-    "wall_loops": "3",
-    "sparse_infill_density": "20%"
-   }
-  }
- ]
+ "jobs": []
 }

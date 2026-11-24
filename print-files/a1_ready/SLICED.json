@@ -501,30 +501,30 @@
  },
  "G1_patched_in/G1_plug.3mf": {
   "ok": true,
-  "time_s": 4271,
-  "grams": 11.9,
+  "time_s": 2742,
+  "grams": 10.3,
   "plates": 1,
-  "when": "2026-11-24 15:38 UTC",
-  "layer": "0.12",
+  "when": "2026-11-24 15:40 UTC",
+  "layer": "0.20",
   "over": {
    "wall_loops": "3",
    "sparse_infill_density": "20%"
   },
-  "hours": 1.19,
+  "hours": 0.76,
   "file": "G1_patched_in/G1_plug.gcode.3mf"
  },
  "G1_patched_in/G1_socket.3mf": {
   "ok": true,
-  "time_s": 2882,
+  "time_s": 1894,
   "grams": 4.4,
   "plates": 1,
-  "when": "2026-11-24 15:38 UTC",
-  "layer": "0.12",
+  "when": "2026-11-24 15:40 UTC",
+  "layer": "0.20",
   "over": {
    "wall_loops": "3",
    "sparse_infill_density": "20%"
   },
-  "hours": 0.8,
+  "hours": 0.53,
   "file": "G1_patched_in/G1_socket.gcode.3mf"
  }
 }
