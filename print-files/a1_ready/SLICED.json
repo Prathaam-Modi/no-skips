@@ -694,14 +694,18 @@
   "file": "P3_chess_board/P3_board_quad_B.gcode.3mf"
  },
  "P3_chess_board/P3_board_keys_x8.3mf": {
-  "ok": false,
-  "error": "Bambu Studio: Invalid parameter value(s) included in the 3mf file. (code -18)",
-  "when": "2026-11-25 17:05 UTC",
+  "ok": true,
+  "time_s": 1110,
+  "grams": 5.3,
+  "plates": 1,
+  "when": "2026-11-25 17:08 UTC",
   "layer": "0.20",
   "over": {
-   "sparse_infill_density": "100%",
+   "sparse_infill_density": "15%",
    "wall_loops": "3"
-  }
+  },
+  "hours": 0.31,
+  "file": "P3_chess_board/P3_board_keys_x8.gcode.3mf"
  },
  "P3_chess_board/P3_board_joint_test.3mf": {
   "ok": true,
