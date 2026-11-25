@@ -664,5 +664,57 @@
   },
   "hours": 1.28,
   "file": "P2_tangram/P2_frame.gcode.3mf"
+ },
+ "P3_chess_board/P3_board_quad_A.3mf": {
+  "ok": true,
+  "time_s": 7645,
+  "grams": 99.1,
+  "plates": 1,
+  "when": "2026-11-25 17:05 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "15%",
+   "wall_loops": "3"
+  },
+  "hours": 2.12,
+  "file": "P3_chess_board/P3_board_quad_A.gcode.3mf"
+ },
+ "P3_chess_board/P3_board_quad_B.3mf": {
+  "ok": true,
+  "time_s": 7640,
+  "grams": 99.1,
+  "plates": 1,
+  "when": "2026-11-25 17:05 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "15%",
+   "wall_loops": "3"
+  },
+  "hours": 2.12,
+  "file": "P3_chess_board/P3_board_quad_B.gcode.3mf"
+ },
+ "P3_chess_board/P3_board_keys_x8.3mf": {
+  "ok": false,
+  "error": "Bambu Studio: Invalid parameter value(s) included in the 3mf file. (code -18)",
+  "when": "2026-11-25 17:05 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "100%",
+   "wall_loops": "3"
+  }
+ },
+ "P3_chess_board/P3_board_joint_test.3mf": {
+  "ok": true,
+  "time_s": 1550,
+  "grams": 10.8,
+  "plates": 1,
+  "when": "2026-11-25 17:05 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "15%",
+   "wall_loops": "3"
+  },
+  "hours": 0.43,
+  "file": "P3_chess_board/P3_board_joint_test.gcode.3mf"
  }
 }
