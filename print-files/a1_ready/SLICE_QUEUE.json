@@ -1,3 +1,12 @@
 {
- "jobs": []
+ "jobs": [
+  {
+   "project": "P3_chess/P3_test_kings_pawn.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "15%",
+    "wall_loops": "3"
+   }
+  }
+ ]
 }
