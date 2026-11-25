@@ -36,7 +36,7 @@ SHOTS = {
  "terrace_bare": dict(az=-20, el=26, zoom=1.0, soft=0.6), "twist_bare": dict(az=-20, el=26, zoom=1.0, soft=0.6), "echo_bare": dict(az=-20, el=26, zoom=1.0, soft=0.6),
  "planters_family": dict(az=-14, el=14, zoom=1.0, soft=0.7),
  "crosses": dict(az=-20, el=48, zoom=1.0, soft=0.7), "crosses_one": dict(az=-22, el=40, zoom=1.0, soft=0.7), "crosses_stack": dict(az=-30, el=22, zoom=1.0, soft=0.7), "pawns": dict(az=-30, el=20, zoom=1.0, soft=0.7),
- "tangram": dict(az=-20, el=50, zoom=1.0, soft=0.7), "tangram_loose": dict(az=-20, el=52, zoom=0.9, soft=0.7),
+ "chess_set": dict(az=-18, el=24, zoom=1.0, soft=0.7), "chess_forms": dict(az=-12, el=14, zoom=1.0, soft=0.7), "tangram": dict(az=-20, el=50, zoom=1.0, soft=0.7), "tangram_loose": dict(az=-20, el=52, zoom=0.9, soft=0.7),
  "ripple": dict(az=-24, el=34, zoom=1.0, soft=0.55), "ripple_black": dict(az=-24, el=34, zoom=1.0, soft=0.8), "ripple_top": dict(az=-8, el=62, zoom=1.0, soft=0.5), "ripple_black_top": dict(az=-8, el=62, zoom=1.0, soft=0.8),
 }
 
