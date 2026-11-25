@@ -7,7 +7,7 @@ on its front and back faces, so the set teaches itself. Heights rise 4 mm per ra
   bishop  block with a roof whose ridge runs corner to corner (the diagonal)   glyph x
   queen   block with a pyramid cap (the pawn, promoted onto a column)          glyph * (+ and x)
   king    tallest block, flat top, red square inlay on top                     glyph square (one step any way)
-Rules: no supports, no metal, logo debossed underneath, glyph grooves 1.2 mm wide and 0.6 mm deep.
+Rules: no supports, no metal, logo debossed underneath, glyph grooves 1.6 mm wide and 0.6 mm deep.
 Usage: NS_OUT=/tmp/out python3 build16.py"""
 import math, json, os
 from shapely.geometry import LineString
@@ -17,7 +17,7 @@ from build13 import GRID
 
 S, RC, C = 22.0, 1.0, 0.6          # block side, corner radius, bevel
 PB = 18.0                          # pawn base
-D, W = 0.6, 1.2                    # engraving depth and stroke
+D, W = 0.6, 1.6                    # engraving depth and stroke (1.2 mm before 25 Nov 10 pm)
 H = dict(pawn=32.0, rook=36.0, knight=40.0, bishop=44.0, queen=48.0, king=52.0)
 ORDER = ["pawn", "rook", "knight", "bishop", "queen", "king"]
 
