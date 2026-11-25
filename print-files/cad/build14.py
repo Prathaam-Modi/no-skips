@@ -10,7 +10,8 @@ GRID = 45.0
 S = 3 * GRID                 # solved square, 135 mm
 U4 = S / 4.0                 # tangram drawn on a 4 x 4 grid
 PT = 5.0                     # piece thickness
-GAP = 0.5                    # clearance between pieces and to the frame
+GAP = 0.3                    # clearance between neighbouring pieces (0.15 mm taken off each piece edge)
+FMARGIN = 0.2                # extra frame clearance outside the square, so pieces sit 0.35 mm off the wall
 FB, FR = 3.0, 2.0            # frame floor and rim height above the floor (pieces stand 3 mm proud)
 FW = 6.0                     # frame wall
 RC = 1.5                     # rounded piece corners
@@ -47,7 +48,7 @@ def piece(name):
     return body(p, PT, c=0.6, top=True, bottom=True), (c.x, c.y)
 
 def frame():
-    inner = S + GAP * 2
+    inner = S + FMARGIN * 2
     outer = inner + 2 * FW
     h = FB + FR
     m = body(rrect(outer, outer, 7.0), h, c=0.6, top=True, bottom=True)
