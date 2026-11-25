@@ -72,12 +72,18 @@ def bishop():
     m = keep_below(m, (k, -k, 1.0), h); m = keep_below(m, (-k, k, 1.0), h)   # ridge along x = y
     return underside(engrave(m, GLYPH["bishop"], 20.0, S / 2))
 
+QDOT = 1.8                         # red queen dot radius (25 Nov 11 pm, owner: a red dot on the queens)
 def queen():
-    h = H["queen"]; cap = 10.0
+    """Body ends in a 4 mm flat; the red dot is a dome on it with a 0.6 mm plug sunk into the flat (same trick as the king inlay)."""
+    h = H["queen"]; cap = 10.0; ztop = h - QDOT; ct = 4.0
     col = block(h - cap + 0.01, top=False)
-    pyr = Manifold.cylinder(cap, S / math.sqrt(2), 1.2 / math.sqrt(2), 4).rotate((0, 0, 45)).translate((0, 0, h - cap))
+    pyr = Manifold.cylinder(ztop - (h - cap), S / math.sqrt(2), ct / math.sqrt(2), 4).rotate((0, 0, 45)).translate((0, 0, h - cap))
     pyr = pyr ^ ext(rrect(S, S, RC), cap + 1, h - cap - 0.5)
-    return underside(engrave(U([col, pyr]), GLYPH["queen"], 22.0, S / 2))
+    plug = Manifold.cylinder(D + 0.01, QDOT, QDOT, 48).translate((0, 0, ztop - D))
+    dome = Manifold.sphere(QDOT, 48).translate((0, 0, ztop)) ^ cube(2 * QDOT + 1, 2 * QDOT + 1, QDOT + 1, 0, 0, ztop)
+    dot = U([plug, dome])
+    m = U([col, pyr]) - plug
+    return underside(engrave(m, GLYPH["queen"], 22.0, S / 2)), dot
 
 KTOP = rrect(10.0, 10.0, 0.8)
 def king():
@@ -92,7 +98,8 @@ def overhang(m, zmin=0.8):
     return float(t.area_faces[bad].sum())
 
 if __name__ == "__main__":
-    P = {n: globals()[n]() for n in ORDER[:-1]}
+    P = {n: globals()[n]() for n in ORDER if n not in ("queen", "king")}
+    qb, qdot = queen(); P["queen"] = qb
     kb, kin = king(); P["king"] = kb
     QTY = {"pawn": 8, "rook": 2, "knight": 2, "bishop": 2, "queen": 1, "king": 1}
     q = Product("P3", "chess", "Six Cuts chess set")
@@ -100,6 +107,7 @@ if __name__ == "__main__":
         for n in ORDER:
             q.part(f"{n}_{sfx}", P[n], colour, qty=QTY[n], infill=0.15)
             if n == "king": q.part(f"king_top_{sfx}", kin, RED, on=f"king_{sfx}")
+            if n == "queen": q.part(f"queen_dot_{sfx}", qdot, RED, on=f"queen_{sfx}")
     # scenes
     names = ["rook", "knight", "bishop", "queen", "king", "pawn"]
     xs = [(i - 2.5) * GRID for i in range(6)]
@@ -110,12 +118,14 @@ if __name__ == "__main__":
         for i, n in enumerate(names):
             sc.append((mv(P[n].rotate((0, 0, rz)), xs[i], y, 0), col))
             if n == "king": sc.append((mv(kin, xs[i], y, 0), RED))
+            if n == "queen": sc.append((mv(qdot.rotate((0, 0, rz)), xs[i], y, 0), RED))
     q.scene("chess2_set", sc)
     f = []
     for i, n in enumerate(ORDER):
         x = (i - 2.5) * 34.0
         f.append((mv(P[n], x, 0, 0), IVORY))
         if n == "king": f.append((mv(kin, x, 0, 0), RED))
+        if n == "queen": f.append((mv(qdot, x, 0, 0), RED))
     q.scene("chess2_forms", f)
     rep = q.export()
     print("piece     H    foot  grams15  grams100  overhang_mm2  tip_deg")
