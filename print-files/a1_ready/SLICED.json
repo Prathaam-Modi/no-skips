@@ -762,5 +762,47 @@
   },
   "hours": 1.14,
   "file": "P3_chess/P3_test_minors_40.gcode.3mf"
+ },
+ "P2_tangram/P2_pieces_black.3mf": {
+  "ok": true,
+  "time_s": 4414,
+  "grams": 53.7,
+  "plates": 1,
+  "when": "2026-11-26 15:46 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "25%",
+   "wall_loops": "3"
+  },
+  "hours": 1.23,
+  "file": "P2_tangram/P2_pieces_black.gcode.3mf"
+ },
+ "P2_tangram/P2_frame_ivory.3mf": {
+  "ok": true,
+  "time_s": 4603,
+  "grams": 58.6,
+  "plates": 1,
+  "when": "2026-11-26 15:46 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "25%",
+   "wall_loops": "3"
+  },
+  "hours": 1.28,
+  "file": "P2_tangram/P2_frame_ivory.gcode.3mf"
+ },
+ "P2_tangram/P2_piece_red_x2.3mf": {
+  "ok": true,
+  "time_s": 1679,
+  "grams": 15.6,
+  "plates": 1,
+  "when": "2026-11-26 15:46 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "25%",
+   "wall_loops": "3"
+  },
+  "hours": 0.47,
+  "file": "P2_tangram/P2_piece_red_x2.gcode.3mf"
  }
 }
