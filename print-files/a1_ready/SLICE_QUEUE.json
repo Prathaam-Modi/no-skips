@@ -1,3 +1,46 @@
 {
- "jobs": []
+ "jobs": [
+  {
+   "project": "_trials/queen_T1.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "100%",
+    "sparse_infill_pattern": "zig-zag",
+    "wall_loops": "3",
+    "wipe_tower_no_sparse_layers": "1"
+   }
+  },
+  {
+   "project": "_trials/queen_T2.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "100%",
+    "sparse_infill_pattern": "zig-zag",
+    "wall_loops": "3",
+    "prime_tower_width": "20"
+   }
+  },
+  {
+   "project": "_trials/queen_T3.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "100%",
+    "sparse_infill_pattern": "zig-zag",
+    "wall_loops": "3",
+    "flush_multiplier": "0.5"
+   }
+  },
+  {
+   "project": "_trials/queen_T4.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "100%",
+    "sparse_infill_pattern": "zig-zag",
+    "wall_loops": "3",
+    "wipe_tower_no_sparse_layers": "1",
+    "prime_tower_width": "20",
+    "flush_multiplier": "0.5"
+   }
+  }
+ ]
 }
