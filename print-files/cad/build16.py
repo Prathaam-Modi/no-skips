@@ -128,6 +128,7 @@ if __name__ == "__main__":
         if n == "king": f.append((mv(kin, x, 0, 0), RED))
         if n == "queen": f.append((mv(qdot, x, 0, 0), RED))
     q.scene("chess2_forms", f)
+    q.scene("queen_close", [(mv(P["queen"], -20, 0, 0), IVORY), (mv(qdot, -20, 0, 0), RED), (mv(P["queen"].rotate((0, 0, 180)), 20, 0, 0), BLACK), (mv(qdot.rotate((0, 0, 180)), 20, 0, 0), RED)])
     rep = q.export()
     print("piece     H    foot  grams15  grams100  overhang_mm2  tip_deg")
     for n in ORDER:
