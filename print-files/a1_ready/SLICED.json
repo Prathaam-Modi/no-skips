@@ -723,10 +723,10 @@
  },
  "P3_chess/P3_test_kings_pawn.3mf": {
   "ok": true,
-  "time_s": 5921,
+  "time_s": 5910,
   "grams": 52.1,
   "plates": 1,
-  "when": "2026-11-25 17:17 UTC",
+  "when": "2026-11-26 16:53 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "15%",
@@ -737,31 +737,31 @@
  },
  "P3_chess/P3_test_queen.3mf": {
   "ok": true,
-  "time_s": 4083,
-  "grams": 32.4,
+  "time_s": 4006,
+  "grams": 30.8,
   "plates": 1,
-  "when": "2026-11-26 16:27 UTC",
+  "when": "2026-11-26 16:53 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "100%",
    "sparse_infill_pattern": "zig-zag",
    "wall_loops": "3"
   },
-  "hours": 1.13,
+  "hours": 1.11,
   "file": "P3_chess/P3_test_queen.gcode.3mf"
  },
  "P3_chess/P3_test_minors_40.3mf": {
   "ok": true,
-  "time_s": 4092,
+  "time_s": 4064,
   "grams": 37.3,
   "plates": 1,
-  "when": "2026-11-26 15:34 UTC",
+  "when": "2026-11-26 16:53 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "40%",
    "wall_loops": "3"
   },
-  "hours": 1.14,
+  "hours": 1.13,
   "file": "P3_chess/P3_test_minors_40.gcode.3mf"
  },
  "P2_tangram/P2_pieces_black.3mf": {
