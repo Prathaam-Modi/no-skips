@@ -748,5 +748,19 @@
   },
   "hours": 0.8,
   "file": "P3_chess/P3_test_queen.gcode.3mf"
+ },
+ "P3_chess/P3_test_minors_40.3mf": {
+  "ok": true,
+  "time_s": 4092,
+  "grams": 37.3,
+  "plates": 1,
+  "when": "2026-11-26 15:34 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "40%",
+   "wall_loops": "3"
+  },
+  "hours": 1.14,
+  "file": "P3_chess/P3_test_minors_40.gcode.3mf"
  }
 }
