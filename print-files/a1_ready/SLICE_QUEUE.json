@@ -1,3 +1,13 @@
 {
- "jobs": []
+ "jobs": [
+  {
+   "project": "P3_chess/P3_test_queen.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "100%",
+    "sparse_infill_pattern": "zig-zag",
+    "wall_loops": "3"
+   }
+  }
+ ]
 }
