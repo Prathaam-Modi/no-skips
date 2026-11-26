@@ -737,16 +737,17 @@
  },
  "P3_chess/P3_test_queen.3mf": {
   "ok": true,
-  "time_s": 2895,
-  "grams": 16.5,
+  "time_s": 4083,
+  "grams": 32.4,
   "plates": 1,
-  "when": "2026-11-26 13:10 UTC",
+  "when": "2026-11-26 16:27 UTC",
   "layer": "0.20",
   "over": {
-   "sparse_infill_density": "15%",
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag",
    "wall_loops": "3"
   },
-  "hours": 0.8,
+  "hours": 1.13,
   "file": "P3_chess/P3_test_queen.gcode.3mf"
  },
  "P3_chess/P3_test_minors_40.3mf": {
