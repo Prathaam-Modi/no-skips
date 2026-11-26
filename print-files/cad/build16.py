@@ -72,17 +72,18 @@ def bishop():
     m = keep_below(m, (k, -k, 1.0), h); m = keep_below(m, (-k, k, 1.0), h)   # ridge along x = y
     return underside(engrave(m, GLYPH["bishop"], 20.0, S / 2))
 
-QDOT = 1.8                         # red queen dot radius (25 Nov 11 pm, owner: a red dot on the queens)
+QFLAT, QDOT = 10.0, 3.0             # queen top flat (side) and red dot radius
 def queen():
-    """Body ends in a 4 mm flat; the red dot is a dome on it with a 0.6 mm plug sunk into the flat (same trick as the king inlay)."""
-    h = H["queen"]; cap = 10.0; ztop = h - QDOT; ct = 4.0
+    """Rev 26 Nov (owner: avoid stringing). The pyramid cap is cut off at a 10 mm square flat, and the red dot is a 6 mm disc
+    inlaid FLUSH 0.6 mm into it (same method as the king's square). Before: a 1.8 mm raised red dome on a 4 mm flat, which made
+    the nozzle print tiny red islands in the air above the cap (strings and blobs) and a slow, overheated tip.
+    Now the last 3 layers are one solid 10 mm face; red stays inside the pocket and there is no point to print."""
+    h = H["queen"]; cap = 10.0
     col = block(h - cap + 0.01, top=False)
-    pyr = Manifold.cylinder(ztop - (h - cap), S / math.sqrt(2), ct / math.sqrt(2), 4).rotate((0, 0, 45)).translate((0, 0, h - cap))
+    pyr = Manifold.cylinder(cap, S / math.sqrt(2), QFLAT / math.sqrt(2), 4).rotate((0, 0, 45)).translate((0, 0, h - cap))
     pyr = pyr ^ ext(rrect(S, S, RC), cap + 1, h - cap - 0.5)
-    plug = Manifold.cylinder(D + 0.01, QDOT, QDOT, 48).translate((0, 0, ztop - D))
-    dome = Manifold.sphere(QDOT, 48).translate((0, 0, ztop)) ^ cube(2 * QDOT + 1, 2 * QDOT + 1, QDOT + 1, 0, 0, ztop)
-    dot = U([plug, dome])
-    m = U([col, pyr]) - plug
+    dot = Manifold.cylinder(D, QDOT, QDOT, 64).translate((0, 0, h - D))
+    m = U([col, pyr]) - Manifold.cylinder(D + 0.01, QDOT, QDOT, 64).translate((0, 0, h - D))
     return underside(engrave(m, GLYPH["queen"], 22.0, S / 2)), dot
 
 KTOP = rrect(10.0, 10.0, 0.8)
