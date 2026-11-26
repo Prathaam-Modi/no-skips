@@ -3,11 +3,12 @@ Idea: every piece is the same 22 mm square block, cut a different way. Each piec
 on its front and back faces, so the set teaches itself. Heights rise 4 mm per rank.
   pawn    lean square pyramid (18 mm base)          glyph |   one step forward
   rook    plain block, flat top                      glyph +   straight lines
-  knight  block with a stepped top (head and snout)  glyph L
+  knight  column with a lower snout and a head standing on its back half (all edges bevelled)  glyph L
   bishop  block with a roof whose ridge runs corner to corner (the diagonal)   glyph x
-  queen   block with a pyramid cap (the pawn, promoted onto a column)          glyph * (+ and x)
+  queen   column with a 16 mm tapered cap, flat top, flush red dot (the pawn promoted onto a column)  glyph * (+ and x)
   king    tallest block, flat top, red square inlay on top                     glyph square (one step any way)
-Rules: no supports, no metal, logo debossed underneath, glyph grooves 1.6 mm wide and 0.6 mm deep.
+Rules: no supports, no metal, logo debossed underneath, glyph grooves 1.6 mm wide and 0.6 mm deep, every edge 0.6 mm (stepped bevel on the
+flat-topped blocks, rounded on the sloped pieces) so the set reads as one family. Audited 26 Nov: geometry checked, see changelog.
 Usage: NS_OUT=/tmp/out python3 build16.py"""
 import math, json, os
 from shapely.geometry import LineString
@@ -35,6 +36,15 @@ GLYPH = {
     "king": rrect(8.4, 8.4, 0.6).difference(rrect(8.4 - 2 * W, 8.4 - 2 * W, 0.2)),
 }
 
+# every glyph is centred on its own bounding box, so what you see on the face is exactly centred on the face
+GLYPH = {k: affinity.translate(g, -(g.bounds[0] + g.bounds[2]) / 2, -(g.bounds[1] + g.bounds[3]) / 2) for k, g in GLYPH.items()}
+
+def soft(m, r=0.6, seg=32):
+    """Round every convex edge of a convex solid with radius r (erode by a sphere, then dilate by it). The stepped bevel of
+    the flat-topped blocks cannot follow a sloped cut, so pawn, bishop and queen are softened this way to the same 0.6 mm."""
+    s = Manifold.sphere(r, seg)
+    return m.minkowski_difference(s).minkowski_sum(s)
+
 def engrave(m, g2d, zc, half, phi=0.0):
     """Cut the glyph into the +y and -y faces. half = distance from the axis to the face at height zc; phi = face lean."""
     cut = ext(g2d, D + 1.0, -1.0)                       # local z: outside (-1) to D inside the face
@@ -53,37 +63,44 @@ def keep_below(m, n, c):
 # ---------------------------------------------------------------- pieces
 def pawn():
     h = H["pawn"]; top = 1.6
-    m = Manifold.cylinder(h, PB / math.sqrt(2), top / math.sqrt(2), 4).rotate((0, 0, 45))
-    phi = math.atan((PB - top) / 2 / h); zc = 12.0
-    m = engrave(m, GLYPH["pawn"], zc, PB / 2 - zc * math.tan(phi), phi)
+    def build(pb): return soft(Manifold.cylinder(h, pb / math.sqrt(2), top / math.sqrt(2), 4).rotate((0, 0, 45)))
+    pb = PB; bb = build(pb).bounding_box()
+    pb += PB - (bb[3] - bb[0])                       # rounding the foot trims ~0.3 mm off the widest point; widen the pyramid so the base measures 18.00
+    m = build(pb)
+    phi = math.atan((pb - top) / 2 / h); zc = 12.0
+    m = engrave(m, GLYPH["pawn"], zc, pb / 2 - zc * math.tan(phi), phi)
     return underside(m, 0.85)
 
 def rook():
     return underside(engrave(block(H["rook"]), GLYPH["rook"], 22.0, S / 2))
 
 def knight():
+    """Two bevelled bodies joined: a full-width column up to the snout, and the head standing on its back half. Cutting the snout
+    out of one block (before 26 Nov) left its top and front edges razor sharp; built this way every edge carries the set's bevel."""
     h = H["knight"]; drop = 13.0; back = 0.45 * S          # tall head at the back (-y), lower snout toward the opponent (+y)
-    m = block(h) - cube(S + 2, S - back + 1, drop + 2, 0, -S / 2 + back + (S - back + 1) / 2, h - drop)
-    return underside(engrave(m, GLYPH["knight"], 15.5, S / 2))
+    col = block(h - drop)
+    head = body(rrect(S, back, RC, 0.0, -S / 2 + back / 2), h, c=C, top=True, bottom=True)
+    return underside(engrave(U([col, head]), GLYPH["knight"], 15.5, S / 2))
 
 def bishop():
     h = H["bishop"]; t = math.tan(math.radians(30)); k = t / math.sqrt(2)
-    m = block(h + 1, top=False)
-    m = keep_below(m, (k, -k, 1.0), h); m = keep_below(m, (-k, k, 1.0), h)   # ridge along x = y
+    def build(hp):
+        m = keep_below(ext(rrect(S, S, RC), hp + 2.0), (k, -k, 1.0), hp)
+        return soft(keep_below(m, (-k, k, 1.0), hp))        # ridge along x = y, every edge rounded 0.6
+    m = build(h); m = build(h + (h - m.bounding_box()[5]))  # rounding dips the ridge a hair; lift the planes so it still stands 44.00
     return underside(engrave(m, GLYPH["bishop"], 20.0, S / 2))
 
-QFLAT, QDOT = 10.0, 3.0             # queen top flat (side) and red dot radius
+QFLAT, QDOT, QCAP = 10.0, 3.0, 16.0   # queen top flat (side), red dot radius, height of the tapered cap
 def queen():
-    """Rev 26 Nov (owner: avoid stringing). The pyramid cap is cut off at a 10 mm square flat, and the red dot is a 6 mm disc
-    inlaid FLUSH 0.6 mm into it (same method as the king's square). Before: a 1.8 mm raised red dome on a 4 mm flat, which made
-    the nozzle print tiny red islands in the air above the cap (strings and blobs) and a slow, overheated tip.
-    Now the last 3 layers are one solid 10 mm face; red stays inside the pocket and there is no point to print."""
-    h = H["queen"]; cap = 10.0
-    col = block(h - cap + 0.01, top=False)
-    pyr = Manifold.cylinder(cap, S / math.sqrt(2), QFLAT / math.sqrt(2), 4).rotate((0, 0, 45)).translate((0, 0, h - cap))
-    pyr = pyr ^ ext(rrect(S, S, RC), cap + 1, h - cap - 0.5)
+    """Rev 26 Nov. (1) Flush red dot in a 10 mm flat, not a raised dome (the dome made the nozzle print red islands in mid-air).
+    (2) Cap is now 16 mm tall instead of 10 and every edge is rounded 0.6: at 10 mm the shape read as a milk carton, and the cut
+    left kinked facets where the pyramid met the corner radii. A taller, gentler cap reads as the pawn's slope carried onto a column."""
+    h = H["queen"]
+    sl = (S / 2 - QFLAT / 2) / QCAP                        # half-width lost per mm of cap
+    fr = Manifold.cylinder(h, (S / 2 + (h - QCAP) * sl) * math.sqrt(2), QFLAT / 2 * math.sqrt(2), 4).rotate((0, 0, 45))
+    m = soft(fr ^ ext(rrect(S, S, RC), h))
     dot = Manifold.cylinder(D, QDOT, QDOT, 64).translate((0, 0, h - D))
-    m = U([col, pyr]) - Manifold.cylinder(D + 0.01, QDOT, QDOT, 64).translate((0, 0, h - D))
+    m = m - Manifold.cylinder(D + 0.01, QDOT, QDOT, 64).translate((0, 0, h - D))
     return underside(engrave(m, GLYPH["queen"], 22.0, S / 2)), dot
 
 KTOP = rrect(10.0, 10.0, 0.8)
