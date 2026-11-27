@@ -667,10 +667,10 @@
  },
  "P3_chess_board/P3_board_quad_A.3mf": {
   "ok": true,
-  "time_s": 7645,
+  "time_s": 7644,
   "grams": 99.1,
   "plates": 1,
-  "when": "2026-11-25 17:05 UTC",
+  "when": "2026-11-27 06:47 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "15%",
@@ -681,16 +681,16 @@
  },
  "P3_chess_board/P3_board_quad_B.3mf": {
   "ok": true,
-  "time_s": 7640,
+  "time_s": 7654,
   "grams": 99.1,
   "plates": 1,
-  "when": "2026-11-25 17:05 UTC",
+  "when": "2026-11-27 06:47 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "15%",
    "wall_loops": "3"
   },
-  "hours": 2.12,
+  "hours": 2.13,
   "file": "P3_chess_board/P3_board_quad_B.gcode.3mf"
  },
  "P3_chess_board/P3_board_keys_x8.3mf": {
