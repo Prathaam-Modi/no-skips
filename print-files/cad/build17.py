@@ -65,9 +65,10 @@ def coupon():
     b = a.mirror((1, 0, 0)).translate((2 * Q, 0, 0))          # the neighbour: pockets are symmetric about the seam
     return a, b
 
-def key(grow=0.0, dots=0):
+KEY_PROD_T = 3.1     # production key: 0.1 mm shy of the 3.2 pocket, so it reads flush with a hairline reveal (test keys stay 3.0)
+def key(grow=0.0, dots=0, t=KEY_T):
     """grow > 0 makes a tighter test key. dots = small marks on top to tell test keys apart."""
-    m = body(key2d().buffer(grow, quad_segs=6), KEY_T, c=0.4, top=True, bottom=True)
+    m = body(key2d().buffer(grow, quad_segs=6), t, c=0.4, top=True, bottom=True)
     for d in range(dots):
         m = m - cyl(0.9, 0.61, KEY_T - 0.6, -7.5, (d - (dots - 1) / 2) * 3.2, seg=24)
     return m
@@ -94,11 +95,11 @@ def overhang(m, zmin=0.8):
     return float(t.area_faces[(nz < -0.7072) & (cz > zmin)].sum())
 
 if __name__ == "__main__":
-    qa, ia = quadrant("A"); qb, ib = quadrant("B"); ky = key(KEY_GROW)
+    qa, ia = quadrant("A"); qb, ib = quadrant("B"); ky = key(KEY_GROW, 0, KEY_PROD_T)
     q = Product("P3", "chess_board", "Chess board quadrants")
     q.part("quad_A", qa, BLACK, qty=2, infill=0.15); q.part("quad_A_ivory", ia, IVORY, qty=2, on="quad_A")
     q.part("quad_B", qb, BLACK, qty=2, infill=0.15); q.part("quad_B_ivory", ib, IVORY, qty=2, on="quad_B")
-    q.part("key", ky, BLACK, qty=8, infill=1.0)
+    q.part("key", ky, IVORY, qty=8, infill=1.0)
     ca, cb = coupon()
     q.part("coupon_left", ca, BLACK, infill=0.15); q.part("coupon_right", cb, BLACK, infill=0.15)
     # Round 2 (27 Nov): every key of round 1 (gaps 0.15, 0.20, 0.25 per side) was loose, so the fit is tighter than 0.15.
@@ -131,15 +132,15 @@ if __name__ == "__main__":
         if n == "king": sc.append((mv(c16.king()[1].rotate((0, 0, rz)), x, y, T), RED))
     q.scene("chess_board", sc)
     q.scene("chess_board_bare", [s for s in sc[:8]])
-    # underside preview (27 Nov): four quadrants as printed (underside up), keys red and flush across every seam
+    # underside preview (27 Nov): four quadrants as printed (underside up), keys ivory and near flush across every seam
     ux = lambda m, dx, dy, rz: mv(m.translate((-Q / 2, -Q / 2, 0)).rotate((0, 0, rz)).translate((Q / 2, Q / 2, 0)), dx, dy, 0)
     under = []
     for (m, pos, rz) in ((qa, (0, 0), 0), (qb, (1, 0), 90), (qb, (0, 1), -90), (qa, (1, 1), 180)):
         under.append((ux(m, pos[0] * Q, pos[1] * Q, rz), BLACK))
-    kf = body(key2d().buffer(KEY_GROW - 0.0, quad_segs=6), POCKET_D, c=0.4, top=True, bottom=True).translate((0, 0, T - POCKET_D))
+    kf = key(KEY_GROW, 0, KEY_PROD_T).translate((0, 0, T - POCKET_D + 0.1))
     for a in KEY_AT:
-        under.append((kf.translate((Q, a, 0)), RED)); under.append((kf.rotate((0, 0, 90)).translate((a, Q, 0)), RED))
-        under.append((kf.translate((Q, 2 * Q - a, 0)), RED)); under.append((kf.rotate((0, 0, 90)).translate((2 * Q - a, Q, 0)), RED))
+        under.append((kf.translate((Q, a, 0)), IVORY)); under.append((kf.rotate((0, 0, 90)).translate((a, Q, 0)), IVORY))
+        under.append((kf.translate((Q, 2 * Q - a, 0)), IVORY)); under.append((kf.rotate((0, 0, 90)).translate((2 * Q - a, Q, 0)), IVORY))
     q.scene("board_underside", under)
     rep = q.export()
     print("quadrant files:", [(p["file"], p["size"], p["grams"]) for p in rep["parts"]])
