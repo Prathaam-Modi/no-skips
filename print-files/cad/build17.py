@@ -17,7 +17,7 @@ T = 6.0               # board thickness
 BAND = 0.6            # inlay depth, 3 layers
 INSET = 0.1           # inner edges pulled in 0.1 mm each, so two quadrants leave 0.2 mm at the seam
 KEY_T, POCKET_D = 3.0, 3.2
-CLR = 0.2             # pocket clearance per side (snug: a 0.3 key lets the seam open about 0.6 mm). Test keys at 0.15/0.20/0.25 on the coupon plate
+CLR = 0.2             # pocket clearance per side (snug: a 0.3 key lets the seam open about 0.6 mm). Round 1 test keys (0.15/0.20/0.25) were all loose; round 2 tests 0.10/0.075/0.05/0.025
 KEY_AT = (GRID, 3 * GRID)   # keys sit on the square lines 45 and 135 mm from the corner
 
 def outline():
@@ -99,7 +99,9 @@ if __name__ == "__main__":
     q.part("key", ky, BLACK, qty=8, infill=1.0)
     ca, cb = coupon()
     q.part("coupon_left", ca, BLACK, infill=0.15); q.part("coupon_right", cb, BLACK, infill=0.15)
-    for n, g in ((1, 0.05), (2, 0.0), (3, -0.05)):          # 1 dot = 0.15 mm gap, 2 = 0.20 (the design value), 3 = 0.25
+    # Round 2 (27 Nov): every key of round 1 (gaps 0.15, 0.20, 0.25 per side) was loose, so the fit is tighter than 0.15.
+    # grow = CLR - gap. 1 dot = 0.10 mm gap per side, 2 dots = 0.075, 3 dots = 0.05, 4 dots = 0.025.
+    for n, g in ((1, 0.10), (2, 0.125), (3, 0.15), (4, 0.175)):
         q.part(f"testkey_{n}dot", key(g, n), BLACK, infill=1.0)
     # render scene: board face up, start position
     # turning the printed quadrant over along its diagonal: (x, y, z) -> (y, x, T - z). Outline, pockets and squares are all
@@ -115,6 +117,7 @@ if __name__ == "__main__":
         sc.append((quad(flip(m), pos, rz), BLACK)); sc.append((quad(flip(iv), pos, rz), IVORY))
     ox, oy = -2 * Q / 2 * 0, 0
     P = {n: getattr(c16, n)() for n in c16.ORDER[:-1]}; kb, kin = c16.king(); P["king"] = kb
+    if isinstance(P["queen"], tuple): P["queen"] = P["queen"][0]   # queen() returns (body, red dot) since 25 Nov; the board scene uses the body
     back = ["rook", "knight", "bishop", "queen", "king", "bishop", "knight", "rook"]
     pieces = []
     for i in range(8):
