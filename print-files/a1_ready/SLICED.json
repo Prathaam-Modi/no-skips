@@ -709,16 +709,16 @@
  },
  "P3_chess_board/P3_board_joint_test.3mf": {
   "ok": true,
-  "time_s": 1550,
-  "grams": 10.8,
+  "time_s": 1614,
+  "grams": 11.1,
   "plates": 1,
-  "when": "2026-11-25 17:05 UTC",
+  "when": "2026-11-27 05:25 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "15%",
    "wall_loops": "3"
   },
-  "hours": 0.43,
+  "hours": 0.45,
   "file": "P3_chess_board/P3_board_joint_test.gcode.3mf"
  },
  "P3_chess/P3_test_kings_pawn.3mf": {
