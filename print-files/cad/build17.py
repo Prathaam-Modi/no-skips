@@ -17,6 +17,7 @@ T = 6.0               # board thickness
 BAND = 0.6            # inlay depth, 3 layers
 INSET = 0.1           # inner edges pulled in 0.1 mm each, so two quadrants leave 0.2 mm at the seam
 KEY_T, POCKET_D = 3.0, 3.2
+KEY_GROW = 0.175     # production keys are grown by this: gap 0.025 mm per side (owner picked the 4-dot test key on 27 Nov)
 CLR = 0.2             # pocket clearance per side (snug: a 0.3 key lets the seam open about 0.6 mm). Round 1 test keys (0.15/0.20/0.25) were all loose; round 2 tests 0.10/0.075/0.05/0.025
 KEY_AT = (GRID, 3 * GRID)   # keys sit on the square lines 45 and 135 mm from the corner
 
@@ -92,7 +93,7 @@ def overhang(m, zmin=0.8):
     return float(t.area_faces[(nz < -0.7072) & (cz > zmin)].sum())
 
 if __name__ == "__main__":
-    qa, ia = quadrant("A"); qb, ib = quadrant("B"); ky = key()
+    qa, ia = quadrant("A"); qb, ib = quadrant("B"); ky = key(KEY_GROW)
     q = Product("P3", "chess_board", "Chess board quadrants")
     q.part("quad_A", qa, BLACK, qty=2, infill=0.15); q.part("quad_A_ivory", ia, IVORY, qty=2, on="quad_A")
     q.part("quad_B", qb, BLACK, qty=2, infill=0.15); q.part("quad_B_ivory", ib, IVORY, qty=2, on="quad_B")
