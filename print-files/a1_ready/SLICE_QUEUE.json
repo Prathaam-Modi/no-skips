@@ -1,3 +1,20 @@
 {
- "jobs": []
+ "jobs": [
+  {
+   "project": "P3_chess_board/P3_board_quad_A.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "15%",
+    "wall_loops": "3"
+   }
+  },
+  {
+   "project": "P3_chess_board/P3_board_quad_B.3mf",
+   "layer": "0.20",
+   "over": {
+    "sparse_infill_density": "15%",
+    "wall_loops": "3"
+   }
+  }
+ ]
 }

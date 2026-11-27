@@ -14,7 +14,7 @@ import build16 as c16
 
 Q = 4 * GRID          # 180 mm quadrant
 T = 6.0               # board thickness
-BAND = 0.6            # inlay depth, 3 layers
+BAND = 1.2            # inlay depth, 6 layers (was 0.6: black body showed through the ivory squares, owner report 27 Nov)
 INSET = 0.1           # inner edges pulled in 0.1 mm each, so two quadrants leave 0.2 mm at the seam
 KEY_T, POCKET_D = 3.0, 3.2
 KEY_GROW = 0.175     # production keys are grown by this: gap 0.025 mm per side (owner picked the 4-dot test key on 27 Nov)
