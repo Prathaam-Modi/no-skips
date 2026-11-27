@@ -871,5 +871,19 @@
   },
   "hours": 0.88,
   "file": "_trials/queen_T4.gcode.3mf"
+ },
+ "P3_chess_board/P3_board_testkeys_r2.3mf": {
+  "ok": true,
+  "time_s": 837,
+  "grams": 2.9,
+  "plates": 1,
+  "when": "2026-11-27 05:28 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "15%",
+   "wall_loops": "3"
+  },
+  "hours": 0.23,
+  "file": "P3_chess_board/P3_board_testkeys_r2.gcode.3mf"
  }
 }
