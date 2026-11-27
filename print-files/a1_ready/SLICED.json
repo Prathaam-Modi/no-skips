@@ -695,16 +695,16 @@
  },
  "P3_chess_board/P3_board_keys_x8.3mf": {
   "ok": true,
-  "time_s": 1110,
-  "grams": 5.3,
+  "time_s": 1136,
+  "grams": 5.6,
   "plates": 1,
-  "when": "2026-11-25 17:08 UTC",
+  "when": "2026-11-27 06:09 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "15%",
    "wall_loops": "3"
   },
-  "hours": 0.31,
+  "hours": 0.32,
   "file": "P3_chess_board/P3_board_keys_x8.gcode.3mf"
  },
  "P3_chess_board/P3_board_joint_test.3mf": {
