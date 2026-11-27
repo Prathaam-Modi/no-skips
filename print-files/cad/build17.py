@@ -51,7 +51,8 @@ def quadrant(variant):
     o = outline()
     m = body(o, T, c=0.6, top=True, bottom=True)
     m = m - ext(pockets().intersection(o.buffer(5)), POCKET_D + 0.01, T - POCKET_D)
-    lg = ext(affinity.translate(logo(0, 0, 1.3), Q / 2 - 15, Q / 2 - 15), 0.61, T - 0.6)     # reads from the underside, unmirrored
+    cx, cy = (o.bounds[0] + o.bounds[2]) / 2, (o.bounds[1] + o.bounds[3]) / 2     # logo sits on the true centre of the quadrant (was 15 mm off on both axes until 27 Nov)
+    lg = ext(affinity.translate(logo(0, 0, 1.3), cx, cy), 0.61, T - 0.6)     # reads from the underside, unmirrored
     m = m - lg
     inl = squares(variant).intersection(o.buffer(-0.0))
     ivory = ext(inl, BAND, 0.0)
@@ -81,7 +82,7 @@ def audit():
     rep["top_skin_over_pocket_mm"] = round(T - POCKET_D, 2)
     rep["seam_gap_mm"] = round(2 * INSET, 2)
     # pockets stay clear of the logo and of the outer edges
-    lg = affinity.translate(logo(0, 0, 1.3), Q / 2 - 15, Q / 2 - 15)
+    lg = affinity.translate(logo(0, 0, 1.3), (o.bounds[0] + o.bounds[2]) / 2, (o.bounds[1] + o.bounds[3]) / 2)
     rep["pocket_to_logo_mm"] = round(p.distance(lg), 1)
     rep["pocket_to_outer_edge_mm"] = round(min(q.bounds[0] for q in [p]) if p.bounds[0] > 0 else 0, 1)
     # every pocket must sit across a seam: half of it inside the body, half over the gap
