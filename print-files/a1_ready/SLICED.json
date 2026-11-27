@@ -695,10 +695,10 @@
  },
  "P3_chess_board/P3_board_keys_x8.3mf": {
   "ok": true,
-  "time_s": 1145,
+  "time_s": 1139,
   "grams": 5.7,
   "plates": 1,
-  "when": "2026-11-27 07:00 UTC",
+  "when": "2026-11-27 07:03 UTC",
   "layer": "0.20",
   "over": {
    "sparse_infill_density": "15%",
