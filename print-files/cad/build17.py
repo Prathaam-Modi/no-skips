@@ -131,6 +131,16 @@ if __name__ == "__main__":
         if n == "king": sc.append((mv(c16.king()[1].rotate((0, 0, rz)), x, y, T), RED))
     q.scene("chess_board", sc)
     q.scene("chess_board_bare", [s for s in sc[:8]])
+    # underside preview (27 Nov): four quadrants as printed (underside up), keys red and flush across every seam
+    ux = lambda m, dx, dy, rz: mv(m.translate((-Q / 2, -Q / 2, 0)).rotate((0, 0, rz)).translate((Q / 2, Q / 2, 0)), dx, dy, 0)
+    under = []
+    for (m, pos, rz) in ((qa, (0, 0), 0), (qb, (1, 0), 90), (qb, (0, 1), -90), (qa, (1, 1), 180)):
+        under.append((ux(m, pos[0] * Q, pos[1] * Q, rz), BLACK))
+    kf = body(key2d().buffer(KEY_GROW - 0.0, quad_segs=6), POCKET_D, c=0.4, top=True, bottom=True).translate((0, 0, T - POCKET_D))
+    for a in KEY_AT:
+        under.append((kf.translate((Q, a, 0)), RED)); under.append((kf.rotate((0, 0, 90)).translate((a, Q, 0)), RED))
+        under.append((kf.translate((Q, 2 * Q - a, 0)), RED)); under.append((kf.rotate((0, 0, 90)).translate((2 * Q - a, Q, 0)), RED))
+    q.scene("board_underside", under)
     rep = q.export()
     print("quadrant files:", [(p["file"], p["size"], p["grams"]) for p in rep["parts"]])
     print("total g (4 quadrants + 8 keys):", rep["grams"])
