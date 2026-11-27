@@ -23,5 +23,7 @@ seed("P3_board_keys_x8.3mf", [dict(name=f"P3 key {i}", parts=[(t("P3_5_key_BLACK
 seed("P3_board_joint_test.3mf", [dict(name="P3 coupon left", parts=[(t("P3_6_coupon_left_BLACK.stl"), 1, "coupon_left")], settings=ST),
      dict(name="P3 coupon right", parts=[(t("P3_7_coupon_right_BLACK.stl"), 1, "coupon_right")], settings=ST)] +
      [dict(name=f"P3 test key {n} dot", parts=[(t(f), 1, f"testkey_{n}")], settings=K) for n, f in ((1, "P3_8_testkey_1dot_BLACK.stl"), (2, "P3_9_testkey_2dot_BLACK.stl"), (3, "P3_10_testkey_3dot_BLACK.stl"), (4, "P3_11_testkey_4dot_BLACK.stl"))], ST)
+# keys only, for owners who already have the coupons (pockets are unchanged between rounds)
+seed("P3_board_testkeys_r2.3mf", [dict(name=f"P3 test key {n} dot", parts=[(t(f), 1, f"testkey_{n}")], settings=K) for n, f in ((1, "P3_8_testkey_1dot_BLACK.stl"), (2, "P3_9_testkey_2dot_BLACK.stl"), (3, "P3_10_testkey_3dot_BLACK.stl"), (4, "P3_11_testkey_4dot_BLACK.stl"))], ST)
 json.dump({"jobs": queue}, open(os.path.join(A, "SLICE_QUEUE.json"), "w"), indent=1)
 print("ok", len(queue))
