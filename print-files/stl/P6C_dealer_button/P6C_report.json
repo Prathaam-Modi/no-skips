@@ -1,0 +1,166 @@
+{
+ "id": "P6C",
+ "name": "Dealer button set",
+ "parts": [
+  {
+   "file": "P6C_1_dealer_IVORY.stl",
+   "colour": "ivory",
+   "qty": 1,
+   "size": [
+    45.0,
+    45.0,
+    9.0
+   ],
+   "grams": 17.2,
+   "watertight": true,
+   "on": null
+  },
+  {
+   "file": "P6C_2_dealer_front_dealer_RED.stl",
+   "colour": "red",
+   "qty": 1,
+   "size": [
+    38.4,
+    7.5,
+    0.6
+   ],
+   "grams": 0.1,
+   "watertight": true,
+   "on": "dealer"
+  },
+  {
+   "file": "P6C_3_big_blind_IVORY.stl",
+   "colour": "ivory",
+   "qty": 1,
+   "size": [
+    40.0,
+    40.0,
+    7.0
+   ],
+   "grams": 10.4,
+   "watertight": true,
+   "on": null
+  },
+  {
+   "file": "P6C_4_big_blind_front_bb_BLACK.stl",
+   "colour": "black",
+   "qty": 1,
+   "size": [
+    21.0,
+    12.1,
+    0.6
+   ],
+   "grams": 0.1,
+   "watertight": true,
+   "on": "big_blind"
+  },
+  {
+   "file": "P6C_5_small_blind_IVORY.stl",
+   "colour": "ivory",
+   "qty": 1,
+   "size": [
+    36.0,
+    36.0,
+    7.0
+   ],
+   "grams": 8.4,
+   "watertight": true,
+   "on": null
+  },
+  {
+   "file": "P6C_6_small_blind_front_sb_BLACK.stl",
+   "colour": "black",
+   "qty": 1,
+   "size": [
+    18.8,
+    11.3,
+    0.6
+   ],
+   "grams": 0.1,
+   "watertight": true,
+   "on": "small_blind"
+  }
+ ],
+ "note": "",
+ "grams": 36.4,
+ "checks": {
+  "dealer": {
+   "front_cap_mm": 7.54,
+   "front_w_mm": 38.4,
+   "front_stroke_mean_min": [
+    1.59,
+    1.9
+   ],
+   "back_caps_mm": [
+    5.03
+   ],
+   "back_stroke_min": 1.2,
+   "logo_w_mm": 10.0,
+   "art_clearance_mm": 2.03,
+   "inlay_thick_mm": 0.6,
+   "overlap_mm3": 0.0,
+   "gap_mm3": 0.0,
+   "inlay_flush": true,
+   "body_watertight": true,
+   "body_bodies": 1,
+   "inlay_watertight": true,
+   "inlay_bodies": 6,
+   "grams_body": 17.2,
+   "grams_inlay": 0.12,
+   "reeds": 141
+  },
+  "big_blind": {
+   "front_cap_mm": 12.07,
+   "front_w_mm": 20.96,
+   "front_stroke_mean_min": [
+    2.76,
+    3.3
+   ],
+   "back_caps_mm": [
+    4.71,
+    4.63
+   ],
+   "back_stroke_min": 1.1,
+   "logo_w_mm": 10.0,
+   "art_clearance_mm": 7.01,
+   "inlay_thick_mm": 0.6,
+   "overlap_mm3": 0.0,
+   "gap_mm3": -0.0,
+   "inlay_flush": true,
+   "body_watertight": true,
+   "body_bodies": 1,
+   "inlay_watertight": true,
+   "inlay_bodies": 2,
+   "grams_body": 10.4,
+   "grams_inlay": 0.13,
+   "reeds": 126
+  },
+  "small_blind": {
+   "front_cap_mm": 11.33,
+   "front_w_mm": 18.83,
+   "front_stroke_mean_min": [
+    2.39,
+    2.8
+   ],
+   "back_caps_mm": [
+    4.53,
+    4.43
+   ],
+   "back_stroke_min": 1.0,
+   "logo_w_mm": 10.0,
+   "art_clearance_mm": 3.62,
+   "inlay_thick_mm": 0.6,
+   "overlap_mm3": 0.0,
+   "gap_mm3": 0.0,
+   "inlay_flush": true,
+   "body_watertight": true,
+   "body_bodies": 1,
+   "inlay_watertight": true,
+   "inlay_bodies": 2,
+   "grams_body": 8.4,
+   "grams_inlay": 0.1,
+   "reeds": 113
+  }
+ },
+ "text_log": []
+}
