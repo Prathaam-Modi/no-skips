@@ -1,0 +1,200 @@
+"""P6A Deck box (28 Nov 2026). Card-table line. A slide-lid box for ONE poker size deck the customer already owns.
+Idea: a ribbed tray with a flush dovetail lid that slides out the front. The lid is a single plain slab, printed TOP FACE DOWN on the
+textured PEI, with one red bar inlaid in its first 1.2 mm (the only red element). The deck comes out through a stadium window in the
+floor: lid off, push the deck up from below with one finger. Colourways: Night (black body and lid) and Bone (ivory body and lid).
+Rails: 45 degree dovetail, 1.6 mm reach, lid land 1.0 mm. Rail cutter = resting lid grown by a half ellipsoid (0.30 mm sideways, 0.10 mm over the top).
+Detent: a long 0.45 mm bump on each side of the lid near its front end. The bump only ever lives in the first 12 mm of the groove
+(the lid never travels deeper), so that stretch carries a 0.30 mm pocket where the bump rests when closed; the plain groove wall in
+front of it (0 to 6 mm) is the gate the bump climbs over: 0.15 mm interference per side, taken up by the side walls flexing. Over
+the rest of the travel only the plain land runs in the groove, at the full 0.30 mm clearance, so the slide stays free. No snaps, no hinge, no added parts.
+Side faces: fine horizontal ribs at 1.0 mm pitch, 0.2 mm deep (0.4 full, 0.4 inset, 0.2 chamfer at 45 degrees), plain band at the top.
+Usage: NS_OUT=/tmp/p6a python3 build_p6a_deckbox.py"""
+import math, json, os, sys
+from ns import *
+from build2 import logo
+
+CARD_W, CARD_L, DECK = 63.5, 88.9, 20.0   # poker size; deck stack up to 20 mm (plastic 54-card decks 17 to 19.5)
+CLR = 0.35                                # cavity clearance per side around the cards
+HEAD = 0.6                                # headroom over a 20 mm deck
+WALL, FLOOR = 3.4, 2.4
+R_OUT, R_IN = 3.0, 1.0                    # outer corner radius; cavity corners (cards have ~3 mm corners, so they clear)
+LID_T, LAND, REACH, CH = 3.0, 1.0, 1.6, 0.3   # lid thickness, vertical land, dovetail reach (45 deg), top edge chamfer
+RAIL_A, RAIL_B = 0.30, 0.10               # rail clearance sideways (per side) and over the top (lid resting on the groove floor)
+BUMP_H, POCKET = 0.45, 0.30               # detent: 0.45 bump on each lid side rests in a 0.30 deep pocket in the groove wall;
+                                          # the 6 mm of plain groove wall in front of the pocket is the gate (0.15 interference per side)
+POCKET_Y = (6.0, 11.8)                    # pocket span behind the front face
+RIB_D, RIB_TOP_GAP = 0.2, 1.0             # rib depth; ribs stop 1 mm under the groove floor (plain band around the lid line)
+BAR = (40.0, 4.0, 10.0, 1.2)              # red bar: length, width, centre behind the front face, depth
+WIN = (24.0, 40.0, 8.0, 6.0)              # floor window: w, l, corner radius, centre y
+
+def outline(hx, y0, y1, r):
+    """Lid outline: back corners rounded r, front corners square (the front end is the visible end face)."""
+    g = rrect(2 * hx, y1 - y0, r, 0, (y0 + y1) / 2)
+    return unary_union([g, box(-hx, y0, hx, (y0 + y1) / 2)])
+
+class Box:
+    def __init__(s, cav_l=CARD_L + 2 * CLR, deck=DECK, ribs=True, window=True, mark=True):
+        s.cx, s.cy = (CARD_W + 2 * CLR) / 2, cav_l / 2
+        s.X, s.Y = 2 * (s.cx + WALL), 2 * (s.cy + WALL)
+        s.yF = -s.Y / 2
+        s.zg = FLOOR + deck + HEAD                   # groove floor = lid underside when the lid rests
+        s.H = s.zg + LID_T                           # lid top flush with the body top
+        s.ribs, s.window, s.mark = ribs, window, mark
+
+    def lid_core(s, z0, shrink=0.0, run=0.0):
+        """Convex lid: hull of the land, the 45 deg bevel, a short vertical and the 0.3 top chamfer.
+        run > 0 stretches it out through the front face (used for the rail cutter)."""
+        yf = s.yF - run
+        L = outline(s.cx + REACH - shrink, yf, s.cy + REACH - shrink, 1.0 + REACH)
+        T = outline(s.cx - shrink, yf, s.cy - shrink, 1.0)
+        Tc = outline(s.cx - shrink - CH, yf + (0 if run else CH), s.cy - shrink - CH, 1.0)
+        e = 0.01
+        # 0.2 edge break under the land keeps its corner off the rounded root of the groove
+        sl = [ext(L.buffer(-0.2, join_style=2), e, z0), ext(L, e, z0 + 0.2), ext(L, e, z0 + LAND - e), ext(T, e, z0 + LAND + REACH - e),
+              ext(T, e, z0 + LID_T - CH - e), ext(Tc, e, z0 + LID_T - e)]
+        return Manifold.batch_hull(sl)
+
+    def cutter(s):
+        """Lid at rest (on the groove floor) grown by the upper half of an ellipsoid: 0.30 sideways at every height, 0.10 over
+        the top, nothing under it (the lid bears on the floor). Runs out through the front face."""
+        rest = s.lid_core(s.zg, run=20.0)
+        ell = Manifold.sphere(1.0, 24).scale((RAIL_A, RAIL_A, RAIL_B)).trim_by_plane((0, 0, 1), 0.0)
+        return rest.minkowski_sum(ell)
+
+    def bump(s, z0, shrink=0.0):
+        """Long 0.30 bump on each lid side: full 7.0..8.5 mm behind the front face, ramps to zero at 4.7 and 10.8.
+        Its face toward the bevel is chamfered 45 deg so it needs no support when the lid prints upside down."""
+        x0 = s.cx + REACH - shrink
+        pts = []
+        for y, h in ((4.7, 0.0), (7.0, BUMP_H), (8.5, BUMP_H), (10.8, 0.0)):
+            for z in (z0 + 0.2, z0 + LAND):               # starts above the 0.2 edge break, clear of the groove root
+                pts.append((x0 - 0.3, s.yF + y, z))
+            if h > 0:
+                pts += [(x0 + h, s.yF + y, z0 + 0.25), (x0 + h, s.yF + y, z0 + LAND - h - 0.05)]
+        b = Manifold.hull_points(pts)
+        return U([b, b.mirror((1, 0, 0))])
+
+    def pocket(s):
+        """0.30 deep pocket in the outer wall of each groove where the bump rests when closed. Its ceiling is a 45 deg chamfer."""
+        xw = s.cx + REACH + RAIL_A
+        y0, y1 = s.yF + POCKET_Y[0], s.yF + POCKET_Y[1]
+        pts = []
+        for y in (y0, y1):
+            pts += [(xw - 0.4, y, s.zg + 0.1), (xw + POCKET, y, s.zg + 0.1), (xw + POCKET, y, s.zg + 0.5),
+                    (xw - 0.4, y, s.zg + 0.8 + 0.4), (xw, y, s.zg + 0.8)]
+        k = Manifold.hull_points(pts)
+        return U([k, k.mirror((1, 0, 0))])
+
+    def shell(s):
+        full = rrect(s.X, s.Y, R_OUT); inset = full.buffer(-RIB_D, quad_segs=12)
+        if not s.ribs:
+            return body(full, s.H, c=0.6, top=True, bottom=True)
+        rtop = s.zg - RIB_TOP_GAP
+        parts = [body(full, 2.0 + 0.01, c=0.6, top=False, bottom=True)]
+        z = 2.0
+        while z < rtop - 1e-6:
+            parts += [ext(full, 0.42, z - 0.01), ext(inset, 0.42, z + 0.39),
+                      Manifold.batch_hull([ext(inset, 0.01, z + 0.8), ext(full, 0.01, z + 1.0 - 0.01)])]
+            z += 1.0
+        parts.append(body(full, s.H - rtop, z0=rtop - 0.01, c=0.6, top=True))
+        return U(parts)
+
+    def build(s):
+        b = s.shell() - s.cutter()
+        b = b - ext(rrect(2 * s.cx, 2 * s.cy, R_IN), s.zg - FLOOR + 0.2, FLOOR)
+        if s.window:
+            w, l, r, cy = WIN
+            b = b - ext(rrect(w, l, r, 0, cy), FLOOR + 1.0, -0.5)
+        if s.mark:   # No Skips mark, ~10 mm wide, debossed 0.6 under the floor, mirrored so it reads from below
+            b = b - ext(affinity.scale(logo(0, -32.0, 10.0 / 13.6), -1, 1, origin=(0, 0)), 0.6, -0.01)
+        return (b - s.pocket()).set_tolerance(1e-3)   # 1 micron: lets manifold collapse the zero-area slivers of the cuts
+
+    def lid(s, shrink=0.0, bar=True, label=None):
+        """Lid in use position, resting on the groove floor."""
+        z0 = s.zg
+        m = U([s.lid_core(z0, shrink), s.bump(z0, shrink)])
+        red = Manifold()
+        if bar:
+            bl, bw, by, bd = BAR
+            g = rrect(bl, bw, 0.6, 0, s.yF + by)
+            red = ext(g, bd, s.H - bd)
+            m = m - ext(g, bd + 0.01, s.H - bd)
+        if label:   # coupon lids: clearance number debossed 0.4 on the underside, mirrored to read from below
+            m = m - ext(affinity.scale(text(label, 4.0, 0, 0), -1, 1, origin=(0, 0)), 0.4, z0 - 0.01)
+        return m.set_tolerance(1e-3), red
+
+def flip(m): return m.rotate((180, 0, 0))     # lid prints top face down
+
+def deck_prop(h=18.6, lift=0.0):
+    return ext(rrect(CARD_W, CARD_L, 3.0), h, FLOOR + lift)
+
+# ---------------------------------------------------------------- checks
+def vol(m): return m.volume() if not m.is_empty() else 0.0
+def touch(a, b): return vol(a ^ b)
+def play(lid, body_, axis, step=0.01, lim=2.0):
+    """How far the lid can move along +axis before it hits the body (it rests on the groove floor, so it is lifted 0.02 first
+    for the sideways test, and that 0.02 is added back for the lift test)."""
+    if axis != 2: lid = lid.translate((0, 0, 0.02))
+    d = 0.0 if axis != 2 else 0.02
+    while d < lim:
+        v = [0, 0, 0]; v[axis] = d + step
+        if touch(lid.translate(tuple(v)), body_) > 1e-4: return round(d, 2)
+        d += step
+    return None
+
+if __name__ == "__main__":
+    B = Box(); body_ = B.build(); lid_, bar_ = B.lid()
+    C = Box(cav_l=22.0, deck=3.0, ribs=False, window=False, mark=False)
+    cb = C.build(); l30, _ = C.lid(bar=False, label="30"); l35, _ = C.lid(shrink=0.05, bar=False, label="35")
+    p = Product("P6A", "deck_box", "Deck box")
+    for col, sfx in ((BLACK, "night"), (IVORY, "bone")):
+        p.part(f"body_{sfx}", body_, col, infill=0.15)
+        p.part(f"lid_{sfx}", flip(lid_), col, infill=0.15)
+        p.part(f"lid_bar_{sfx}", flip(bar_), RED, on=f"lid_{sfx}")
+    p.part("coupon_body", cb, BLACK); p.part("coupon_lid_30", flip(l30), BLACK); p.part("coupon_lid_35", flip(l35), BLACK)
+    deck = deck_prop()
+    p.scene("deckbox_closed", [(body_, BLACK), (lid_, BLACK), (bar_, RED),
+                               (mv(body_, 84, 30, 0), IVORY), (mv(lid_, 84, 30, 0), IVORY), (mv(bar_, 84, 30, 0), RED)])
+    o = -52.0
+    p.scene("deckbox_open", [(body_, BLACK), (mv(lid_, 0, o, 0), BLACK), (mv(bar_, 0, o, 0), RED), (deck, PROP2)])
+    p.note = ("Body prints upright (floor on the PEI), lid prints top face down with the red bar in its first 1.2 mm. Slide the lid in "
+              "from the front until it clicks over the gates. Lid off, push the deck up through the floor window.")
+    rep = p.export()
+
+    # ---------------- fit check
+    nom_x = round(B.cx + REACH + RAIL_A - (B.cx + REACH), 3)
+    fit = dict(
+        outer_mm=[round(B.X, 1), round(B.Y, 1), round(B.H, 1)],
+        cavity_mm=[round(2 * B.cx, 2), round(2 * B.cy, 2), round(B.zg - FLOOR, 2)],
+        card_clearance_per_side_x=round(B.cx - CARD_W / 2, 3), card_clearance_per_side_y=round(B.cy - CARD_L / 2, 3),
+        deck_allowance_over_20mm=round(B.zg - FLOOR - DECK, 2),
+        rail_clearance_per_side_nominal=nom_x, rail_clearance_over_top=RAIL_B,
+        lid_side_play_mid_travel_each_way=play(lid_.translate((0, -30, 0)), body_, 0), lid_side_play_closed_each_way=play(lid_, body_, 0),
+        lid_lift_play_closed=play(lid_, body_, 2), lid_lift_play_mid_travel=play(lid_.translate((0, -30, 0)), body_, 2),
+        lid_travel_to_free=round(B.cy + REACH - B.yF, 1),
+        wall=dict(side_below_rail=WALL, behind_rail_land=round(WALL - REACH - RAIL_A, 2), top_rim=round(B.X / 2 - (B.cx + RAIL_A), 2),
+                  back_rim=round(B.Y / 2 - (B.cy + RAIL_A), 2), floor=FLOOR, lid=LID_T, under_bar=round(LID_T - BAR[3], 2)),
+        overlap_body_lid_closed=round(touch(body_, lid_), 4), overlap_body_bar=round(touch(body_, bar_), 4),
+        overlap_deck_body=round(touch(deck_prop(DECK), body_), 4), overlap_deck_lid=round(touch(deck_prop(DECK), lid_), 4),
+        detent_interference_per_side=round(BUMP_H - RAIL_A, 2), bump_free_in_pocket_per_side=round(RAIL_A + POCKET - BUMP_H, 2),
+        detent_engaged_volume_mm3=round(touch(lid_.translate((0, -4.75, 0)), body_), 3),   # bump plateau over the gate
+        coupon_overlap=round(touch(cb, l30) + touch(cb, l35), 4),
+    )
+    stl_dir = f"{OUT}/stl/P6A_deck_box"
+    import trimesh as T
+    fit["stl"] = {}
+    for f in sorted(os.listdir(stl_dir)):
+        # manifold3d leaves a few zero-area slivers where cut faces meet; once vertices are merged they read as open edges.
+        # Drop them and write the file again: same volume, one closed body.
+        t = T.load(f"{stl_dir}/{f}")
+        if not t.is_watertight:
+            t.update_faces(t.nondegenerate_faces(height=1e-6)); t.remove_unreferenced_vertices(); t.merge_vertices()
+        assert t.is_watertight and len(t.split(only_watertight=False)) == 1, f
+        t.export(f"{stl_dir}/{f}"); t = T.load(f"{stl_dir}/{f}")
+        fit["stl"][f] = dict(watertight=bool(t.is_watertight), bodies=len(t.split(only_watertight=False)), size=[round(x, 1) for x in t.extents])
+    g = {}
+    for label, m, colour, qty, infill in p.parts: g[label] = round(grams(m, infill), 1)
+    fit["grams"] = g
+    rep["fit"] = fit
+    json.dump(rep, open(f"{OUT}/p6a_report.json", "w"), indent=1)
+    print(json.dumps(fit, indent=1))
