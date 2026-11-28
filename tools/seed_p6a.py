@@ -18,15 +18,19 @@ PLATES = {
  "P6A_bone": [one("P6A Bone body", [(t("P6A_4_body_bone_IVORY.stl"), IVO, "body")]),
               one("P6A Bone lid", [(t("P6A_5_lid_bone_IVORY.stl"), IVO, "lid"), (t("P6A_6_lid_bar_bone_RED.stl"), RED, "red_bar")])],
  # queen and jack lids, one plate per colour (the K lid sits on the main plates above). Same body for all three.
- "P6A_night_lids_QJ": [one("P6A Night lid Q", [(t("P6A_10_lid_night_q_BLACK.stl"), BLK, "lid_q"), (t("P6A_11_lid_bar_night_q_RED.stl"), RED, "red_bar")]),
-                       one("P6A Night lid J", [(t("P6A_12_lid_night_j_BLACK.stl"), BLK, "lid_j"), (t("P6A_13_lid_bar_night_j_RED.stl"), RED, "red_bar")])],
- "P6A_bone_lids_QJ": [one("P6A Bone lid Q", [(t("P6A_14_lid_bone_q_IVORY.stl"), IVO, "lid_q"), (t("P6A_15_lid_bar_bone_q_RED.stl"), RED, "red_bar")]),
-                      one("P6A Bone lid J", [(t("P6A_16_lid_bone_j_IVORY.stl"), IVO, "lid_j"), (t("P6A_17_lid_bar_bone_j_RED.stl"), RED, "red_bar")])],
+ "P6A_night_lids_QJ": [one("P6A Night lid Q", [(t("P6A_11_lid_night_q_BLACK.stl"), BLK, "lid_q"), (t("P6A_12_lid_bar_night_q_RED.stl"), RED, "red_bar")]),
+                       one("P6A Night lid J", [(t("P6A_13_lid_night_j_BLACK.stl"), BLK, "lid_j"), (t("P6A_14_lid_bar_night_j_RED.stl"), RED, "red_bar")])],
+ "P6A_bone_lids_QJ": [one("P6A Bone lid Q", [(t("P6A_15_lid_bone_q_IVORY.stl"), IVO, "lid_q"), (t("P6A_16_lid_bar_bone_q_RED.stl"), RED, "red_bar")]),
+                      one("P6A Bone lid J", [(t("P6A_17_lid_bone_j_IVORY.stl"), IVO, "lid_j"), (t("P6A_18_lid_bar_bone_j_RED.stl"), RED, "red_bar")])],
  # engraving test: K crown plus "No Skips" (a long name) on a plain Night lid, print it once to check the 4 mm lettering
- "P6A_name_test": [one("P6A name test lid", [(t("P6A_18_sample_lid_name_BLACK.stl"), BLK, "lid_name")])],
+ "P6A_name_test": [one("P6A name test lid", [(t("P6A_21_sample_lid_name_BLACK.stl"), BLK, "lid_name")])],
  "P6A_rail_coupon": [one("P6A coupon body", [(t("P6A_7_coupon_body_BLACK.stl"), BLK, "coupon_body")]),
                      one("P6A coupon lid 0.30", [(t("P6A_8_coupon_lid_30_BLACK.stl"), BLK, "lid_30")]),
-                     one("P6A coupon lid 0.35", [(t("P6A_9_coupon_lid_35_BLACK.stl"), BLK, "lid_35")])],
+                     one("P6A coupon lid 0.35", [(t("P6A_9_coupon_lid_35_BLACK.stl"), BLK, "lid_35")]),
+                     one("P6A coupon lid 0.27", [(t("P6A_10_coupon_lid_27_BLACK.stl"), BLK, "lid_27")])],
+ # card grip test: two 30 mm slices of the body with one leaf pair each (62.8 as designed, 63.0 looser). Lay your deck across.
+ "P6A_grip_coupon": [one("P6A grip 62.8", [(t("P6A_19_grip_coupon_628_BLACK.stl"), BLK, "grip_628")]),
+                     one("P6A grip 63.0", [(t("P6A_20_grip_coupon_630_BLACK.stl"), BLK, "grip_630")])],
 }
 d = os.path.join(A, "P6A_deck_box"); os.makedirs(d, exist_ok=True)
 jobs = []

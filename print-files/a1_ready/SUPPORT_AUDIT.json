@@ -1,1 +1,317 @@
-{}
+{
+ "P6A_deck_box/P6A_10_coupon_lid_27_BLACK.stl": {
+  "current": {
+   "overhang": 3.1,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  },
+  "best": "flip",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  }
+ },
+ "P6A_deck_box/P6A_11_lid_night_q_BLACK.stl": {
+  "current": {
+   "overhang": 3.1,
+   "flat": 159.7,
+   "on_model": 0.0,
+   "height": 3.0
+  },
+  "best": "flip",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  }
+ },
+ "P6A_deck_box/P6A_12_lid_bar_night_q_RED.stl": {
+  "current": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  },
+  "best": "as is",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  }
+ },
+ "P6A_deck_box/P6A_13_lid_night_j_BLACK.stl": {
+  "current": {
+   "overhang": 3.1,
+   "flat": 159.7,
+   "on_model": 0.0,
+   "height": 3.0
+  },
+  "best": "flip",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  }
+ },
+ "P6A_deck_box/P6A_14_lid_bar_night_j_RED.stl": {
+  "current": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  },
+  "best": "as is",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  }
+ },
+ "P6A_deck_box/P6A_15_lid_bone_q_IVORY.stl": {
+  "current": {
+   "overhang": 3.1,
+   "flat": 159.7,
+   "on_model": 0.0,
+   "height": 3.0
+  },
+  "best": "flip",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  }
+ },
+ "P6A_deck_box/P6A_16_lid_bar_bone_q_RED.stl": {
+  "current": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  },
+  "best": "as is",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  }
+ },
+ "P6A_deck_box/P6A_17_lid_bone_j_IVORY.stl": {
+  "current": {
+   "overhang": 3.1,
+   "flat": 159.7,
+   "on_model": 0.0,
+   "height": 3.0
+  },
+  "best": "flip",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  }
+ },
+ "P6A_deck_box/P6A_18_lid_bar_bone_j_RED.stl": {
+  "current": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  },
+  "best": "as is",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  }
+ },
+ "P6A_deck_box/P6A_19_grip_coupon_628_BLACK.stl": {
+  "current": {
+   "overhang": 0.0,
+   "flat": 6.0,
+   "on_model": 0.0,
+   "height": 19.9
+  },
+  "best": "x+90",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 15.0
+  }
+ },
+ "P6A_deck_box/P6A_1_body_night_BLACK.stl": {
+  "current": {
+   "overhang": 1.0,
+   "flat": 109.2,
+   "on_model": 16.8,
+   "height": 26.0
+  },
+  "best": "as is",
+  "best_score": {
+   "overhang": 1.0,
+   "flat": 109.2,
+   "on_model": 16.8,
+   "height": 26.0
+  }
+ },
+ "P6A_deck_box/P6A_20_grip_coupon_630_BLACK.stl": {
+  "current": {
+   "overhang": 0.0,
+   "flat": 6.0,
+   "on_model": 0.0,
+   "height": 19.9
+  },
+  "best": "x+90",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 15.0
+  }
+ },
+ "P6A_deck_box/P6A_21_sample_lid_name_BLACK.stl": {
+  "current": {
+   "overhang": 3.1,
+   "flat": 159.7,
+   "on_model": 0.0,
+   "height": 3.0
+  },
+  "best": "flip",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  }
+ },
+ "P6A_deck_box/P6A_2_lid_night_BLACK.stl": {
+  "current": {
+   "overhang": 3.1,
+   "flat": 159.7,
+   "on_model": 0.0,
+   "height": 3.0
+  },
+  "best": "flip",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  }
+ },
+ "P6A_deck_box/P6A_3_lid_bar_night_RED.stl": {
+  "current": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  },
+  "best": "as is",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  }
+ },
+ "P6A_deck_box/P6A_4_body_bone_IVORY.stl": {
+  "current": {
+   "overhang": 1.0,
+   "flat": 109.2,
+   "on_model": 16.8,
+   "height": 26.0
+  },
+  "best": "as is",
+  "best_score": {
+   "overhang": 1.0,
+   "flat": 109.2,
+   "on_model": 16.8,
+   "height": 26.0
+  }
+ },
+ "P6A_deck_box/P6A_5_lid_bone_IVORY.stl": {
+  "current": {
+   "overhang": 3.1,
+   "flat": 159.7,
+   "on_model": 0.0,
+   "height": 3.0
+  },
+  "best": "flip",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  }
+ },
+ "P6A_deck_box/P6A_6_lid_bar_bone_RED.stl": {
+  "current": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  },
+  "best": "as is",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 1.2
+  }
+ },
+ "P6A_deck_box/P6A_7_coupon_body_BLACK.stl": {
+  "current": {
+   "overhang": 1.0,
+   "flat": 38.8,
+   "on_model": 1.0,
+   "height": 9.0
+  },
+  "best": "as is",
+  "best_score": {
+   "overhang": 1.0,
+   "flat": 38.8,
+   "on_model": 1.0,
+   "height": 9.0
+  }
+ },
+ "P6A_deck_box/P6A_8_coupon_lid_30_BLACK.stl": {
+  "current": {
+   "overhang": 3.1,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  },
+  "best": "flip",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  }
+ },
+ "P6A_deck_box/P6A_9_coupon_lid_35_BLACK.stl": {
+  "current": {
+   "overhang": 3.1,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  },
+  "best": "flip",
+  "best_score": {
+   "overhang": 0.0,
+   "flat": 0.0,
+   "on_model": 0.0,
+   "height": 3.0
+  }
+ }
+}
