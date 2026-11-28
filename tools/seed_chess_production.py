@@ -19,11 +19,13 @@ PLATES = {
  "P3_black_king_queen": [one("P3 black king", [(t("P3_7_king_b_BLACK.stl"), BLK, "king"), (t("P3_8_king_top_b_RED.stl"), RED, "king_top")], SOLID),
                          one("P3 black queen", [(t("P3_5_queen_b_BLACK.stl"), BLK, "queen"), (t("P3_6_queen_dot_b_RED.stl"), RED, "queen_dot")], SOLID)],
 }
+# one-shot black set (28 Nov): all 16 pieces on one plate, per-object infill, one wipe tower for the two red parts
+PLATES = {"P3_black_set_all": PLATES["P3_black_pawns_x8"] + PLATES["P3_black_minors_40"] + PLATES["P3_black_king_queen"]} if "--all-black" in sys.argv else PLATES
 d = os.path.join(A, "P3_chess"); os.makedirs(d, exist_ok=True)
 jobs = []
 for name, objs in PLATES.items():
     n = b.seed(os.path.join(d, name + ".3mf"), objs, "0.20", {})
     print(name, "plates:", n)
-    jobs.append({"project": f"P3_chess/{name}.3mf", "layer": "0.20", "over": MID if "minors" in name else SOLID})
+    jobs.append({"project": f"P3_chess/{name}.3mf", "layer": "0.20", "over": {"wall_loops": "3"} if "all" in name else (MID if "minors" in name else SOLID)})
 json.dump({"jobs": jobs}, open(os.path.join(A, "SLICE_QUEUE.json"), "w"), indent=1)
 print("ok", len(jobs))
