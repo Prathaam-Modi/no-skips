@@ -850,11 +850,11 @@ const ART={
 /* ---------------- catalogue ----------------
    f: text fields [label, example]. pick: one choice field [label, options]. imgs: [file, caption].
    ed: edition line shown on the card and in the product view. build: key into BUILD.
-   deferred: sidelined on 24 Nov 2026 (files in print-files/deferred, hidden everywhere). To bring one back: delete deferred:true,hide:true and git mv its folders back.
+   deferred: sidelined on 24 Nov 2026, and the rest of the old range on 28 Nov 2026 when the site flipped to games (files in print-files/deferred, hidden everywhere). To bring one back: delete deferred:true,hide:true and git mv its folders back.
    soon: text. A product WITH soon is on the bench (not orderable in any phase). A product WITHOUT soon is in the launch set.
    A soon text that starts with "Second drop" is badged Second drop and sorted first on the bench. */
 const P=[
- {id:"C1",side:"C",name:"Vol. 01: The Studio",kind:"Collector set",price:1999,line:"All six pieces on a numbered tray",badge:"Latest release",noAccent:true,
+ {id:"C1",deferred:true,hide:true,side:"C",name:"Vol. 01: The Studio",kind:"Collector set",price:1999,line:"All six pieces on a numbered tray",badge:"Latest release",noAccent:true,
   ed:`Numbered 01/${DROP.total} to ${DROP.total}/${DROP.total}`,build:"studio",
   desc:"The whole first volume: turntable, synth, drum machine, mixer, mic and headphones, each numbered 01/06 to 06/06 underneath, on a tray that carries your set number. Three pieces come in red, three in ivory. Twenty-five sets are made. After that the files are retired.",
   size:"Tray 196 x 124 mm. Pieces 30 to 62 mm wide, 9 to 54 mm tall",f:[],imgs:[["studio_set","The full set"],["studio_mini","01 Turntable, 05 Mic, 02 Synth"],["studio_mini2","03 Drums, 06 Headphones, 04 Mixer"]]},
@@ -870,7 +870,7 @@ const P=[
   desc:"A phone stand with one idea: lean it back. The A-frame is hollow, so it is light and strong, with a 12 mm groove that takes a phone in a case, a lip to stop it sliding and a cable channel underneath so charging does not tip it. Fine flutes run up the back. The top 4 mm is red either way. One piece, nothing to build.",
   size:"70 x 88 x 88 mm, about 60 g. Groove takes phones up to about 11 mm thick with a case",f:[],
   imgs:[["lean","Black body"],["lean_ivory","Ivory body"],["lean_phone","With a phone"],["lean_back","Back, with the cable channel"]]},
- {id:"D18",side:"D",name:"Ripple",kind:"Key tray",price:699,custom:true,noAccent:true,badge:"New",build:"ripple",pick:["Tray colour",["Ivory","Black"]],line:"Ripples spread from one red dot, your name on the lip",
+ {id:"D18",deferred:true,hide:true,side:"D",name:"Ripple",kind:"Key tray",price:699,custom:true,noAccent:true,badge:"New",build:"ripple",pick:["Tray colour",["Ivory","Black"]],line:"Ripples spread from one red dot, your name on the lip",
   desc:"A tray for keys and wallet by the door, in ivory or black. Fine ripple grooves spread out from a single red dot, and a flat lip at the front carries your name. Four felt pads underneath keep the table safe. One piece, nothing to build.",
   size:"170 x 95 x 18 mm, about 78 g",
   f:[["Name for the front lip (optional)","",{max:12,opt:true,note:"Up to 12 letters. Leave it empty for a plain lip."}]],
@@ -880,17 +880,17 @@ const P=[
   size:"Rail 200 x 36 x 10 mm, about 57 g with three hooks",f:[],
   extra:"Screws and wall plugs are not in the box. 3M strips suit smooth walls and light loads only. ",
   imgs:[["keyrail","On the wall"],["keyrail_build","Rail and hooks, labelled"]]},
- {id:"H1",soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Terrace",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Six tiers that get finer toward the rim",
+ {id:"H1",deferred:true,hide:true,soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Terrace",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Six tiers that get finer toward the rim",
   pick:["Colour",["Ivory","Black"]],
   desc:"Six stepped tiers, each a little shorter than the one below, so the pot gets lighter as your eye moves up. It is a cover pot: your plant stays in its plastic nursery pot and drops straight in, so there is no drainage hole and nothing to repot. Walls are at least 4 mm and the base is 8 mm, so it has real weight in the hand. Felt pads underneath, three small risers inside keep the pot out of any drained water. Indoors only.",
   size:"Fits a 3 inch (7.5 to 8 cm) nursery pot. About 115 mm across the base, 86 mm tall. A 4 inch size is made on request",f:[],
   imgs:[["terrace","Ivory, with a plant"],["terrace_bare","Ivory"],["planters_family","Terrace, Twist and Echo"]]},
- {id:"H2",soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Twist",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Twenty flutes that turn as they rise",
+ {id:"H2",deferred:true,hide:true,soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Twist",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Twenty flutes that turn as they rise",
   pick:["Colour",["Black","Ivory"]],
   desc:"Twenty soft flutes turn a tenth of the way round from base to rim, shallow at the bottom and deeper at the top, so the light moves across it as you walk past. It is a cover pot: your plant stays in its plastic nursery pot and drops straight in, so there is no drainage hole and nothing to repot. Walls are at least 4 mm and the base is 8 mm, so it has real weight in the hand. Felt pads underneath, three small risers inside keep the pot out of any drained water. Indoors only.",
   size:"Fits a 3 inch (7.5 to 8 cm) nursery pot. About 104 mm across, 86 mm tall. A 4 inch size is made on request",f:[],
   imgs:[["twist_black","Black, with a plant"],["twist","Ivory, with a plant"],["planters_family","Terrace, Twist and Echo"]]},
- {id:"H3",soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Echo",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Ripples that tighten toward the rim, like a sound dying out",
+ {id:"H3",deferred:true,hide:true,soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Echo",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Ripples that tighten toward the rim, like a sound dying out",
   pick:["Colour",["Ivory","Black"]],
   desc:"Ripples run round the pot, wide and faint at the base and tighter and deeper toward the rim, over a soft shoulder. It is a cover pot: your plant stays in its plastic nursery pot and drops straight in, so there is no drainage hole and nothing to repot. Walls are at least 4 mm and the base is 8 mm, so it has real weight in the hand. Felt pads underneath, three small risers inside keep the pot out of any drained water. Indoors only.",
   size:"Fits a 3 inch (7.5 to 8 cm) nursery pot. About 108 mm across, 86 mm tall. A 4 inch size is made on request",f:[],
@@ -901,7 +901,7 @@ const P=[
   size:"Channel on a 4-tile Stage grid, about 287 g plus the weights",f:[],
   box:"Printed parts, concealed steel weights under the tiles, felt feet and a black gift box.",
   imgs:[["desk_night","Night"],["desk_bone","Bone"]]},
- {id:"D17",soon:"Reserve opens before Valentine's, after the first drop. Tap to be told the day it opens.",side:"R",name:"Bookends",kind:"Reserve, numbered run of 25 pairs",price:1499,noAccent:true,badge:"Reserve",line:"A weighted pair that holds a shelf of books upright",
+ {id:"D17",deferred:true,hide:true,soon:"Reserve opens before Valentine's, after the first drop. Tap to be told the day it opens.",side:"R",name:"Bookends",kind:"Reserve, numbered run of 25 pairs",price:1499,noAccent:true,badge:"Reserve",line:"A weighted pair that holds a shelf of books upright",
   pick:["Colourway",["Night","Bone"]],ed:"Numbered 01/25 to 25/25",
   desc:"A pair of L-shaped bookends, a smooth face to the books and fluted back. A steel plate is sealed inside each base, so they take the weight of a shelf without sliding, and felt pads protect the shelf. The top is red. Sold as a pair, run number underneath. Twenty-five pairs are made.",
   size:"Each 90 x 90 x 110 mm, about 188 g of steel in each base",f:[],
@@ -922,7 +922,7 @@ const P=[
   desc:"A fluted amp knob on a puck with eleven level marks. It clicks onto a printed post and spins freely. For queues, long renders and calls that could have been an email.",
   size:"44 mm base, 27 mm knob, 21 mm tall",f:[],imgs:[["knob","Red and ivory"],["knob_build","Cap and base"]]},
 
- {id:"A1",soon:"Second drop, opening before Valentine's. Tap to be told the day it opens.",side:"A",name:"Track Plate",kind:"Scannable song display",price:1299,art:"plate",custom:true,song:"plate",line:"Your song as a desk piece, scan it or see it",badge:"Signature",build:"plate",
+ {id:"A1",deferred:true,hide:true,soon:"Second drop, opening before Valentine's. Tap to be told the day it opens.",side:"A",name:"Track Plate",kind:"Scannable song display",price:1299,art:"plate",custom:true,song:"plate",line:"Your song as a desk piece, scan it or see it",badge:"Signature",build:"plate",
   desc:"Your song on a matte black plate, two ways. As its Spotify Code: open the Spotify app, scan the plate and the song starts playing. Or as its sound wave: the loud and quiet parts of the track from first second to last, in 50 raised bars. The title and artist sit underneath. The plate drops into one slotted base bar and leans back 12 degrees, the angle a phone reads it from most easily.",
   size:"140 x 70 x 3 mm plate, 150 x 30 x 14 mm base bar",
   f:[["Song title","Blinding Lights",{max:28}],["Artist name","The Weeknd",{max:26,note:{code:"Spell both exactly as you want them printed under the code.",wave:"Spell both exactly. We build the wave from this song. For your own unreleased track, send the audio file in the chat."}}],
@@ -973,7 +973,7 @@ const P=[
   desc:"Three desk modules styled as mixer channels, each with its own fader on the front. A tall cup for pens and brushes, a mid cup for markers and scissors, and a tray with a divider for cards, clips and earbuds. Each module has a dovetail on one side and a socket on the other: lower one beside the next and they lock into a single row. Rearrange them any time, or run them apart.",
   size:"Tall cup 60 x 60 x 100 mm, mid cup 60 x 60 x 60 mm, tray 120 x 60 x 24 mm. 254 mm linked",f:[],
   imgs:[["channel","Linked, in use"],["channel_build","Three modules"]]},
- {id:"D8",engrave:{max:18,where:"underneath the tray"},side:"D",name:"B-Side",kind:"Catch-all tray",price:999,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
+ {id:"D8",deferred:true,hide:true,engrave:{max:18,where:"underneath the tray"},side:"D",name:"B-Side",kind:"Catch-all tray",price:999,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
   desc:"A tray for the things you drop when you walk in: keys, rings, earbuds, a watch, loose change. It is drawn as a record, with grooves cut into the floor and a raised centre label, and a 20 mm rim so nothing rolls off. One piece, nothing to build.",
   size:"160 mm across, 20 mm tall",f:[],
   imgs:[["bside","In use"],["bside_bare","Grooves and label"]]},
