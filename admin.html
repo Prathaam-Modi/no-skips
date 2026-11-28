@@ -2,11 +2,11 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer"><title>No Skips admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Schibsted+Grotesk:ital,wght@0,400..700;1,400&family=Sometype+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#F3EEE2;--ink:#171615;--mut:#6b655b;--line:#d9d2c2;--red:#C8202B;--card:#fbf8f0}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Instrument Sans",sans-serif}
-h1,.nm{font-family:"Archivo",sans-serif;letter-spacing:-.02em;line-height:1.1}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Schibsted Grotesk",sans-serif}
+h1,.nm{font-family:"Gloock",Georgia,serif;letter-spacing:-.02em;line-height:1.1}
 main{max-width:760px;margin:0 auto;padding:20px 16px 120px}
 h1{font-size:22px;margin:0 0 2px;display:flex;align-items:center;gap:10px}h1 i{display:inline-block;width:8px;height:22px;background:var(--red);border-radius:2px}
 .sub{color:var(--mut);margin:0 0 18px}
@@ -22,7 +22,7 @@ button{font:inherit;cursor:pointer}
 .bar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap}
 .row{display:grid;grid-template-columns:1fr;gap:10px;padding:14px 0;border-top:1px solid var(--line)}
 .row:first-child{border-top:0}
-.nm{font-weight:600}.nm small{color:var(--mut);font-weight:400;font-family:"DM Mono",monospace;margin-left:6px}
+.nm{font-weight:600}.nm small{color:var(--mut);font-weight:400;font-family:"Sometype Mono",monospace;margin-left:6px}
 .ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .seg{display:inline-flex;border:1px solid var(--ink);border-radius:6px;overflow:hidden}
 .seg button{border:0;background:transparent;padding:9px 14px;font-weight:600;color:var(--ink)}
@@ -35,10 +35,10 @@ button{font:inherit;cursor:pointer}
 .save span{color:var(--mut);font-size:13px}.ok{color:#1c7a3c!important;font-weight:600}
 .seg button[aria-pressed=true][data-ph],.seg button[aria-pressed=true][data-v]{background:var(--ink);color:var(--bg)}
 .seg button[aria-pressed=true][data-v=hidden]{background:var(--mut);color:#fff}
-.lbl{font:12px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);min-width:84px}
+.lbl{font:12px "Sometype Mono",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);min-width:84px}
 .seg.sm button{padding:8px 11px;font-size:14px}
 .fld{margin-top:14px}.fld label{font-weight:600;margin-bottom:6px}
-.tag{font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--line);border-radius:2px;padding:1px 6px;margin-left:8px;color:var(--mut)}
+.tag{font:11px "Sometype Mono",monospace;text-transform:uppercase;letter-spacing:.06em;border:1px solid var(--line);border-radius:2px;padding:1px 6px;margin-left:8px;color:var(--mut)}
 .mk{width:22px;height:22px;flex:none;color:var(--ink)}.mk .ch{fill:none;stroke:var(--bg);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}.mk .bar{fill:var(--red)}
 @keyframes run{0%{transform:translateX(-66px)}45%{transform:translateX(7px)}60%,100%{transform:none}}
 @media (prefers-reduced-motion:no-preference){.mk .ch{animation:run 1.1s cubic-bezier(.3,.7,.2,1) infinite}.mk .ch+.ch{animation-delay:.07s}}
@@ -49,31 +49,31 @@ button{font:inherit;cursor:pointer}
 .tabs button{border:0;background:transparent;padding:10px 18px;font-weight:600;color:var(--ink)}
 .tabs button[aria-selected=true]{background:var(--ink);color:var(--bg)}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
-.chips button{border:1px solid var(--line);background:var(--card);border-radius:2px;padding:6px 10px;font:12px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.04em;color:var(--ink)}
+.chips button{border:1px solid var(--line);background:var(--card);border-radius:2px;padding:6px 10px;font:12px "Sometype Mono",monospace;text-transform:uppercase;letter-spacing:.04em;color:var(--ink)}
 .chips button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .chips b{font-weight:500;opacity:.7;margin-left:4px}
 .ord{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin-bottom:10px}
-.ord h3{margin:0;font:600 17px/1.1 "Archivo",sans-serif;letter-spacing:-.02em;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.st{font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.06em;border-radius:2px;padding:2px 6px;border:1px solid var(--line);color:var(--mut)}
+.ord h3{margin:0;font:400 18px/1.1 "Gloock",Georgia,serif;letter-spacing:-.02em;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.st{font:11px "Sometype Mono",monospace;text-transform:uppercase;letter-spacing:.06em;border-radius:2px;padding:2px 6px;border:1px solid var(--line);color:var(--mut)}
 .st.new{background:var(--red);border-color:var(--red);color:#fff}.st.refund_due{background:#d98b1c;border-color:#d98b1c;color:#fff}
 .st.approved,.st.paid,.st.printing{border-color:var(--ink);color:var(--ink)}
 .meta{color:var(--mut);font-size:13px;margin:4px 0 8px}.meta a{color:inherit}
 .its{margin:0 0 8px;padding:0;list-style:none;border-top:1px solid var(--line)}
 .its li{padding:7px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:2px 12px}
 .its li span{color:var(--mut);font-size:13px;grid-column:1/-1}
-.its .k{font:11px "DM Mono",monospace;text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}
+.its .k{font:11px "Sometype Mono",monospace;text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}
 .flag{color:var(--red);font-weight:600;font-size:13px;margin:4px 0}
-.money{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:6px 0 10px}.money b{font-family:"DM Mono",monospace;font-weight:500}
+.money{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:6px 0 10px}.money b{font-family:"Sometype Mono",monospace;font-weight:500}
 details.act{border-top:1px solid var(--line);padding:8px 0}
 details.act summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between}
-details.act summary::after{content:"+";font-family:"DM Mono",monospace;color:var(--mut)}details.act[open] summary::after{content:"-"}
+details.act summary::after{content:"+";font-family:"Sometype Mono",monospace;color:var(--mut)}details.act[open] summary::after{content:"-"}
 details.act summary::-webkit-details-marker{display:none}
 details.act.go summary{color:var(--red)}
 .af{display:grid;gap:8px;margin-top:10px}.af label{font-weight:600;font-size:13px;margin:0}
 .af textarea{width:100%;min-height:70px;border:1px solid var(--line);border-radius:6px;padding:10px 12px;font:inherit;background:#fff;color:var(--ink)}
 .af .tk{display:flex;gap:8px;align-items:center;font-weight:400}
 .af .btn{justify-self:start}
-.hist{font:12px/1.5 "DM Mono",monospace;color:var(--mut);white-space:pre-wrap;margin:8px 0 0}
+.hist{font:12px/1.5 "Sometype Mono",monospace;color:var(--mut);white-space:pre-wrap;margin:8px 0 0}
 .pf{margin-top:8px}.pf img{max-width:100%;border:1px solid var(--line);border-radius:6px;background:#fff;margin-top:8px}
 .pf .row2{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .small{font-size:13px}
