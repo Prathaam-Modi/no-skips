@@ -1030,5 +1030,50 @@
   },
   "hours": 3.09,
   "file": "P6C_dealer_button/P6C_dealer_x6.gcode.3mf"
+ },
+ "P6A_deck_box/P6A_rail_coupon.3mf": {
+  "ok": true,
+  "time_s": 2057,
+  "grams": 17.1,
+  "plates": 1,
+  "when": "2026-11-28 15:33 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "15%",
+   "seam_position": "back"
+  },
+  "hours": 0.57,
+  "file": "P6A_deck_box/P6A_rail_coupon.gcode.3mf"
+ },
+ "P6A_deck_box/P6A_night.3mf": {
+  "ok": true,
+  "time_s": 5503,
+  "grams": 56.2,
+  "plates": 1,
+  "when": "2026-11-28 15:33 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "15%",
+   "seam_position": "back"
+  },
+  "hours": 1.53,
+  "file": "P6A_deck_box/P6A_night.gcode.3mf"
+ },
+ "P6A_deck_box/P6A_bone.3mf": {
+  "ok": true,
+  "time_s": 5573,
+  "grams": 57.1,
+  "plates": 1,
+  "when": "2026-11-28 15:33 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3",
+   "sparse_infill_density": "15%",
+   "seam_position": "back"
+  },
+  "hours": 1.55,
+  "file": "P6A_deck_box/P6A_bone.gcode.3mf"
  }
 }
