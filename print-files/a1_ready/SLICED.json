@@ -959,5 +959,18 @@
   },
   "hours": 1.93,
   "file": "P3_chess/P3_black_king_queen.gcode.3mf"
+ },
+ "P3_chess/P3_black_set_all.3mf": {
+  "ok": true,
+  "time_s": 18001,
+  "grams": 175.8,
+  "plates": 1,
+  "when": "2026-11-28 04:29 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "3"
+  },
+  "hours": 5.0,
+  "file": "P3_chess/P3_black_set_all.gcode.3mf"
  }
 }
