@@ -19,6 +19,13 @@ PLATES = {
  "P3_black_king_queen": [one("P3 black king", [(t("P3_7_king_b_BLACK.stl"), BLK, "king"), (t("P3_8_king_top_b_RED.stl"), RED, "king_top")], SOLID),
                          one("P3 black queen", [(t("P3_5_queen_b_BLACK.stl"), BLK, "queen"), (t("P3_6_queen_dot_b_RED.stl"), RED, "queen_dot")], SOLID)],
 }
+# one-shot ivory set (28 Nov, evening): mirror of the black one-shot, after the chess print passed
+IVORY_ALL = ([one(f"P3 ivory pawn {i}", [(t("P3_9_pawn_i_IVORY_x8.stl"), IVO, "pawn")], SOLID) for i in range(1, 9)]
+  + [one(f"P3 ivory {n} {i}", [(t(f), IVO, n)], MID) for n, f in
+     [("rook", "P3_10_rook_i_IVORY_x2.stl"), ("knight", "P3_11_knight_i_IVORY_x2.stl"), ("bishop", "P3_12_bishop_i_IVORY_x2.stl")] for i in (1, 2)]
+  + [one("P3 ivory king", [(t("P3_15_king_i_IVORY.stl"), IVO, "king"), (t("P3_16_king_top_i_RED.stl"), RED, "king_top")], SOLID),
+     one("P3 ivory queen", [(t("P3_13_queen_i_IVORY.stl"), IVO, "queen"), (t("P3_14_queen_dot_i_RED.stl"), RED, "queen_dot")], SOLID)])
+if "--all-ivory" in sys.argv: PLATES = {"P3_ivory_set_all": IVORY_ALL}
 # one-shot black set (28 Nov): all 16 pieces on one plate, per-object infill, one wipe tower for the two red parts
 PLATES = {"P3_black_set_all": PLATES["P3_black_pawns_x8"] + PLATES["P3_black_minors_40"] + PLATES["P3_black_king_queen"]} if "--all-black" in sys.argv else PLATES
 d = os.path.join(A, "P3_chess"); os.makedirs(d, exist_ok=True)

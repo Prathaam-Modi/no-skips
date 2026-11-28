@@ -1,3 +1,11 @@
 {
- "jobs": []
+ "jobs": [
+  {
+   "project": "P3_chess/P3_ivory_set_all.3mf",
+   "layer": "0.20",
+   "over": {
+    "wall_loops": "3"
+   }
+  }
+ ]
 }
