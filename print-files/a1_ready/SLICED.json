@@ -1075,5 +1075,56 @@
   },
   "hours": 1.55,
   "file": "P6A_deck_box/P6A_bone.gcode.3mf"
+ },
+ "P6B_hand_rack/P6B_coupon_pair.3mf": {
+  "ok": true,
+  "time_s": 4337,
+  "grams": 32.3,
+  "plates": 1,
+  "when": "2026-11-28 15:40 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "4",
+   "sparse_infill_density": "25%",
+   "sparse_infill_pattern": "gyroid",
+   "top_shell_layers": "5",
+   "bottom_shell_layers": "4"
+  },
+  "hours": 1.2,
+  "file": "P6B_hand_rack/P6B_coupon_pair.gcode.3mf"
+ },
+ "P6B_hand_rack/P6B_night_pair.3mf": {
+  "ok": true,
+  "time_s": 13581,
+  "grams": 130.9,
+  "plates": 1,
+  "when": "2026-11-28 15:40 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "4",
+   "sparse_infill_density": "25%",
+   "sparse_infill_pattern": "gyroid",
+   "top_shell_layers": "5",
+   "bottom_shell_layers": "4"
+  },
+  "hours": 3.77,
+  "file": "P6B_hand_rack/P6B_night_pair.gcode.3mf"
+ },
+ "P6B_hand_rack/P6B_bone_pair.3mf": {
+  "ok": true,
+  "time_s": 13590,
+  "grams": 130.7,
+  "plates": 1,
+  "when": "2026-11-28 15:40 UTC",
+  "layer": "0.20",
+  "over": {
+   "wall_loops": "4",
+   "sparse_infill_density": "25%",
+   "sparse_infill_pattern": "gyroid",
+   "top_shell_layers": "5",
+   "bottom_shell_layers": "4"
+  },
+  "hours": 3.77,
+  "file": "P6B_hand_rack/P6B_bone_pair.gcode.3mf"
  }
 }
