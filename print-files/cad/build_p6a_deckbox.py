@@ -109,10 +109,14 @@ class Box:
             b = b - ext(affinity.scale(logo(0, -32.0, 10.0 / 13.6), -1, 1, origin=(0, 0)), 0.6, -0.01)
         return (b - s.pocket()).set_tolerance(1e-3)   # 1 micron: lets manifold collapse the zero-area slivers of the cuts
 
-    def lid(s, shrink=0.0, bar=True, label=None):
-        """Lid in use position, resting on the groove floor."""
+    def lid(s, shrink=0.0, bar=True, label=None, face=None, name=None):
+        """Lid in use position, resting on the groove floor. face K/Q/J engraves a crown, name engraves a line under it (0.4 deep)."""
         z0 = s.zg
         m = U([s.lid_core(z0, shrink), s.bump(z0, shrink)])
+        art = Polygon()
+        if face: art = unary_union([art, affinity.translate(emblem(face), 0, s.yF + FACE_Y)])
+        if name: art = unary_union([art, name_shape(name, 0, s.yF + (NAME_Y if face else FACE_Y - 8))])
+        if not art.is_empty: m = m - ext(art, ENG_D + 0.01, s.H - ENG_D)
         red = Manifold()
         if bar:
             bl, bw, by, bd = BAR
@@ -122,6 +126,39 @@ class Box:
         if label:   # coupon lids: clearance number debossed 0.4 on the underside, mirrored to read from below
             m = m - ext(affinity.scale(text(label, 4.0, 0, 0), -1, 1, origin=(0, 0)), 0.4, z0 - 0.01)
         return m.set_tolerance(1e-3), red
+
+# ---------------------------------------------------------------- engraving (lid top face, printed face down: no supports, like the red bar)
+ENG_D = 0.4                      # recess depth: two 0.2 layers, floor stays smooth against the textured PEI face
+NAME_CAP, NAME_MAXW = 4.0, 48.0  # name cap height (4 mm is the smallest that prints clean on a 0.4 nozzle), max width
+FACE_Y, NAME_Y = 60.0, 34.0      # emblem and name centres behind the front face
+def soft(g, r=0.5): return g.buffer(r, quad_segs=8).buffer(-r, quad_segs=8)   # rounds inside corners so no feature is thinner than ~1 mm
+def emblem(face):
+    """Minimal face-card crowns as solid silhouettes, ~16 mm wide. K: three-point crown. Q: tiara of five beads. J: band with one plume."""
+    band = box(-8, 0, 8, 2.4)
+    if face == "K":
+        peaks = [Polygon([(cx - 2.8, 2.3), (cx + 2.8, 2.3), (cx, h)]) for cx, h in ((-5.2, 7.2), (0, 9.6), (5.2, 7.2))]
+        g = unary_union([band] + peaks)
+        g = unary_union([g] + [circle(0.9, cx, h - 0.2) for cx, h in ((-5.2, 7.2), (0, 9.6), (5.2, 7.2))])
+    elif face == "Q":
+        beads = [circle(r, cx, 2.4 + dy) for cx, r, dy in ((-6.4, 1.2, 1.0), (-3.2, 1.5, 2.3), (0, 2.0, 3.6), (3.2, 1.5, 2.3), (6.4, 1.2, 1.0))]
+        g = unary_union([band] + beads)
+    else:   # J
+        g = unary_union([box(-6, 0, 6, 2.4), box(-1.0, 2.0, 1.0, 4.0), Polygon([(0, 3.6), (3.4, 7.6), (0, 11.6), (-3.4, 7.6)])])
+    g = soft(g)
+    x0, y0, x1, y1 = g.bounds
+    return affinity.scale(affinity.translate(g, -(x0 + x1) / 2, -(y0 + y1) / 2), 1.4, 1.4, origin=(0, 0))
+def name_shape(name, cx=0.0, cy=0.0):
+    """Name in the printed-part face (Poppins Bold), keeps the case the customer typed, centred, cap height NAME_CAP."""
+    k = NAME_CAP / 0.698
+    tp = TextPath((0, 0), name, size=k, prop=FontProperties(fname=FONT))
+    g = Polygon()
+    for ring in tp.to_polygons():
+        if len(ring) >= 4: g = g.symmetric_difference(Polygon(ring).buffer(0))
+    x0, y0, x1, y1 = g.bounds
+    w = x1 - x0
+    if w > NAME_MAXW:
+        raise SystemExit(f"name '{name}' is {w:.1f} mm wide at the {NAME_CAP} mm minimum cap height: max {NAME_MAXW} mm, shorten it")
+    return affinity.translate(g, cx - (x0 + x1) / 2, cy - NAME_CAP / 2)
 
 def flip(m): return m.rotate((180, 0, 0))     # lid prints top face down
 
@@ -143,7 +180,8 @@ def play(lid, body_, axis, step=0.01, lim=2.0):
     return None
 
 if __name__ == "__main__":
-    B = Box(); body_ = B.build(); lid_, bar_ = B.lid()
+    B = Box(); body_ = B.build(); lid_, bar_ = B.lid(face="K")
+    lid_bone_, _ = B.lid(face="Q", name=os.environ.get("NS_NAME", "Meera"))   # render sample: queen with a name
     C = Box(cav_l=22.0, deck=3.0, ribs=False, window=False, mark=False)
     cb = C.build(); l30, _ = C.lid(bar=False, label="30"); l35, _ = C.lid(shrink=0.05, bar=False, label="35")
     p = Product("P6A", "deck_box", "Deck box")
@@ -152,9 +190,16 @@ if __name__ == "__main__":
         p.part(f"lid_{sfx}", flip(lid_), col, infill=0.15)
         p.part(f"lid_bar_{sfx}", flip(bar_), RED, on=f"lid_{sfx}")
     p.part("coupon_body", cb, BLACK); p.part("coupon_lid_30", flip(l30), BLACK); p.part("coupon_lid_35", flip(l35), BLACK)
+    for sfx, col in (("night", BLACK), ("bone", IVORY)):      # queen and jack lids: same bar, same body
+        for fc in ("Q", "J"):
+            lq, _ = B.lid(face=fc)
+            p.part(f"lid_{sfx}_{fc.lower()}", flip(lq), col, infill=0.15)
+            p.part(f"lid_bar_{sfx}_{fc.lower()}", flip(bar_), RED, on=f"lid_{sfx}_{fc.lower()}")
+    pn, _ = B.lid(face="K", name="No Skips")                   # name line check (widest typical name)
+    p.part("sample_lid_name", flip(pn), BLACK)
     deck = deck_prop()
     p.scene("deckbox_closed", [(body_, BLACK), (lid_, BLACK), (bar_, RED),
-                               (mv(body_, 84, 30, 0), IVORY), (mv(lid_, 84, 30, 0), IVORY), (mv(bar_, 84, 30, 0), RED)])
+                               (mv(body_, 84, 30, 0), IVORY), (mv(lid_bone_, 84, 30, 0), IVORY), (mv(bar_, 84, 30, 0), RED)])
     o = -52.0
     p.scene("deckbox_open", [(body_, BLACK), (mv(lid_, 0, o, 0), BLACK), (mv(bar_, 0, o, 0), RED), (deck, PROP2)])
     p.note = ("Body prints upright (floor on the PEI), lid prints top face down with the red bar in its first 1.2 mm. Slide the lid in "

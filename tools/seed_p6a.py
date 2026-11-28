@@ -1,5 +1,5 @@
 """Seed the P6A Deck box Bambu projects (28 Nov 2026). Run from the repo root after print-files/cad/build_p6a_deckbox.py.
-One plate per colourway: body upright (floor on the PEI) and lid top face down, its red bar in the first 1.2 mm (the only colour
+One plate per colourway (King crown lid): body upright (floor on the PEI) and lid top face down, its red bar in the first 1.2 mm (the only colour
 change on the plate). Plus the rail fit coupon (short body and two short lids at 0.30 and 0.35 mm a side), print it first.
 Does not touch SLICE_QUEUE.json: it prints the jobs to add."""
 import os, sys, json
@@ -17,6 +17,13 @@ PLATES = {
                one("P6A Night lid", [(t("P6A_2_lid_night_BLACK.stl"), BLK, "lid"), (t("P6A_3_lid_bar_night_RED.stl"), RED, "red_bar")])],
  "P6A_bone": [one("P6A Bone body", [(t("P6A_4_body_bone_IVORY.stl"), IVO, "body")]),
               one("P6A Bone lid", [(t("P6A_5_lid_bone_IVORY.stl"), IVO, "lid"), (t("P6A_6_lid_bar_bone_RED.stl"), RED, "red_bar")])],
+ # queen and jack lids, one plate per colour (the K lid sits on the main plates above). Same body for all three.
+ "P6A_night_lids_QJ": [one("P6A Night lid Q", [(t("P6A_10_lid_night_q_BLACK.stl"), BLK, "lid_q"), (t("P6A_11_lid_bar_night_q_RED.stl"), RED, "red_bar")]),
+                       one("P6A Night lid J", [(t("P6A_12_lid_night_j_BLACK.stl"), BLK, "lid_j"), (t("P6A_13_lid_bar_night_j_RED.stl"), RED, "red_bar")])],
+ "P6A_bone_lids_QJ": [one("P6A Bone lid Q", [(t("P6A_14_lid_bone_q_IVORY.stl"), IVO, "lid_q"), (t("P6A_15_lid_bar_bone_q_RED.stl"), RED, "red_bar")]),
+                      one("P6A Bone lid J", [(t("P6A_16_lid_bone_j_IVORY.stl"), IVO, "lid_j"), (t("P6A_17_lid_bar_bone_j_RED.stl"), RED, "red_bar")])],
+ # engraving test: K crown plus "No Skips" (a long name) on a plain Night lid, print it once to check the 4 mm lettering
+ "P6A_name_test": [one("P6A name test lid", [(t("P6A_18_sample_lid_name_BLACK.stl"), BLK, "lid_name")])],
  "P6A_rail_coupon": [one("P6A coupon body", [(t("P6A_7_coupon_body_BLACK.stl"), BLK, "coupon_body")]),
                      one("P6A coupon lid 0.30", [(t("P6A_8_coupon_lid_30_BLACK.stl"), BLK, "lid_30")]),
                      one("P6A coupon lid 0.35", [(t("P6A_9_coupon_lid_35_BLACK.stl"), BLK, "lid_35")])],
