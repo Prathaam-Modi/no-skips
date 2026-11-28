@@ -885,5 +885,79 @@
   },
   "hours": 0.23,
   "file": "P3_chess_board/P3_board_testkeys_r2.gcode.3mf"
+ },
+ "P3_chess/P3_ivory_pawns_x8.3mf": {
+  "ok": true,
+  "time_s": 5254,
+  "grams": 38.2,
+  "plates": 1,
+  "when": "2026-11-28 04:23 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag",
+   "wall_loops": "3"
+  },
+  "hours": 1.46,
+  "file": "P3_chess/P3_ivory_pawns_x8.gcode.3mf"
+ },
+ "P3_chess/P3_ivory_queen.3mf": {
+  "ok": true,
+  "time_s": 4006,
+  "grams": 30.8,
+  "plates": 1,
+  "when": "2026-11-28 04:23 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag",
+   "wall_loops": "3"
+  },
+  "hours": 1.11,
+  "file": "P3_chess/P3_ivory_queen.gcode.3mf"
+ },
+ "P3_chess/P3_black_pawns_x8.3mf": {
+  "ok": true,
+  "time_s": 5254,
+  "grams": 38.2,
+  "plates": 1,
+  "when": "2026-11-28 04:23 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag",
+   "wall_loops": "3"
+  },
+  "hours": 1.46,
+  "file": "P3_chess/P3_black_pawns_x8.gcode.3mf"
+ },
+ "P3_chess/P3_black_minors_40.3mf": {
+  "ok": true,
+  "time_s": 7327,
+  "grams": 74.5,
+  "plates": 1,
+  "when": "2026-11-28 04:23 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "40%",
+   "wall_loops": "3"
+  },
+  "hours": 2.04,
+  "file": "P3_chess/P3_black_minors_40.gcode.3mf"
+ },
+ "P3_chess/P3_black_king_queen.3mf": {
+  "ok": true,
+  "time_s": 6941,
+  "grams": 63.3,
+  "plates": 1,
+  "when": "2026-11-28 04:23 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag",
+   "wall_loops": "3"
+  },
+  "hours": 1.93,
+  "file": "P3_chess/P3_black_king_queen.gcode.3mf"
  }
 }
