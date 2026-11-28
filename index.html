@@ -889,7 +889,7 @@ const P=[
  {id:"P3",side:"P",name:"Six Cuts",kind:"Chess set and board",price:2799,noAccent:true,nobp:true,badge:"Game 01",build:"board",
   pick:["Set",["Pieces and board","Pieces only"]],pickPrice:{"Pieces only":1599},
   line:"One 22 mm block, cut six ways. Every move engraved",
-  ed:`Full set with board ₹2,799. Pieces only ₹1,599. At pre-order, the first ${FIRST_N} sets are ${inr(FIRST_PRICE)}`,
+  ed:`Full set with board ₹2,799. Pieces only ₹1,599. At pre-order, the first ${FIRST_N} full sets are ${inr(FIRST_PRICE)}`,
   desc:"Every piece is the same 22 mm square block, cut a different way. Heights rise 4 mm a rank, from the 32 mm pawn to the 52 mm king. Each piece has its move engraved on the front and back, so the set teaches itself. A red square marks the king and a red dot the queen. The king, queen and pawns are printed solid, so they sit heavy in the hand. The board is four 180 mm quadrants of 45 mm squares, 360 mm across, locked together by printed bow-tie keys underneath. Its top face is printed on a textured plate, so it comes off matte.",
   size:"Board 360 x 360 mm, 45 mm squares, in four 180 mm quadrants. Pieces 22 x 22 mm, 32 to 52 mm tall",
   box:"32 printed pieces, four board quadrants and eight bow-tie keys. Pieces only: the 32 pieces. Only filament, no glue, magnets or metal.",
@@ -1296,7 +1296,7 @@ function swap(el){el.classList.remove("swap");void el.offsetWidth;el.classList.a
 function setSide(s){side=s;filt="all";renderGrid();swap($("grid"))}
 function renderDrop(){
   const p3=byId("P3"),c=capOf("P3"),l=PHASE==="waitlist"?null:slotsLeft("P3"),out=PHASE!=="waitlist"&&stockOf(p3).s==="out";
-  $("tickEd").textContent=`Six Cuts: the first ${FIRST_N} sets are ${inr(FIRST_PRICE)} at pre-order`;
+  $("tickEd").textContent=`Six Cuts: the first ${FIRST_N} full sets are ${inr(FIRST_PRICE)} at pre-order`;
   $("heroStamp").textContent=out?"First batch full":l!==null&&c?`${l} of ${c} left`:`First ${FIRST_N} at ${inr(FIRST_PRICE)}`;
   $("heroEdition").innerHTML=`<div><b>32</b><span>pieces</span></div><div><b>360</b><span>mm board</span></div><div><b>${inr(p3.price)}</b><span>with the board</span></div>`
     +(l!==null&&c&&l<c?`<div class="meter" role="img" aria-label="${c-l} of ${c} sets claimed"><i style="width:${Math.min(100,100*(c-l)/c).toFixed(1)}%"></i></div>`:"");
@@ -1308,7 +1308,7 @@ function renderPhase(){
   root.dataset.phase=PHASE;
   $("tickPhase").textContent=L.tick;$("listLbl").textContent=L.list;
   const line=full?"The first batch is full. Ask to be told when the next one opens."
-    :wl?`Pre-orders open Saturday 9 January, 7 pm. The first ${FIRST_N} sets are ${inr(FIRST_PRICE)}. Shipping ${SHIP_FROM}.`
+    :wl?`Pre-orders open Saturday 9 January, 7 pm. The first ${FIRST_N} full sets with board are ${inr(FIRST_PRICE)}. Shipping ${SHIP_FROM}.`
     :pre?`Pre-orders are open. Ships from ${SHIP_FROM}.${PREORDER_NOTE?" "+PREORDER_NOTE:""}`
     :"Printed to order, one set at a time.";
   $("heroPhase").hidden=!line;$("heroPhase").innerHTML=`<i class="led"></i><span>${esc(line)}</span>`;
