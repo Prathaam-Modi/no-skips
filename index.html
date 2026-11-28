@@ -3,31 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>No Skips. Music pieces and daily gear, printed to order</title>
-<meta name="description" content="Music collectibles, song keepsakes and flat-pack daily gear, 3D printed to order in Bengaluru. Ordering happens on WhatsApp.">
+<title>No Skips. Games printed to order. Play everything. Skip nothing.</title>
+<meta name="description" content="Six Cuts, a chess set where every piece is one block cut a different way, and more games in black, ivory and one red piece. 3D printed to order in Bengaluru. Ordering happens on WhatsApp.">
 <meta name="theme-color" content="#EDEBE6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E0D0C" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="No Skips">
-<meta property="og:title" content="No Skips. Music pieces and daily gear, printed to order">
-<meta property="og:description" content="Music collectibles, song keepsakes and flat-pack daily gear, 3D printed to order in Bengaluru.">
+<meta property="og:title" content="No Skips. Six Cuts, a chess set cut from one block">
+<meta property="og:description" content="Play everything. Skip nothing. Games in black, ivory and one red piece, 3D printed to order in Bengaluru.">
 <!-- Link previews need the full address. Change these two lines if the site moves to its own domain. -->
 <meta property="og:url" content="https://prathaam-modi.github.io/no-skips/">
-<meta property="og:image" content="https://prathaam-modi.github.io/no-skips/img/og.jpg">
+<meta property="og:image" content="https://prathaam-modi.github.io/no-skips/img/og_play.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="No Skips. Vol. 01 The Studio, six miniature studio pieces on a numbered tray">
+<meta property="og:image:alt" content="No Skips Six Cuts chess pieces in black and ivory, each a square block cut a different way, the kings and queens marked in red">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="No Skips. Six Cuts, a chess set cut from one block">
+<meta name="twitter:description" content="Play everything. Skip nothing. Games in black, ivory and one red piece, 3D printed to order in Bengaluru.">
+<meta name="twitter:image" content="https://prathaam-modi.github.io/no-skips/img/og_play.jpg">
+<meta name="twitter:image:alt" content="No Skips Six Cuts chess pieces in black and ivory, each a square block cut a different way">
 <script>/* opens light by default (owner's choice); a saved pick wins */var t="light";try{var s=localStorage.getItem("ns-theme");if(s==="dark"||s==="light")t=s}catch(e){}document.documentElement.dataset.theme=t</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&family=Poppins:wght@700&display=swap" rel="stylesheet">
 <style>
-/* Layout idea: a record shop counter. The newest release sits in the window, the numbered
-   collectibles get the dark listening booth, the rest is racked as Side A and Side B.
-   Wide caps for names, mono for specs and edition numbers, one red signal light. */
+/* Layout idea: a game table. The game on the waitlist sits in the window, the grid that every game
+   shares gets the dark booth, then the one red piece, the shelf of games and the board setup card.
+   Wide caps for names, mono for specs and sizes. Red is for the buy button and the one red piece only. */
 :root{
   --bg:#EDEBE6; --surface:#F6F4F0; --stage:#E0DDD6; --ink:#151413; --muted:#69655F; --line:#CECAC2;
   --accent:#C8202B; --on-accent:#FFF8F0;
@@ -88,7 +92,11 @@ nav a:hover{color:var(--ink)}
 .icon-btn{height:36px;min-width:36px;padding:0 12px;border:1px solid var(--line);border-radius:var(--r);background:transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:13px}
 .icon-btn:hover{border-color:var(--ink)}
 .count{font-family:var(--mono);font-size:11px;background:var(--ink);color:var(--bg);border-radius:var(--r-s);min-width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;padding:0 5px}
-@media (max-width:900px){nav{display:none}.tools{margin-left:auto}}
+.menu-btn{display:none}
+@media (max-width:900px){nav{display:none}.tools{margin-left:auto}.menu-btn{display:inline-flex}
+  nav.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:4px var(--gut) 12px}
+  nav.open a{padding:13px 0;border-top:1px solid var(--line);font-size:16px;color:var(--ink)}
+  nav.open a:first-child{border-top:0}}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 24px;border-radius:var(--r);border:1px solid var(--ink);background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap}
@@ -102,7 +110,7 @@ nav a:hover{color:var(--ink)}
 /* hero: the latest release */
 .hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:center;padding-block:clamp(28px,5vw,64px)}
 .hero h1{font-size:clamp(46px,7.2vw,104px);font-stretch:125%;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-top:18px}
-.hero h1 em{font-style:normal;color:var(--accent);display:block}
+.hero h1 em{font-style:normal;color:var(--muted);display:block}
 .hero .lede{max-width:44ch;margin:22px 0 0;font-size:18px;color:var(--muted)}
 .edition{margin:26px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,auto);gap:0 clamp(16px,3vw,36px);justify-content:start;padding:14px 0}
 .edition div{display:flex;flex-direction:column;gap:2px}
@@ -115,7 +123,7 @@ nav a:hover{color:var(--ink)}
 .hero-shot img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .hero-shot .tagl{position:absolute;left:16px;top:14px;color:#3d3a36}
 .hero-shot .tagr{position:absolute;right:16px;bottom:14px;color:#3d3a36;text-align:right}
-.stamp{position:absolute;right:16px;top:14px;background:var(--accent);color:var(--on-accent);border-radius:var(--r-s);padding:5px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.stamp{position:absolute;right:16px;top:14px;background:#151413;color:#F3EEE2;border-radius:var(--r-s);padding:5px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 @media (max-width:900px){.hero{grid-template-columns:1fr}.hero-shot{order:-1}.hero-shot img{aspect-ratio:5/4}}
 
 /* section heads */
@@ -134,10 +142,12 @@ nav a:hover{color:var(--ink)}
 .viewsw{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:15;display:inline-flex;gap:2px;padding:4px;border-radius:var(--r);background:#151413;border:1px solid #38342F}
 .viewsw button{border:0;background:transparent;color:#A39E95;height:36px;padding:0 16px;border-radius:var(--r-s);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
 .viewsw button[aria-pressed="true"]{background:#EFEAE0;color:#151413}
-footer{padding-bottom:84px!important}
+@media (min-width:701px){body:has(.viewsw:not([hidden])) footer{padding-bottom:84px!important}}
+.head .viewsw{flex:none}
+@media (max-width:700px){.viewsw{position:static;transform:none;left:auto;bottom:auto}}
 .badges{position:absolute;left:10px;top:10px;display:flex;gap:6px;flex-wrap:wrap}
 .badge{border-radius:var(--r-s);padding:3px 9px;font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;background:rgba(21,20,19,.82);color:#F3EEE2}
-.badge.hot{background:var(--accent);color:var(--on-accent)}
+.badge.hot{background:#F3EEE2;color:#151413}
 .badge.out{background:#F3EEE2;color:#151413}.badge.low{background:var(--accent);color:var(--on-accent)}
 .card.is-out .shot img{filter:grayscale(.85);opacity:.55}.card.is-out .price{text-decoration:line-through;opacity:.5}
 .stockline{font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;margin:0 0 4px}.stockline.out{opacity:.7}
@@ -247,6 +257,37 @@ footer{padding-bottom:84px!important}
 .bulk p{margin:10px 0 0;max-width:52ch;color:var(--booth-muted)}
 footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color:var(--muted)}
 footer .row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* one grid: every game on the 45 mm module */
+.gs{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:start}
+.gs-copy h2{font-size:clamp(36px,5.4vw,72px);font-stretch:125%;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-top:14px}
+.gs-copy p{color:var(--booth-muted);max-width:40ch;margin:16px 0 0}
+.gs-copy .ratio{margin-top:26px;padding-top:14px;border-top:1px solid var(--booth-line);font-family:var(--mono);font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--booth-ink)}
+.mods{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,2fr);gap:1px;background:var(--booth-line);border:1px solid var(--booth-line);border-radius:var(--r);overflow:hidden}
+.mod{margin:0;background:var(--booth);padding:clamp(14px,2vw,24px);display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-width:0}
+.mod svg{width:100%;max-width:var(--s);height:auto;overflow:visible}
+.mod figcaption{display:flex;flex-direction:column;gap:2px}
+.mod figcaption b{font-family:var(--display);font-stretch:120%;font-weight:800;font-size:clamp(20px,2.2vw,28px);letter-spacing:-.02em;line-height:1.1}
+.mod figcaption span{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--booth-muted)}
+.m1{--s:44px}.m3{--s:118px}.m4{--s:150px;grid-column:1/3;flex-direction:row;align-items:flex-end}.m8{--s:100%;grid-column:3;grid-row:1/3}
+.m4 svg{flex:0 0 150px}
+.gl{fill:none;stroke:var(--booth-muted);stroke-width:.6}
+.gl.hard{stroke:var(--booth-ink);stroke-width:1.2}
+.gd{fill:var(--booth-2)}.gi{fill:#E9E3D6}
+@media (max-width:900px){.gs{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:620px){.mods{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.m4{grid-column:1/-1}.m8{grid-column:1/-1;grid-row:auto}.m4 svg{flex-basis:110px}}
+
+/* one red piece */
+.redlist{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;margin:4px 0 0;padding-top:14px;border-top:1px solid var(--line);font-size:14px;width:100%}
+.redlist dt{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.redlist dd{margin:0}
+
+/* board setup figures */
+.bsteps .sfig:has(.bfig){max-width:320px}
+.bfig{display:block;width:100%;height:auto;background:#E4E1DB}
+.bfig text{font-family:var(--mono);font-size:13px;letter-spacing:.04em;fill:#3d3a36}
+.bfig .lt{font-family:var(--display);font-weight:800;font-size:22px;fill:#151413;text-anchor:middle;dominant-baseline:central}
+.bfig .lc{fill:#F6F4F0;stroke:#151413;stroke-width:1.5}
 
 /* product drawing (live personalisation preview) */
 .pv{width:100%;height:auto;--pa:var(--p-red)}
@@ -466,22 +507,22 @@ footer a{text-underline-offset:3px}
   <span id="tickEd"></span>
   <span class="opt">Only filament in the box. No magnets, no glue, no metal</span>
   <span class="opt">Printed to order in Bengaluru</span>
+  <span class="opt">Play everything. Skip nothing.</span>
 </div></div>
 <header>
   <div class="wrap bar">
     <a class="brand" href="#top"><svg class="wm" role="img" aria-label="No Skips" xmlns="http://www.w3.org/2000/svg" viewBox="-12 -126.8 684.5 183.3"><g transform="translate(-6 -120.8) scale(1.7130)"><rect width="100" height="100" rx="22" fill="currentColor"/><path d="M17 30L35 50L17 70" fill="none" stroke="var(--bg)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 30L58 50L40 70" fill="none" stroke="var(--bg)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><rect x="71" y="20" width="10" height="60" rx="5" fill="var(--accent)"/></g><g transform="translate(197.3 0)"><path fill="currentColor" d="M69.00 -0.00L51.91 -0.00L23.30 -43.30L23.30 -0.00L6.20 -0.00L6.20 -70.20L23.30 -70.20L51.91 -26.70L51.91 -70.20L69.00 -70.20L69.00 -0.00ZM113.41 0.70Q103.50 0.70 95.25 -3.89Q87.00 -8.50 82.14 -16.75Q77.30 -25.00 77.30 -35.30Q77.30 -45.59 82.14 -53.80Q87.00 -62.00 95.25 -66.59Q103.50 -71.20 113.41 -71.20Q123.30 -71.20 131.55 -66.59Q139.80 -62.00 144.55 -53.80Q149.30 -45.59 149.30 -35.30Q149.30 -25.00 144.50 -16.75Q139.70 -8.50 131.50 -3.89Q123.30 0.70 113.41 0.70ZM113.41 -14.91Q121.80 -14.91 126.84 -20.50Q131.91 -26.09 131.91 -35.30Q131.91 -44.59 126.84 -50.14Q121.80 -55.70 113.41 -55.70Q104.91 -55.70 99.84 -50.20Q94.80 -44.70 94.80 -35.30Q94.80 -26.00 99.84 -20.45Q104.91 -14.91 113.41 -14.91ZM211.89 0.70Q204.20 0.70 198.09 -1.80Q192.00 -4.30 188.34 -9.19Q184.70 -14.09 184.50 -21.00L202.70 -21.00Q203.09 -17.09 205.39 -15.05Q207.70 -13.00 211.39 -13.00Q215.20 -13.00 217.39 -14.75Q219.59 -16.50 219.59 -19.59Q219.59 -22.20 217.84 -23.89Q216.09 -25.59 213.55 -26.69Q211.00 -27.80 206.30 -29.20Q199.50 -31.30 195.19 -33.39Q190.89 -35.50 187.80 -39.59Q184.70 -43.70 184.70 -50.30Q184.70 -60.09 191.80 -65.64Q198.89 -71.20 210.30 -71.20Q221.89 -71.20 228.98 -65.64Q236.09 -60.09 236.59 -50.20L218.09 -50.20Q217.89 -53.59 215.59 -55.55Q213.30 -57.50 209.70 -57.50Q206.59 -57.50 204.69 -55.84Q202.80 -54.20 202.80 -51.09Q202.80 -47.70 206.00 -45.80Q209.20 -43.91 216.00 -41.70Q222.80 -39.41 227.05 -37.30Q231.30 -35.20 234.39 -31.20Q237.50 -27.20 237.50 -20.91Q237.50 -14.91 234.44 -10.00Q231.39 -5.09 225.59 -2.19Q219.80 0.70 211.89 0.70ZM289.41 -0.00L265.80 -31.00L265.80 -0.00L248.70 -0.00L248.70 -70.20L265.80 -70.20L265.80 -39.41L289.20 -70.20L309.30 -70.20L282.09 -35.80L310.30 -0.00L289.41 -0.00ZM401.00 -47.59Q401.00 -41.50 398.19 -36.45Q395.39 -31.41 389.59 -28.30Q383.80 -25.20 375.20 -25.20L364.59 -25.20L364.59 -0.00L347.50 -0.00L347.50 -70.20L375.20 -70.20Q383.59 -70.20 389.39 -67.30Q395.20 -64.41 398.09 -59.30Q401.00 -54.20 401.00 -47.59ZM373.89 -38.80Q378.80 -38.80 381.19 -41.09Q383.59 -43.41 383.59 -47.59Q383.59 -51.80 381.19 -54.09Q378.80 -56.41 373.89 -56.41L364.59 -56.41L364.59 -38.80L373.89 -38.80ZM437.59 0.70Q429.91 0.70 423.80 -1.80Q417.70 -4.30 414.05 -9.19Q410.41 -14.09 410.20 -21.00L428.41 -21.00Q428.80 -17.09 431.09 -15.05Q433.41 -13.00 437.09 -13.00Q440.91 -13.00 443.09 -14.75Q445.30 -16.50 445.30 -19.59Q445.30 -22.20 443.55 -23.89Q441.80 -25.59 439.25 -26.69Q436.70 -27.80 432.00 -29.20Q425.20 -31.30 420.89 -33.39Q416.59 -35.50 413.50 -39.59Q410.41 -43.70 410.41 -50.30Q410.41 -60.09 417.50 -65.64Q424.59 -71.20 436.00 -71.20Q447.59 -71.20 454.69 -65.64Q461.80 -60.09 462.30 -50.20L443.80 -50.20Q443.59 -53.59 441.30 -55.55Q439.00 -57.50 435.41 -57.50Q432.30 -57.50 430.39 -55.84Q428.50 -54.20 428.50 -51.09Q428.50 -47.70 431.70 -45.80Q434.91 -43.91 441.70 -41.70Q448.50 -39.41 452.75 -37.30Q457.00 -35.20 460.09 -31.20Q463.20 -27.20 463.20 -20.91Q463.20 -14.91 460.14 -10.00Q457.09 -5.09 451.30 -2.19Q445.50 0.70 437.59 0.70Z"/><rect x="317.30" y="-86.20" width="17" height="102.20" rx="8.5" fill="var(--accent)"/></g></svg></a>
-    <nav aria-label="Sections">
-      <a href="#collectibles">Collectibles</a>
-      <a href="#catalogue" data-side="G" hidden>Gifts</a>
-      <a href="#catalogue" data-side="D">Everyday</a>
-      <a href="#catalogue" data-side="H">Room Tone</a>
-      <a href="#catalogue" data-side="R">Reserve</a>
-      <a href="#build">Build it</a>
+    <nav aria-label="Sections" id="nav">
+      <a href="#top">Six Cuts</a>
+      <a href="#catalogue">The games</a>
+      <a href="#grid-sys">One grid</a>
+      <a href="#build">Set up the board</a>
       <a href="#order">How to order</a>
     </nav>
     <div class="tools">
+      <button class="icon-btn menu-btn" id="navBtn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
       <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch between light and dark"></button>
-      <button class="icon-btn" id="listBtn" type="button"><span class="lbl-long" id="listLbl">Interest list</span><span class="lbl-short">List</span> <span class="count" id="count">0</span></button>
+      <button class="icon-btn" id="listBtn" type="button"><span class="lbl-long" id="listLbl">Waitlist</span><span class="lbl-short">List</span> <span class="count" id="count">0</span></button>
     </div>
   </div>
 </header>
@@ -489,45 +530,48 @@ footer a{text-underline-offset:3px}
 <main id="top">
   <section class="wrap hero" aria-labelledby="heroTitle">
     <div>
-      <span class="eyebrow"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="mkc"><rect width="100" height="100" rx="22"/></clipPath></defs><rect width="100" height="100" rx="22" fill="currentColor"/><g clip-path="url(#mkc)"><path class="ch" d="M17 30L35 50L17 70"/><path class="ch" d="M40 30L58 50L40 70"/><rect class="bar" x="71" y="20" width="10" height="60" rx="5"/></g></svg>Latest release &middot; Drop 01</span>
-      <h1 id="heroTitle">Vol. 01 <em>The Studio</em></h1>
-      <p class="lede">Six pieces of studio gear, shrunk to fit your palm and racked on a numbered tray. Turntable, synth, drum machine, mixer, mic, headphones. Collect one, or take the whole set.</p>
+      <span class="eyebrow"><svg class="mark" viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="mkc"><rect width="100" height="100" rx="22"/></clipPath></defs><rect width="100" height="100" rx="22" fill="currentColor"/><g clip-path="url(#mkc)"><path class="ch" d="M17 30L35 50L17 70"/><path class="ch" d="M40 30L58 50L40 70"/><rect class="bar" x="71" y="20" width="10" height="60" rx="5"/></g></svg>Play &middot; Game 01</span>
+      <h1 id="heroTitle">Six Cuts <em>A chess set</em></h1>
+      <p class="lede">Every piece is the same 22 mm square block, cut a different way. Each one carries its move on the front and back, so the set teaches itself.</p>
       <p class="phase-line" id="heroPhase" hidden></p>
       <div class="edition" id="heroEdition"></div>
       <div class="cta" id="heroCta"></div>
     </div>
-    <button class="hero-shot" type="button" data-open="C1" aria-label="Open Vol. 01 The Studio">
-      <img src="img/studio_set.webp" alt="Vol. 01 The Studio: six miniature studio pieces on a numbered tray" width="880" height="880">
-      <img class="bp" src="img/bp_C1.webp" alt="" aria-hidden="true" width="1200" height="1200">
-      <span class="mono tagl">C1 / Vol. 01</span>
+    <button class="hero-shot" type="button" data-open="P3" aria-label="Open Six Cuts">
+      <img src="img/chess2_set.webp" alt="Six Cuts: black and ivory chess pieces, each a square block cut a different way, the kings and queens marked in red" width="880" height="880">
+      <span class="mono tagl">P3 / Six Cuts</span>
       <span class="stamp" id="heroStamp"></span>
-      <span class="mono tagr">Render of the print files<br>196 x 124 mm tray</span>
+      <span class="mono tagr">Render of the print files<br>Pawn 32 mm to king 52 mm</span>
     </button>
   </section>
 
-  <section class="booth" id="collectibles" aria-labelledby="boothTitle">
-    <div class="wrap">
-      <div class="head">
-        <div>
-          <span class="eyebrow">Numbered &middot; Limited &middot; Made to keep</span>
-          <h2 id="boothTitle" style="margin-top:14px">The collectibles</h2>
-          <p>Small enough to carry, numbered so no two are the same. Each run has a fixed size. When a run is finished, the files are retired and the next volume takes its place.</p>
-        </div>
-        <button class="btn red" type="button" data-open="C1" id="boothCta">See the set</button>
+  <section class="booth" id="grid-sys" aria-labelledby="gridTitle">
+    <div class="wrap gs">
+      <div class="gs-copy">
+        <span class="eyebrow">Rule one</span>
+        <h2 id="gridTitle">One grid</h2>
+        <p>Every game is laid out on the same 45 mm module. A chess square is one module. The tangram is three by three. A board quadrant is four by four, and four quadrants lock into the 360 mm board.</p>
+        <p>Games that share a grid share a table, and later they can share parts.</p>
+        <p class="ratio">1 module = 45 mm</p>
       </div>
-      <div class="booth-grid" id="boothGrid"></div>
+      <div class="mods">
+        <figure class="mod m1"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="gi" x="0" y="0" width="100" height="100"/><rect class="gl hard" x="0" y="0" width="100" height="100" rx="1.5"/></svg><figcaption><b>1 x 1</b><span>45 mm, one chess square</span></figcaption></figure>
+        <figure class="mod m3"><svg viewBox="0 0 100 100" aria-hidden="true"><path class="gl" stroke-dasharray="2 2" d="M33.33 0V100M0 33.33H100"/><path class="gl" stroke-dasharray="2 2" d="M66.67 0V100M0 66.67H100"/><path class="gl hard" d="M0 0L100 100M0 100L50 50M50 0L100 50M25 25L50 0M75 25L50 50M75 25L75 75M100 50L75 75"/><rect class="gl hard" x="0" y="0" width="100" height="100" rx="1.5"/></svg><figcaption><b>3 x 3</b><span>135 mm, the tangram</span></figcaption></figure>
+        <figure class="mod m4"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="gd" x="0.00" y="75.00" width="25.00" height="25.00"/><rect class="gi" x="0.00" y="50.00" width="25.00" height="25.00"/><rect class="gd" x="0.00" y="25.00" width="25.00" height="25.00"/><rect class="gi" x="0.00" y="0.00" width="25.00" height="25.00"/><rect class="gi" x="25.00" y="75.00" width="25.00" height="25.00"/><rect class="gd" x="25.00" y="50.00" width="25.00" height="25.00"/><rect class="gi" x="25.00" y="25.00" width="25.00" height="25.00"/><rect class="gd" x="25.00" y="0.00" width="25.00" height="25.00"/><rect class="gd" x="50.00" y="75.00" width="25.00" height="25.00"/><rect class="gi" x="50.00" y="50.00" width="25.00" height="25.00"/><rect class="gd" x="50.00" y="25.00" width="25.00" height="25.00"/><rect class="gi" x="50.00" y="0.00" width="25.00" height="25.00"/><rect class="gi" x="75.00" y="75.00" width="25.00" height="25.00"/><rect class="gd" x="75.00" y="50.00" width="25.00" height="25.00"/><rect class="gi" x="75.00" y="25.00" width="25.00" height="25.00"/><rect class="gd" x="75.00" y="0.00" width="25.00" height="25.00"/><path class="gl" d="M25.00 0V100M0 25.00H100"/><path class="gl" d="M50.00 0V100M0 50.00H100"/><path class="gl" d="M75.00 0V100M0 75.00H100"/><rect class="gl hard" x="0" y="0" width="100" height="100" rx="1.5"/></svg><figcaption><b>4 x 4</b><span>180 mm, one board quadrant</span></figcaption></figure>
+        <figure class="mod m8"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="gd" x="0.00" y="87.50" width="12.50" height="12.50"/><rect class="gi" x="0.00" y="75.00" width="12.50" height="12.50"/><rect class="gd" x="0.00" y="62.50" width="12.50" height="12.50"/><rect class="gi" x="0.00" y="50.00" width="12.50" height="12.50"/><rect class="gd" x="0.00" y="37.50" width="12.50" height="12.50"/><rect class="gi" x="0.00" y="25.00" width="12.50" height="12.50"/><rect class="gd" x="0.00" y="12.50" width="12.50" height="12.50"/><rect class="gi" x="0.00" y="0.00" width="12.50" height="12.50"/><rect class="gi" x="12.50" y="87.50" width="12.50" height="12.50"/><rect class="gd" x="12.50" y="75.00" width="12.50" height="12.50"/><rect class="gi" x="12.50" y="62.50" width="12.50" height="12.50"/><rect class="gd" x="12.50" y="50.00" width="12.50" height="12.50"/><rect class="gi" x="12.50" y="37.50" width="12.50" height="12.50"/><rect class="gd" x="12.50" y="25.00" width="12.50" height="12.50"/><rect class="gi" x="12.50" y="12.50" width="12.50" height="12.50"/><rect class="gd" x="12.50" y="0.00" width="12.50" height="12.50"/><rect class="gd" x="25.00" y="87.50" width="12.50" height="12.50"/><rect class="gi" x="25.00" y="75.00" width="12.50" height="12.50"/><rect class="gd" x="25.00" y="62.50" width="12.50" height="12.50"/><rect class="gi" x="25.00" y="50.00" width="12.50" height="12.50"/><rect class="gd" x="25.00" y="37.50" width="12.50" height="12.50"/><rect class="gi" x="25.00" y="25.00" width="12.50" height="12.50"/><rect class="gd" x="25.00" y="12.50" width="12.50" height="12.50"/><rect class="gi" x="25.00" y="0.00" width="12.50" height="12.50"/><rect class="gi" x="37.50" y="87.50" width="12.50" height="12.50"/><rect class="gd" x="37.50" y="75.00" width="12.50" height="12.50"/><rect class="gi" x="37.50" y="62.50" width="12.50" height="12.50"/><rect class="gd" x="37.50" y="50.00" width="12.50" height="12.50"/><rect class="gi" x="37.50" y="37.50" width="12.50" height="12.50"/><rect class="gd" x="37.50" y="25.00" width="12.50" height="12.50"/><rect class="gi" x="37.50" y="12.50" width="12.50" height="12.50"/><rect class="gd" x="37.50" y="0.00" width="12.50" height="12.50"/><rect class="gd" x="50.00" y="87.50" width="12.50" height="12.50"/><rect class="gi" x="50.00" y="75.00" width="12.50" height="12.50"/><rect class="gd" x="50.00" y="62.50" width="12.50" height="12.50"/><rect class="gi" x="50.00" y="50.00" width="12.50" height="12.50"/><rect class="gd" x="50.00" y="37.50" width="12.50" height="12.50"/><rect class="gi" x="50.00" y="25.00" width="12.50" height="12.50"/><rect class="gd" x="50.00" y="12.50" width="12.50" height="12.50"/><rect class="gi" x="50.00" y="0.00" width="12.50" height="12.50"/><rect class="gi" x="62.50" y="87.50" width="12.50" height="12.50"/><rect class="gd" x="62.50" y="75.00" width="12.50" height="12.50"/><rect class="gi" x="62.50" y="62.50" width="12.50" height="12.50"/><rect class="gd" x="62.50" y="50.00" width="12.50" height="12.50"/><rect class="gi" x="62.50" y="37.50" width="12.50" height="12.50"/><rect class="gd" x="62.50" y="25.00" width="12.50" height="12.50"/><rect class="gi" x="62.50" y="12.50" width="12.50" height="12.50"/><rect class="gd" x="62.50" y="0.00" width="12.50" height="12.50"/><rect class="gd" x="75.00" y="87.50" width="12.50" height="12.50"/><rect class="gi" x="75.00" y="75.00" width="12.50" height="12.50"/><rect class="gd" x="75.00" y="62.50" width="12.50" height="12.50"/><rect class="gi" x="75.00" y="50.00" width="12.50" height="12.50"/><rect class="gd" x="75.00" y="37.50" width="12.50" height="12.50"/><rect class="gi" x="75.00" y="25.00" width="12.50" height="12.50"/><rect class="gd" x="75.00" y="12.50" width="12.50" height="12.50"/><rect class="gi" x="75.00" y="0.00" width="12.50" height="12.50"/><rect class="gi" x="87.50" y="87.50" width="12.50" height="12.50"/><rect class="gd" x="87.50" y="75.00" width="12.50" height="12.50"/><rect class="gi" x="87.50" y="62.50" width="12.50" height="12.50"/><rect class="gd" x="87.50" y="50.00" width="12.50" height="12.50"/><rect class="gi" x="87.50" y="37.50" width="12.50" height="12.50"/><rect class="gd" x="87.50" y="25.00" width="12.50" height="12.50"/><rect class="gi" x="87.50" y="12.50" width="12.50" height="12.50"/><rect class="gd" x="87.50" y="0.00" width="12.50" height="12.50"/><path class="gl" d="M12.50 0V100M0 12.50H100"/><path class="gl" d="M25.00 0V100M0 25.00H100"/><path class="gl" d="M37.50 0V100M0 37.50H100"/><path class="gl hard" d="M50.00 0V100M0 50.00H100"/><path class="gl" d="M62.50 0V100M0 62.50H100"/><path class="gl" d="M75.00 0V100M0 75.00H100"/><path class="gl" d="M87.50 0V100M0 87.50H100"/><rect class="gl hard" x="0" y="0" width="100" height="100" rx="1.5"/></svg><figcaption><b>8 x 8</b><span>360 mm, the Six Cuts board, four quadrants</span></figcaption></figure>
+      </div>
     </div>
   </section>
 
-  <section class="wrap sig" aria-labelledby="sigTitle">
+  <section class="wrap sig" id="red" aria-labelledby="redTitle">
     <div class="sig-in">
-      <div class="shot"><img src="img/plate.webp" alt="Track Plate in its base bar" loading="lazy" width="880" height="880"><img class="bp" src="img/bp_A1.webp" alt="" aria-hidden="true" loading="lazy" width="1200" height="1200"></div>
+      <div class="shot"><img src="img/queen_close.webp" alt="Two Six Cuts queens, ivory and black, each with a red dot on top" loading="lazy" width="880" height="880"></div>
       <div class="sig-copy">
-        <span class="eyebrow"><span id="sigLabel"></span></span>
-        <h2 id="sigTitle">Track Plate</h2>
-        <p>The piece the range grew from. Send a song and it becomes a plate you can scan to play, or a wave of 50 raised bars drawn from the track itself, every quiet intro and every drop. No two songs print alike.</p>
-        <span class="price" id="sigPrice"></span>
-        <button class="btn" type="button" data-open="A1" id="sigCta">Tell me when it opens</button>
+        <span class="eyebrow">Rule two</span>
+        <h2 id="redTitle">One red piece</h2>
+        <p>Every game is black and ivory, with one red element and nothing else in colour. Red marks the piece the game turns on, so you find it at a glance.</p>
+        <dl class="redlist"><dt>Six Cuts</dt><dd>A red square on the king, a red dot on the queen</dd><dt>Tangram</dt><dd>One red piece of seven</dd></dl>
+        <button class="btn ghost" type="button" data-open="P3">Open Six Cuts</button>
       </div>
     </div>
   </section>
@@ -535,21 +579,18 @@ footer a{text-underline-offset:3px}
   <section class="wrap cat" id="catalogue">
     <div class="head">
       <div>
-        <h2 id="sideTitle">Everyday</h2>
+        <h2 id="sideTitle">The games</h2>
         <p id="sideCopy"></p>
       </div>
-      <div class="tabs" role="tablist" aria-label="Collection">
-        <button role="tab" type="button" aria-controls="grid" data-side="G" id="tabG" hidden>Gifts</button>
-        <button role="tab" type="button" aria-controls="grid" data-side="D" id="tabD">Everyday</button>
-        <button role="tab" type="button" aria-controls="grid" data-side="H" id="tabH">Room Tone</button>
-        <button role="tab" type="button" aria-controls="grid" data-side="R" id="tabR">Reserve</button>
-        <button role="tab" type="button" aria-controls="grid" data-side="all" id="tabAll">Everything</button>
+      <div class="viewsw" role="group" aria-label="Product pictures" hidden>
+        <button type="button" data-view="render" aria-pressed="true">Renders</button>
+        <button type="button" data-view="bp" aria-pressed="false">Blueprints</button>
       </div>
     </div>
     <div class="fbar"><div class="chips fchips" id="filters" role="group" aria-label="Filter"></div><span class="mono muted" id="gridCount" aria-live="polite"></span></div>
     <div class="grid" id="grid"></div>
     <div class="soon" id="soonWrap" hidden>
-      <div class="soon-head"><span class="eyebrow">On the bench</span><p id="soonCopy">Designed and drawn, not on sale yet. Tap one to be told when it lands.</p></div>
+      <div class="soon-head"><span class="eyebrow">On the bench</span><p id="soonCopy">Designed and test printed, not on sale yet. Tap one to be told when it lands.</p></div>
       <div class="grid soon-grid" id="soonGrid"></div>
     </div>
   </section>
@@ -558,11 +599,11 @@ footer a{text-underline-offset:3px}
     <div class="wrap">
       <div class="head">
         <div>
-          <h2 id="buildTitle">Build it</h2>
-          <p>Most pieces arrive as two to five parts that press together by hand. No glue, no tools, a few minutes. Scan the code on your box, or pick your piece here.</p>
+          <h2 id="buildTitle">Set up the board</h2>
+          <p>The Six Cuts board comes as four quadrants and eight bow-tie keys. No glue, no tools, about two minutes. Scan the code on your box, or follow it here.</p>
         </div>
       </div>
-      <div class="chips" role="tablist" aria-label="Build guides" id="buildChips"></div>
+      <div class="chips" role="tablist" aria-label="Setup guides" id="buildChips"></div>
       <div class="build-panel" id="buildPanel"></div>
     </div>
   </section>
@@ -570,14 +611,14 @@ footer a{text-underline-offset:3px}
   <section class="system" id="system">
     <div class="wrap cols">
       <div>
-        <h2>One system, every piece</h2>
-        <p class="lead">Each product is built from the same few rules, so a coin and a desk piece look like they belong on the same shelf.</p>
+        <h2>One system, every game</h2>
+        <p class="lead">Every game follows the same few rules, so they share a shelf and a table, and later, each other's parts.</p>
       </div>
       <div class="rules">
-        <div class="rule"><span class="big">1<small>material</small></span><p>Everything in the box is printed. No magnets, rings, pads or glue to source, lose or throw away.</p></div>
-        <div class="rule"><span class="big">5<small>mm</small></span><p>One corner radius on every body, softened by a fine stepped bevel.</p></div>
-        <div class="rule"><span class="big">1.6<small>mm</small></span><p>The bar. Our waveform mark is drawn from real audio in bars this wide.</p></div>
-        <div class="rule"><div class="sw"><i style="background:#171615"></i><i style="background:#F3EEE2"></i><i style="background:#C8202B"></i></div><p>Three colours. A black body and one accent per piece, ivory or red.</p></div>
+        <div class="rule"><span class="big">1<small>material</small></span><p>Everything in the box is printed. No glue, magnets or metal to source, lose or throw away.</p></div>
+        <div class="rule"><span class="big">45<small>mm</small></span><p>One module. Every board, frame and tile is a whole number of 45 mm squares.</p></div>
+        <div class="rule"><span class="big">0.025<small>mm</small></span><p>The gap between a board key and its pocket. Fits are test printed until nothing rattles.</p></div>
+        <div class="rule"><div class="sw"><i style="background:#171615"></i><i style="background:#F3EEE2"></i><i style="background:#C8202B"></i></div><p>Three colours. Black and ivory, and one red piece per game.</p></div>
       </div>
     </div>
   </section>
@@ -590,41 +631,29 @@ footer a{text-underline-offset:3px}
         <p class="dispatch"><span class="mono">Dispatch</span><span id="howDispatch"></span></p>
       </div>
       <ol class="steps" id="howSteps">
-        <li style="--i:0"><svg viewBox="0 0 120 56" aria-hidden="true"><rect class="dr" pathLength="1" x="2" y="4" width="48" height="48" rx="5"/><path class="dr" pathLength="1" style="--d:.15s" d="M14 34v-8M22 40V18M30 36V22M38 32v-4"/><path class="dr ac" pathLength="1" style="--d:.3s" d="M74 28h22M85 17v22"/></svg><h3>Pick your pieces</h3><p>Open a piece, add your name, show or label text, and choose an ivory or red accent. Add more than one to your list.</p></li>
-        <li style="--i:1"><svg viewBox="0 0 120 56" aria-hidden="true"><path class="dr" pathLength="1" d="M8 4h80a5 5 0 0 1 5 5v26a5 5 0 0 1-5 5H34L20 52V40H8a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5z"/><rect class="dr" pathLength="1" style="--d:.15s" x="13" y="12" width="26" height="20" rx="3"/><path class="dr" pathLength="1" style="--d:.25s" d="M48 16h34M48 26h22"/><path class="dr ac" pathLength="1" style="--d:.4s" d="M100 22l6 6 11-13"/></svg><h3>Chat and preview on WhatsApp</h3><p>One tap opens WhatsApp with your list written out. Personalised pieces get a preview, and nothing is printed until you approve it.</p></li>
-        <li style="--i:2"><svg viewBox="0 0 120 56" aria-hidden="true"><path class="dr" pathLength="1" d="M6 8h24M6 18h24M10 8c16 0 16 20 0 20H6l18 22"/><path class="dr" pathLength="1" style="--d:.2s" d="M66 4h28l-6 12H72zM80 16v8"/><path class="dr" pathLength="1" style="--d:.35s" d="M56 50h48M60 42h40"/><path class="dr ac" pathLength="1" style="--d:.5s" d="M64 34h20"/></svg><h3>Pay by UPI, then we print</h3><p>Shipping and your dispatch date are quoted in the chat before you pay. Then your piece is printed, checked and boxed with a code that opens its build steps.</p></li>
+        <li style="--i:0"><svg viewBox="0 0 120 56" aria-hidden="true"><rect class="dr" pathLength="1" x="2" y="4" width="48" height="48" rx="5"/><path class="dr" pathLength="1" style="--d:.15s" d="M14 34v-8M22 40V18M30 36V22M38 32v-4"/><path class="dr ac" pathLength="1" style="--d:.3s" d="M74 28h22M85 17v22"/></svg><h3>Pick your game</h3><p>Open a game, choose the full set or pieces only, and add it to your list.</p></li>
+        <li style="--i:1"><svg viewBox="0 0 120 56" aria-hidden="true"><path class="dr" pathLength="1" d="M8 4h80a5 5 0 0 1 5 5v26a5 5 0 0 1-5 5H34L20 52V40H8a5 5 0 0 1-5-5V9a5 5 0 0 1 5-5z"/><rect class="dr" pathLength="1" style="--d:.15s" x="13" y="12" width="26" height="20" rx="3"/><path class="dr" pathLength="1" style="--d:.25s" d="M48 16h34M48 26h22"/><path class="dr ac" pathLength="1" style="--d:.4s" d="M100 22l6 6 11-13"/></svg><h3>Chat on WhatsApp</h3><p>One tap opens WhatsApp with your list written out. We confirm the price, shipping and your dispatch date there.</p></li>
+        <li style="--i:2"><svg viewBox="0 0 120 56" aria-hidden="true"><path class="dr" pathLength="1" d="M6 8h24M6 18h24M10 8c16 0 16 20 0 20H6l18 22"/><path class="dr" pathLength="1" style="--d:.2s" d="M66 4h28l-6 12H72zM80 16v8"/><path class="dr" pathLength="1" style="--d:.35s" d="M56 50h48M60 42h40"/><path class="dr ac" pathLength="1" style="--d:.5s" d="M64 34h20"/></svg><h3>Pay by UPI, then we print</h3><p>Shipping and your dispatch date are quoted in the chat before you pay. Then your set is printed, checked piece by piece and boxed with a code that opens its setup steps.</p></li>
       </ol>
     </div>
     <div class="terms" id="terms">
-      <div><h3>Shipping and packing</h3><p>Every order ships in a No Skips box with tissue and a build card. Pieces in one order share a box. Shipping is charged on top and quoted in the chat with the dispatch date.</p></div>
+      <div><h3>Shipping and packing</h3><p>Every order ships in a No Skips box with tissue and a setup card. Pieces in one order share a box. Shipping is charged on top and quoted in the chat with the dispatch date.</p></div>
       <div><h3>Replacements within 48 hours</h3><p>Pieces are made to order, so we do not take returns. If something arrives broken, faulty or not as approved, message us within 48 hours of delivery with photos and an unboxing video and we replace it. <button class="linkish" type="button" data-terms>Read the full terms</button></p></div>
-      <div><h3>Checked before it ships</h3><p>Every personalised piece is reviewed by hand against your order, and you see the preview before it is printed.</p></div>
-      <div><h3>Not a toy</h3><p>Small parts. Keep away from children under 3.</p></div>
-    </div>
-    <div class="bulk">
-      <div>
-        <h2>Tags for your act or venue</h2>
-        <p>Run 50 is fifty name tags with your act's name, ready for the merch table, at <span id="run50Price"></span>. It opens after launch. Name tags also come in runs of 25 or more for artists, DJs, clubs and festivals.</p>
-      </div>
-      <div class="cta" style="margin:0"><a class="btn ghost bulk-ghost" id="chatBulk" target="_blank" rel="noopener" href="#">Ask about a custom run</a></div>
+      <div><h3>Checked before it ships</h3><p>Every piece is checked by hand, and every board is put together and taken apart once before it is boxed.</p></div>
+      <div><h3>Not for children under 3</h3><p>Small parts. Keep them away from children under 3.</p></div>
     </div>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <form class="mailsign" id="mailSign" hidden novalidate><div><h3>New drops by email</h3><p class="note">First word on each drop and the odd launch price. A few emails a month at most. Unsubscribe in any email.</p></div>
+    <form class="mailsign" id="mailSign" hidden novalidate><div><h3>New games by email</h3><p class="note">First word on each new game and the odd launch price. A few emails a month at most. Unsubscribe in any email.</p></div>
       <div class="mailrow"><label class="vh" for="signEmail">Your email</label><input id="signEmail" type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder="you@example.com" required><button class="btn red" type="submit">Sign up</button></div>
       <p class="note" id="signMsg" role="status" aria-live="polite"></p></form>
-    <div class="row"><span>No Skips. Printed to order in Bengaluru.</span><span>Instagram <a href="https://www.instagram.com/noskips.in/" target="_blank" rel="noopener">@noskips.in</a></span><span>Prices in INR, shipping extra.</span><span><button class="linkish" type="button" data-terms>Terms, replacements and privacy</button></span></div>
-    <div class="row" style="margin-top:10px"><span>All pictures are 3D renders made from our print files and are for reference only. Every piece is printed to order, so colour, surface texture and small details can differ slightly from the pictures. Blueprint dimensions are in millimetres. Song titles and artist names on example pieces show how personalisation looks. No Skips is an independent maker and is not affiliated with or endorsed by any artist. Artist names on example pieces are used to show the artist the piece is about, and are not an endorsement. Spotify and Spotify Codes are trademarks of Spotify AB. No Skips is not affiliated with Spotify.</span></div>
+    <div class="row"><span>No Skips. Play everything. Skip nothing.</span><span>Printed to order in Bengaluru.</span><span>Instagram <a href="https://www.instagram.com/noskips.in/" target="_blank" rel="noopener">@noskips.in</a></span><span>Prices in INR, shipping extra.</span><span><button class="linkish" type="button" data-terms>Terms, replacements and privacy</button></span></div>
+    <div class="row" style="margin-top:10px"><span>All pictures are 3D renders made from our print files and are for reference only. Every piece is printed to order, so colour, surface texture and small details can differ slightly from the pictures. Sizes are in millimetres.</span></div>
   </div>
 </footer>
-
-<div class="viewsw" role="group" aria-label="Product pictures">
-  <button type="button" data-view="render" aria-pressed="true">Renders</button>
-  <button type="button" data-view="bp" aria-pressed="false">Blueprints</button>
-</div>
 
 <dialog id="pd" aria-labelledby="pdName"></dialog>
 <dialog id="list" aria-labelledby="listTitle"></dialog>
@@ -648,7 +677,7 @@ const PHASES=["waitlist","preorder","live"];
 let PHASE="waitlist", SHIP_FROM="January 2027", PREORDER_NOTE="";
 try{const c=localStorage.getItem("ns-phase");if(PHASES.includes(c))PHASE=c}catch(e){}
 /* Most pieces one customer can put in one order. Admin can set a different number per product. */
-const MAX_PER_ORDER=5, MAX_DEFAULTS={C1:2};
+const MAX_PER_ORDER=5, MAX_DEFAULTS={C1:2,P3:2};
 /* Email list and order updates. The address of the Google Apps Script web app (tools/orders/SETUP.md),
    set from /admin.html and saved to stock.json. Empty = no email anywhere on the site. */
 let MAIL_ENDPOINT="";
@@ -714,7 +743,8 @@ async function loadStock(){
   try{const r=await fetch("stock.json?t="+Date.now(),{cache:"no-store"});if(r.ok)d=await r.json()}catch(e){}
   applyStock(d);loadAvail(true);
 }
-const SIGNATURE_LABEL = "Signature piece";  // change to "Top seller" once your sales say so
+/* Six Cuts launch offer: the first FIRST_N sets at FIRST_PRICE, confirmed in the chat. Also set as the pre-order note in /admin.html. */
+const FIRST_N=10, FIRST_PRICE=2499;
 
 /* ---------------- waveform data from "Knowing" ---------------- */
 const W50=[0.16,0.27,0.96,0.97,0.98,0.96,0.97,0.96,0.35,0.28,0.36,0.42,0.87,1.0,1.0,1.0,0.95,0.98,0.99,0.99,0.78,0.52,0.42,0.41,0.4,0.41,0.42,0.43,0.43,0.45,0.44,0.12,0.26,0.99,0.97,0.98,0.93,0.94,0.97,0.98,0.95,0.87,0.99,0.94,0.98,0.98,0.99,0.98,1.0,0.73];
@@ -725,9 +755,11 @@ const inr=n=>"₹"+n.toLocaleString("en-IN");
 /* Engrave add-on: text cut 0.6 mm into the base of D1, D2, D8 and D12 (product.engrave = {max characters a line, where}). One or two lines,
    letters at least 4 mm tall. The order kit (kit/engrave.py) builds the engraved file and refuses text that would not fit. */
 const ENGRAVE_PRICE=99, GIFT_PRICE=49;
-const giftOk=p=>p.side!=="R"&&p.id!=="C1";   /* Reserve and Vol. 01 already ship in the black box */
+const giftOk=p=>p.side!=="R"&&p.side!=="P"&&p.id!=="C1";   /* Reserve, Vol. 01 and the games ship in their own box, so no gift box add-on */
 const engOn=it=>!!(it&&it.eng&&byId(it.id).engrave);
-const unitOf=it=>byId(it.id).price+(engOn(it)?ENGRAVE_PRICE:0)+(it.gift&&giftOk(byId(it.id))?GIFT_PRICE:0);
+/* pickPrice: a pick option can carry its own price (Six Cuts pieces only). Any other option costs p.price. */
+const priceOf=(p,pick)=>p.pickPrice&&Number.isFinite(p.pickPrice[pick])?p.pickPrice[pick]:p.price;
+const unitOf=it=>priceOf(byId(it.id),it.pick)+(engOn(it)?ENGRAVE_PRICE:0)+(it.gift&&giftOk(byId(it.id))?GIFT_PRICE:0);
 const fit=(s,base,width)=>Math.min(base,width/(Math.max(s.length,1)*0.66)).toFixed(1);
 const up=s=>esc(String(s).toUpperCase());
 const pad2=n=>String(n).padStart(2,"0");
@@ -761,7 +793,7 @@ function problems(p,c){
   p.f.forEach((f,i)=>{const v=c.vals[i]||"";if(isLink(f)&&showF(f,c)&&v&&!SPOTIFY_LINK.test(v))out.push("That does not look like a Spotify song link. It should start with https://open.spotify.com/track/. In Spotify: Share, then Copy song link.")});
   return out;
 }
-const TERMS_DATE="24 November 2026";
+const TERMS_DATE="28 November 2026";
 let agreed=false;try{agreed=sessionStorage.getItem("ns-agree")==="1"}catch(e){}
 const emailBox=id=>`<div class="field mailf"><label for="${id}">Email for order updates</label><input id="${id}" data-email type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder="you@example.com" value="${esc(contact.email)}" aria-required="true"><p class="note">Your order number and every step come by email: approved, paid, printing, dispatched with tracking. The chat stays on WhatsApp, where we already have your number.</p>
   <label class="agree"><input type="checkbox" data-news ${contact.news?"checked":""}><span>Also email me new drops and offers. Unsubscribe in any email.</span></label></div>`;
@@ -850,11 +882,28 @@ const ART={
 /* ---------------- catalogue ----------------
    f: text fields [label, example]. pick: one choice field [label, options]. imgs: [file, caption].
    ed: edition line shown on the card and in the product view. build: key into BUILD.
-   deferred: sidelined on 24 Nov 2026 (files in print-files/deferred, hidden everywhere). To bring one back: delete deferred:true,hide:true and git mv its folders back.
+   deferred: sidelined on 24 Nov 2026, and the rest of the old range on 28 Nov 2026 when the site flipped to games (files in print-files/deferred, hidden everywhere). To bring one back: delete deferred:true,hide:true and git mv its folders back.
    soon: text. A product WITH soon is on the bench (not orderable in any phase). A product WITHOUT soon is in the launch set.
    A soon text that starts with "Second drop" is badged Second drop and sorted first on the bench. */
 const P=[
- {id:"C1",side:"C",name:"Vol. 01: The Studio",kind:"Collector set",price:1999,line:"All six pieces on a numbered tray",badge:"Latest release",noAccent:true,
+ {id:"P3",side:"P",name:"Six Cuts",kind:"Chess set and board",price:2799,noAccent:true,nobp:true,badge:"Game 01",build:"board",
+  pick:["Set",["Pieces and board","Pieces only"]],pickPrice:{"Pieces only":1599},
+  line:"One 22 mm block, cut six ways. Every move engraved",
+  ed:`Full set with board ₹2,799. Pieces only ₹1,599. At pre-order, the first ${FIRST_N} sets are ${inr(FIRST_PRICE)}`,
+  desc:"Every piece is the same 22 mm square block, cut a different way. Heights rise 4 mm a rank, from the 32 mm pawn to the 52 mm king. Each piece has its move engraved on the front and back, so the set teaches itself. A red square marks the king and a red dot the queen. The king, queen and pawns are printed solid, so they sit heavy in the hand. The board is four 180 mm quadrants of 45 mm squares, 360 mm across, locked together by printed bow-tie keys underneath. Its top face is printed on a textured plate, so it comes off matte.",
+  size:"Board 360 x 360 mm, 45 mm squares, in four 180 mm quadrants. Pieces 22 x 22 mm, 32 to 52 mm tall",
+  box:"32 printed pieces, four board quadrants and eight bow-tie keys. Pieces only: the 32 pieces. Only filament, no glue, magnets or metal.",
+  extra:"Made to order in small batches on one printer. ",
+  f:[],imgs:[["chess2_set","The full set"],["chess2_forms","Six cuts of one block"],["queen_close","Queens, the red dot"],["chess_board","Set up on the board"],["board_underside_ivory_keys.png","Underneath, eight bow-tie keys"]]},
+ {id:"P2",side:"P",name:"Tangram",kind:"Seven-piece puzzle in a frame",price:999,noAccent:true,nobp:true,
+  soon:"Coming soon. We are reprinting it to check the fit before it goes on sale. Tap to be told when it lands.",
+  pick:["Colourway",["Bone","Night"]],
+  line:"Seven pieces, one square, one red piece",
+  desc:"The old seven-piece puzzle, cut 5 mm thick. The pieces tile a 135 mm square inside a 148 mm frame, and once it is solved it hangs on the wall or stands on a shelf as a piece of art. Two colourways: Bone, ivory pieces in a black frame, and Night, black pieces in an ivory frame. One piece is red in both.",
+  size:"Frame 148 x 148 mm. Seven pieces, 5 mm thick, tile a 135 mm square",
+  box:"Seven printed pieces and the frame. Only filament, no glue, magnets or metal.",
+  f:[],imgs:[["tangram","Bone, solved in the frame"],["tangram_loose","The seven pieces"]]},
+ {id:"C1",deferred:true,hide:true,side:"C",name:"Vol. 01: The Studio",kind:"Collector set",price:1999,line:"All six pieces on a numbered tray",badge:"Latest release",noAccent:true,
   ed:`Numbered 01/${DROP.total} to ${DROP.total}/${DROP.total}`,build:"studio",
   desc:"The whole first volume: turntable, synth, drum machine, mixer, mic and headphones, each numbered 01/06 to 06/06 underneath, on a tray that carries your set number. Three pieces come in red, three in ivory. Twenty-five sets are made. After that the files are retired.",
   size:"Tray 196 x 124 mm. Pieces 30 to 62 mm wide, 9 to 54 mm tall",f:[],imgs:[["studio_set","The full set"],["studio_mini","01 Turntable, 05 Mic, 02 Synth"],["studio_mini2","03 Drums, 06 Headphones, 04 Mixer"]]},
@@ -870,7 +919,7 @@ const P=[
   desc:"A phone stand with one idea: lean it back. The A-frame is hollow, so it is light and strong, with a 12 mm groove that takes a phone in a case, a lip to stop it sliding and a cable channel underneath so charging does not tip it. Fine flutes run up the back. The top 4 mm is red either way. One piece, nothing to build.",
   size:"70 x 88 x 88 mm, about 60 g. Groove takes phones up to about 11 mm thick with a case",f:[],
   imgs:[["lean","Black body"],["lean_ivory","Ivory body"],["lean_phone","With a phone"],["lean_back","Back, with the cable channel"]]},
- {id:"D18",side:"D",name:"Ripple",kind:"Key tray",price:699,custom:true,noAccent:true,badge:"New",build:"ripple",pick:["Tray colour",["Ivory","Black"]],line:"Ripples spread from one red dot, your name on the lip",
+ {id:"D18",deferred:true,hide:true,side:"D",name:"Ripple",kind:"Key tray",price:699,custom:true,noAccent:true,badge:"New",build:"ripple",pick:["Tray colour",["Ivory","Black"]],line:"Ripples spread from one red dot, your name on the lip",
   desc:"A tray for keys and wallet by the door, in ivory or black. Fine ripple grooves spread out from a single red dot, and a flat lip at the front carries your name. Four felt pads underneath keep the table safe. One piece, nothing to build.",
   size:"170 x 95 x 18 mm, about 78 g",
   f:[["Name for the front lip (optional)","",{max:12,opt:true,note:"Up to 12 letters. Leave it empty for a plain lip."}]],
@@ -880,17 +929,17 @@ const P=[
   size:"Rail 200 x 36 x 10 mm, about 57 g with three hooks",f:[],
   extra:"Screws and wall plugs are not in the box. 3M strips suit smooth walls and light loads only. ",
   imgs:[["keyrail","On the wall"],["keyrail_build","Rail and hooks, labelled"]]},
- {id:"H1",soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Terrace",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Six tiers that get finer toward the rim",
+ {id:"H1",deferred:true,hide:true,soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Terrace",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Six tiers that get finer toward the rim",
   pick:["Colour",["Ivory","Black"]],
   desc:"Six stepped tiers, each a little shorter than the one below, so the pot gets lighter as your eye moves up. It is a cover pot: your plant stays in its plastic nursery pot and drops straight in, so there is no drainage hole and nothing to repot. Walls are at least 4 mm and the base is 8 mm, so it has real weight in the hand. Felt pads underneath, three small risers inside keep the pot out of any drained water. Indoors only.",
   size:"Fits a 3 inch (7.5 to 8 cm) nursery pot. About 115 mm across the base, 86 mm tall. A 4 inch size is made on request",f:[],
   imgs:[["terrace","Ivory, with a plant"],["terrace_bare","Ivory"],["planters_family","Terrace, Twist and Echo"]]},
- {id:"H2",soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Twist",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Twenty flutes that turn as they rise",
+ {id:"H2",deferred:true,hide:true,soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Twist",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Twenty flutes that turn as they rise",
   pick:["Colour",["Black","Ivory"]],
   desc:"Twenty soft flutes turn a tenth of the way round from base to rim, shallow at the bottom and deeper at the top, so the light moves across it as you walk past. It is a cover pot: your plant stays in its plastic nursery pot and drops straight in, so there is no drainage hole and nothing to repot. Walls are at least 4 mm and the base is 8 mm, so it has real weight in the hand. Felt pads underneath, three small risers inside keep the pot out of any drained water. Indoors only.",
   size:"Fits a 3 inch (7.5 to 8 cm) nursery pot. About 104 mm across, 86 mm tall. A 4 inch size is made on request",f:[],
   imgs:[["twist_black","Black, with a plant"],["twist","Ivory, with a plant"],["planters_family","Terrace, Twist and Echo"]]},
- {id:"H3",soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Echo",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Ripples that tighten toward the rim, like a sound dying out",
+ {id:"H3",deferred:true,hide:true,soon:"Room Tone lands after the first drop. We are test printing each planter first. Tap to be told when it opens.",side:"H",name:"Echo",kind:"Cover planter",price:999,noAccent:true,badge:"New",line:"Ripples that tighten toward the rim, like a sound dying out",
   pick:["Colour",["Ivory","Black"]],
   desc:"Ripples run round the pot, wide and faint at the base and tighter and deeper toward the rim, over a soft shoulder. It is a cover pot: your plant stays in its plastic nursery pot and drops straight in, so there is no drainage hole and nothing to repot. Walls are at least 4 mm and the base is 8 mm, so it has real weight in the hand. Felt pads underneath, three small risers inside keep the pot out of any drained water. Indoors only.",
   size:"Fits a 3 inch (7.5 to 8 cm) nursery pot. About 108 mm across, 86 mm tall. A 4 inch size is made on request",f:[],
@@ -901,7 +950,7 @@ const P=[
   size:"Channel on a 4-tile Stage grid, about 287 g plus the weights",f:[],
   box:"Printed parts, concealed steel weights under the tiles, felt feet and a black gift box.",
   imgs:[["desk_night","Night"],["desk_bone","Bone"]]},
- {id:"D17",soon:"Reserve opens before Valentine's, after the first drop. Tap to be told the day it opens.",side:"R",name:"Bookends",kind:"Reserve, numbered run of 25 pairs",price:1499,noAccent:true,badge:"Reserve",line:"A weighted pair that holds a shelf of books upright",
+ {id:"D17",deferred:true,hide:true,soon:"Reserve opens before Valentine's, after the first drop. Tap to be told the day it opens.",side:"R",name:"Bookends",kind:"Reserve, numbered run of 25 pairs",price:1499,noAccent:true,badge:"Reserve",line:"A weighted pair that holds a shelf of books upright",
   pick:["Colourway",["Night","Bone"]],ed:"Numbered 01/25 to 25/25",
   desc:"A pair of L-shaped bookends, a smooth face to the books and fluted back. A steel plate is sealed inside each base, so they take the weight of a shelf without sliding, and felt pads protect the shelf. The top is red. Sold as a pair, run number underneath. Twenty-five pairs are made.",
   size:"Each 90 x 90 x 110 mm, about 188 g of steel in each base",f:[],
@@ -922,7 +971,7 @@ const P=[
   desc:"A fluted amp knob on a puck with eleven level marks. It clicks onto a printed post and spins freely. For queues, long renders and calls that could have been an email.",
   size:"44 mm base, 27 mm knob, 21 mm tall",f:[],imgs:[["knob","Red and ivory"],["knob_build","Cap and base"]]},
 
- {id:"A1",soon:"Second drop, opening before Valentine's. Tap to be told the day it opens.",side:"A",name:"Track Plate",kind:"Scannable song display",price:1299,art:"plate",custom:true,song:"plate",line:"Your song as a desk piece, scan it or see it",badge:"Signature",build:"plate",
+ {id:"A1",deferred:true,hide:true,soon:"Second drop, opening before Valentine's. Tap to be told the day it opens.",side:"A",name:"Track Plate",kind:"Scannable song display",price:1299,art:"plate",custom:true,song:"plate",line:"Your song as a desk piece, scan it or see it",badge:"Signature",build:"plate",
   desc:"Your song on a matte black plate, two ways. As its Spotify Code: open the Spotify app, scan the plate and the song starts playing. Or as its sound wave: the loud and quiet parts of the track from first second to last, in 50 raised bars. The title and artist sit underneath. The plate drops into one slotted base bar and leans back 12 degrees, the angle a phone reads it from most easily.",
   size:"140 x 70 x 3 mm plate, 150 x 30 x 14 mm base bar",
   f:[["Song title","Blinding Lights",{max:28}],["Artist name","The Weeknd",{max:26,note:{code:"Spell both exactly as you want them printed under the code.",wave:"Spell both exactly. We build the wave from this song. For your own unreleased track, send the audio file in the chat."}}],
@@ -973,7 +1022,7 @@ const P=[
   desc:"Three desk modules styled as mixer channels, each with its own fader on the front. A tall cup for pens and brushes, a mid cup for markers and scissors, and a tray with a divider for cards, clips and earbuds. Each module has a dovetail on one side and a socket on the other: lower one beside the next and they lock into a single row. Rearrange them any time, or run them apart.",
   size:"Tall cup 60 x 60 x 100 mm, mid cup 60 x 60 x 60 mm, tray 120 x 60 x 24 mm. 254 mm linked",f:[],
   imgs:[["channel","Linked, in use"],["channel_build","Three modules"]]},
- {id:"D8",engrave:{max:18,where:"underneath the tray"},side:"D",name:"B-Side",kind:"Catch-all tray",price:999,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
+ {id:"D8",deferred:true,hide:true,engrave:{max:18,where:"underneath the tray"},side:"D",name:"B-Side",kind:"Catch-all tray",price:999,line:"Keys, rings and earbuds land here",badge:"New",noAccent:false,
   desc:"A tray for the things you drop when you walk in: keys, rings, earbuds, a watch, loose change. It is drawn as a record, with grooves cut into the floor and a raised centre label, and a 20 mm rim so nothing rolls off. One piece, nothing to build.",
   size:"160 mm across, 20 mm tall",f:[],
   imgs:[["bside","In use"],["bside_bare","Grooves and label"]]},
@@ -1021,17 +1070,17 @@ const P=[
   size:"Table 122 x 240 mm with a 9 mm rim. 264 mm wide laid flat",f:[],
   imgs:[["perch","On a sofa arm"],["perch_flat","Laid flat"]]}
 ];
-const SIDES={H:["Room Tone","Pieces for the shelf and the windowsill. Thick, weighted, shaped to catch the light. Printed one at a time, never thin."],G:["Gifts","Made for two people, or for one person you want to surprise. A name goes on every one."],
+const SIDES={P:["The games","Black, ivory and one red piece. Printed to order, one set at a time, on one printer in Bengaluru."],H:["Room Tone","Pieces for the shelf and the windowsill. Thick, weighted, shaped to catch the light. Printed one at a time, never thin."],G:["Gifts","Made for two people, or for one person you want to surprise. A name goes on every one."],
              R:["Reserve","Numbered runs of 25, weighted with steel and boxed in black. When a run is gone, it is gone."],
              D:["Everyday","Pieces that live out in the open, so they are made to be looked at and picked up: thick, heavy trays that sit by the door. Home pieces for shelves and plants follow after launch."],
              A:["Listen","For people who live for the music. Keepsakes and gifts built around a song, a show or a night you want to keep."],
              B:["Make","For people who make the music. Small, useful things for the desk, the booth and the gig bag."],
              all:["Everything","The whole range. One design system, one material, nothing in the box but printed parts."]};
-const SIDE_NAME={H:"Room Tone",A:"Listen",B:"Make",C:"Collectibles",D:"Everyday",G:"Gifts",R:"Reserve"};
+const SIDE_NAME={P:"Play",H:"Room Tone",A:"Listen",B:"Make",C:"Collectibles",D:"Everyday",G:"Gifts",R:"Reserve"};
 const live=p=>!p.soon&&!p.hide&&!p.unlisted;
 const FILTERS=[["all","All"],["new","New"],["u999","Under ₹999"],["custom","Made for you"],["build","Build it yourself"]];
 const passes=(p,f)=>f==="all"||(f==="new"&&p.badge==="New")||(f==="u999"&&p.price<1000)||(f==="custom"&&!!p.custom)||(f==="build"&&!!p.build);
-const img=k=>"img/"+k+".webp";
+const img=k=>"img/"+k+(/\.(png|jpe?g|webp)$/.test(k)?"":".webp");
 const defaults=p=>({t1:(p.f[0]&&p.f[0][1])||"",t2:(p.f[1]&&p.f[1][1])||""});
 const draw=(p,o,accent)=>svg(ART[p.art](o||defaults(p)),accent||"red");
 
@@ -1039,6 +1088,12 @@ const draw=(p,o,accent)=>svg(ART[p.art](o||defaults(p)),accent||"red");
    steps: [title, text, picture or "", direction]. direction is optional: "down", "up", "side" or "turn".
    It draws a small arrow beside the step title, so only set it where the text itself says which way the part moves. */
 const BUILD={
+ board:{name:"Six Cuts board",img:"chess_board",parts:"4 quadrants, 8 bow-tie keys",time:"2 minutes",steps:[
+   ["Sort the quadrants","Two quadrants are A and two are B. Look at the square beside the rounded corner: on A it is dark, on B it is light.","fig:sort"],
+   ["Lay them face down","Turn all four over on a flat table. Seen from underneath, A goes top left and bottom right, B top right and bottom left. Every rounded corner points out, and the seams close up.","fig:under"],
+   ["Drop in the 8 keys","Press a bow-tie key into each pair of half pockets that meet across a seam, two on each half seam, eight in all. They sit almost flush.","fig:keys","down"],
+   ["Turn it over","Hold two opposite edges and flip the board face up. From White's side, the bottom-left square (a1) is dark. If two squares of the same colour meet across a seam, a quadrant is in the wrong corner: swap it.","fig:top","turn"]],
+   note:"To pack it away, turn the board over and lift the keys out with a fingernail. The keys are a tight fit by design."},
  patched:{name:"Patched In",img:"patched_guide",parts:"Plug and socket",time:"10 seconds",steps:[
    ["Find the two parts","A is the black plug with the red collar. B is the ivory socket. Each has your name on the front and a hole for the key ring.","patched_guide"],
    ["Click them together","Hold the plug with the pin pointing at the socket. Push the pin straight into the split top until you feel and hear a click. Pull them apart by hand to separate.","patched_clicked_guide","side"],
@@ -1148,6 +1203,28 @@ const BUILD={
    ["Lock it","Turn the T-bar in line with the slot at the other end, feed it through, and let it turn back. Pull gently to check.","songtag_use","turn"]]}
 };
 
+/* ---------------- board setup figures (drawn, not rendered). Quadrant A is bottom-left and top-right face up. ---------------- */
+const BF={dk:"#1d1c1a",iv:"#F3EEE2",seam:"#8a857c",key:"#F3EEE2"};
+function sqs(x0,y0,n,u,darkAt){let o="";for(let i=0;i<n;i++)for(let j=0;j<n;j++){const d=darkAt(i,j);o+=`<rect x="${x0+i*u}" y="${y0+(n-1-j)*u}" width="${u}" height="${u}" fill="${d?BF.dk:BF.iv}"/>`}return o}
+const lab=(x,y,t)=>`<circle class="lc" cx="${x}" cy="${y}" r="17"/><text class="lt" x="${x}" y="${y}">${t}</text>`;
+function bowtie(cx,cy,vertical){const a=15,b=8,m=3.5;
+  const pts=vertical?[[cx-a,cy-b],[cx,cy-m],[cx+a,cy-b],[cx+a,cy+b],[cx,cy+m],[cx-a,cy+b]]:[[cx-b,cy-a],[cx-m,cy],[cx-b,cy+a],[cx+b,cy+a],[cx+m,cy],[cx+b,cy-a]];
+  return `<polygon points="${pts.map(p=>p.join(",")).join(" ")}" fill="${BF.key}" stroke="#151413" stroke-width="1"/>`}
+const FIGS={
+  sort(){const u=30,w=120;
+    const out=x=>`M${x} 20h${w}v${w}h${-(w-12)}a12 12 0 0 1 -12 -12z`;
+    const q=(x,dark,t)=>`<g><clipPath id="qc${t}"><path d="${out(x)}"/></clipPath><g clip-path="url(#qc${t})">${sqs(x,20,4,u,(i,j)=>((i+j)%2===0)===dark)}</g><path d="${out(x)}" fill="none" stroke="#151413" stroke-width="1.2"/>
+      <rect x="${x-3}" y="${20+3*u-3}" width="${u+6}" height="${u+6}" fill="none" stroke="var(--accent)" stroke-width="2.5" rx="3"/><text x="${x}" y="${20+w+24}">rounded corner</text>${lab(x+w/2,20+w+52,t)}</g>`;
+    return `<svg class="bfig" viewBox="0 0 340 230" role="img" aria-label="Quadrant A has a dark square beside its rounded corner, quadrant B a light one">${q(30,true,"A")}${q(190,false,"B")}</svg>`},
+  under(){const w=150,x=20,y=20;const cell=(cx,cy,t)=>`<rect x="${cx}" y="${cy}" width="${w}" height="${w}" fill="${BF.dk}" stroke="${BF.seam}" stroke-width="1"/>${lab(cx+w/2,cy+w/2,t)}`;
+    return `<svg class="bfig" viewBox="0 0 340 360" role="img" aria-label="Underside view: A top left and bottom right, B top right and bottom left">${cell(x,y,"A")}${cell(x+w,y,"B")}${cell(x,y+w,"B")}${cell(x+w,y+w,"A")}<text x="20" y="345">Underside up, face down</text></svg>`},
+  keys(){const w=150,x=20,y=20,u=w/4;let k="";[1,3,5,7].forEach(n=>{k+=bowtie(x+w,y+n*u,true)+bowtie(x+n*u,y+w,false)});
+    return `<svg class="bfig" viewBox="0 0 340 360" role="img" aria-label="Eight bow-tie keys across the seams, two on each half seam"><rect x="${x}" y="${y}" width="${2*w}" height="${2*w}" fill="${BF.dk}" rx="8"/><path d="M${x+w} ${y}v${2*w}M${x} ${y+w}h${2*w}" stroke="${BF.seam}" stroke-width="1.5"/>${k}<text x="20" y="345">8 keys, 2 on each half seam</text></svg>`},
+  top(){const u=36,x=26,y=14,w=8*u;
+    return `<svg class="bfig" viewBox="0 0 340 360" role="img" aria-label="Board face up: a1, the bottom-left square on White's side, is dark">${sqs(x,y,8,u,(i,j)=>(i+j)%2===0)}<rect x="${x}" y="${y}" width="${w}" height="${w}" fill="none" stroke="#151413" stroke-width="1.2" rx="6"/><path d="M${x+w/2} ${y}v${w}M${x} ${y+w/2}h${w}" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4 3"/>
+      ${lab(x+w/4,y+3*w/4,"A")}${lab(x+3*w/4,y+w/4,"A")}${lab(x+3*w/4,y+3*w/4,"B")}${lab(x+w/4,y+w/4,"B")}<rect x="${x-2}" y="${y+7*u-2}" width="${u+4}" height="${u+4}" fill="none" stroke="var(--accent)" stroke-width="2.5" rx="3"/><text x="${x}" y="${y+w+20}">a1 is dark</text><text x="${x+w}" y="${y+w+20}" text-anchor="end">White's side</text></svg>`}
+};
+
 /* ---------------- state ---------------- */
 const byId=id=>P.find(p=>p.id===id);
 const isSecond=p=>!!p.soon&&/^Second drop/.test(p.soon);
@@ -1157,16 +1234,16 @@ const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 /* stock is ignored while nothing can be ordered */
 const stockOf=p=>PHASE==="waitlist"?{s:"in",n:null}:(p.id==="C1"&&c1Full()?{s:"out",n:null}:stk(p.id));
 const PH=()=>({
-  waitlist:{tick:"Pre-orders open Sat 9 Jan, 7 pm",list:"Interest list",add:"Add to interest list",cta:"Get early access",go:"Get early access",label:"First drop, early access"},
-  preorder:{tick:`Pre-orders open. Shipping from ${SHIP_FROM}`,list:"Pre-order list",add:"Add to pre-order list",cta:"Pre-order on WhatsApp",go:"Pre-order",label:"First drop, pre-order open"},
+  waitlist:{tick:"Pre-orders open Sat 9 Jan, 7 pm",list:"Waitlist",add:"Add to waitlist",cta:"Join the waitlist",go:"Join the waitlist",label:"On the waitlist"},
+  preorder:{tick:`Pre-orders open. Shipping from ${SHIP_FROM}`,list:"Pre-order list",add:"Add to pre-order list",cta:"Pre-order on WhatsApp",go:"Pre-order",label:"Pre-order open"},
   live:{tick:"Open for orders",list:"Order list",add:"Add to order list",cta:"Order on WhatsApp",go:"Order",label:"Available now"}}[PHASE]);
 const wa=text=>"https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(text);
-const earlyMsg=names=>`Hi ${BRAND}, put me on the early access list for: ${names.join(", ")}`;
+const earlyMsg=names=>`Hi ${BRAND}, put me on the waitlist for: ${names.join(", ")}`;
 const waLink=(cls,msg,label,id)=>`<a class="${cls}"${id?` id="${id}"`:""} target="_blank" rel="noopener" href="${esc(wa(msg))}">${esc(label)}</a>`;
 
 /* the list is an interest list in the waitlist phase and an order list otherwise. They are stored apart,
    so a name left on the interest list never turns into a half-filled order when the phase changes. */
-let side="D", cart=[];
+let side="P", cart=[];
 const cartKey=()=>PHASE==="waitlist"?"ns-wish-v1":"ns-list-v2";
 function fixItem(it){
   const p=byId(it.id),v=Array.isArray(it.vals)?it.vals:[];
@@ -1199,7 +1276,6 @@ function card(p,booth){
 let filt="all";
 function renderGrid(){
   const [t,c]=SIDES[side];$("sideTitle").textContent=t;$("sideCopy").textContent=c;
-  ["G","D","H","R","all"].forEach(s=>{const b=$("tab"+(s==="all"?"All":s));b.setAttribute("aria-selected",String(s===side));b.tabIndex=s===side?0:-1});
   const inSide=P.filter(p=>live(p)&&(side==="all"||p.side===side));
   const soon=P.filter(p=>p.soon&&!p.hide&&!p.unlisted&&(side==="all"||p.side===side)).sort((a,b)=>isSecond(b)-isSecond(a));
   const few=inSide.length<=2;
@@ -1207,11 +1283,11 @@ function renderGrid(){
   $("filters").hidden=inSide.length<4;
   $("filters").innerHTML=FILTERS.filter(([k])=>k==="all"||inSide.some(p=>passes(p,k))).map(([k,l])=>`<button type="button" data-filter="${k}" aria-pressed="${k===filt}">${esc(l)}</button>`).join("");
   const shown=inSide.filter(p=>passes(p,filt));
-  $("gridCount").textContent=shown.length?`${PH().label} · ${shown.length} ${shown.length===1?"piece":"pieces"}`:"";
-  const second=soon.filter(isSecond).map(p=>p.name);
+  $("gridCount").textContent=shown.length?`${PH().label} · ${shown.length} ${shown.length===1?"game":"games"}`:"";
+  const later=soon.map(p=>p.name);
   const note=!few||inSide.length===2?"":inSide.length===1
-    ?`<div class="gnote"><b>One piece from ${esc(t)} is in the first drop</b><p>${soon.length} more ${soon.length===1?"is":"are"} on the bench below.${second.length?` ${esc(second.join(" and "))} ${second.length===1?"opens":"open"} in the second drop, before Valentine's.`:""}</p></div>`
-    :`<div class="gnote"><b>${esc(t)} joins after the first drop</b><p>Nothing from ${esc(t)} is open yet. The ${soon.length} ${soon.length===1?"piece":"pieces"} below ${soon.length===1?"is":"are"} on the bench. Tap one to be told when it lands.</p></div>`;
+    ?`<div class="gnote"><b>${PHASE==="waitlist"?"One game on the waitlist":PHASE==="preorder"?"One game open for pre-order":"One game open now"}</b><p>${later.length?`${esc(later.join(" and "))} ${later.length===1?"is":"are"} on the bench below, being test printed. `:""}More games follow on the same 45 mm grid, in black, ivory and one red piece.</p></div>`
+    :`<div class="gnote"><b>The first game opens soon</b><p>Nothing is open yet. The ${soon.length} ${soon.length===1?"game":"games"} below ${soon.length===1?"is":"are"} on the bench. Tap one to be told when it lands.</p></div>`;
   $("grid").className="grid"+(few?" few":"");
   $("grid").innerHTML=shown.map(p=>card(p)).join("")+note;
   $("soonWrap").hidden=!soon.length;$("soonGrid").innerHTML=soon.map(p=>card(p)).join("");
@@ -1219,61 +1295,57 @@ function renderGrid(){
 function swap(el){el.classList.remove("swap");void el.offsetWidth;el.classList.add("swap")}
 function setSide(s){side=s;filt="all";renderGrid();swap($("grid"))}
 function renderDrop(){
-  const part=DROP.batch<DROP.total,left=batchLeft(),gone=DROP.claimed>=DROP.total;
-  $("tickEd").textContent=`Vol. 01: ${DROP.total} numbered sets`+(part?`, ${DROP.batchName} of ${DROP.batch}`:"")+(DROP.claimed&&!gone?`, ${left} left`:"");
-  $("heroStamp").textContent=!DROP.claimed?`Edition of ${DROP.total}`:gone?"Edition complete":!left?`${cap(DROP.batchName)} full`:part?`${left} left in the ${DROP.batchName}`:`${left} of ${DROP.total} left`;
-  $("heroEdition").innerHTML=`<div><b>${DROP.total}</b><span>numbered sets</span></div><div><b>6</b><span>pieces a set</span></div><div><b>${inr(byId("C1").price)}</b><span>tray included</span></div>`
-    +(DROP.claimed?`<div class="meter" role="img" aria-label="${DROP.claimed} of ${DROP.batch} sets ${part?"in the "+esc(DROP.batchName)+" ":""}claimed"><i style="width:${Math.min(100,100*DROP.claimed/DROP.batch).toFixed(1)}%"></i></div>`:"")
-    +(part?`<p class="batchline">${esc(cap(DROP.batchName))}: ${DROP.batch} of ${DROP.total} sets${DROP.claimed?`, ${Math.min(DROP.claimed,DROP.batch)} claimed`:""}</p>`:"");
-  {const bg=P.filter(p=>p.side==="C"&&p.id!=="C1"&&!p.hide).sort((a,b)=>!!a.soon-!!b.soon||isSecond(b)-isSecond(a)).map(p=>card(p,true)).join("");$("boothGrid").innerHTML=bg;$("boothGrid").hidden=!bg}
-  $("sigPrice").textContent=inr(byId("A1").price);
+  const p3=byId("P3"),c=capOf("P3"),l=PHASE==="waitlist"?null:slotsLeft("P3"),out=PHASE!=="waitlist"&&stockOf(p3).s==="out";
+  $("tickEd").textContent=`Six Cuts: the first ${FIRST_N} sets are ${inr(FIRST_PRICE)} at pre-order`;
+  $("heroStamp").textContent=out?"First batch full":l!==null&&c?`${l} of ${c} left`:`First ${FIRST_N} at ${inr(FIRST_PRICE)}`;
+  $("heroEdition").innerHTML=`<div><b>32</b><span>pieces</span></div><div><b>360</b><span>mm board</span></div><div><b>${inr(p3.price)}</b><span>with the board</span></div>`
+    +(l!==null&&c&&l<c?`<div class="meter" role="img" aria-label="${c-l} of ${c} sets claimed"><i style="width:${Math.min(100,100*(c-l)/c).toFixed(1)}%"></i></div>`:"");
 }
 /* everything whose wording depends on the phase */
 function renderPhase(){
-  const L=PH(),wl=PHASE==="waitlist",pre=PHASE==="preorder",c1=byId("C1"),c2=byId("C2"),a1=byId("A1");
-  const part=DROP.batch<DROP.total,gone=DROP.claimed>=DROP.total,full=c1Full()&&!wl;
+  const L=PH(),wl=PHASE==="waitlist",pre=PHASE==="preorder",p3=byId("P3");
+  const full=!wl&&stockOf(p3).s==="out";
   root.dataset.phase=PHASE;
   $("tickPhase").textContent=L.tick;$("listLbl").textContent=L.list;
-  const batchTxt=part?`The ${DROP.batchName} is ${DROP.batch} sets. `:"";
-  const line=full?(gone?`All ${DROP.total} sets are claimed.`:`The ${DROP.batchName} is full. Ask to be told when the next one opens.`)
-    :wl?`Pre-orders open Saturday 9 January, 7 pm. ${batchTxt}The early access list gets the first message.`
-    :pre?`Pre-orders are open. ${batchTxt}Ships from ${SHIP_FROM}.`
-    :part?`The ${DROP.batchName} is ${DROP.batch} sets, printed to order.`:"";
+  const line=full?"The first batch is full. Ask to be told when the next one opens."
+    :wl?`Pre-orders open Saturday 9 January, 7 pm. The first ${FIRST_N} sets are ${inr(FIRST_PRICE)}. Shipping ${SHIP_FROM}.`
+    :pre?`Pre-orders are open. Ships from ${SHIP_FROM}.${PREORDER_NOTE?" "+PREORDER_NOTE:""}`
+    :"Printed to order, one set at a time.";
   $("heroPhase").hidden=!line;$("heroPhase").innerHTML=`<i class="led"></i><span>${esc(line)}</span>`;
-  const primary=wl?waLink("btn red",earlyMsg([c1.name]),"Get early access")
-    :full?(gone?`<button class="btn" type="button" data-open="C1">See the set</button>`:waLink("btn red",`Hi ${BRAND}, please tell me when the next batch of ${c1.name} opens.`,"Tell me when the next batch opens"))
-    :`<button class="btn red" type="button" data-open="C1">${pre?"Pre-order a numbered set":"Claim a numbered set"}</button>`;
-  $("heroCta").innerHTML=primary+(wl?`<button class="btn ghost" type="button" data-open="C1">See the set, ${inr(c1.price)}</button>`
-    :c2.hide?`<button class="btn ghost" type="button" data-open="C1">See the set, ${inr(c1.price)}</button>`:`<button class="btn ghost" type="button" data-open="C2">Start with one piece, ${inr(c2.price)}</button>`);
-  $("boothCta").textContent=wl?"See the set":pre?"Pre-order a numbered set":"Claim a numbered set";
-  $("sigLabel").textContent=SIGNATURE_LABEL+(isSecond(a1)?" · Second drop":a1.soon?" · Coming soon":"");
-  $("sigCta").textContent=a1.soon?"Tell me when it opens":"Make it with your song";
-  $("howLead").textContent=wl?"Pre-orders are not open yet. Tap Get early access on any piece and you get the first message when they do. After that, ordering takes three steps."
-    :pre?"Pre-orders are open for the first drop. Three steps, all of them in one WhatsApp chat."
+  const primary=wl?waLink("btn red",earlyMsg([p3.name]),L.cta)
+    :full?waLink("btn red",`Hi ${BRAND}, please tell me when the next batch of ${p3.name} opens.`,"Tell me when the next batch opens")
+    :`<button class="btn red" type="button" data-open="P3">${pre?"Pre-order a set":"Order a set"}</button>`;
+  $("heroCta").innerHTML=primary+`<button class="btn ghost" type="button" data-open="P3">See the set, ${inr(p3.price)}</button>`;
+  $("howLead").textContent=wl?"Pre-orders are not open yet. Tap Join the waitlist on any game and you get the first message when they do. After that, ordering takes three steps."
+    :pre?"Pre-orders are open. Three steps, all of them in one WhatsApp chat."
     :"Three steps, all of them in one WhatsApp chat. Nothing is charged on this site.";
-  $("howDispatch").textContent=wl?`Shipping is planned from ${SHIP_FROM}. Every piece is printed after it is ordered, on one printer, in the order payments come in.`
+  $("howDispatch").textContent=wl?`Shipping is planned from ${SHIP_FROM}. Every set is printed after it is ordered, on one printer, in the order payments come in.`
     :pre?`Pre-orders ship from ${SHIP_FROM}, in the order payments come in.${PREORDER_NOTE?" "+PREORDER_NOTE:""} Your dispatch date is confirmed in the chat before you pay.`
-    :"Every piece is printed after you order, on one printer, in the order payments come in. Your dispatch date is confirmed in the chat before you pay.";
-  $("soonCopy").textContent="Designed and drawn, not on sale yet. Tap one to be told when it lands.";
+    :"Every set is printed after you order, on one printer, in the order payments come in. Your dispatch date is confirmed in the chat before you pay.";
+  $("soonCopy").textContent="Designed and test printed, not on sale yet. Tap one to be told when it lands.";
 }
 function renderAll(){
   renderPhase();renderDrop();renderGrid();renderCount();
+  /* the Renders/Blueprints switch only shows when something on the page has a blueprint */
+  const vs=document.querySelector(".viewsw"),bp=P.some(p=>!p.hide&&!p.unlisted&&!p.nobp);vs.hidden=!bp;if(!bp)setView("render");
   if($("pd").open&&cur)openProduct(cur.id);
   if($("list").open)renderList();
 }
 
 /* ---------------- build section ---------------- */
-let buildKey="studio";
+let buildKey="board";
 const dirSvg=(c,label,d)=>`<svg class="dir ${c}" viewBox="0 0 18 18" role="img" aria-label="${label}"><path d="${d}"/></svg>`;
 const DIRS={down:dirSvg("d","Moves straight down","M9 3v12M4 10l5 5 5-5"),up:dirSvg("u","Moves straight up","M9 15V3M4 8l5-5 5 5"),
   side:dirSvg("s","Slides sideways","M3 9h12M10 4l5 5-5 5"),turn:dirSvg("t","Turns","M14.5 9a5.5 5.5 0 1 1-1.8-4.1M13 1.8v3.4H9.6")};
 function renderBuild(){
-  $("buildChips").innerHTML=Object.entries(BUILD).filter(([k])=>k===buildKey||!P.some(p=>p.build===k&&(p.unlisted||p.deferred))&&P.some(p=>p.build===k)).map(([k,b])=>`<button type="button" role="tab" data-build="${k}" aria-selected="${k===buildKey}" tabindex="${k===buildKey?0:-1}">${esc(b.name)}</button>`).join("");
+  const chips=Object.entries(BUILD).filter(([k])=>k===buildKey||!P.some(p=>p.build===k&&(p.unlisted||p.deferred))&&P.some(p=>p.build===k));
+  $("buildChips").hidden=chips.length<2;
+  $("buildChips").innerHTML=chips.map(([k,b])=>`<button type="button" role="tab" data-build="${k}" aria-selected="${k===buildKey}" tabindex="${k===buildKey?0:-1}">${esc(b.name)}</button>`).join("");
   const b=BUILD[buildKey];
   $("buildPanel").innerHTML=`<div class="shot"><img src="${img(b.img)}" alt="${esc(b.name)}, parts laid out" loading="lazy" width="880" height="880"></div>
     <div><h3>${esc(b.name)}</h3><div class="bmeta"><span>${esc(b.parts)}</span><span>About ${esc(b.time)}</span><span>No glue, no tools</span></div>
-    <p class="bkey"><b>Reading the pictures:</b> a letter in a circle names a part. A red arrow shows which way it moves. The number on the arrow is the step. A small arrow beside a step title shows which way that part moves.</p>
-    <ol class="bsteps">${b.steps.map(s=>`<li><b>${esc(s[0])}${s[3]&&DIRS[s[3]]?DIRS[s[3]]:""}</b><span>${esc(s[1])}</span>${s[2]?`<div class="sfig"><img src="${img(s[2])}" alt="${esc(b.name)}, ${esc(s[0].toLowerCase())}" loading="lazy" decoding="async" width="880" height="880"></div>`:""}</li>`).join("")}</ol>${b.note?`<p class="bnote">${esc(b.note)}</p>`:""}</div>`;
+    <p class="bkey"><b>Reading the pictures:</b> a letter in a circle names a part. A red outline marks the square or seam to check. A small arrow beside a step title shows which way that part moves.</p>
+    <ol class="bsteps">${b.steps.map(s=>`<li><b>${esc(s[0])}${s[3]&&DIRS[s[3]]?DIRS[s[3]]:""}</b><span>${esc(s[1])}</span>${s[2]&&/^fig:/.test(s[2])&&FIGS[s[2].slice(4)]?`<div class="sfig">${FIGS[s[2].slice(4)]()}</div>`:s[2]?`<div class="sfig"><img src="${img(s[2])}" alt="${esc(b.name)}, ${esc(s[0].toLowerCase())}" loading="lazy" decoding="async" width="880" height="880"></div>`:""}</li>`).join("")}</ol>${b.note?`<p class="bnote">${esc(b.note)}</p>`:""}</div>`;
   trackSteps();
 }
 let stepIO=null;
@@ -1350,10 +1422,10 @@ function openProduct(id){
   if(p.soon)act=`<div class="pd-ed ph"><i class="led"></i><span>${esc(p.soon)}</span></div>
       <div class="pd-act">${waLink("btn red block",`Hi ${BRAND}, please tell me when ${p.name} (${p.kind}) is available.`,isSecond(p)?"Tell me the day it opens":"Tell me when it lands","pdOrder")}</div>
       <p class="note">Opens WhatsApp with a short message. Nothing is ordered or charged.</p>`;
-  else if(wl)act=`<div class="pd-ed ph"><i class="led"></i><span>Pre-orders are not open yet. Join the early access list and you get the first message when they do.</span></div>
+  else if(wl)act=`<div class="pd-ed ph"><i class="led"></i><span>Pre-orders open Saturday 9 January, 7 pm. Join the waitlist and you get the first message when they do.</span></div>
       ${p.art?`${form}${accent}<p class="note">Try your own text above to see it on the piece. Nothing is ordered yet.</p><p class="warn" id="pdWarn" role="alert" hidden></p>`:""}
       <div class="pd-act">${waLink("btn red block",earlyMsg([p.name]),L.cta,"pdOrder")}</div>
-      <button class="btn ghost block" type="button" id="pdAdd"${cart.some(it=>it.id===p.id)?" disabled>On your interest list":">"+L.add}</button>
+      <button class="btn ghost block" type="button" id="pdAdd"${cart.some(it=>it.id===p.id)?" disabled>On your waitlist":">"+L.add}</button>
       <p class="note">Opens WhatsApp with a short message. Nothing is ordered or charged.</p>`;
   else act=`${pre?`<div class="pd-ed ph"><i class="led"></i><span>Pre-order. Ships from ${esc(SHIP_FROM)}.${PREORDER_NOTE?" "+esc(PREORDER_NOTE):""}</span></div>`:""}
       ${k.s==="out"?`<p class="stockline out">${p.id==="C1"?(DROP.claimed>=DROP.total?`All ${DROP.total} sets are claimed`:`The ${esc(DROP.batchName)} is full`):"Sold out right now"}</p>
@@ -1380,13 +1452,13 @@ function openProduct(id){
     <div class="pd-body">
       <span class="eyebrow muted">${p.id} / ${SIDE_NAME[p.side]}${p.kind?" / "+esc(p.kind):""}</span>
       <h2 id="pdName">${esc(p.name)}</h2>
-      <div class="pd-price">${p.soon?(p.price?`<span class="muted">${inr(p.price)}</span>`:"")+`<span class="badge out">${isSecond(p)?"Second drop":"Coming soon"}</span>`:inr(p.price)+(pre&&k.s!=="out"?`<span class="badge out">Pre-order</span>`:"")+(p.badge?`<span class="badge hot">${esc(p.badge)}</span>`:"")}</div>
+      <div class="pd-price">${p.soon?(p.price?`<span class="muted">${inr(p.price)}</span>`:"")+`<span class="badge out">${isSecond(p)?"Second drop":"Coming soon"}</span>`:`<span id="pdPrice">${inr(priceOf(p,cur.pick))}</span>`+(pre&&k.s!=="out"?`<span class="badge out">Pre-order</span>`:"")+(p.badge?`<span class="badge hot">${esc(p.badge)}</span>`:"")}</div>
       ${p.ed?`<div class="pd-ed">${esc(p.ed)}${p.id==="C1"&&DROP.claimed&&batchLeft()?`. ${batchLeft()} left${DROP.batch<DROP.total?" in the "+esc(DROP.batchName):""}`:""}</div>`:""}
       <p class="pd-desc">${esc(p.desc)}</p>
       <p class="note refnote">Pictures are 3D renders of the print files, shown for reference. Each piece is printed to order, so colour, surface texture and small details can look slightly different on the real thing.</p>
       ${act}
       <div class="pd-links">${p.build?`<button class="linkish" type="button" data-gobuild="${p.build}">See how it builds, ${esc(BUILD[p.build].time)}</button>`:""}<button class="linkish" type="button" data-share>Share this piece</button></div>
-      <dl class="specs"><dt>Size</dt><dd>${esc(p.size)}</dd><dt>In the box</dt><dd>${esc(p.box||"Printed parts only, no magnets, glue or metal.")} ${esc(p.mat||"Printed in PLA, a plant-based plastic that softens with heat. Keep away from hot cars and direct summer sun.")}</dd><dt>Care</dt><dd>Not a toy. Small parts, keep away from children under 3.</dd><dt>Made</dt><dd>Printed to order in Bengaluru. No returns. Replacement if it arrives broken, faulty or not as approved, reported within 48 hours of delivery. <button class="linkish" type="button" data-terms>Terms</button></dd></dl>
+      <dl class="specs"><dt>Size</dt><dd>${esc(p.size)}</dd><dt>In the box</dt><dd>${esc(p.box||"Printed parts only, no magnets, glue or metal.")} ${esc(p.mat||"Printed in PLA, a plant-based plastic that softens with heat. Keep away from hot cars and direct summer sun.")}</dd><dt>Care</dt><dd>Small parts. Not for children under 3.</dd><dt>Made</dt><dd>Printed to order in Bengaluru. No returns. Replacement if it arrives broken, faulty or not as approved, reported within 48 hours of delivery. <button class="linkish" type="button" data-terms>Terms</button></dd></dl>
     </div></div>`;
   syncProduct();
   if(!$("pd").open){$("pd").showModal();try{history.replaceState(null,"","#p-"+id)}catch(e){}}
@@ -1408,6 +1480,7 @@ function syncProduct(){
   if($("accField"))$("accField").hidden=p.song==="plate"&&cur.mode==="code";
   pd.querySelectorAll("[data-accent]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.accent===cur.accent)));
   pd.querySelectorAll("[data-pick]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.pick===cur.pick)));
+  if($("pdPrice"))$("pdPrice").textContent=inr(priceOf(p,cur.pick));
   if($("qOut"))$("qOut").textContent=cur.qty;
   const probs=$("pdWarn")?problems(p,cur):[];
   if($("pdWarn")){$("pdWarn").hidden=!probs.length;$("pdWarn").innerHTML=probs.map(esc).join("<br>")}
@@ -1509,11 +1582,11 @@ function renderList(){
   const names=[...new Set(cart.map(it=>byId(it.id).name))];
   $("list").innerHTML=`<div class="dl"><button class="close" type="button" aria-label="Close" data-close>&times;</button>
     <h2 id="listTitle">${esc(L.list)}</h2>
-    ${wl&&cart.length?`<p class="note">Pieces you want first. Pre-orders are not open yet, so nothing here is ordered or charged.</p>`:""}
+    ${wl&&cart.length?`<p class="note">Games you want first. Pre-orders are not open yet, so nothing here is ordered or charged.</p>`:""}
     ${cart.length?rows+(wl?"":`<div class="total"><span>Total before shipping</span><span>${inr(total)}</span></div>`)
-      :`<p class="empty">Nothing here yet. Open a piece and tap ${esc(L.add)}.</p><button class="btn ghost block" type="button" data-browse>Browse the first drop</button>`}
+      :`<p class="empty">Nothing here yet. Open a piece and tap ${esc(L.add)}.</p><button class="btn ghost block" type="button" data-browse>See the games</button>`}
     <div class="spacer"></div>
-    ${!cart.length?"":wl?`${waLink("btn red block",earlyMsg(names),"Get early access on WhatsApp","listSend")}<p class="note">Opens WhatsApp with a short message naming these pieces. Prices are shown for reference.</p>`
+    ${!cart.length?"":wl?`${waLink("btn red block",earlyMsg(names),"Join the waitlist on WhatsApp","listSend")}<p class="note">Opens WhatsApp with a short message naming these games. Prices are shown for reference.</p>`
       :`${pre?`<p class="note">Pre-order. Ships from ${esc(SHIP_FROM)}.${PREORDER_NOTE?" "+esc(PREORDER_NOTE):""}</p>`:""}${emailBox("emailList")}${agreeBox("agreeList")}<p class="note" id="listNeed" role="status" hidden></p><a class="btn red block" id="listSend" target="_blank" rel="noopener" aria-describedby="listNeed" data-href="${esc(wa(orderMsg(cart,true)))}"${gone?' data-gone="1"':""} href="#">${pre?"Send pre-order on WhatsApp":"Send list on WhatsApp"}</a><p class="note">Opens WhatsApp with this list written out. Nothing is charged here.</p>`}
   </div>`;
   paintListSend();
@@ -1526,7 +1599,7 @@ $("list").addEventListener("click",e=>{
   const t=e.target.closest("button");
   if(e.target===$("list")||(t&&t.hasAttribute("data-close"))){$("list").close();return}
   if(!t)return;
-  if(t.hasAttribute("data-browse")){$("list").close();setSide("all");$("catalogue").scrollIntoView();return}
+  if(t.hasAttribute("data-browse")){$("list").close();setSide("P");$("catalogue").scrollIntoView();return}
   if(t.dataset.rm){cart.splice(+t.dataset.rm,1);save();renderCount();renderList();const f=$("list").querySelector("[data-rm],[data-browse],[data-close]");if(f)f.focus()}
   if(t.dataset.lq){const it=cart[+t.dataset.i];it.qty=Math.max(1,Math.min(maxQ(it.id),it.qty+ +t.dataset.lq));save();renderCount();renderList();const b=$("list").querySelector(`[data-lq="${t.dataset.lq}"][data-i="${t.dataset.i}"]`);if(b)b.focus()}
 });
@@ -1535,15 +1608,15 @@ $("list").addEventListener("click",e=>{
 /* ---------------- terms ---------------- */
 const TERMS=`<h2 id="tcTitle">Terms, replacements and privacy</h2><p class="upd">Last updated ${TERMS_DATE}</p>
 <p>These terms apply to every order placed with No Skips. By sending an order on WhatsApp you agree to them. Nothing here takes away rights you have under Indian consumer law.</p>
-<h3>1. Who we are</h3><p>No Skips is a small studio in Bengaluru, Karnataka, India that designs and 3D prints music pieces to order. This website is a catalogue. Orders, previews, payment and support all happen on WhatsApp at +91 74111 48303.</p>
+<h3>1. Who we are</h3><p>No Skips is a small studio in Bengaluru, Karnataka, India that designs and 3D prints games and other pieces to order. This website is a catalogue. Orders, previews, payment and support all happen on WhatsApp at +91 74111 48303.</p>
 <h3>2. Orders and payment</h3><ul><li>Every order gets an order number. We check each order by hand and then email you the final price with shipping and our UPI details. Your order is confirmed only when we have approved it and received full payment by UPI. Nothing is charged before we approve it.</li><li>Please give an email address you check. Order updates (approval, payment, printing, dispatch and tracking) come by email; the chat stays on WhatsApp.</li><li>To keep things fair, we may limit how many of a piece one customer can order, and we may decline repeat orders that look like reselling. An order holds its pieces only while it waits for review and payment: one that we have not reviewed within four days, or that is approved but unpaid after 48 hours, is cancelled and the pieces go back on sale. You can order again any time.</li><li>Prices are in Indian rupees and include printing and packing. Shipping is extra and is quoted in the chat before you pay.</li><li>We may decline or cancel an order before printing, for example if we cannot print it well, or if it uses content that is hateful, unlawful or someone else's logo or artwork without permission. If we cancel, you get a full refund.</li><li>Prices on the site can change. Your order keeps the price confirmed in the chat.</li></ul>
-<h3>3. Early access and pre-orders</h3><ul><li><b>Early access list.</b> Joining the list is free and is not an order. We message you on WhatsApp when pre-orders open. Reply STOP at any time and we remove you.</li><li><b>A pre-order</b> is a paid order for a piece we have not started making yet. It is confirmed only when we have approved it and received full payment by UPI.</li><li><b>Ship-from date.</b> The date shown on the site and confirmed in the chat is our best estimate, not a guarantee. If dispatch will be later, we tell you in the chat as soon as we know.</li><li><b>Your way out.</b> You can cancel a pre-order for a full refund at any time before we start printing your piece. If we have not dispatched within 30 days after the ship-from date we confirmed, you can cancel for a full refund even if printing has started.</li><li><b>If we cancel.</b> If we cannot make a pre-ordered piece to our standard, we cancel it and refund you in full to the UPI account you paid from within 7 days, and email you the refund reference.</li><li><b>Limited batches.</b> Numbered editions such as Vol. 01 are released in batches. A place in a batch is held only by a confirmed, paid order, and set numbers are given in the order payments arrive.</li><li><b>Launch prices.</b> A launch or pre-order price applies only as confirmed in the chat for that order.</li><li><b>Small changes.</b> Pictures on the site are 3D renders made from the print files. After test printing we may adjust a size or a fit slightly. If a change affects how the piece looks or works, we tell you before printing and you can cancel for a full refund.</li></ul>
+<h3>3. Early access and pre-orders</h3><ul><li><b>Early access list.</b> Joining the list is free and is not an order. We message you on WhatsApp when pre-orders open. Reply STOP at any time and we remove you.</li><li><b>A pre-order</b> is a paid order for a piece we have not started making yet. It is confirmed only when we have approved it and received full payment by UPI.</li><li><b>Ship-from date.</b> The date shown on the site and confirmed in the chat is our best estimate, not a guarantee. If dispatch will be later, we tell you in the chat as soon as we know.</li><li><b>Your way out.</b> You can cancel a pre-order for a full refund at any time before we start printing your piece. If we have not dispatched within 30 days after the ship-from date we confirmed, you can cancel for a full refund even if printing has started.</li><li><b>If we cancel.</b> If we cannot make a pre-ordered piece to our standard, we cancel it and refund you in full to the UPI account you paid from within 7 days, and email you the refund reference.</li><li><b>Limited batches.</b> Some games, such as Six Cuts, are released in small batches. A place in a batch is held only by a confirmed, paid order, in the order payments arrive.</li><li><b>Launch prices.</b> A launch or pre-order price applies only as confirmed in the chat for that order.</li><li><b>Small changes.</b> Pictures on the site are 3D renders made from the print files. After test printing we may adjust a size or a fit slightly. If a change affects how the piece looks or works, we tell you before printing and you can cancel for a full refund.</li></ul>
 <h3>4. Personalised pieces</h3><ul><li>You are responsible for the text, song, link and names you send. Please check the spelling.</li><li>For every personalised piece we send a preview. Once you approve it, we print exactly what you approved. A mistake in an approved preview is not a fault.</li><li><b>Spotify Codes</b> need the song's Spotify link, and are made with Spotify's own code generator from that link. If the link opens a different song or version from the one you named, we check with you in the chat before printing. We scan each code with a phone before it ships. A code scans only in the Spotify app. It keeps working as long as Spotify keeps the song and its code service. If Spotify removes the song or changes how codes work, that is outside our control and is not a fault in the piece.</li><li>If Spotify asks makers to stop producing pieces with its codes, we will offer you the same piece as a sound wave, or a full refund if it has not shipped.</li><li>Songs that are not on Spotify can be ordered as a sound wave.</li><li><b>Sound waves</b> are an artistic picture of the song's loud and quiet parts, not a measurement.</li></ul>
 <h3>5. Cancellations</h3><p>You can cancel for a full refund until we start printing. Pieces are made to order for you, so once printing has started we cannot cancel or take the piece back.</p>
 <h3>6. Replacements within 48 hours of delivery</h3><p>We replace a piece that arrives broken, has a print fault, or is not what you approved. To claim:</p><ul><li>Message us on WhatsApp within <b>48 hours of delivery</b>, going by the delivery time on the courier tracking.</li><li>Send photos of the piece, the box and the shipping label, and an unboxing video. Without an unboxing video we may not be able to accept a claim for a broken or missing part.</li><li>Keep the piece and the packing until we reply.</li></ul><p>If the claim is accepted, we reprint the piece and ship it at our cost. If we cannot reprint it, we refund the price of that piece. Claims made after 48 hours are not accepted, except where the law requires otherwise.</p>
 <p>These are not faults: the fine layer lines, small seams and slight colour differences that come with 3D printing; damage from heat, drops, misuse or wear after delivery; and phones or cases outside the sizes listed for a product.</p>
 <h3>7. Shipping</h3><p>We share a dispatch date and a tracking link in the chat. Courier delays are outside our control. Please give a complete and correct address. If a parcel comes back because of a wrong address or a missed delivery, re-shipping is charged again.</p>
-<h3>8. Care and safety</h3><ul><li>Pieces are printed in PLA, a plant-based plastic that softens with heat (about 55 to 60 C). Heat-exposed pieces, such as coasters and trays, will be printed in PETG once they are on sale. Keep PLA pieces out of hot cars, direct summer sun, dishwashers and away from hot pans. Coasters are for cups and glasses, not for a pot or a mug straight off the boil.</li><li>Not a toy. Small parts, keep away from children under 3.</li><li>Not for direct contact with food.</li><li><b>Adults only pieces.</b> A piece marked 18+ is sold only to adults. By ordering one you confirm you are 18 or older. It is sold empty, for use with products that are legal where you live, and we may ask you to confirm your age or decline to ship where local rules restrict it.</li></ul>
+<h3>8. Care and safety</h3><ul><li>Pieces are printed in PLA, a plant-based plastic that softens with heat (about 55 to 60 C). Heat-exposed pieces, such as coasters and trays, will be printed in PETG once they are on sale. Keep PLA pieces out of hot cars, direct summer sun, dishwashers and away from hot pans. Coasters are for cups and glasses, not for a pot or a mug straight off the boil.</li><li>Small parts. Not for children under 3.</li><li>Not for direct contact with food.</li><li><b>Adults only pieces.</b> A piece marked 18+ is sold only to adults. By ordering one you confirm you are 18 or older. It is sold empty, for use with products that are legal where you live, and we may ask you to confirm your age or decline to ship where local rules restrict it.</li></ul>
 <h3>9. Designs, names and trademarks</h3><ul><li>The No Skips designs, models and files belong to No Skips. Please do not copy or sell them.</li><li>By sending a name, logo, photo or artwork you confirm you have the right to use it.</li><li>A piece that carries an artist, act or event name is a personal keepsake made at your request. It is not official merchandise and is not sold as such.</li><li>Song titles, artist names and trademarks belong to their owners. No Skips is an independent maker and is not affiliated with or endorsed by any artist, label or Spotify. Spotify and Spotify Codes are trademarks of Spotify AB.</li></ul>
 <h3>10. Our liability</h3><p>To the extent the law allows, our total liability for an order is limited to the amount you paid for it, and we are not liable for indirect losses. This does not limit liability that cannot be limited by law.</p>
 <h3>11. Privacy</h3><p>We use your name, phone number, address and order details only to make, deliver and support your order. We share your address and phone number with the courier and with no one else, and we never sell your data. Order details and your email are kept in our private Google Sheet, and order emails are sent from our Gmail account. If you tick the box for drops and offers, or sign up in the footer, we email you about new drops and offers until you unsubscribe from the link in any email. If you join the early access list on WhatsApp, we use your number only to tell you when pre-orders or a piece you asked about open. Ask us in the chat to delete your details once your order is complete.</p>
@@ -1578,8 +1651,13 @@ document.addEventListener("keydown",e=>{
   const again=n.isConnected?n:document.querySelector(`[data-build="${n.dataset.build}"]`);if(again)again.focus();
 });
 $("listBtn").addEventListener("click",openList);
-$("chatBulk").href=wa(`Hi ${BRAND}, I would like a quote for a run.\n\nAct or venue:\nProduct (tags):\nQuantity:\nGig date:`);
-$("run50Price").textContent=inr(byId("B5").price);
+/* small screens: the section links fold into a Menu button */
+const navBtn=$("navBtn"),navEl=$("nav");
+const setNav=o=>{navBtn.setAttribute("aria-expanded",String(o));navEl.classList.toggle("open",o)};
+navBtn.addEventListener("click",()=>setNav(navBtn.getAttribute("aria-expanded")!=="true"));
+navEl.addEventListener("click",e=>{if(e.target.closest("a"))setNav(false)});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&navEl.classList.contains("open")){setNav(false);navBtn.focus()}});
+document.addEventListener("click",e=>{if(navEl.classList.contains("open")&&!e.target.closest("header"))setNav(false)});
 function setView(v){if(v==="bp")root.dataset.view="bp";else delete root.dataset.view;
   document.querySelectorAll(".viewsw button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.view===v)))}
 document.querySelector(".viewsw").addEventListener("click",e=>{const b=e.target.closest("button");if(b)setView(b.dataset.view)});

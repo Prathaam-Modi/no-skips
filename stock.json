@@ -2,17 +2,14 @@
   "updated": null,
   "phase": "waitlist",
   "shipFrom": "late January 2027",
-  "preorderNote": "",
+  "preorderNote": "The first 10 sets are ₹2,499.",
   "drop": {
     "claimed": 0,
     "batch": 15
   },
   "items": {
-    "D8": {
+    "P3": {
       "c": 10
-    },
-    "D18": {
-      "c": 20
     }
   }
 }
