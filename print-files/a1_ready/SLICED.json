@@ -985,5 +985,50 @@
   },
   "hours": 5.11,
   "file": "P3_chess/P3_ivory_set_all.gcode.3mf"
+ },
+ "P6C_dealer_button/P6C_set_x1.3mf": {
+  "ok": true,
+  "time_s": 5123,
+  "grams": 39.3,
+  "plates": 1,
+  "when": "2026-11-28 15:25 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag",
+   "wall_loops": "3"
+  },
+  "hours": 1.42,
+  "file": "P6C_dealer_button/P6C_set_x1.gcode.3mf"
+ },
+ "P6C_dealer_button/P6C_sets_x4.3mf": {
+  "ok": true,
+  "time_s": 16877,
+  "grams": 147.6,
+  "plates": 1,
+  "when": "2026-11-28 15:25 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag",
+   "wall_loops": "3"
+  },
+  "hours": 4.69,
+  "file": "P6C_dealer_button/P6C_sets_x4.gcode.3mf"
+ },
+ "P6C_dealer_button/P6C_dealer_x6.3mf": {
+  "ok": true,
+  "time_s": 11139,
+  "grams": 105.0,
+  "plates": 1,
+  "when": "2026-11-28 15:25 UTC",
+  "layer": "0.20",
+  "over": {
+   "sparse_infill_density": "100%",
+   "sparse_infill_pattern": "zig-zag",
+   "wall_loops": "3"
+  },
+  "hours": 3.09,
+  "file": "P6C_dealer_button/P6C_dealer_x6.gcode.3mf"
  }
 }

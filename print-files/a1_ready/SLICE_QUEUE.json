@@ -1,31 +1,3 @@
 {
- "jobs": [
-  {
-   "project": "P6C_dealer_button/P6C_set_x1.3mf",
-   "layer": "0.20",
-   "over": {
-    "sparse_infill_density": "100%",
-    "sparse_infill_pattern": "zig-zag",
-    "wall_loops": "3"
-   }
-  },
-  {
-   "project": "P6C_dealer_button/P6C_sets_x4.3mf",
-   "layer": "0.20",
-   "over": {
-    "sparse_infill_density": "100%",
-    "sparse_infill_pattern": "zig-zag",
-    "wall_loops": "3"
-   }
-  },
-  {
-   "project": "P6C_dealer_button/P6C_dealer_x6.3mf",
-   "layer": "0.20",
-   "over": {
-    "sparse_infill_density": "100%",
-    "sparse_infill_pattern": "zig-zag",
-    "wall_loops": "3"
-   }
-  }
- ]
+ "jobs": []
 }
